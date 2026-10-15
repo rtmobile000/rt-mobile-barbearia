@@ -422,7 +422,7 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO EXCLUSIVO DA ÁREA DO CLIENTE -->
+<!-- MODAL AGENDAMENTO DO CLIENTE (COM QR CODE E PIX COMPLETO) -->
 <div class="modalback" id="clientBookingModal">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
@@ -575,7 +575,7 @@ function changeRole(role){
     }
 }
 
-// Abre o agendamento exclusivo do cliente
+// Abre o agendamento exclusivo do cliente sem conflito
 function openClientBooking(){
     const modal = document.getElementById('clientBookingModal');
     if(modal) modal.style.display = 'grid';
@@ -605,7 +605,7 @@ function confirmAdminBooking(){
     toast('Agendamento inserido na grade com sucesso!');
 }
 
-// Agendamento do Cliente (Salva na tabela pessoal do cliente e repassa para a agenda da barbearia)
+// Agendamento Final do Cliente
 function confirmClientBookingFinal(){
     const name = document.getElementById('clientBookNameInput').value;
     const service = document.getElementById('clientServiceChoice').value;
@@ -616,14 +616,14 @@ function confirmClientBookingFinal(){
 
     closeModal('clientBookingModal');
 
-    // Insere na tabela "Meus Agendamentos" da Área do Cliente
+    // Atualiza a tabela "Meus Agendamentos" na Área do Cliente
     const clientTable = document.getElementById('clientMyAppointments');
     if(clientTable.querySelector('td[colspan]')) clientTable.innerHTML = '';
 
     const statusBadge = payMethod === 'pix' ? '<span class="status wait">Aguardando Pix</span>' : '<span class="status">Pagar no Local</span>';
     clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service}</td><td>Hoje às ${time}</td><td>${statusBadge}</td></tr>`;
 
-    // Insere também na agenda da barbearia em segundo plano
+    // Envia também para a agenda interna da barbearia
     const adminTbody = document.getElementById('agendaTableBody');
     adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App Cliente)</td><td>${service}</td><td>Primeiro Disponível</td><td>${statusBadge}</td></tr>`;
 
@@ -732,4 +732,4 @@ function signOut(){
 }
 </script>
 </body>
-</html>
+</html>s
