@@ -408,7 +408,7 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO RÁPIDO DO CLIENTE -->
+<!-- MODAL AGENDAMENTO RÁPIDO DO CLIENTE (COM PIX COMPLETO E PAGO NO LOCAL) -->
 <div class="modalback" id="clientBookingModal">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
@@ -419,8 +419,8 @@
   <div class="field"><label>3. Data e Horário</label><input type="date"><select style="margin-top:6px;"><option>09:00</option><option>10:00</option></select></div>
   <div class="field"><label>Forma de Pagamento</label>
     <select id="bookingPayMethod" onchange="toggleBookingPix(this.value)">
-      <option value="local">Pagar no Local (Presencial)</option>
-      <option value="pix">Pagar Agora via Pix</option>
+      <option value="local">Pagar no Local (Dinheiro / Cartão / Pix Presencial)</option>
+      <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
     </select>
   </div>
   <div id="bookingPixBox" class="hidden" style="background:#171a20; border:1px solid #30343b; padding:15px; border-radius:12px; margin-bottom:12px; text-align:center;">
@@ -430,12 +430,12 @@
         <path d="M45 10h10v10H45zM10 45h10v10H10zM60 45h10v10H60zM45 45h10v10H45zM75 60h15v15H75zM60 75h15v15H60zM45 75h10v15H45z" fill="#000"/>
       </svg>
     </div>
-    <small class="muted" style="display:block; margin-bottom:6px;">Pix Copia e Cola:</small>
+    <small class="muted" style="display:block; margin-bottom:6px;">Escaneie o QR Code ou use o Pix Copia e Cola:</small>
     <div id="bookingPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
-    <button class="btn" style="width:100%; margin-top:8px; font-size:11px;" onclick="toast('Chave Pix copiada!')">📋 Copiar Chave Pix</button>
+    <button class="btn" style="width:100%; margin-top:8px; font-size:11px;" onclick="toast('Chave Pix copiada com sucesso!')">📋 Copiar Chave Pix</button>
   </div>
   <div class="field"><label>Seu Nome e WhatsApp</label><input placeholder="Nome e WhatsApp"></div>
-  <button class="btn" style="width:100%;margin-top:6px;" onclick="closeModal('clientBookingModal');toast('Agendamento confirmado com sucesso!')">Confirmar Agendamento</button>
+  <button class="btn" style="width:100%;margin-top:6px;" onclick="confirmClientBooking()">Confirmar Agendamento</button>
  </div>
 </div>
 
@@ -518,7 +518,7 @@ function handleAuth() {
     }, 500);
 }
 
-// Configurações & Permissões Restritas do Barbeiro Convidado
+// Configurações & Permissões Estritas do Barbeiro Convidado
 function changeRole(role){
     currentRole = role;
     const hHelp = document.getElementById('roleHelp');
@@ -583,6 +583,14 @@ function confirmAdminBooking(){
     tbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name}</td><td>Procedimento (${duration} min)</td><td>Marcos Mendes</td><td><span class="status">Confirmado</span></td></tr>`;
     closeModal('bookingModal');
     toast('Agendamento inserido na grade com sucesso!');
+}
+
+// Agendamento Feito pelo Cliente (Exibido exclusivamente na Agenda da Barbearia sem misturar painéis)
+function confirmClientBooking(){
+    closeModal('clientBookingModal');
+    const tbody = document.getElementById('agendaTableBody');
+    tbody.innerHTML += `<tr><td><b>11:30</b></td><td>Cliente Web</td><td>Corte Degradê (30 min)</td><td>Primeiro Disponível</td><td><span class="status wait">Pendente / Pix</span></td></tr>`;
+    toast('Agendamento realizado com sucesso! Registrado na agenda da barbearia.');
 }
 
 function saveShopSettings(){
