@@ -289,7 +289,7 @@
  <div class="topbar">
    <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>ÁREA DO CLIENTE</small></div></div>
    <div class="topright">
-     <button class="btn secondary" onclick="closeClientView()">← Voltar ao Painel da Barbearia</button>
+     <button class="btn secondary" onclick="closeClientView()">← Sair / Voltar ao Login</button>
      <div class="avatar">CL</div>
    </div>
  </div>
@@ -530,7 +530,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
-let currentRole='owner';
+let currentRole='client';
 let shopConfig = {
     name: "Barbearia Imperial Pro",
     address: "Centro - Belém/PA",
@@ -571,14 +571,12 @@ function pickRole(role,btn){
 window.addEventListener('load', () => {
     const savedEmail = localStorage.getItem('navalha_saved_email');
     if(savedEmail === 'roberthaelley75@gmail.com'){
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('app').classList.remove('hidden');
-        document.getElementById('navAdmin').style.display = 'flex';
-        showPage('dashboard');
+        // Mantém a última sessão do dono se ele escolheu lembrar
     }
     renderClientShopping();
 });
 
+// MOTOR DE LOGIN CORRIGIDO RIGOROSAMENTE (SEPARANDO CLIENTE E BARBEARIA)
 function handleAuth() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
@@ -589,26 +587,28 @@ function handleAuth() {
 
     if(rememberMe) localStorage.setItem('navalha_saved_email', email);
 
-    if(email === 'roberthaelley75@gmail.com'){
+    // Se o usuário selecionou explicitamente "Sou cliente" ou usou e-mail comum
+    if(currentRole === 'client'){
         document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('app').classList.remove('hidden');
-        document.getElementById('navAdmin').style.display = 'flex';
-        showPage('dashboard');
-        toast('Bem-vindo, Robert Haelley!');
+        document.getElementById('clientScreen').style.display = 'block';
+        toast('Bem-vindo à Área do Cliente!');
         return;
     }
 
-    setTimeout(() => {
+    // Acesso Administrativo / Dono / Barbeiro
+    if(email === 'roberthaelley75@gmail.com' || currentRole === 'shop'){
         document.getElementById('loginScreen').classList.add('hidden');
-        if(currentRole === 'client'){
-            document.getElementById('clientScreen').style.display = 'block';
-            toast('Área do cliente aberta.');
-        } else {
-            document.getElementById('app').classList.remove('hidden');
-            showPage('dashboard');
-            toast('Painel carregado.');
-        }
-    }, 500);
+        document.getElementById('app').classList.remove('hidden');
+        if(email === 'roberthaelley75@gmail.com') document.getElementById('navAdmin').style.display = 'flex';
+        showPage('dashboard');
+        toast('Painel da Barbearia carregado.');
+        return;
+    }
+
+    // Fallback padrão para cliente
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('clientScreen').style.display = 'block';
+    toast('Área do cliente aberta.');
 }
 
 function changeRole(role){
@@ -678,7 +678,6 @@ function confirmAdminBooking(){
     toast('Agendamento inserido na grade com sucesso!');
 }
 
-// Agendamento Final do Cliente com Redirecionamento Direto ao WhatsApp da Barbearia
 function confirmClientBookingFinal(){
     const name = document.getElementById('clientBookNameInput').value;
     const service = document.getElementById('clientServiceChoice').value;
@@ -691,28 +690,23 @@ function confirmClientBookingFinal(){
 
     closeModal('clientBookingModal');
 
-    // Atualiza tabela do cliente
     const clientTable = document.getElementById('clientMyAppointments');
     if(clientTable.querySelector('td[colspan]')) clientTable.innerHTML = '';
 
     const statusBadge = payMethod === 'pix' ? '<span class="status wait">Aguardando Pix</span>' : '<span class="status">Pagar no Local</span>';
     clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service} (${barber})</td><td>${date} às ${time}</td><td>${statusBadge} <button class="btn secondary" style="padding:2px 6px;font-size:9px;" onclick="openModal('reviewModal')">Avaliar ⭐</button></td></tr>`;
 
-    // Atualiza agenda da barbearia
     const adminTbody = document.getElementById('agendaTableBody');
     adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App)</td><td>${service}</td><td>${barber}</td><td>${statusBadge}</td></tr>`;
 
-    // Disparo de simulação de notificação (1h / 10 min antes)
     setTimeout(() => {
         toast('📲 Notificação automática WhatsApp: "Seu atendimento na ' + shopConfig.name + ' está chegando!"');
     }, 4000);
 
-    // Redireciona para o WhatsApp da barbearia com os dados
     const msg = encodeURIComponent(`Olá, gostaria de confirmar meu agendamento na *${shopConfig.name}*:\n\n👤 Cliente: ${name}\n✂️ Serviço: ${service}\n👨‍🦰 Barbeiro: ${barber}\n📅 Data/Horário: ${date} às ${time}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Local'}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
 }
 
-// Checkout do Shopping com Opção de Quem Vai Buscar e Envio WhatsApp
 function confirmShopCheckoutFinal(){
     const name = document.getElementById('shopClientName').value;
     const payMethod = document.getElementById('shopPayMethod').value;
@@ -766,7 +760,12 @@ function openTVMode(){ document.getElementById('tvScreen').style.display = 'bloc
 function closeTVMode(){ document.getElementById('tvScreen').style.display = 'none'; }
 
 function openClientView(){ document.getElementById('app').classList.add('hidden'); document.getElementById('clientScreen').style.display = 'block'; toast('Visualizando como Cliente 👁️'); }
-function closeClientView(){ document.getElementById('clientScreen').style.display = 'none'; document.getElementById('app').classList.remove('hidden'); }
+function closeClientView(){ 
+    document.getElementById('clientScreen').style.display = 'none'; 
+    document.getElementById('app').classList.add('hidden');
+    document.getElementById('loginScreen').classList.remove('hidden');
+    toast('Retornado à tela de login.');
+}
 
 function toggleClientPix(val){ document.getElementById('clientPixBox').classList.toggle('hidden', val !== 'pix'); }
 function toggleShopPay(val){ document.getElementById('shopPixBox').classList.toggle('hidden', val !== 'pix'); document.getElementById('shopBalcaoBox').classList.toggle('hidden', val !== 'balcao'); }
@@ -783,7 +782,6 @@ function saveBarber(){
     toast('Barbeiro cadastrado!');
 }
 
-// Cadastro de Produto no Estoque -> Só aparece no Shopping se estoque >= 1
 function saveProduct(){
     const name = document.getElementById('pNameInput').value;
     const price = document.getElementById('pPriceInput').value;
