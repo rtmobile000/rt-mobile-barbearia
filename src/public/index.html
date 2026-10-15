@@ -408,7 +408,7 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO EXCLUSIVO DO CLIENTE -->
+<!-- MODAL AGENDAMENTO EXCLUSIVO DA ÁREA DO CLIENTE -->
 <div class="modalback" id="clientBookingModal">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
@@ -561,7 +561,7 @@ function changeRole(role){
     }
 }
 
-// Função dedicada para abrir o agendamento do cliente sem conflito
+// Função dedicada exclusivamente para abrir o agendamento do cliente
 function openClientBooking(){
     const modal = document.getElementById('clientBookingModal');
     if(modal) modal.style.display = 'grid';
@@ -578,7 +578,7 @@ function submitTimeoff(){
     toast(`Solicitação de folga (${label}) enviada com sucesso ao dono!`);
 }
 
-// Agendamento na Tabela da Barbearia
+// Agendamento na Tabela da Barbearia (Painel Administrativo)
 function confirmAdminBooking(){
     const name = document.getElementById('bookClientName').value;
     const time = document.getElementById('bookTime').value;
@@ -591,7 +591,7 @@ function confirmAdminBooking(){
     toast('Agendamento inserido na grade com sucesso!');
 }
 
-// Agendamento Final do Cliente
+// Agendamento Final do Cliente (Aparece corretamente na agenda da barbearia)
 function confirmClientBookingFinal(){
     const name = document.getElementById('clientBookNameInput').value;
     if(!name){ toast('Informe seu Nome e WhatsApp.'); return; }
