@@ -23,8 +23,17 @@
 </head>
 <body>
 
+<!-- SPLASH SCREEN DE MARCA INICIAL -->
+<div id="brandSplash" style="position:fixed;inset:0;z-index:9999999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s ease-out;">
+ <div style="width:84px;height:84px;border-radius:18px;background:#000;border:1.5px solid #333;display:flex;align-items:center;justify-content:center;box-shadow:0 0 35px rgba(215,177,91,0.25);margin-bottom:16px;">
+  <span style="font-size:34px;font-weight:900;color:var(--gold2);font-family:Manrope;">N</span>
+ </div>
+ <h1 style="font:800 26px Manrope;color:#fff;letter-spacing:6px;margin:0;">NAVALHA</h1>
+ <span style="font-size:10px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:800;margin-top:8px;">GESTÃO INTELIGENTE PARA BARBEARIAS</span>
+</div>
+
 <!-- TELA DE LOGIN -->
-<div id="loginScreen" class="loginpage">
+<div id="loginScreen" class="loginpage hidden">
  <div class="loginvisual">
   <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>BARBEARIA · GESTÃO</small></div></div>
   <div>
@@ -83,9 +92,8 @@
   <header class="topbar">
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
-      <!-- Botão Visão do Cliente visível apenas para o Dev Master -->
       <button class="btn ghost" id="btnDevClientView" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);display:none;">👁️ Ver como Cliente (DEV)</button>
-      <button class="btn secondary" onclick="openTVMode()">▣ Modo TV</button>
+      <button class="btn secondary" onclick="openTVMode()">▣ Modo TV / Recepção</button>
       <span class="pill" id="userBadge">● TESTE GRÁTIS</span>
       <div class="avatar" id="userAvatar">RT</div>
     </div>
@@ -240,7 +248,7 @@
             <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Modo TV na Recepção</span><input type="checkbox" id="toggleTvModule" checked></label>
           </div>
           <div style="margin-top:25px; border-top:1px solid var(--line); padding-top:15px;">
-            <div class="eyebrow" style="color:var(--gold);">Licença Oficial RT Mobile</div>
+            <div class="eyebrow" style="color:var(--gold);">Licença Oficial NAVALHA</div>
             <p class="muted small" style="margin:5px 0;">Desenvolvedor: <b>Robert Haelley</b><br>Suporte Técnico: <a href="https://wa.me/5591989117332" target="_blank" style="color:var(--green); text-decoration:underline;">(91) 98911-7332</a></p>
           </div>
         </div>
@@ -259,7 +267,7 @@
 </main>
 </div>
 
-<!-- MODO TV EM TELA CHEIA -->
+<!-- MODO TV EM TELA CHEIA (SALA DE ESPERA EM TEMPO REAL) -->
 <div id="tvScreen" style="display:none; position:fixed; inset:0; background:#050608; z-index:99999; padding:4vw; color:#fff; overflow:auto;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #262a31; padding-bottom:20px;">
     <div>
@@ -407,6 +415,18 @@ let currentRole='client';
 let shopConfig = { name: "Barbearia Imperial Pro", whatsapp: "5591989117332", pix: "91989117332" };
 let stockProducts = [{ name: "Pomada Matte Fixadora", price: 39.90, stock: 12, img: "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80" }];
 
+// SPLASH SCREEN DE MARCA
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const splash = document.getElementById('brandSplash');
+        if(splash) {
+            splash.style.opacity = '0';
+            setTimeout(() => splash.remove(), 400);
+        }
+        document.getElementById('loginScreen').classList.remove('hidden');
+    }, 1200);
+});
+
 function toast(msg){
     const t=document.getElementById('toast');
     if(!t) return;
@@ -441,14 +461,14 @@ window.addEventListener('load', () => {
 function handleAuth() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
-    const rememberMe = document.getElementById('rememberMe'].checked;
+    const rememberMe = document.getElementById('rememberMe').checked;
     
     if(!email || !password){ toast('Informe e-mail e senha.'); return; }
     toast('Autenticando...');
 
     if(rememberMe) localStorage.setItem('navalha_saved_email', email);
 
-    // 1. ACESSO MESTRE VITALÍCIO EXCLUSIVO PARA O SEU E-MAIL DE DESENVOLVEDOR
+    // 1. EXCLUSIVO PARA O SEU E-MAIL DE DESENVOLVEDOR MASTER
     if(email === 'roberthaelley75@gmail.com'){
         document.getElementById('loginScreen').classList.add('hidden');
         if(currentRole === 'client'){
@@ -468,7 +488,7 @@ function handleAuth() {
     if(currentRole === 'client'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('clientScreen').style.display = 'block';
-        document.getElementById('btnDevClientView').style.display = 'none'; // Clientes comuns não veem botão DEV
+        document.getElementById('btnDevClientView').style.display = 'none';
         toast('Bem-vindo à Área do Cliente!');
         return;
     }
@@ -477,7 +497,7 @@ function handleAuth() {
     if(currentRole === 'shop'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
-        document.getElementById('btnDevClientView').style.display = 'none'; // Clientes da SaaS não veem botão DEV
+        document.getElementById('btnDevClientView').style.display = 'none';
         showPage('dashboard');
         toast('Painel de Franquia carregado (Teste Grátis: 7 dias).');
         return;
@@ -566,7 +586,6 @@ function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo!
 function openTVMode(){ document.getElementById('tvScreen').style.display = 'block'; }
 function closeTVMode(){ document.getElementById('tvScreen').style.display = 'none'; }
 
-// Visão do Cliente exclusiva para o Dev Master
 function openClientView(){ 
     document.getElementById('app').classList.add('hidden'); 
     document.getElementById('clientScreen').style.display = 'block'; 
