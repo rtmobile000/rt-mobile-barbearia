@@ -150,7 +150,7 @@
       </div>
     </section>
     
-    <!-- SERVIÇOS (EDITÁVEL) -->
+    <!-- SERVIÇOS -->
     <section class="section" id="page-servicos">
       <div class="heading"><div><h1>Serviços e Preços</h1><p>Defina os valores e o tempo de execução (duração em minutos).</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
       <div class="servicegrid" id="serviceListContainer">
@@ -276,7 +276,7 @@
       <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">O relatório está otimizado para exibir dados exatos do intervalo de dias selecionado acima.</p></div>
     </section>
 
-    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA (COM CLUBE VIP LIGA/DESLIGA E PREÇO) -->
+    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA -->
     <section class="section" id="page-config">
       <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix e Clube VIP.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
       <div class="grid2">
@@ -355,17 +355,16 @@
  <div class="content">
   <section id="clientHome">
    
-   <!-- BOTÃO 1: ATALHO RÁPIDO PARA O CATÁLOGO DE BARBEARIAS (SCROLL AUTOMÁTICO) -->
-   <!-- BOTÃO 2: BANNER DE CLUBE DE ASSINATURA VIP (LIGADO/DESLIGADO POR BARBEARIA) -->
+   <!-- BOTÕES SUPERIORES CONFIGURADOS: VER BARBEARIAS PRÓXIMAS E CLUBE VIP DINÂMICO -->
    <div class="client-hero" style="display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start;">
     <div>
      <div class="eyebrow">NAVALHA · CLUBE DE ASSINATURA VIP</div>
-     <h1 id="clientVipBannerTitle">Plano Mensal Ilimitado - R$ 99/mês</h1>
-     <p style="color:#bbb;font-size:12px;margin:4px 0 12px;" id="clientVipBannerDesc">Corte até 4 vezes ao mês com prioridade na cadeira.</p>
+     <h1 id="clientVipBannerTitle">Plano Mensal Ilimitado</h1>
+     <p style="color:#bbb;font-size:12px;margin:4px 0 12px;" id="clientVipBannerDesc">Corte com prioridade nas unidades parceiras.</p>
     </div>
     <div style="display:flex; gap:10px; flex-wrap:wrap; width:100%;">
      <button class="btn" onclick="scrollToShops()" style="background:#fff; color:#000;">📍 Ver Barbearias Próximas</button>
-     <button class="btn secondary" id="clientVipSubscribeBtn" onclick="subscribeVipPlan()">⭐ Assinar Clube VIP</button>
+     <button class="btn secondary" id="clientVipSubscribeBtn" onclick="openVipShopsModal()">⭐ Assinar Clube VIP</button>
     </div>
    </div>
 
@@ -410,6 +409,42 @@
      </div>
    </div>
   </section>
+ </div>
+</div>
+
+<!-- MODAL DE ESCOLHA DE BARBEARIA PARA O CLUBE VIP (SEM VALOR FIXO NA LISTA) -->
+<div class="modalback" id="vipShopsModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('vipShopsModal')">✕</button>
+  <h2>Escolha a Barbearia para Assinar o VIP ⭐</h2>
+  <p class="muted small">Abaixo estão listadas as unidades que disponibilizam o Clube de Assinatura Mensal:</p>
+  <div style="display:grid; gap:10px; margin-top:15px;">
+    <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
+      <div>
+        <b>Barbearia Imperial Pro</b>
+        <small class="muted" style="display:block;">Plano Mensal Ilimitado Disponível</small>
+      </div>
+      <button class="btn" onclick="subscribeSpecificVip('Barbearia Imperial Pro', '5591989117332')">Assinar Unidade</button>
+    </div>
+  </div>
+ </div>
+</div>
+
+<!-- MODAL DE BARBEARIAS PRÓXIMAS (GEOLOCALIZAÇÃO) -->
+<div class="modalback" id="nearbyShopsModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('nearbyShopsModal')">✕</button>
+  <h2>📍 Barbearias Mais Próximas</h2>
+  <p class="muted small">Unidades localizadas próximas à sua localização atual:</p>
+  <div style="display:grid; gap:10px; margin-top:15px;">
+    <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
+      <div>
+        <b>Barbearia Imperial Pro</b>
+        <small class="muted" style="display:block;">Centro · A 1.2 km de você</small>
+      </div>
+      <button class="btn" onclick="closeModal('nearbyShopsModal'); scrollToShops();">Ver Unidade</button>
+    </div>
+  </div>
  </div>
 </div>
 
@@ -592,6 +627,7 @@ window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('loginScreen').classList.remove('hidden');
         }
         toggleVipSettings(document.getElementById('toggleVipPlan').checked);
+        renderAdminStock();
     }, 1000);
 });
 
@@ -632,7 +668,28 @@ function scrollToShops(){
     if(el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
-// LIGA / DESLIGA CONFIGURAÇÃO DO PLANO VIP NO PAINEL
+// ABRIR MODAL COM BARBEARIAS QUE DISPONIBILIZAM CLUBE VIP (SEM VALOR FIXO NA LISTA)
+function openVipShopsModal(){
+    const isVipEnabled = document.getElementById('toggleVipPlan').checked;
+    if(!isVipEnabled){
+        toast('O Clube VIP não está ativo no momento.');
+        return;
+    }
+    openModal('vipShopsModal');
+}
+
+function subscribeSpecificVip(shopName, wpNumber){
+    closeModal('vipShopsModal');
+    const text = encodeURIComponent(`⭐ Olá! Gostaria de assinar o *Clube de Assinatura Mensal VIP* na ${shopName}. Como procedo com o pagamento e ativação?`);
+    window.open(`https://wa.me/${wpNumber}?text=${text}`, '_blank');
+    toast(`Redirecionando para ${shopName}...`);
+}
+
+// ABRIR MODAL DE BARBEARIAS MAIS PRÓXIMAS (GEOLOCALIZAÇÃO)
+function openNearbyShopsModal(){
+    openModal('nearbyShopsModal');
+}
+
 function toggleVipSettings(isChecked){
     const priceField = document.getElementById('vipPriceField');
     const banner = document.getElementById('clientVipBannerTitle');
@@ -642,10 +699,8 @@ function toggleVipSettings(isChecked){
     if(priceField) priceField.style.display = isChecked ? 'grid' : 'none';
     if(banner){
         if(isChecked){
-            const price = document.getElementById('cfgVipPrice')?.value || '99.00';
-            const cuts = document.getElementById('cfgVipCuts')?.value || '4';
-            banner.textContent = `Plano Mensal Ilimitado - R$ ${Number(price).toFixed(2).replace('.',',')}/mês`;
-            bannerDesc.textContent = `Corte até ${cuts} vezes ao mês com prioridade na cadeira.`;
+            banner.textContent = `Plano Mensal Ilimitado VIP`;
+            bannerDesc.textContent = `Corte com prioridade nas unidades parceiras participantes.`;
             if(subBtn) subBtn.style.display = 'inline-block';
         } else {
             banner.textContent = `Clube VIP Indisponível no Momento`;
@@ -653,14 +708,6 @@ function toggleVipSettings(isChecked){
             if(subBtn) subBtn.style.display = 'none';
         }
     }
-}
-
-function subscribeVipPlan(){
-    const price = document.getElementById('cfgVipPrice')?.value || '99.00';
-    const cuts = document.getElementById('cfgVipCuts')?.value || '4';
-    const text = encodeURIComponent(`⭐ Olá! Gostaria de assinar o *Clube VIP Mensal* na ${shopConfig.name} (R$ ${price}/mês - até ${cuts} cortes). Como procedo com o pagamento?`);
-    window.open(`https://wa.me/${shopConfig.whatsapp}?text=${text}`, '_blank');
-    toast('Redirecionando para assinar o Clube VIP...');
 }
 
 function selectBarbershop(name, wp, pix){
