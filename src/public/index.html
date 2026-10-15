@@ -55,7 +55,7 @@
  </div>
 </div>
 
-<!-- PAINEL EMPRESARIAL (COM BOTÃO DE VISÃO DO CLIENTE PARA O DEV) -->
+<!-- PAINEL EMPRESARIAL -->
 <div id="app" class="app hidden">
 <aside class="sidebar">
   <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>BARBEARIA · GESTÃO</small></div></div>
@@ -83,7 +83,8 @@
   <header class="topbar">
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
-      <button class="btn ghost" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);">👁️ Ver como Cliente</button>
+      <!-- Botão Visão do Cliente visível apenas para o Dev Master -->
+      <button class="btn ghost" id="btnDevClientView" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);display:none;">👁️ Ver como Cliente (DEV)</button>
       <button class="btn secondary" onclick="openTVMode()">▣ Modo TV</button>
       <span class="pill" id="userBadge">● TESTE GRÁTIS</span>
       <div class="avatar" id="userAvatar">RT</div>
@@ -436,45 +437,49 @@ window.addEventListener('load', () => {
     renderClientShopping();
 });
 
-// VALIDAÇÃO DE ACESSO: APENAS O SEU E-MAIL DE DEV TEM ACESSO MASTER VITALÍCIO
+// MOTOR DE AUTENTICAÇÃO COM SEPARAÇÃO RIGOROSA
 function handleAuth() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
-    const rememberMe = document.getElementById('rememberMe').checked;
+    const rememberMe = document.getElementById('rememberMe'].checked;
     
     if(!email || !password){ toast('Informe e-mail e senha.'); return; }
     toast('Autenticando...');
 
     if(rememberMe) localStorage.setItem('navalha_saved_email', email);
 
-    // 1. EXCLUSIVO PARA O SEU E-MAIL DE DESENVOLVEDOR MASTER
+    // 1. ACESSO MESTRE VITALÍCIO EXCLUSIVO PARA O SEU E-MAIL DE DESENVOLVEDOR
     if(email === 'roberthaelley75@gmail.com'){
         document.getElementById('loginScreen').classList.add('hidden');
         if(currentRole === 'client'){
             document.getElementById('clientScreen').style.display = 'block';
+            document.getElementById('btnDevClientView').style.display = 'inline-flex';
         } else {
             document.getElementById('app').classList.remove('hidden');
             document.getElementById('navAdmin').style.display = 'flex';
+            document.getElementById('btnDevClientView').style.display = 'inline-flex';
             showPage('dashboard');
         }
-        toast('Acesso Master Autorizado!');
+        toast('Acesso Master de Desenvolvedor Autorizado!');
         return;
     }
 
-    // 2. SE LOGOU COMO CLIENTE (Acesso estritamente à Área do Cliente)
+    // 2. QUALQUER OUTRO E-MAIL COMO CLIENTE
     if(currentRole === 'client'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('clientScreen').style.display = 'block';
+        document.getElementById('btnDevClientView').style.display = 'none'; // Clientes comuns não veem botão DEV
         toast('Bem-vindo à Área do Cliente!');
         return;
     }
 
-    // 3. SE LOGOU COMO BARBEARIA / FRANQUEADO (Inicia Trial de 7 Dias)
+    // 3. QUALQUER OUTRO E-MAIL COMO BARBEARIA / FRANQUEADO (Inicia Trial de 7 Dias)
     if(currentRole === 'shop'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
+        document.getElementById('btnDevClientView').style.display = 'none'; // Clientes da SaaS não veem botão DEV
         showPage('dashboard');
-        toast('Franquia carregada (Teste Grátis: 7 dias).');
+        toast('Painel de Franquia carregado (Teste Grátis: 7 dias).');
         return;
     }
 }
@@ -561,11 +566,11 @@ function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo!
 function openTVMode(){ document.getElementById('tvScreen').style.display = 'block'; }
 function closeTVMode(){ document.getElementById('tvScreen').style.display = 'none'; }
 
-// Visão do Cliente restaurada no topo para o Dev
+// Visão do Cliente exclusiva para o Dev Master
 function openClientView(){ 
     document.getElementById('app').classList.add('hidden'); 
     document.getElementById('clientScreen').style.display = 'block'; 
-    toast('Visualizando como Cliente 👁️');
+    toast('Visualizando como Cliente 👁️ (Modo DEV)');
 }
 function closeClientView(){ 
     document.getElementById('clientScreen').style.display = 'none'; 
