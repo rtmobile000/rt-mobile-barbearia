@@ -9,13 +9,13 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{--bg:#08090b;--panel:#101216;--panel2:#15181e;--line:#262a31;--text:#f4f4f2;--muted:#9298a2;--gold:#d7b15b;--gold2:#f0d38a;--green:#55c69a;--red:#f07878}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;max-width:100vw;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{padding:25px 17px;border-right:1px solid var(--line);background:#0b0c0f;display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brandmark{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,var(--gold2),#9b762c);display:grid;place-items:center;color:#17130a;font-weight:900;font-family:Manrope}.brand strong{font:800 16px Manrope;letter-spacing:.7px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:2px}.navlabel{color:#606671;font-size:10px;font-weight:700;letter-spacing:1.8px;padding:0 12px;margin-bottom:-14px}.nav{display:grid;gap:5px}.nav button{display:flex;align-items:center;gap:12px;background:transparent;color:#a6abb4;padding:12px;border-radius:11px;text-align:left;font-size:13px}.nav button span{width:18px;text-align:center;font-size:16px}.nav button.active,.nav button:hover{background:#242016;color:var(--gold2)}.sidebottom{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:15px;background:linear-gradient(135deg,#17150f,#101216)}.sidebottom p{font-size:12px;color:var(--muted);line-height:1.5}.sidebottom button{width:100%}.main{min-width:0;width:100%}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;gap:18px}.crumb{font-size:12px;color:var(--muted)}.crumb b{color:#fff;font-weight:600}.topright{display:flex;align-items:center;gap:12px}.pill{border:1px solid #34302a;color:var(--gold2);background:#1a1710;border-radius:99px;padding:7px 11px;font-size:11px}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#d4b05a;color:#1b1608;font-weight:800}.content{max-width:1500px;margin:auto;padding:30px 34px 50px}.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:800;text-transform:uppercase}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:24px}.heading h1{font:800 clamp(24px,3vw,34px) Manrope;margin:7px 0}.heading p{margin:0;color:var(--muted);font-size:13px}.btn{border-radius:10px;padding:11px 15px;font-size:12px;font-weight:700;background:var(--gold);color:#191407;transition:.2s}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#1b1e24;color:#e9e9e7;border:1px solid #30343c}.btn.ghost{background:transparent;color:var(--gold2);border:1px solid #51452a}.btn.danger{background:#361b1e;color:#ffb5b5;border:1px solid #623237}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px}.stat{padding:19px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.staticon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#282216;color:var(--gold2)}.stat strong{display:block;font:800 25px Manrope;margin:16px 0 6px}.stat small{color:var(--green);font-size:11px}.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,1fr);gap:17px}.card{padding:21px;min-width:0}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.cardtitle h2{font:700 15px Manrope;margin:0}.muted{color:var(--muted)}.small{font-size:11px}.appointment{display:grid;grid-template-columns:52px 4px minmax(0,1fr) auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #22252b}.appointment:last-child{border:0}.time{font-size:12px;font-weight:700}.bar{height:40px;border-radius:8px;background:var(--gold)}.bar.blue{background:#7da9ff}.bar.green{background:var(--green)}.bar.purple{background:#b79bff}.apptname{font-size:12px;font-weight:700}.apptdesc{font-size:11px;color:var(--muted);margin-top:4px}.status{font-size:10px;border-radius:99px;padding:6px 8px;background:#173126;color:#7ee0b4;white-space:nowrap}.status.wait{background:#332918;color:#e7c477}.status.off{background:#351e22;color:#f2a0a0}.barberrow{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid #22252b}.barberrow:last-child{border:0}.person{width:37px;height:37px;border-radius:12px;background:#282b32;display:grid;place-items:center;font-weight:800;color:var(--gold2)}.person.green{color:#7ee0b4}.person.purple{color:#c5b4ff}.person.blue{color:#9fc3ff}.personinfo{flex:1}.personinfo b{font-size:12px;display:block}.personinfo small{font-size:11px;color:var(--muted)}.section{display:none}.section.active{display:block}.servicegrid,.shopgrid,.barbershopgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.service,.product,.shop{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px}.service h3,.product h3,.shop h3{font:700 14px Manrope;margin:0 0 6px}.service p,.product p,.shop p{font-size:11px;color:var(--muted);line-height:1.5}.price{font:800 20px Manrope;color:var(--gold2);margin:14px 0}.service button,.product button,.shop button{width:100%;margin-top:8px}.productart{height:100px;border-radius:12px;background:radial-gradient(circle at 50% 35%,#3b3322,#181a1e 65%);display:grid;place-items:center;font-size:37px;margin-bottom:14px}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:11px;color:#b6bbc3}.field input,.field select{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #30343b;background:#0b0d10;color:white;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed #30343b;border-radius:12px;font-size:12px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#f1d181;color:#171207;border-radius:12px;padding:12px 18px;font-size:12px;font-weight:700;box-shadow:0 8px 30px #0008;display:none;z-index:99;max-width:90vw}.modalback{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:18px;z-index:100}.modal{background:#111419;border:1px solid #373b43;border-radius:18px;padding:24px;width:min(470px,100%);max-height:90vh;overflow:auto}.modal h2{font:800 21px Manrope;margin:0 0 8px}.modal p{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;background:#272a30;color:white;border-radius:8px;padding:6px 10px}.loginpage{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:fixed;inset:0;z-index:1000;background:var(--bg)}.loginvisual{padding:8%;background:radial-gradient(circle at 25% 20%,#392b13,#101114 55%,#08090b);display:flex;flex-direction:column;justify-content:space-between}.loginvisual h1{font:800 clamp(32px,5vw,60px) Manrope;line-height:1.05;max-width:600px}.loginvisual h1 span{color:var(--gold2)}.loginvisual p{color:#b2b0a9;max-width:410px;line-height:1.7}.loginform{padding:8%;display:flex;flex-direction:column;justify-content:center;max-width:620px;width:100%;margin:auto}.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}.rolepick button{padding:12px;border-radius:10px;background:#1a1d22;border:1px solid #30343b;color:#c7c9ce;font-size:12px}.rolepick button.selected{border-color:var(--gold);color:var(--gold2);background:#282216}.tiny{font-size:10px;color:var(--muted);line-height:1.6}.hidden{display:none!important}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;max-width:100vw;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{padding:25px 17px;border-right:1px solid var(--line);background:#0b0c0f;display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brandmark{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,var(--gold2),#9b762c);display:grid;place-items:center;color:#17130a;font-weight:900;font-family:Manrope}.brand strong{font:800 16px Manrope;letter-spacing:.7px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:2px}.navlabel{color:#606671;font-size:10px;font-weight:700;letter-spacing:1.8px;padding:0 12px;margin-bottom:-14px}.nav{display:grid;gap:5px}.nav button{display:flex;align-items:center;gap:12px;background:transparent;color:#a6abb4;padding:12px;border-radius:11px;text-align:left;font-size:13px}.nav button span{width:18px;text-align:center;font-size:16px}.nav button.active,.nav button:hover{background:#242016;color:var(--gold2)}.sidebottom{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:15px;background:linear-gradient(135deg,#17150f,#101216)}.sidebottom p{font-size:12px;color:var(--muted);line-height:1.5}.sidebottom button{width:100%}.main{min-width:0;width:100%}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;gap:18px}.crumb{font-size:12px;color:var(--muted)}.crumb b{color:#fff;font-weight:600}.topright{display:flex;align-items:center;gap:12px}.pill{border:1px solid #34302a;color:var(--gold2);background:#1a1710;border-radius:99px;padding:7px 11px;font-size:11px}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#d4b05a;color:#1b1608;font-weight:800}.content{max-width:1500px;margin:auto;padding:30px 34px 50px}.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:800;text-transform:uppercase}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:24px}.heading h1{font:800 clamp(24px,3vw,34px) Manrope;margin:7px 0}.heading p{margin:0;color:var(--muted);font-size:13px}.btn{border-radius:10px;padding:11px 15px;font-size:12px;font-weight:700;background:var(--gold);color:#191407;transition:.2s}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#1b1e24;color:#e9e9e7;border:1px solid #30343c}.btn.ghost{background:transparent;color:var(--gold2);border:1px solid #51452a}.btn.danger{background:#361b1e;color:#ffb5b5;border:1px solid #623237}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px}.stat{padding:19px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.staticon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#282216;color:var(--gold2)}.stat strong{display:block;font:800 25px Manrope;margin:16px 0 6px}.stat small{color:var(--green);font-size:11px}.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,1fr);gap:17px}.card{padding:21px;min-width:0}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.cardtitle h2{font:700 15px Manrope;margin:0}.muted{color:var(--muted)}.small{font-size:11px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:550px}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #272a30;font-size:11px}th{color:var(--muted);font-weight:600}td{color:#e4e5e7}.status{font-size:10px;border-radius:99px;padding:6px 8px;background:#173126;color:#7ee0b4;white-space:nowrap}.status.wait{background:#332918;color:#e7c477}.status.off{background:#351e22;color:#f2a0a0}.section{display:none}.section.active{display:block}.servicegrid,.shopgrid,.barbershopgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.service,.product,.shop{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px}.service h3,.product h3,.shop h3{font:700 14px Manrope;margin:0 0 6px}.service p,.product p,.shop p{font-size:11px;color:var(--muted);line-height:1.5}.price{font:800 20px Manrope;color:var(--gold2);margin:14px 0}.service button,.product button,.shop button{width:100%;margin-top:8px}.productart{height:100px;border-radius:12px;background:radial-gradient(circle at 50% 35%,#3b3322,#181a1e 65%);display:grid;place-items:center;font-size:37px;margin-bottom:14px;background-size:cover;background-position:center}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:11px;color:#b6bbc3}.field input,.field select{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #30343b;background:#0b0d10;color:white;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed #30343b;border-radius:12px;font-size:12px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#f1d181;color:#171207;border-radius:12px;padding:12px 18px;font-size:12px;font-weight:700;box-shadow:0 8px 30px #0008;display:none;z-index:99;max-width:90vw}.modalback{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:18px;z-index:100}.modal{background:#111419;border:1px solid #373b43;border-radius:18px;padding:24px;width:min(470px,100%);max-height:90vh;overflow:auto}.modal h2{font:800 21px Manrope;margin:0 0 8px}.modal p{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;background:#272a30;color:white;border-radius:8px;padding:6px 10px}.loginpage{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:fixed;inset:0;z-index:1000;background:var(--bg)}.loginvisual{padding:8%;background:radial-gradient(circle at 25% 20%,#392b13,#101114 55%,#08090b);display:flex;flex-direction:column;justify-content:space-between}.loginvisual h1{font:800 clamp(32px,5vw,60px) Manrope;line-height:1.05;max-width:600px}.loginvisual h1 span{color:var(--gold2)}.loginvisual p{color:#b2b0a9;max-width:410px;line-height:1.7}.loginform{padding:8%;display:flex;flex-direction:column;justify-content:center;max-width:620px;width:100%;margin:auto}.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}.rolepick button{padding:12px;border-radius:10px;background:#1a1d22;border:1px solid #30343b;color:#c7c9ce;font-size:12px}.rolepick button.selected{border-color:var(--gold);color:var(--gold2);background:#282216}.tiny{font-size:10px;color:var(--muted);line-height:1.6}.hidden{display:none!important}
 
 @media(max-width:768px){body,.app,.main{max-width:100vw;overflow-x:hidden}.loginpage{grid-template-columns:1fr;padding:12px}.loginvisual{display:none}.loginform{padding:18px 12px;max-width:100%}.app{display:block;padding-bottom:70px}.sidebar{display:none}.topbar{height:60px;padding:0 12px}.content{padding:15px 12px 60px}}
 .devfooter{padding:28px 0 10px;text-align:center;color:#7e838c;font-size:11px;line-height:1.8}.devfooter a{color:var(--gold2);text-decoration:underline;text-underline-offset:3px}
 .owner-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.switch{display:inline-flex;align-items:center;gap:9px;border:1px solid #373b43;background:#171a20;border-radius:12px;padding:9px 12px;color:#e5e6e8;font-size:11px}.switch input{accent-color:#d7b15b;width:16px;height:16px}
 .role-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#13161b;border:1px solid #2c3037;border-radius:13px;padding:13px 16px;margin-bottom:17px}.role-banner strong{font-size:12px}.role-banner p{font-size:11px;color:var(--muted);margin:4px 0 0}
-#clientScreen{min-height:100vh;background:#090a0c;color:#f6f6f4;position:fixed;inset:0;z-index:999;display:none;overflow-y:auto}
+#clientScreen{min-height:100vh;background:#090a0c;color:#f6f6f4;position:fixed;inset:0;z-index:999;display:none;overflow-y:auto;padding-bottom:60px}
 #clientScreen .content{max-width:1220px;padding-top:28px}
 .client-hero{position:relative;overflow:hidden;border-radius:24px;min-height:280px;padding:clamp(20px,4vw,45px);display:flex;align-items:flex-end;background:linear-gradient(90deg,#090a0cf2 0%,#090a0c9c 54%,#090a0c1c 100%),url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1600&q=85') center 42%/cover;margin-bottom:20px;border:1px solid #282a2e}
 .client-hero h1{font:800 clamp(26px,4vw,46px) Manrope;line-height:1.04;margin:10px 0;max-width:580px}
@@ -62,11 +62,11 @@
   <div class="navlabel">MENU PRINCIPAL</div>
   <nav class="nav" id="nav">
     <button class="active" data-page="dashboard"><span>◫</span><span class="navtxt">Visão geral</span></button>
-    <button data-page="agenda"><span>▦</span><span class="navtxt">Agenda</span></button>
-    <button data-page="servicos"><span>✂</span><span class="navtxt">Serviços</span></button>
+    <button data-page="agenda" id="navAgenda"><span>▦</span><span class="navtxt">Agenda</span></button>
+    <button data-page="servicos" id="navServicos"><span>✂</span><span class="navtxt">Serviços</span></button>
     <button data-page="equipe" id="navEquipe"><span>♙</span><span class="navtxt">Equipe</span></button>
-    <button data-page="clientes"><span>♧</span><span class="navtxt">Clientes & Convênios</span></button>
-    <button data-page="loja"><span>▣</span><span class="navtxt">Loja / Vendas</span></button>
+    <button data-page="clientes" id="navClientes"><span>♧</span><span class="navtxt">Clientes & Convênios</span></button>
+    <button data-page="loja" id="navLoja"><span>▣</span><span class="navtxt">Loja / Vendas</span></button>
     <button data-page="financeiro" id="navFinanceiro"><span>◷</span><span class="navtxt">Financeiro & Caixa</span></button>
     <button data-page="relatorios" id="navRelatorios"><span>▥</span><span class="navtxt">Relatórios</span></button>
     <button data-page="config" id="navConfig"><span>⚙</span><span class="navtxt">Configurações</span></button>
@@ -117,21 +117,67 @@
     </section>
 
     <!-- AGENDA -->
-    <section class="section" id="page-agenda"><div class="heading"><h1>Agenda da Unidade</h1></div><div class="card"><div class="empty">Nenhum horário marcado.</div></div></section>
+    <section class="section" id="page-agenda">
+      <div class="heading">
+        <div><h1>Agenda da Unidade</h1><p>Grade de horários (intervalos de 30 minutos com cálculo dinâmico de duração).</p></div>
+        <button class="btn" onclick="openModal('bookingModal')">＋ Agendar Horário</button>
+      </div>
+      <div class="card">
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>HORÁRIO</th><th>CLIENTE</th><th>SERVIÇO & TEMPO</th><th>PROFISSIONAL</th><th>STATUS</th></tr></thead>
+            <tbody id="agendaTableBody">
+              <tr><td>08:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
+              <tr><td>08:30</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
+              <tr><td>09:00</td><td>Lucas Almeida</td><td>Corte Degradê (30 min)</td><td>Marcos Mendes</td><td><span class="status">Confirmado</span></td></tr>
+              <tr><td>09:30</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário bloqueado (Duração de Corte)</td></tr>
+              <tr><td>10:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
+              <tr><td>10:30</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
+              <tr><td>11:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
+              <tr><td>14:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
     
     <!-- SERVIÇOS -->
     <section class="section" id="page-servicos">
-      <div class="heading"><div><h1>Serviços e Preços</h1><p>Defina os valores e serviços da sua barbearia.</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
+      <div class="heading"><div><h1>Serviços e Preços</h1><p>Defina os valores e o tempo de execução (duração em minutos).</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
       <div class="servicegrid" id="serviceListContainer">
-        <article class="service"><div class="symbol">✂️</div><h3>Corte Degradê</h3><p class="muted">Tempo: 30 min</p><div class="price" id="servPrice1">R$ 45,00</div><button class="btn secondary" onclick="editServicePrice(1)">Editar Valor</button></article>
+        <article class="service">
+          <div class="symbol">✂️</div>
+          <h3>Corte Degradê</h3>
+          <p class="muted">Duração: <span id="servTime1">30</span> min</p>
+          <div class="price" id="servPrice1">R$ 45,00</div>
+          <button class="btn secondary" onclick="editService(1)">Editar Valor & Tempo</button>
+        </article>
+        <article class="service">
+          <div class="symbol">✨</div>
+          <h3>Corte Platinado</h3>
+          <p class="muted">Duração: <span id="servTime2">90</span> min</p>
+          <div class="price" id="servPrice2">R$ 120,00</div>
+          <button class="btn secondary" onclick="editService(2)">Editar Valor & Tempo</button>
+        </article>
       </div>
     </section>
 
     <!-- EQUIPE -->
     <section class="section" id="page-equipe">
-      <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre os profissionais e dados da cadeira.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
+      <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre os profissionais e gerencie solicitações de folga.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
       <div class="servicegrid" id="barberListContainer">
-        <div class="empty" style="grid-column:1/-1">Nenhum barbeiro cadastrado no momento. Clique em cadastrar acima.</div>
+        <article class="service">
+          <div class="symbol">👨‍🦰</div>
+          <h3>Marcos Mendes</h3>
+          <p class="muted">Cadeira 01 · Ativo</p>
+          <button class="btn secondary" onclick="openModal('timeoffModal')">Solicitar Folga 🌴</button>
+        </article>
+        <article class="service">
+          <div class="symbol">👨‍🦰</div>
+          <h3>Bruno Costa</h3>
+          <p class="muted">Cadeira 02 · Ativo</p>
+          <button class="btn secondary" onclick="openModal('timeoffModal')">Solicitar Folga 🌴</button>
+        </article>
       </div>
     </section>
     
@@ -147,7 +193,7 @@
           <table>
             <thead><tr><th>EMPRESA / CONVÊNIO</th><th>CONTATO / WHATSAPP</th><th>STATUS</th></tr></thead>
             <tbody id="convenioTableBody">
-              <tr><td colspan="3" style="text-align:center; color:var(--muted);">Nenhum convênio cadastrado ainda.</td></tr>
+              <tr><td><b>Tech Solutions Ltda</b></td><td>(91) 98888-1122</td><td><span class="status">Parceiro Ativo</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -157,9 +203,15 @@
 
     <!-- LOJA -->
     <section class="section" id="page-loja">
-      <div class="heading"><div><h1>Loja de Produtos & Bebidas</h1><p>Cadastre os itens do seu estoque com foto e preço.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
+      <div class="heading"><div><h1>Loja de Produtos & Bebidas</h1><p>Cadastre os itens com foto e preço.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
       <div class="shopgrid" id="shopListContainer">
-        <div class="empty" style="grid-column:1/-1">Nenhum produto cadastrado na loja.</div>
+        <article class="product">
+          <div class="productart" style="background-image:url('https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80')">🧴</div>
+          <h3>Pomada Matte Fixadora</h3>
+          <div class="price">R$ 39,90</div>
+          <span class="status">Estoque: 12 un.</span>
+          <button class="btn" onclick="openStoreCheckout('Pomada Matte', 39.90)">Comprar / Pix</button>
+        </article>
       </div>
     </section>
 
@@ -191,14 +243,13 @@
           <div class="field"><label>Nome da Barbearia</label><input id="cfgName" value="Barbearia Imperial Pro"></div>
           <div class="field"><label>Endereço Completo</label><input id="cfgAddress" value="Centro - Belém/PA"></div>
           <div class="field"><label>WhatsApp de Atendimento</label><input id="cfgWhatsapp" value="(91) 99999-9999"></div>
-          <div class="field"><label>Sua Chave Pix (Para recebimento no Shopping e Agendamentos)</label><input id="cfgPix" value="91989117332"></div>
+          <div class="field"><label>Sua Chave Pix</label><input id="cfgPix" value="91989117332"></div>
         </div>
         <div class="card">
-          <div class="cardtitle"><h2>Chaves de Ativação de Funções</h2><p class="muted">Ligue ou desligue módulos conforme sua necessidade.</p></div>
+          <div class="cardtitle"><h2>Chaves de Ativação de Funções</h2><p class="muted">Ligue ou desligue módulos.</p></div>
           <div style="display:grid; gap:14px; margin-top:15px;">
             <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Módulo Loja / E-commerce</span><input type="checkbox" id="toggleShopModule" checked></label>
             <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Módulo Convênios Parceiros</span><input type="checkbox" id="toggleConvModule" checked></label>
-            <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Módulo Clube de Assinatura</span><input type="checkbox" id="toggleClubModule" checked></label>
             <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Modo TV na Recepção</span><input type="checkbox" id="toggleTvModule" checked></label>
           </div>
           <div style="margin-top:25px; border-top:1px solid var(--line); padding-top:15px;">
@@ -221,7 +272,7 @@
 </main>
 </div>
 
-<!-- MODO TV EM TELA CHEIA (100% FUNCIONAL) -->
+<!-- MODO TV EM TELA CHEIA -->
 <div id="tvScreen" style="display:none; position:fixed; inset:0; background:#050608; z-index:99999; padding:4vw; color:#fff; overflow:auto;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #262a31; padding-bottom:20px;">
     <div>
@@ -234,7 +285,7 @@
     <div style="background:#101216; border:1px solid #262a31; border-radius:20px; padding:25px;">
       <div class="eyebrow" style="color:var(--green);">CLIENTE NA VEZ (CHAMADA)</div>
       <div id="tvNextClient" style="font:800 42px Manrope; color:var(--gold2); margin:15px 0;">Lucas Almeida</div>
-      <p class="muted">Apresente-se à recepção.</p>
+      <p class="muted">Apresente-se à recepção da barbearia.</p>
     </div>
     <div style="background:#101216; border:1px solid #262a31; border-radius:20px; padding:25px;">
       <div class="eyebrow" style="color:var(--gold);">STATUS DAS CADEIRAS DOS BARBEIROS</div>
@@ -266,13 +317,12 @@
      <div class="eyebrow">NAVALHA · AGENDAMENTO RÁPIDO EM 4 CLIQUES</div>
      <h1>Seu próximo corte começa aqui.</h1>
      <p style="color:#bbb;font-size:13px;margin:8px 0 16px;">Escolha o serviço, profissional e horário ideal sem complicação.</p>
-     <button class="btn" onclick="openModal('quickBookingModal')">⚡ Agendar Horário Agora</button>
+     <button class="btn" onclick="openModal('clientBookingModal')">⚡ Agendar Horário Agora</button>
     </div>
    </div>
    <div class="clientsectiontitle"><div><h2>Barbearias Parceiras Ativas</h2></div></div>
    <div class="barbershopgrid" id="publicShopsFeed">
-    <!-- Barbearia de teste do dev fica oculta para clientes comuns, aparecendo apenas barbearias reais -->
-    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3 id="clientShopDisplayTitle">Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openModal('quickBookingModal')">Agendar Procedimento ✂️</button></div></article>
+    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3 id="clientShopDisplayTitle">Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openModal('clientBookingModal')">Agendar Procedimento ✂️</button></div></article>
    </div>
   </section>
  </div>
@@ -306,6 +356,7 @@
   <div class="field"><label>Nome do Produto</label><input id="pNameInput" placeholder="Ex.: Pomada Modeladora"></div>
   <div class="field"><label>Preço de Venda (R$)</label><input id="pPriceInput" type="number" placeholder="45.00"></div>
   <div class="field"><label>Quantidade em Estoque</label><input id="pStockInput" type="number" placeholder="10"></div>
+  <div class="field"><label>URL da Foto do Produto</label><input id="pImageInput" placeholder="https://exemplo.com/foto.jpg"></div>
   <button class="btn" style="width:100%;margin-top:10px;" onclick="saveProduct()">Cadastrar Produto</button>
  </div>
 </div>
@@ -314,62 +365,101 @@
  <div class="modal">
   <button class="close" onclick="closeModal('addServiceModal')">✕</button>
   <h2>Cadastrar Serviço ✂️</h2>
-  <div class="field"><label>Nome do Serviço</label><input id="sNameInput" placeholder="Ex.: Corte + Barba"></div>
-  <div class="field"><label>Preço (R$)</label><input id="sPriceInput" type="number" placeholder="75.00"></div>
+  <div class="field"><label>Nome do Serviço</label><input id="sNameInput" placeholder="Ex.: Corte Social"></div>
+  <div class="field"><label>Preço (R$)</label><input id="sPriceInput" type="number" placeholder="50.00"></div>
+  <div class="field"><label>Duração (Minutos)</label><input id="sTimeInput" type="number" placeholder="30"></div>
   <button class="btn" style="width:100%;margin-top:10px;" onclick="saveServiceModal()">Salvar Serviço</button>
  </div>
 </div>
 
-<!-- MODAL CHECKOUT COM PIX DINÂMICO -->
+<!-- MODAL SOLICITAÇÃO DE FOLGA (BARBEIRO) -->
+<div class="modalback" id="timeoffModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('timeoffModal')">✕</button>
+  <h2>Solicitar Folga 🌴</h2>
+  <div class="field"><label>Data da Folga</label><input type="date" id="timeoffDate"></div>
+  <div class="field"><label>Período Desejado</label>
+    <select id="timeoffPeriod">
+      <option value="morning">Manhã (Abertura até 12:00)</option>
+      <option value="afternoon">Tarde (12:00 até Fechamento)</option>
+      <option value="all">Dia Todo</option>
+    </select>
+  </div>
+  <button class="btn" style="width:100%;margin-top:10px;" onclick="submitTimeoff()">Enviar Solicitação ao Dono</button>
+ </div>
+</div>
+
+<!-- MODAL AGENDAMENTO NO PAINEL DA BARBEARIA / BARBEIRO -->
+<div class="modalback" id="bookingModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('bookingModal')">✕</button>
+  <h2>Agendamento Presencial / Balcão ⚡</h2>
+  <div class="field"><label>Nome do Cliente</label><input id="bookClientName" placeholder="Nome completo"></div>
+  <div class="field"><label>Serviço</label><select id="bookService"><option value="30">Corte Degradê (30 min)</option><option value="90">Corte Platinado (90 min)</option></select></div>
+  <div class="field"><label>Horário</label><select id="bookTime"><option>08:00</option><option>08:30</option><option>09:00</option><option>10:00</option><option>10:30</option><option>11:00</option><option>14:00</option></select></div>
+  <div class="field"><label>Barbeiro Responsável</label><select><option>Marcos Mendes</option><option>Bruno Costa</option></select></div>
+  <button class="btn" style="width:100%;margin-top:10px;" onclick="confirmAdminBooking()">Confirmar Agendamento na Grade</button>
+ </div>
+</div>
+
+<!-- MODAL CHECKOUT COM PIX PROFISSIONAL -->
 <div class="modalback" id="storeModal">
  <div class="modal">
   <button class="close" onclick="closeModal('storeModal')">✕</button>
-  <div class="eyebrow">PAGAMENTO VIA PIX</div>
+  <div class="eyebrow">PAGAMENTO INSTANTÂNEO VIA PIX</div>
   <h2 id="storeModalTitle">Produto</h2>
   <p id="storeModalPrice" class="price" style="margin:5px 0;">R$ 0,00</p>
-  <div class="paybox" style="border:1px solid #4b3d20; background:#211b10; border-radius:12px; padding:15px; text-align:center; margin:15px 0;">
-   <div class="eyebrow">CHAVE PIX DA BARBEARIA</div>
-   <div id="dynamicPixKey" class="pixkey" style="font-weight:800; color:var(--gold2); font-size:18px; margin:8px 0;">91989117332</div>
-   <button class="btn secondary" onclick="toast('Chave Pix copiada com sucesso!')">Copiar Chave Pix (Copia e Cola)</button>
+  <div style="background:#171a20; border:1px solid #30343b; border-radius:14px; padding:18px; text-align:center; margin:15px 0;">
+    <div style="background:#fff; width:130px; height:130px; margin:0 auto 12px; border-radius:8px; display:grid; place-items:center; padding:8px;">
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
+        <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10z" fill="#000"/>
+        <path d="M45 10h10v10H45zM10 45h10v10H10zM60 45h10v10H60zM45 45h10v10H45zM75 60h15v15H75zM60 75h15v15H60zM45 75h10v15H45z" fill="#000"/>
+      </svg>
+    </div>
+    <small class="muted" style="display:block; margin-bottom:8px;">Escaneie o QR Code com o app do seu banco</small>
+    <div class="eyebrow" style="color:var(--gold2);">OU PIX COPIA E COLA</div>
+    <div id="dynamicPixKey" style="font-family:monospace; background:#0b0d10; padding:10px; border-radius:8px; font-size:12px; color:#38bdf8; margin:8px 0; word-break:break-all; border:1px dashed #373b43;">91989117332</div>
+    <button class="btn" style="width:100%; margin-top:8px; background:var(--gold); color:#191407;" onclick="toast('Chave Pix Copia e Cola copiada!')">📋 Copiar Chave Pix</button>
   </div>
-  <button class="btn" style="width:100%;" onclick="closeModal('storeModal');toast('Pedido confirmado! Aguardando pagamento Pix.')">Confirmar Pedido</button>
+  <button class="btn secondary" style="width:100%;" onclick="closeModal('storeModal');toast('Pedido registrado! Aguardando Pix.')">Já Realizei o Pagamento</button>
  </div>
 </div>
 
 <!-- MODAL AGENDAMENTO RÁPIDO DO CLIENTE -->
-<div class="modalback" id="quickBookingModal">
+<div class="modalback" id="clientBookingModal">
  <div class="modal">
-  <button class="close" onclick="closeModal('quickBookingModal')">✕</button>
+  <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
   <div class="eyebrow">AGENDAMENTO EM 4 CLIQUES</div>
   <h2>Agendar Horário ⚡</h2>
-  <div class="field"><label>1. Serviço</label><select><option>Corte Degradê — R$ 45,00</option><option>Barba Terapia — R$ 35,00</option></select></div>
-  <div class="field"><label>2. Profissional</label><select><option>Primeiro Disponível</option><option>Marcos Mendes</option></select></div>
-  <div class="field"><label>3. Data e Horário</label><input type="date"><select style="margin-top:6px;"><option>09:00</option><option>10:30</option></select></div>
+  <div class="field"><label>1. Serviço</label><select><option>Corte Degradê — R$ 45,00 (30 min)</option><option>Corte Platinado — R$ 120,00 (90 min)</option></select></div>
+  <div class="field"><label>2. Profissional</label><select><option>Primeiro Disponível</option><option>Marcos Mendes</option><option>Bruno Costa</option></select></div>
+  <div class="field"><label>3. Data e Horário</label><input type="date"><select style="margin-top:6px;"><option>09:00</option><option>10:00</option></select></div>
   <div class="field"><label>Forma de Pagamento</label>
     <select id="bookingPayMethod" onchange="toggleBookingPix(this.value)">
       <option value="local">Pagar no Local (Presencial)</option>
       <option value="pix">Pagar Agora via Pix</option>
     </select>
   </div>
-  <div id="bookingPixBox" class="hidden" style="background:#211b10; border:1px solid #4b3d20; padding:12px; border-radius:10px; margin-bottom:12px; text-align:center;">
-    <small class="eyebrow">Chave Pix para Pagamento Antecipado</small>
-    <div id="bookingPixKeyDisplay" style="font-weight:800; color:var(--gold2); font-size:16px; margin:6px 0;">91989117332</div>
+  <div id="bookingPixBox" class="hidden" style="background:#171a20; border:1px solid #30343b; padding:15px; border-radius:12px; margin-bottom:12px; text-align:center;">
+    <div style="background:#fff; width:110px; height:110px; margin:0 auto 10px; border-radius:6px; display:grid; place-items:center; padding:6px;">
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
+        <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10z" fill="#000"/>
+        <path d="M45 10h10v10H45zM10 45h10v10H10zM60 45h10v10H60zM45 45h10v10H45zM75 60h15v15H75zM60 75h15v15H60zM45 75h10v15H45z" fill="#000"/>
+      </svg>
+    </div>
+    <small class="muted" style="display:block; margin-bottom:6px;">Pix Copia e Cola:</small>
+    <div id="bookingPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
+    <button class="btn" style="width:100%; margin-top:8px; font-size:11px;" onclick="toast('Chave Pix copiada!')">📋 Copiar Chave Pix</button>
   </div>
   <div class="field"><label>Seu Nome e WhatsApp</label><input placeholder="Nome e WhatsApp"></div>
-  <button class="btn" style="width:100%;margin-top:6px;" onclick="closeModal('quickBookingModal');toast('Agendamento confirmado com sucesso!')">Confirmar Agendamento</button>
+  <button class="btn" style="width:100%;margin-top:6px;" onclick="closeModal('clientBookingModal');toast('Agendamento confirmado com sucesso!')">Confirmar Agendamento</button>
  </div>
 </div>
-
-<div class="modalback" id="notificationsModal"><div class="modal"><button class="close" onclick="closeModal('notificationsModal')">✕</button><h2>Notificações</h2></div></div>
-<div class="modalback" id="plansModal"><div class="modal"><button class="close" onclick="closeModal('plansModal')">✕</button><h2>Plano Vitalício Master</h2><p class="muted">Acesso total garantido.</p></div></div>
-<div class="modalback" id="bookingModal"><div class="modal"><button class="close" onclick="closeModal('bookingModal')">✕</button><h2>Novo Agendamento</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('bookingModal');toast('Agendado!')">Confirmar</button></div></div>
-<div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('timeoffModal');toast('Agenda trancada!')">Confirmar</button></div></div>
-<div class="modalback" id="quickProductModal"><div class="modal"><button class="close" onclick="closeModal('quickProductModal')">✕</button><h2>Comanda</h2><button class="btn" style="width:100%;" onclick="closeModal('quickProductModal');toast('Lançado!')">Lançar</button></div></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-let currentRole='client';
+let currentRole='owner';
 let shopConfig = {
     name: "Barbearia Imperial Pro",
     address: "Centro - Belém/PA",
@@ -403,7 +493,6 @@ function pickRole(role,btn){
     if(sf) sf.classList.toggle('hidden',role!=='shop');
 }
 
-// Persistência de Sessão Automática
 window.addEventListener('load', () => {
     const savedEmail = localStorage.getItem('navalha_saved_email');
     if(savedEmail === 'roberthaelley75@gmail.com'){
@@ -446,7 +535,58 @@ function handleAuth() {
     }, 500);
 }
 
-// Salvar Configurações Globais e Histórico de Caixa
+// Configurações & Permissões Restritas do Barbeiro Convidado
+function changeRole(role){
+    currentRole = role;
+    const hHelp = document.getElementById('roleHelp');
+    const roleLabel = document.getElementById('roleLabel');
+    const navFin = document.getElementById('navFinanceiro');
+    const navRel = document.getElementById('navRelatorios');
+    const navConfig = document.getElementById('navConfig');
+    const navAdmin = document.getElementById('navAdmin');
+    
+    if(role === 'barber'){
+        roleLabel.textContent = 'Minha Cadeira ✂️ (Barbeiro)';
+        if(hHelp) hHelp.textContent = 'Visão restrita: Apenas sua agenda, equipe e clientes.';
+        if(navFin) navFin.style.display = 'none';
+        if(navRel) navRel.style.display = 'none';
+        if(navConfig) navConfig.style.display = 'none';
+        if(navAdmin) navAdmin.style.display = 'none';
+        toast('Modo Barbeiro Convidado ativado.');
+    } else {
+        roleLabel.textContent = 'Painel da barbearia (Dono)';
+        if(hHelp) hHelp.textContent = 'Controle gerencial completo.';
+        if(navFin) navFin.style.display = 'flex';
+        if(navRel) navRel.style.display = 'flex';
+        if(navConfig) navConfig.style.display = 'flex';
+        toast('Modo Dono ativado.');
+    }
+}
+
+// Solicitação de Folga com 3 Opções
+function submitTimeoff(){
+    const date = document.getElementById('timeoffDate').value;
+    const period = document.getElementById('timeoffPeriod').value;
+    if(!date){ toast('Selecione a data da folga.'); return; }
+    
+    const label = period === 'morning' ? 'Manhã (até 12:00)' : (period === 'afternoon' ? 'Tarde (12:00 em diante)' : 'Dia Todo');
+    closeModal('timeoffModal');
+    toast(`Solicitação de folga (${label}) enviada com sucesso ao dono!`);
+}
+
+// Agendamento na Tabela da Barbearia
+function confirmAdminBooking(){
+    const name = document.getElementById('bookClientName').value;
+    const time = document.getElementById('bookTime').value;
+    const duration = document.getElementById('bookService').value;
+    if(!name){ toast('Informe o nome do cliente.'); return; }
+
+    const tbody = document.getElementById('agendaTableBody');
+    tbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name}</td><td>Procedimento (${duration} min)</td><td>Marcos Mendes</td><td><span class="status">Confirmado</span></td></tr>`;
+    closeModal('bookingModal');
+    toast('Agendamento inserido na grade com sucesso!');
+}
+
 function saveShopSettings(){
     shopConfig.name = document.getElementById('cfgName').value;
     shopConfig.address = document.getElementById('cfgAddress').value;
@@ -459,15 +599,9 @@ function saveShopSettings(){
     document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
     document.getElementById('tvShopTitle').textContent = shopConfig.name;
 
-    // Registra alteração no histórico de caixa
-    const now = new Date().toLocaleString('pt-BR');
-    const cashTable = document.getElementById('cashHistoryTable');
-    cashTable.innerHTML += `<tr><td>${now}</td><td>Alteração de Configurações / Pix</td><td>Config Global</td><td>Robert Haelley</td></tr>`;
-
-    toast('Configurações salvas com sucesso! Chave Pix e dados atualizados.');
+    toast('Configurações salvas com sucesso!');
 }
 
-// Cadastrar Convênio
 function saveConvenio(){
     const name = document.getElementById('convNameInput').value;
     const wp = document.getElementById('convWpInput').value;
@@ -481,41 +615,22 @@ function saveConvenio(){
     toast('Convênio cadastrado com sucesso!');
 }
 
-// Modo TV Funcional em Tela Cheia
-function openTVMode(){
-    document.getElementById('tvShopTitle').textContent = shopConfig.name;
-    document.getElementById('tvScreen').style.display = 'block';
-    toast('Modo TV ativado em tela cheia.');
-}
-function closeTVMode(){
-    document.getElementById('tvScreen').style.display = 'none';
-}
+// Modo TV
+function openTVMode(){ document.getElementById('tvScreen').style.display = 'block'; toast('Modo TV ativado.'); }
+function closeTVMode(){ document.getElementById('tvScreen').style.display = 'none'; }
 
 // Visão do Cliente
-function openClientView(){
-    document.getElementById('app').classList.add('hidden');
-    document.getElementById('clientScreen').style.display = 'block';
-    toast('Visualizando como Cliente 👁️');
-}
-function closeClientView(){
-    document.getElementById('clientScreen').style.display = 'none';
-    document.getElementById('app').classList.remove('hidden');
-    toast('Retornando ao painel.');
-}
+function openClientView(){ document.getElementById('app').classList.add('hidden'); document.getElementById('clientScreen').style.display = 'block'; toast('Visualizando como Cliente 👁️'); }
+function closeClientView(){ document.getElementById('clientScreen').style.display = 'none'; document.getElementById('app').classList.remove('hidden'); toast('Retornando ao painel.'); }
 
-function toggleBookingPix(val){
-    document.getElementById('bookingPixBox').classList.toggle('hidden', val !== 'pix');
-}
+function toggleBookingPix(val){ document.getElementById('bookingPixBox').classList.toggle('hidden', val !== 'pix'); }
 
-// Cadastros Reais
 function saveBarber(){
     const name = document.getElementById('bNameInput').value;
     const spec = document.getElementById('bSpecInput').value;
     if(!name){ toast('Informe o nome.'); return; }
     
     const container = document.getElementById('barberListContainer');
-    if(container.querySelector('.empty')) container.innerHTML = '';
-    
     container.innerHTML += `<article class="service"><div class="symbol">👨‍🦰</div><h3>${name}</h3><p class="muted">${spec || 'Barbeiro'}</p><span class="status">Ativo</span></article>`;
     closeModal('addBarberModal');
     toast('Barbeiro cadastrado!');
@@ -525,32 +640,37 @@ function saveProduct(){
     const name = document.getElementById('pNameInput').value;
     const price = document.getElementById('pPriceInput').value;
     const stock = document.getElementById('pStockInput').value;
+    const img = document.getElementById('pImageInput').value;
     if(!name || !price){ toast('Preencha os campos.'); return; }
 
     const container = document.getElementById('shopListContainer');
     if(container.querySelector('.empty')) container.innerHTML = '';
 
-    container.innerHTML += `<article class="product"><div class="productart">🧴</div><h3>${name}</h3><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><span class="status">Estoque: ${stock || 1} un.</span><button class="btn" onclick="openStoreCheckout('${name}', ${price})">Comprar / Pix</button></article>`;
+    const bgStyle = img ? `background-image:url('${img}')` : '';
+    container.innerHTML += `<article class="product"><div class="productart" style="${bgStyle}">🧴</div><h3>${name}</h3><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><span class="status">Estoque: ${stock || 1} un.</span><button class="btn" onclick="openStoreCheckout('${name}', ${price})">Comprar / Pix</button></article>`;
     closeModal('addProductModal');
-    toast('Produto cadastrado e ativado na Loja!');
+    toast('Produto cadastrado com foto e estoque!');
 }
 
 function saveServiceModal(){
     const name = document.getElementById('sNameInput').value;
     const price = document.getElementById('sPriceInput').value;
+    const time = document.getElementById('sTimeInput').value;
     if(!name || !price){ toast('Preencha os campos.'); return; }
 
     const container = document.getElementById('serviceListContainer');
-    container.innerHTML += `<article class="service"><div class="symbol">✂️</div><h3>${name}</h3><p class="muted">Tempo: 30 min</p><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><button class="btn secondary" onclick="toast('Serviço atualizado')">Editar Valor</button></article>`;
+    container.innerHTML += `<article class="service"><div class="symbol">✂️</div><h3>${name}</h3><p class="muted">Duração: ${time || 30} min</p><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><button class="btn secondary" onclick="toast('Editando serviço')">Editar Valor & Tempo</button></article>`;
     closeModal('addServiceModal');
     toast('Serviço cadastrado com sucesso!');
 }
 
-function editServicePrice(id){
-    const newPrice = prompt("Digite o novo valor do serviço (R$):", "45.00");
-    if(newPrice){
-        document.getElementById('servPrice1').textContent = 'R$ ' + Number(newPrice).toFixed(2).replace('.',',');
-        toast('Valor do serviço atualizado com sucesso!');
+function editService(id){
+    const newPrice = prompt("Digite o novo valor do serviço (R$):", "50.00");
+    const newTime = prompt("Digite a nova duração em minutos (ex: 30, 45, 60):", "30");
+    if(newPrice && newTime){
+        document.getElementById('servPrice'+id).textContent = 'R$ ' + Number(newPrice).toFixed(2).replace('.',',');
+        document.getElementById('servTime'+id).textContent = newTime;
+        toast('Valor e tempo do serviço atualizados!');
     }
 }
 
@@ -558,17 +678,6 @@ function openStoreCheckout(name, price){
     openModal('storeModal');
     document.getElementById('storeModalTitle').textContent = name;
     document.getElementById('storeModalPrice').textContent = 'R$ ' + Number(price).toFixed(2).replace('.',',');
-}
-
-function changeRole(role){
-    const hHelp = document.getElementById('roleHelp');
-    if(role === 'barber'){
-        if(hHelp) hHelp.textContent = 'Visão Minha Cadeira ✂️: Apenas seus atendimentos e folgas.';
-        toast('Modo Barbeiro ativado.');
-    } else {
-        if(hHelp) hHelp.textContent = 'Controle total do estabelecimento.';
-        toast('Modo Dono ativado.');
-    }
 }
 
 function signOut(){
