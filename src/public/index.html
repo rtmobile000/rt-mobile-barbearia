@@ -123,8 +123,7 @@
     <section class="section" id="page-servicos">
       <div class="heading"><div><h1>Serviços e Preços</h1><p>Defina os valores e serviços da sua barbearia.</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
       <div class="servicegrid" id="serviceListContainer">
-        <article class="service"><div class="symbol">✂️</div><h3>Corte Degradê</h3><p class="muted">Tempo: 30 min</p><div class="price">R$ 45,00</div><button class="btn secondary" onclick="toast('Editando valor do serviço')">Editar Valor</button></article>
-        <article class="service"><div class="symbol">♨️</div><h3>Barba Terapia</h3><p class="muted">Tempo: 30 min</p><div class="price">R$ 35,00</div><button class="btn secondary" onclick="toast('Editando valor do serviço')">Editar Valor</button></article>
+        <article class="service"><div class="symbol">✂️</div><h3>Corte Degradê</h3><p class="muted">Tempo: 30 min</p><div class="price" id="servPrice1">R$ 45,00</div><button class="btn secondary" onclick="editServicePrice(1)">Editar Valor</button></article>
       </div>
     </section>
 
@@ -172,7 +171,7 @@
         <div class="tablewrap">
           <table>
             <thead><tr><th>DATA / HORA</th><th>OPERAÇÃO</th><th>VALOR</th><th>RESPONSÁVEL</th></tr></thead>
-            <tbody>
+            <tbody id="cashHistoryTable">
               <tr><td>15/10/2026 02:30</td><td>Abertura de Caixa</td><td>R$ 150,00 (Troco)</td><td>Robert Haelley</td></tr>
             </tbody>
           </table>
@@ -189,9 +188,9 @@
       <div class="grid2">
         <div class="card">
           <div class="cardtitle"><h2>Dados do Estabelecimento</h2></div>
-          <div class="field"><label>Nome da Barbearia</label><input id="cfgName" value="RT Assistência & Barbearia"></div>
-          <div class="field"><label>Endereço Completo</label><input id="cfgAddress" value="Santa Isabel do Pará - PA"></div>
-          <div class="field"><label>WhatsApp de Atendimento</label><input id="cfgWhatsapp" value="(91) 98911-7332"></div>
+          <div class="field"><label>Nome da Barbearia</label><input id="cfgName" value="Barbearia Imperial Pro"></div>
+          <div class="field"><label>Endereço Completo</label><input id="cfgAddress" value="Centro - Belém/PA"></div>
+          <div class="field"><label>WhatsApp de Atendimento</label><input id="cfgWhatsapp" value="(91) 99999-9999"></div>
           <div class="field"><label>Sua Chave Pix (Para recebimento no Shopping e Agendamentos)</label><input id="cfgPix" value="91989117332"></div>
         </div>
         <div class="card">
@@ -214,7 +213,7 @@
     <section class="section" id="page-admin">
       <div class="heading"><div><div class="eyebrow">PAINEL MESTRE SAAS</div><h1>Gerenciador de Lojas 🏢</h1></div></div>
       <div class="stats"><div class="stat"><div class="stathead">Total de Lojas</div><strong>1</strong></div><div class="stat"><div class="stathead">MRR SaaS</div><strong>R$ 100,00</strong></div></div>
-      <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody><tr><td><b>Barbearia Exemplo</b></td><td><span class="pill">Pro R$ 100</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
+      <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody><tr><td><b>Barbearia Imperial Pro</b></td><td><span class="pill">Pro R$ 100</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
     </section>
 
   <footer class="devfooter">Desenvolvido por <strong style="color:#d7b15b">RT Mobile</strong><br><a href="https://rtmobile-bio.onrender.com" target="_blank">rtmobile-bio.onrender.com</a></footer>
@@ -222,29 +221,29 @@
 </main>
 </div>
 
-<!-- MODO TV EM TELA CHEIA -->
+<!-- MODO TV EM TELA CHEIA (100% FUNCIONAL) -->
 <div id="tvScreen" style="display:none; position:fixed; inset:0; background:#050608; z-index:99999; padding:4vw; color:#fff; overflow:auto;">
   <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #262a31; padding-bottom:20px;">
     <div>
       <div class="eyebrow" style="color:var(--gold);">NAVALHA · MODO TV EM TEMPO REAL</div>
-      <h1 id="tvShopTitle" style="font:800 36px Manrope; margin:5px 0;">RT Assistência & Barbearia</h1>
+      <h1 id="tvShopTitle" style="font:800 36px Manrope; margin:5px 0;">Barbearia Imperial Pro</h1>
     </div>
     <button class="btn secondary" onclick="closeTVMode()">✕ Sair do Modo TV</button>
   </div>
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:25px; margin-top:30px;">
     <div style="background:#101216; border:1px solid #262a31; border-radius:20px; padding:25px;">
-      <div class="eyebrow" style="color:var(--green);">PRÓXIMO DA FILA</div>
+      <div class="eyebrow" style="color:var(--green);">CLIENTE NA VEZ (CHAMADA)</div>
       <div id="tvNextClient" style="font:800 42px Manrope; color:var(--gold2); margin:15px 0;">Lucas Almeida</div>
-      <p class="muted">Aguardando chamada para a cadeira.</p>
+      <p class="muted">Apresente-se à recepção.</p>
     </div>
     <div style="background:#101216; border:1px solid #262a31; border-radius:20px; padding:25px;">
-      <div class="eyebrow" style="color:var(--gold);">STATUS DAS CADEIRAS</div>
+      <div class="eyebrow" style="color:var(--gold);">STATUS DAS CADEIRAS DOS BARBEIROS</div>
       <div id="tvBarberChairs" style="margin-top:15px; display:grid; gap:10px;">
-        <div style="display:flex; justify-content:space-between; padding:10px; background:#171a20; border-radius:10px;">
-          <b>Cadeira 01 (Marcos)</b><span class="status">Atendendo Luan Garcia</span>
+        <div style="display:flex; justify-content:space-between; padding:12px; background:#171a20; border-radius:10px;">
+          <b>Cadeira 01 (Marcos Mendes)</b><span class="status">Atendendo Luan Garcia</span>
         </div>
-        <div style="display:flex; justify-content:space-between; padding:10px; background:#171a20; border-radius:10px;">
-          <b>Cadeira 02 (Bruno)</b><span class="status wait">Livre / Próximo</span>
+        <div style="display:flex; justify-content:space-between; padding:12px; background:#171a20; border-radius:10px;">
+          <b>Cadeira 02 (Bruno Costa)</b><span class="status wait">Livre / Próximo da Fila</span>
         </div>
       </div>
     </div>
@@ -272,14 +271,14 @@
    </div>
    <div class="clientsectiontitle"><div><h2>Barbearias Parceiras Ativas</h2></div></div>
    <div class="barbershopgrid" id="publicShopsFeed">
-    <!-- Barbearia de teste do dev fica oculta para clientes comuns, aparecem apenas as barbearias reais assinantes -->
-    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3>Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openModal('quickBookingModal')">Agendar Procedimento ✂️</button></div></article>
+    <!-- Barbearia de teste do dev fica oculta para clientes comuns, aparecendo apenas barbearias reais -->
+    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3 id="clientShopDisplayTitle">Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openModal('quickBookingModal')">Agendar Procedimento ✂️</button></div></article>
    </div>
   </section>
  </div>
 </div>
 
-<!-- MODAIS DE CADASTRO -->
+<!-- MODAIS -->
 <div class="modalback" id="addConvenioModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addConvenioModal')">✕</button>
@@ -315,9 +314,9 @@
  <div class="modal">
   <button class="close" onclick="closeModal('addServiceModal')">✕</button>
   <h2>Cadastrar Serviço ✂️</h2>
-  <div class="field"><label>Nome do Serviço</label><input placeholder="Ex.: Corte + Barba"></div>
-  <div class="field"><label>Preço (R$)</label><input type="number" placeholder="75.00"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('addServiceModal');toast('Serviço cadastrado!')">Salvar</button>
+  <div class="field"><label>Nome do Serviço</label><input id="sNameInput" placeholder="Ex.: Corte + Barba"></div>
+  <div class="field"><label>Preço (R$)</label><input id="sPriceInput" type="number" placeholder="75.00"></div>
+  <button class="btn" style="width:100%;margin-top:10px;" onclick="saveServiceModal()">Salvar Serviço</button>
  </div>
 </div>
 
@@ -363,6 +362,7 @@
 
 <div class="modalback" id="notificationsModal"><div class="modal"><button class="close" onclick="closeModal('notificationsModal')">✕</button><h2>Notificações</h2></div></div>
 <div class="modalback" id="plansModal"><div class="modal"><button class="close" onclick="closeModal('plansModal')">✕</button><h2>Plano Vitalício Master</h2><p class="muted">Acesso total garantido.</p></div></div>
+<div class="modalback" id="bookingModal"><div class="modal"><button class="close" onclick="closeModal('bookingModal')">✕</button><h2>Novo Agendamento</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('bookingModal');toast('Agendado!')">Confirmar</button></div></div>
 <div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('timeoffModal');toast('Agenda trancada!')">Confirmar</button></div></div>
 <div class="modalback" id="quickProductModal"><div class="modal"><button class="close" onclick="closeModal('quickProductModal')">✕</button><h2>Comanda</h2><button class="btn" style="width:100%;" onclick="closeModal('quickProductModal');toast('Lançado!')">Lançar</button></div></div>
 
@@ -371,9 +371,9 @@
 <script>
 let currentRole='client';
 let shopConfig = {
-    name: "RT Assistência & Barbearia",
-    address: "Santa Isabel do Pará - PA",
-    whatsapp: "(91) 98911-7332",
+    name: "Barbearia Imperial Pro",
+    address: "Centro - Belém/PA",
+    whatsapp: "(91) 99999-9999",
     pix: "91989117332"
 };
 
@@ -446,7 +446,7 @@ function handleAuth() {
     }, 500);
 }
 
-// Salvar Configurações Globais
+// Salvar Configurações Globais e Histórico de Caixa
 function saveShopSettings(){
     shopConfig.name = document.getElementById('cfgName').value;
     shopConfig.address = document.getElementById('cfgAddress').value;
@@ -456,8 +456,15 @@ function saveShopSettings(){
     document.getElementById('shopTitleHeader').textContent = 'Bom dia, Robert (' + shopConfig.name + ').';
     document.getElementById('dynamicPixKey').textContent = shopConfig.pix;
     document.getElementById('bookingPixKeyDisplay').textContent = shopConfig.pix;
+    document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
+    document.getElementById('tvShopTitle').textContent = shopConfig.name;
 
-    toast('Configurações salvas com sucesso! Chave Pix atualizada.');
+    // Registra alteração no histórico de caixa
+    const now = new Date().toLocaleString('pt-BR');
+    const cashTable = document.getElementById('cashHistoryTable');
+    cashTable.innerHTML += `<tr><td>${now}</td><td>Alteração de Configurações / Pix</td><td>Config Global</td><td>Robert Haelley</td></tr>`;
+
+    toast('Configurações salvas com sucesso! Chave Pix e dados atualizados.');
 }
 
 // Cadastrar Convênio
@@ -474,7 +481,7 @@ function saveConvenio(){
     toast('Convênio cadastrado com sucesso!');
 }
 
-// Modo TV
+// Modo TV Funcional em Tela Cheia
 function openTVMode(){
     document.getElementById('tvShopTitle').textContent = shopConfig.name;
     document.getElementById('tvScreen').style.display = 'block';
@@ -525,7 +532,26 @@ function saveProduct(){
 
     container.innerHTML += `<article class="product"><div class="productart">🧴</div><h3>${name}</h3><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><span class="status">Estoque: ${stock || 1} un.</span><button class="btn" onclick="openStoreCheckout('${name}', ${price})">Comprar / Pix</button></article>`;
     closeModal('addProductModal');
-    toast('Produto cadastrado com Pix vinculado!');
+    toast('Produto cadastrado e ativado na Loja!');
+}
+
+function saveServiceModal(){
+    const name = document.getElementById('sNameInput').value;
+    const price = document.getElementById('sPriceInput').value;
+    if(!name || !price){ toast('Preencha os campos.'); return; }
+
+    const container = document.getElementById('serviceListContainer');
+    container.innerHTML += `<article class="service"><div class="symbol">✂️</div><h3>${name}</h3><p class="muted">Tempo: 30 min</p><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><button class="btn secondary" onclick="toast('Serviço atualizado')">Editar Valor</button></article>`;
+    closeModal('addServiceModal');
+    toast('Serviço cadastrado com sucesso!');
+}
+
+function editServicePrice(id){
+    const newPrice = prompt("Digite o novo valor do serviço (R$):", "45.00");
+    if(newPrice){
+        document.getElementById('servPrice1').textContent = 'R$ ' + Number(newPrice).toFixed(2).replace('.',',');
+        toast('Valor do serviço atualizado com sucesso!');
+    }
 }
 
 function openStoreCheckout(name, price){
