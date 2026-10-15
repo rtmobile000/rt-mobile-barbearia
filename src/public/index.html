@@ -304,6 +304,20 @@
      <button class="btn" onclick="openClientBooking()">⚡ Agendar Horário Agora</button>
     </div>
    </div>
+
+   <!-- MEUS AGENDAMENTOS NA ÁREA DO CLIENTE -->
+   <div class="card" style="margin-bottom:25px;">
+     <div class="cardtitle"><h2>Meus Agendamentos Realizados 📅</h2></div>
+     <div class="tablewrap">
+       <table>
+         <thead><tr><th>BARBEARIA</th><th>SERVIÇO</th><th>HORÁRIO</th><th>STATUS / PAGAMENTO</th></tr></thead>
+         <tbody id="clientMyAppointments">
+           <tr><td colspan="4" style="text-align:center; color:var(--muted);">Nenhum agendamento realizado por você ainda.</td></tr>
+         </tbody>
+       </table>
+     </div>
+   </div>
+
    <div class="clientsectiontitle"><div><h2>Barbearias Parceiras Ativas</h2></div></div>
    <div class="barbershopgrid" id="publicShopsFeed">
     <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3 id="clientShopDisplayTitle">Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openClientBooking()">Agendar Procedimento ✂️</button></div></article>
@@ -414,9 +428,9 @@
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
   <div class="eyebrow">AGENDAMENTO EM 4 CLIQUES</div>
   <h2>Agendar Horário ⚡</h2>
-  <div class="field"><label>1. Serviço</label><select><option>Corte Degradê — R$ 45,00 (30 min)</option><option>Corte Platinado — R$ 120,00 (90 min)</option></select></div>
+  <div class="field"><label>1. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option></select></div>
   <div class="field"><label>2. Profissional</label><select><option>Primeiro Disponível</option><option>Marcos Mendes</option><option>Bruno Costa</option></select></div>
-  <div class="field"><label>3. Data e Horário</label><input type="date"><select style="margin-top:6px;"><option>09:00</option><option>10:00</option></select></div>
+  <div class="field"><label>3. Data e Horário</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:6px;"><option>09:00</option><option>10:00</option><option>11:00</option><option>14:00</option></select></div>
   <div class="field"><label>Forma de Pagamento</label>
     <select id="clientPayMethod" onchange="toggleClientPix(this.value)">
       <option value="local">Pagar no Local (Presencial)</option>
@@ -561,7 +575,7 @@ function changeRole(role){
     }
 }
 
-// Função dedicada exclusivamente para abrir o agendamento do cliente
+// Abre o agendamento exclusivo do cliente
 function openClientBooking(){
     const modal = document.getElementById('clientBookingModal');
     if(modal) modal.style.display = 'grid';
@@ -591,14 +605,28 @@ function confirmAdminBooking(){
     toast('Agendamento inserido na grade com sucesso!');
 }
 
-// Agendamento Final do Cliente (Aparece corretamente na agenda da barbearia)
+// Agendamento do Cliente (Salva na tabela pessoal do cliente e repassa para a agenda da barbearia)
 function confirmClientBookingFinal(){
     const name = document.getElementById('clientBookNameInput').value;
+    const service = document.getElementById('clientServiceChoice').value;
+    const time = document.getElementById('clientTimeChoice').value;
+    const payMethod = document.getElementById('clientPayMethod').value;
+
     if(!name){ toast('Informe seu Nome e WhatsApp.'); return; }
 
     closeModal('clientBookingModal');
-    const tbody = document.getElementById('agendaTableBody');
-    tbody.innerHTML += `<tr><td><b>11:30</b></td><td>${name} (App Cliente)</td><td>Corte Degradê (30 min)</td><td>Primeiro Disponível</td><td><span class="status wait">Agendado (App)</span></td></tr>`;
+
+    // Insere na tabela "Meus Agendamentos" da Área do Cliente
+    const clientTable = document.getElementById('clientMyAppointments');
+    if(clientTable.querySelector('td[colspan]')) clientTable.innerHTML = '';
+
+    const statusBadge = payMethod === 'pix' ? '<span class="status wait">Aguardando Pix</span>' : '<span class="status">Pagar no Local</span>';
+    clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service}</td><td>Hoje às ${time}</td><td>${statusBadge}</td></tr>`;
+
+    // Insere também na agenda da barbearia em segundo plano
+    const adminTbody = document.getElementById('agendaTableBody');
+    adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App Cliente)</td><td>${service}</td><td>Primeiro Disponível</td><td>${statusBadge}</td></tr>`;
+
     toast('Agendamento realizado com sucesso! Sua vaga está garantida.');
 }
 
