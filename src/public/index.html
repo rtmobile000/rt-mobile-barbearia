@@ -395,7 +395,7 @@ async function handleAuth() {
             document.getElementById('clientScreen').style.display = 'block';
             toast('Área do cliente aberta.');
         } else {
-            document.getElementById('app'].classList.remove('hidden');
+            document.getElementById('app').classList.remove('hidden');
             showPage('dashboard');
             toast('Painel carregado.');
         }
@@ -433,7 +433,14 @@ function signOut(){
     toast('Você saiu da conta.');
 }
 function enterTV(){document.getElementById('app').classList.add('hidden');}
-window.addEventListener('load',()=>setTimeout(()=>{const s=document.getElementById('splash');if(s){s.classList.add('hide');setTimeout(()=>s.remove(),500)}},1500));
+
+// Remoção garantida do Splash Screen (nunca trava)
+window.addEventListener('load',()=>{
+    setTimeout(()=>{
+        const s = document.getElementById('splash');
+        if(s){ s.classList.add('hide'); setTimeout(()=>s.remove(), 400); }
+    }, 800);
+});
 </script>
 </body>
 </html>
