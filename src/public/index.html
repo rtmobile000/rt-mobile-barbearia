@@ -1,38 +1,36 @@
 async function handleAuth() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
-    const name = document.getElementById('loginName')?.value.trim() || 'RT Assistência & Barbearia';
     
     if (!email || !password) {
         toast('Informe e-mail e senha.');
         return;
     }
-    toast('Autenticando...');
     
-    // ATALHO ABSOLUTO PARA O SEU E-MAIL MESTRE
+    toast('Autenticando...');
+
+    // Atalho absoluto para o seu e-mail mestre
     if (email === 'roberthaelley75@gmail.com') {
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
         document.getElementById('navAdmin').style.display = 'flex';
         showPage('admin');
-        toast('Bem-vindo, Robert Haelley (Acesso Vitalício Master Ativo).');
+        toast('Bem-vindo, Robert Haelley!');
         return;
     }
 
-    let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-    if (error) {
-        const signUpRes = await supabaseClient.auth.signUp({ email, password });
-        if (signUpRes.error) {
-            toast('Erro: ' + signUpRes.error.message);
-            return;
+    // Login padrão para clientes e barbearias
+    try {
+        let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) {
+            let signUpRes = await supabaseClient.auth.signUp({ email, password });
+            if (signUpRes.error) {
+                toast('Erro: ' + signUpRes.error.message);
+                return;
+            }
+            data = signUpRes.data;
         }
-        data = signUpRes.data;
-        if (currentRole === 'shop' && data.user) {
-            await supabaseClient.from('barbershops').insert([{ name: name, owner_id: data.user.id, subscription_status: 'trial' }]);
-        }
-    }
 
-    if (data.user) {
         document.getElementById('loginScreen').classList.add('hidden');
         if (currentRole === 'client') {
             document.getElementById('clientScreen').style.display = 'block';
@@ -40,7 +38,9 @@ async function handleAuth() {
         } else {
             document.getElementById('app').classList.remove('hidden');
             showPage('dashboard');
-            toast('Painel da barbearia carregado.');
+            toast('Painel carregado.');
         }
+    } catch (err) {
+        toast('Erro de conexão com o Supabase.');
     }
 }
