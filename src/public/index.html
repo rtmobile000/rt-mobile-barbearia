@@ -150,7 +150,7 @@
       </div>
     </section>
     
-    <!-- SERVIÇOS (EDITÁVEL: VALOR E TEMPO) -->
+    <!-- SERVIÇOS (EDITÁVEL) -->
     <section class="section" id="page-servicos">
       <div class="heading"><div><h1>Serviços e Preços</h1><p>Defina os valores e o tempo de execução (duração em minutos).</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
       <div class="servicegrid" id="serviceListContainer">
@@ -164,7 +164,7 @@
       </div>
     </section>
 
-    <!-- EQUIPE (COM FOTO E WHATSAPP) -->
+    <!-- EQUIPE -->
     <section class="section" id="page-equipe">
       <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre os profissionais com foto e WhatsApp.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
       <div class="servicegrid" id="barberListContainer">
@@ -177,7 +177,7 @@
       </div>
     </section>
     
-    <!-- CLIENTES & CONVÊNIOS (COM FOTO E WHATSAPP) -->
+    <!-- CLIENTES & CONVÊNIOS -->
     <section class="section" id="page-clientes">
       <div class="heading">
         <div><h1>Clientes & Convênios 🤝</h1><p>Gerencie sua base de clientes com foto e WhatsApp.</p></div>
@@ -204,7 +204,7 @@
       </div>
     </section>
 
-    <!-- LOJA / ESTOQUE (COM EDIÇÃO DE PREÇO, FOTO REAL E APAGAR) -->
+    <!-- LOJA / ESTOQUE -->
     <section class="section" id="page-loja">
       <div class="heading"><div><h1>Loja / Estoque da Barbearia ▣</h1><p>Gerencie preços, fotos reais e remova itens do estoque.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
       <div class="shopgrid" id="shopStockContainer">
@@ -221,7 +221,7 @@
       </div>
     </section>
 
-    <!-- FINANCEIRO & CAIXA (COM CALCULADORA, LEITOR DE CÓDIGO DE BARRAS, PIX E NOTINHA WHATSAPP / NF) -->
+    <!-- FINANCEIRO & CAIXA -->
     <section class="section" id="page-financeiro">
       <div class="heading">
         <div><h1>Caixa & Financeiro 💸</h1><p>Controle entradas, saídas, calculadora e emissão de notas/comprovantes via WhatsApp.</p></div>
@@ -258,7 +258,7 @@
       </div>
     </section>
 
-    <!-- RELATÓRIOS (COM FILTRO DE QUANTOS DIAS QUISER) -->
+    <!-- RELATÓRIOS -->
     <section class="section" id="page-relatorios">
       <div class="heading">
         <div><h1>Relatórios de Desempenho 📊</h1><p>Gere relatórios financeiros e de atendimento filtrados por quantos dias quiser.</p></div>
@@ -370,7 +370,7 @@
      </div>
    </div>
 
-   <div class="clientsectiontitle" style="margin-bottom:12px;"><div><h2>Escolha a Barbearia Parceira para Acessar a Loja & Agendar</h2></div></div>
+   <div class="clientsectiontitle" style="margin-bottom:12px;"><div><h2>Barbearias Parceiras (Botões Separados para Agenda e Shopping)</h2></div></div>
    
    <div class="barbershopgrid" id="publicShopsFeed">
     <article class="shop" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px;">
@@ -378,7 +378,12 @@
         <span class="status" style="margin-bottom:6px; display:inline-block;" id="shopRatingBadge">Aberto · 4.9 ★★★★★</span>
         <h3 id="clientShopDisplayTitle" style="font:800 16px Manrope; margin:4px 0;">Barbearia Imperial Pro</h3>
         <p class="muted small" style="margin-bottom:10px;">Centro · Atendimento Premium com Especialistas</p>
-        <button class="btn" style="width:100%; margin-bottom:8px;" onclick="selectBarbershop('Barbearia Imperial Pro', '5591989117332', '91989117332')">Entrar na Barbearia (Shopping & Agenda) 🛍️</button>
+        
+        <!-- BOTÕES SEPARADOS EXATAMENTE COMO SOLICITADO -->
+        <div style="display:flex; gap:8px;">
+          <button class="btn" style="flex:1;" onclick="openClientBooking()">📅 Agendar Horário</button>
+          <button class="btn secondary" style="flex:1;" onclick="selectBarbershop('Barbearia Imperial Pro', '5591989117332', '91989117332')">🛍️ Acessar Shopping</button>
+        </div>
       </div>
     </article>
    </div>
@@ -399,7 +404,7 @@
 <!-- MODAIS -->
 <div class="modalback" id="addConvenioModal"><div class="modal"><button class="close" onclick="closeModal('addConvenioModal')">✕</button><h2>Cadastrar Convênio</h2><div class="field"><label>Nome</label><input id="convNameInput"></div><button class="btn" onclick="saveConvenio()">Salvar</button></div></div>
 
-<!-- MODAL CADASTRAR BARBEIRO (COM FOTO E WHATSAPP) -->
+<!-- MODAL CADASTRAR BARBEIRO (FOTO E WHATSAPP) -->
 <div class="modalback" id="addBarberModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addBarberModal')">✕</button>
@@ -411,7 +416,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR CLIENTE (COM FOTO E WHATSAPP) -->
+<!-- MODAL CADASTRAR CLIENTE (FOTO E WHATSAPP) -->
 <div class="modalback" id="addClientModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addClientModal')">✕</button>
@@ -423,7 +428,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE (FOTO REAL) -->
+<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE -->
 <div class="modalback" id="addProductModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addProductModal')">✕</button>
@@ -436,7 +441,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR / EDITAR SERVIÇOS (VALOR E TEMPO) -->
+<!-- MODAL CADASTRAR / EDITAR SERVIÇOS -->
 <div class="modalback" id="addServiceModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addServiceModal')">✕</button>
@@ -490,21 +495,26 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO COMPLETO -->
+<!-- MODAL AGENDAMENTO COMPLETO (COM SELEÇÃO DE BARBEARIA) -->
 <div class="modalback" id="clientBookingModal" style="z-index:999999;">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
   <div class="eyebrow">AGENDAMENTO EM 4 CLIQUES</div>
   <h2>Agendar Horário ⚡</h2>
-  <div class="field"><label>1. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option><option value="Barba Terapia — R$ 35,00">Barba Terapia — R$ 35,00 (30 min)</option></select></div>
-  <div class="field"><label>2. Profissional / Barbeiro</label>
+  <div class="field"><label>1. Escolha a Barbearia</label>
+    <select id="bookingShopChoice">
+      <option value="Barbearia Imperial Pro">Barbearia Imperial Pro (Centro)</option>
+    </select>
+  </div>
+  <div class="field"><label>2. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option><option value="Barba Terapia — R$ 35,00">Barba Terapia — R$ 35,00 (30 min)</option></select></div>
+  <div class="field"><label>3. Profissional / Barbeiro</label>
     <select id="clientBarberChoice">
       <option value="Marcos Mendes">Marcos Mendes (Especialista em Degradê · ★ 4.9)</option>
       <option value="Bruno Costa">Bruno Costa (Barba Terapia & Platinados · ★ 5.0)</option>
     </select>
   </div>
-  <div class="field"><label>3. Data e Horário</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:4px;"><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>14:00</option><option>15:00</option></select></div>
-  <div class="field"><label>4. Forma de Pagamento</label>
+  <div class="field"><label>4. Data e Horário</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:4px;"><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>14:00</option><option>15:00</option></select></div>
+  <div class="field"><label>5. Forma de Pagamento</label>
     <select id="clientPayMethod" onchange="toggleClientPix(this.value)">
       <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
       <option value="local">Pagar no Local (Presencial)</option>
@@ -520,7 +530,7 @@
  </div>
 </div>
 
-<!-- CHECKOUT SHOPPING -->
+<!-- CHECKOUT CARRINHO DO SHOPPING -->
 <div class="modalback" id="storeModal">
  <div class="modal">
   <button class="close" onclick="closeModal('storeModal')">✕</button>
@@ -586,6 +596,7 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
             document.getElementById('loginScreen').classList.remove('hidden');
         }
+        renderAdminStock();
     }, 1000);
 });
 
@@ -679,7 +690,6 @@ function handleAuth(isAuto = false) {
     }
 }
 
-// MODO BARBEIRO CONVIDADO (ACESSO LIMITADO)
 function changeRole(role){
     currentRole = role;
     const hHelp = document.getElementById('roleHelp');
@@ -726,6 +736,7 @@ function submitTimeoff(){
 }
 
 function confirmClientBookingFinal(){
+    const chosenShop = document.getElementById('bookingShopChoice').value;
     const name = document.getElementById('clientBookNameInput').value;
     const service = document.getElementById('clientServiceChoice').value;
     const barber = document.getElementById('clientBarberChoice').value;
@@ -738,26 +749,23 @@ function confirmClientBookingFinal(){
     const clientTable = document.getElementById('clientMyAppointments');
     if(clientTable.querySelector('td[colspan]')) clientTable.innerHTML = '';
     const statusBadge = payMethod === 'pix' ? '<span class="status wait">Aguardando Pix</span>' : '<span class="status">Pagar no Local</span>';
-    clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service} (${barber})</td><td>Hoje às ${time}</td><td>${statusBadge} <button class="btn secondary" style="padding:2px 6px;font-size:9px;" onclick="openModal('reviewModal')">Avaliar ⭐</button></td></tr>`;
+    clientTable.innerHTML += `<tr><td><b>${chosenShop}</b></td><td>${service} (${barber})</td><td>Hoje às ${time}</td><td>${statusBadge} <button class="btn secondary" style="padding:2px 6px;font-size:9px;" onclick="openModal('reviewModal')">Avaliar ⭐</button></td></tr>`;
 
     const adminTbody = document.getElementById('agendaTableBody');
     if(adminTbody.querySelector('td[colspan]')) adminTbody.innerHTML = '';
     adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App)</td><td>${service}</td><td>${barber}</td><td>${statusBadge}</td></tr>`;
 
-    const msg = encodeURIComponent(`Olá, confirmo meu agendamento na *${shopConfig.name}*:\n\n👤 Cliente: ${name}\n✂️ Serviço: ${service}\n👨‍🦰 Barbeiro: ${barber}\n🕒 Horário: ${time}`);
+    const msg = encodeURIComponent(`Olá, confirmo meu agendamento na *${chosenShop}*:\n\n👤 Cliente: ${name}\n✂️ Serviço: ${service}\n👨‍🦰 Barbeiro: ${barber}\n🕒 Horário: ${time}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
     toast('Agendamento realizado com sucesso!');
 }
 
-// AVALIAÇÃO PÓS-CORTE
 function submitReview(){
     const stars = document.getElementById('reviewStars').value;
-    const comment = document.getElementById('reviewComment').value;
     closeModal('reviewModal');
     toast(`Avaliação enviada com sucesso! Nota ${stars}.0 registrada.`);
 }
 
-// CARRINHO DO SHOPPING DA BARBEARIA
 function addProductToCart(name, price){
     const item = activeCart.find(p => p.name === name);
     if(item){
@@ -793,7 +801,6 @@ function confirmShopCheckoutFinal(){
     toast('Pedido enviado ao WhatsApp da barbearia com sucesso!');
 }
 
-// CAIXA E FINANCEIRO
 function saveCashTransaction(){
     const type = document.getElementById('cashType').value;
     const desc = document.getElementById('cashDescInput').value;
@@ -813,7 +820,6 @@ function sendWhatsAppReceipt(){
     toast('Comprovante enviado ao WhatsApp!');
 }
 
-// CALCULADORA
 function calcAppend(val){
     const disp = document.getElementById('calcDisplay');
     if(disp.value === '0') disp.value = val;
@@ -831,7 +837,6 @@ function calcCompute(){
     }
 }
 
-// RELATÓRIOS POR QUANTOS DIAS QUISER
 function updateReportData(){
     const days = document.getElementById('reportDaysInput').value || 7;
     const rev = days * 45;
@@ -869,7 +874,6 @@ function toggleClientPix(val){ document.getElementById('clientPixBox').classList
 function toggleShopPay(val){ document.getElementById('shopPixBox').classList.toggle('hidden', val !== 'pix'); document.getElementById('shopBalcaoBox').classList.toggle('hidden', val !== 'balcao'); }
 function togglePickerInput(val){ document.getElementById('pickerNameField').classList.toggle('hidden', val !== 'other'); }
 
-// CADASTRAR BARBEIRO COM FOTO E WHATSAPP
 function saveBarber(){
     const name = document.getElementById('bNameInput').value;
     const wp = document.getElementById('bWpInput').value;
@@ -889,7 +893,6 @@ function saveBarber(){
     toast('Barbeiro cadastrado com foto e WhatsApp!');
 }
 
-// CADASTRAR CLIENTE COM FOTO E WHATSAPP
 function saveClient(){
     const name = document.getElementById('cNameInput').value;
     const wp = document.getElementById('cWpInput').value;
@@ -909,7 +912,6 @@ function saveClient(){
     toast('Cliente cadastrado com sucesso!');
 }
 
-// CADASTRAR PRODUTO NO ESTOQUE (COM FOTO REAL)
 function saveProduct(){
     const name = document.getElementById('pNameInput').value;
     const price = Number(document.getElementById('pPriceInput').value);
@@ -924,7 +926,6 @@ function saveProduct(){
     toast('Produto cadastrado no estoque!');
 }
 
-// EDITAR PREÇO, FOTO E APAGAR NO ESTOQUE
 function editProductStock(index){
     const p = stockProducts[index];
     const newName = prompt("Nome do produto:", p.name);
@@ -951,7 +952,6 @@ function deleteProduct(index){
     }
 }
 
-// EDITAR SERVIÇOS (VALOR E TEMPO)
 function editService(index){
     const name = prompt("Nome do serviço:", "Corte Degradê");
     const price = prompt("Valor (R$):", "45.00");
