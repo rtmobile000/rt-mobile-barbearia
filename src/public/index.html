@@ -3,11 +3,14 @@ async function handleAuth() {
     const password = document.getElementById('loginPassword').value.trim();
     const name = document.getElementById('loginName')?.value.trim() || 'RT Assistência & Barbearia';
     
-    if(!email || !password){toast('Informe e-mail e senha.');return}
+    if (!email || !password) {
+        toast('Informe e-mail e senha.');
+        return;
+    }
     toast('Autenticando...');
     
-    // ATALHO ABSOLUTO PARA O SEU E-MAIL MESTRE (ENTRE COM QUALQUER SENHA)
-    if(email === 'roberthaelley75@gmail.com'){
+    // ATALHO ABSOLUTO PARA O SEU E-MAIL MESTRE
+    if (email === 'roberthaelley75@gmail.com') {
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
         document.getElementById('navAdmin').style.display = 'flex';
@@ -17,18 +20,21 @@ async function handleAuth() {
     }
 
     let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-    if(error){
+    if (error) {
         const signUpRes = await supabaseClient.auth.signUp({ email, password });
-        if(signUpRes.error){toast('Erro: '+signUpRes.error.message);return}
+        if (signUpRes.error) {
+            toast('Erro: ' + signUpRes.error.message);
+            return;
+        }
         data = signUpRes.data;
-        if(currentRole === 'shop' && data.user){
+        if (currentRole === 'shop' && data.user) {
             await supabaseClient.from('barbershops').insert([{ name: name, owner_id: data.user.id, subscription_status: 'trial' }]);
         }
     }
 
-    if(data.user){
+    if (data.user) {
         document.getElementById('loginScreen').classList.add('hidden');
-        if(currentRole === 'client'){
+        if (currentRole === 'client') {
             document.getElementById('clientScreen').style.display = 'block';
             toast('Área do cliente aberta.');
         } else {
