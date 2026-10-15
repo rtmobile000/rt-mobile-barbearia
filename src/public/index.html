@@ -55,7 +55,7 @@
  </div>
 </div>
 
-<!-- PAINEL EMPRESARIAL (COM CONTADOR DE 7 DIAS GRÁTIS) -->
+<!-- PAINEL EMPRESARIAL (COM BOTÃO DE VISÃO DO CLIENTE PARA O DEV) -->
 <div id="app" class="app hidden">
 <aside class="sidebar">
   <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>BARBEARIA · GESTÃO</small></div></div>
@@ -83,9 +83,10 @@
   <header class="topbar">
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
+      <button class="btn ghost" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);">👁️ Ver como Cliente</button>
       <button class="btn secondary" onclick="openTVMode()">▣ Modo TV</button>
       <span class="pill" id="userBadge">● TESTE GRÁTIS</span>
-      <div class="avatar" id="userAvatar">BB</div>
+      <div class="avatar" id="userAvatar">RT</div>
     </div>
   </header>
   <div class="content">
@@ -435,7 +436,7 @@ window.addEventListener('load', () => {
     renderClientShopping();
 });
 
-// AUTENTICAÇÃO COM SEPARAÇÃO E VALIDAÇÃO RIGOROSA
+// VALIDAÇÃO DE ACESSO: APENAS O SEU E-MAIL DE DEV TEM ACESSO MASTER VITALÍCIO
 function handleAuth() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
@@ -446,7 +447,7 @@ function handleAuth() {
 
     if(rememberMe) localStorage.setItem('navalha_saved_email', email);
 
-    // 1. ACESSO MESTRE VITALÍCIO (EXCLUSIVO DO SEU E-MAIL DE DESENVOLVEDOR)
+    // 1. EXCLUSIVO PARA O SEU E-MAIL DE DESENVOLVEDOR MASTER
     if(email === 'roberthaelley75@gmail.com'){
         document.getElementById('loginScreen').classList.add('hidden');
         if(currentRole === 'client'){
@@ -460,7 +461,7 @@ function handleAuth() {
         return;
     }
 
-    // 2. SE O USUÁRIO LOGOU COMO CLIENTE (Acesso comum, estritamente à Área do Cliente)
+    // 2. SE LOGOU COMO CLIENTE (Acesso estritamente à Área do Cliente)
     if(currentRole === 'client'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('clientScreen').style.display = 'block';
@@ -468,12 +469,12 @@ function handleAuth() {
         return;
     }
 
-    // 3. SE O USUÁRIO LOGOU COMO BARBEARIA / FRANQUEADO (Inicia com Teste Grátis de 7 Dias)
+    // 3. SE LOGOU COMO BARBEARIA / FRANQUEADO (Inicia Trial de 7 Dias)
     if(currentRole === 'shop'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
         showPage('dashboard');
-        toast('Franquia carregada (Período de Teste Grátis: 7 dias).');
+        toast('Franquia carregada (Teste Grátis: 7 dias).');
         return;
     }
 }
@@ -559,10 +560,17 @@ function saveShopSettings(){
 function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo!'); }
 function openTVMode(){ document.getElementById('tvScreen').style.display = 'block'; }
 function closeTVMode(){ document.getElementById('tvScreen').style.display = 'none'; }
-function openClientView(){ document.getElementById('app').classList.add('hidden'); document.getElementById('clientScreen').style.display = 'block'; }
+
+// Visão do Cliente restaurada no topo para o Dev
+function openClientView(){ 
+    document.getElementById('app').classList.add('hidden'); 
+    document.getElementById('clientScreen').style.display = 'block'; 
+    toast('Visualizando como Cliente 👁️');
+}
 function closeClientView(){ 
     document.getElementById('clientScreen').style.display = 'none'; 
-    document.getElementById('loginScreen').classList.remove('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    toast('Retornando ao painel master.');
 }
 
 function toggleClientPix(val){ document.getElementById('clientPixBox').classList.toggle('hidden', val !== 'pix'); }
