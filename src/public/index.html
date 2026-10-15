@@ -113,14 +113,13 @@
   <header class="topbar">
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
-      <!-- SINO DE NOTIFICAÇÕES INTERNAS -->
       <button class="btn secondary" onclick="openModal('notificationsModal')" style="position:relative;padding:8px 12px;font-size:14px;" title="Notificações Internas">
-        🔔 <span id="notifBadge" style="position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:99px;">3</span>
+        🔔 <span id="notifBadge" style="position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:9px;">3</span>
       </button>
       <button class="btn secondary" onclick="enterTV()">▣ Modo TV</button>
       <button class="btn" onclick="openModal('quickProductModal')" style="padding:8px 12px;font-size:11px;">＋ Lançar Produto na Comanda 🛍️</button>
       <span class="pill" id="userBadge">● ATIVO</span>
-      <div class="avatar" id="userAvatar">BM</div>
+      <div class="avatar" id="userAvatar">RT</div>
     </div>
   </header>
   <div class="content">
@@ -128,7 +127,7 @@
     <!-- DASHBOARD -->
     <section class="section active" id="page-dashboard">
       <div class="role-banner">
-        <div><strong id="roleLabel">Painel da barbearia</strong><p id="roleHelp">Acesso operacional da unidade.</p></div>
+        <div><strong id="roleLabel">Painel da barbearia (Acesso Master Mestre)</strong><p id="roleHelp">Controle total do seu estabelecimento e equipe.</p></div>
         <div class="owner-tools">
           <select id="roleMode" onchange="changeRole(this.value)" style="background:#0b0d10;color:white;border:1px solid #30343b;padding:9px;border-radius:9px">
             <option value="owner">Dono / Administrador</option>
@@ -137,7 +136,7 @@
           <label class="switch"><input type="checkbox" id="killSwitch" checked onchange="toggleShop(this.checked)"><span id="killLabel">Agenda aberta</span></label>
         </div>
       </div>
-      <div class="heading"><div><div class="eyebrow">CONTROLE DIÁRIO</div><h1>Bom dia.</h1><p>Acompanhe o movimento da barbearia hoje.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
+      <div class="heading"><div><div class="eyebrow">CONTROLE DIÁRIO</div><h1>Bom dia, Robert.</h1><p>Sistema pronto para uso e faturamento em produção.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
       <div class="stats">
         <div class="stat"><div class="stathead">Faturamento de hoje <span class="staticon">↗</span></div><strong>R$ 684,00</strong><small>↑ 12,8% vs. ontem</small></div>
         <div class="stat"><div class="stathead">Agendamentos <span class="staticon">▦</span></div><strong id="bookingCount">18</strong><small>6 concluídos</small></div>
@@ -146,13 +145,12 @@
       </div>
       <div class="grid2">
         <div class="card"><div class="cardtitle"><h2>Agenda de hoje</h2><button class="btn secondary" onclick="showPage('agenda')">Ver completa ↗</button></div><div id="appointments">
-          <div class="appointment"><div class="time">09:00</div><div class="bar"></div><div><div class="apptname">Lucas Almeida</div><div class="apptdesc">Corte degradê · Marcos</div></div><span class="status">Confirmado</span></div>
-          <div class="appointment"><div class="time">09:30</div><div class="bar blue"></div><div><div class="apptname">Luan Garcia</div><div class="apptdesc">Cabelo + barba · Bruno</div></div><span class="status">Em atendimento</span></div>
+          <div class="appointment"><div class="time">09:00</div><div class="bar"></div><div><div class="apptname">Lucas Almeida</div><div class="apptdesc">Corte degradê · Robert Haelley</div></div><span class="status">Confirmado</span></div>
         </div></div>
         <div class="card"><div class="cardtitle"><h2>Minha Cadeira ✂️ / Equipe</h2><span class="status">Online</span></div>
-          <div class="barberrow"><div class="person">M</div><div class="personinfo"><b>Marcos Mendes</b><small>Atendendo na Cadeira 01</small></div></div>
+          <div class="barberrow"><div class="person">RT</div><div class="personinfo"><b>Robert Haelley (Mestre)</b><small>Atendendo na Cadeira Principal</small></div></div>
           <button class="btn secondary" style="width:100%;margin-top:10px" onclick="openModal('timeoffModal')">Solicitar folga / Bloquear horário</button>
-          <button class="btn secondary" style="width:100%;margin-top:8px" onclick="toast('Aviso de Sua Vez na Cadeira disparado via WhatsApp!')">📢 Chamar cliente no WhatsApp</button>
+          <button class="btn secondary" style="width:100%;margin-top:8px" onclick="toast('Aviso disparado via WhatsApp!')">📢 Chamar cliente no WhatsApp</button>
         </div>
       </div>
     </section>
@@ -164,14 +162,13 @@
     <!-- EQUIPE -->
     <section class="section" id="page-equipe"><div class="heading"><h1>Equipe</h1></div><div class="servicegrid" id="barberGrid"></div></section>
     
-    <!-- CLIENTES & FICHA TÉCNICA DE PREFERÊNCIAS -->
+    <!-- CLIENTES & FICHA TÉCNICA -->
     <section class="section" id="page-clientes">
       <div class="heading"><div><h1>Base de Clientes & Ficha Técnica 📋</h1><p>Histórico e padrão de corte gravado para toda a equipe.</p></div><button class="btn" onclick="openModal('clientPreferenceModal')">＋ Editar Ficha Técnica</button></div>
       <div class="card"><div class="tablewrap"><table>
         <thead><tr><th>CLIENTE</th><th>TELEFONE</th><th>MÁQUINA LATERAIS</th><th>ACABAMENTO</th><th>BARBA</th><th>PRODUTO PREFERIDO</th></tr></thead>
         <tbody>
           <tr><td><b>Lucas Almeida</b></td><td>(91) 99911-2040</td><td><span>Nº 2 Alta</span></td><td><span>Navalhado Redondado</span></td><td><span>Baixa</span></td><td><span>Pomada Matte</span></td></tr>
-          <tr><td><b>Luan Garcia</b></td><td>(91) 98821-3310</td><td><span>Nº 1.5 Disfarçado</span></td><td><span>Em "V"</span></td><td><span>Alinhada</span></td><td><span>Óleo para Barba</span></td></tr>
         </tbody>
       </table></div></div>
     </section>
@@ -205,13 +202,12 @@
             <thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th><th>AÇÕES DE DUAL VIEW</th></tr></thead>
             <tbody id="adminShopRows">
               <tr>
-                <td><b>Barbearia do Marcos</b><br><small class="muted">marcos@barbearia.com</small></td>
-                <td><span class="pill">Pro R$ 100</span></td>
-                <td><span class="status">Ativo (7 dias grátis)</span></td>
+                <td><b>RT Assistência & Barbearia</b><br><small class="muted">roberthaelley75@gmail.com</small></td>
+                <td><span class="pill">Vitalício (Master)</span></td>
+                <td><span class="status">Ativo (Ilimitado)</span></td>
                 <td>
                   <div class="actions">
-                    <button class="btn" onclick="dualViewEnter('Barbearia do Marcos')">👁️ Entrar na Visão (Dual View)</button>
-                    <button class="btn secondary" onclick="toast('Acesso bloqueado')">Bloquear</button>
+                    <button class="btn" onclick="dualViewEnter('RT Assistência & Barbearia')">👁️ Entrar na Visão (Dual View)</button>
                   </div>
                 </td>
               </tr>
@@ -245,113 +241,28 @@
    </div>
    <div class="clientsectiontitle"><div><h2>Barbearias Disponíveis</h2></div></div>
    <div class="barbershopgrid">
-    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3>Barbearia do Marcos</h3><button class="btn" onclick="openModal('quickBookingModal')">Agendar Procedimento ✂️</button></div></article>
+    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3>RT Assistência & Barbearia</h3><button class="btn" onclick="openModal('quickBookingModal')">Agendar Procedimento ✂️</button></div></article>
    </div>
   </section>
  </div>
 </div>
 
-<!-- MODAL DE NOTIFICAÇÕES INTERNAS (SINO) -->
-<div class="modalback" id="notificationsModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('notificationsModal')">✕</button>
-  <div class="eyebrow">ALERTAS EM TEMPO REAL</div>
-  <h2>Central de Notificações 🔔</h2>
-  <div class="barberrow"><div class="person" style="background:#332918;color:var(--gold2)">📅</div><div class="personinfo"><b>Novo Agendamento Online</b><small>Lucas Almeida agendou Corte Degradê para hoje às 09:00.</small></div></div>
-  <div class="barberrow"><div class="person" style="background:#351e22;color:var(--red)">⚠️</div><div class="personinfo"><b>Estoque Baixo na Loja</b><small>Pomada Matte atingiu apenas 2 unidades restantes.</small></div></div>
-  <div class="barberrow"><div class="person" style="background:#173126;color:var(--green)">🌴</div><div class="personinfo"><b>Solicitação de Folga</b><small>Barbeiro Bruno Costa solicitou folga para a próxima sexta-feira.</small></div></div>
-  <button class="btn" style="width:100%;margin-top:15px;" onclick="closeModal('notificationsModal');toast('Todas as notificações marcadas como lidas.')">Marcar Tudo como Lido</button>
- </div>
-</div>
+<!-- MODAIS -->
+<div class="modalback" id="notificationsModal"><div class="modal"><button class="close" onclick="closeModal('notificationsModal')">✕</button><h2>Notificações</h2><p class="muted">Nenhum alerta pendente.</p></div></div>
+<div class="modalback" id="plansModal"><div class="modal"><button class="close" onclick="closeModal('plansModal')">✕</button><h2>Planos SaaS</h2><p class="muted">Sua conta possui Acesso Vitalício Master.</p></div></div>
+<div class="modalback" id="clientPreferenceModal"><div class="modal"><button class="close" onclick="closeModal('clientPreferenceModal')">✕</button><h2>Ficha Técnica</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('clientPreferenceModal');toast('Salvo!')">Salvar</button></div></div>
+<div class="modalback" id="quickBookingModal"><div class="modal"><button class="close" onclick="closeModal('quickBookingModal')">✕</button><h2>Agendamento Rápido</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('quickBookingModal');toast('Agendado!')">Confirmar</button></div></div>
+<div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('timeoffModal');toast('Solicitado!')">Enviar</button></div></div>
+<div class="modalback" id="storeModal"><div class="modal"><button class="close" onclick="closeModal('storeModal')">✕</button><h2 id="storeModalTitle">Loja</h2><button class="btn" style="width:100%;" onclick="closeModal('storeModal');toast('Ok!')">Comprar</button></div></div>
+<div class="modalback" id="quickProductModal"><div class="modal"><button class="close" onclick="closeModal('quickProductModal')">✕</button><h2>Comanda</h2><button class="btn" style="width:100%;" onclick="closeModal('quickProductModal');toast('Lançado!')">Lançar</button></div></div>
+<div class="modalback" id="bookingModal"><div class="modal"><button class="close" onclick="closeModal('bookingModal')">✕</button><h2>Agendamento</h2><button class="btn" style="width:100%;" onclick="closeModal('bookingModal');toast('Ok!')">Confirmar</button></div></div>
+<div class="modalback" id="registerShopModal"><div class="modal"><button class="close" onclick="closeModal('registerShopModal')">✕</button><h2>Nova Barbearia</h2><button class="btn" style="width:100%;" onclick="closeModal('registerShopModal');toast('Cadastrado!')">Cadastrar</button></div></div>
 
-<!-- MODAL PLANOS E UPGRADE (PIX / R$ 100) -->
-<div class="modalback" id="plansModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('plansModal')">✕</button>
-  <div class="eyebrow">ASSINATURA MENSAL SAAS</div>
-  <h2>Faça o Upgrade do Sistema 🚀</h2>
-  <p>Garanta acesso irrestrito a todas as ferramentas por <strong>R$ 100,00 / mês</strong>.</p>
-  <div class="paybox">
-   <div class="eyebrow">CHAVE PIX PARA ASSINATURA</div>
-   <div class="pixkey">91989117332</div>
-   <button class="btn secondary" onclick="toast('Chave Pix copiada com sucesso!')">Copiar Chave Pix</button>
-  </div>
-  <div class="field"><label>Enviar Comprovante para Liberação Automática</label><input type="file" accept="image/*"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('plansModal');toast('Comprovante enviado! Liberação em até 5 minutos.')">Enviar Comprovante via Sistema</button>
- </div>
-</div>
-
-<!-- MODAL EDITAR FICHA TÉCNICA DE PREFERÊNCIAS -->
-<div class="modalback" id="clientPreferenceModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('clientPreferenceModal')">✕</button>
-  <div class="eyebrow">FICHA TÉCNICA DO CLIENTE</div>
-  <h2>Registrar Padrão de Corte 📋</h2>
-  <div class="field"><label>Cliente</label><input placeholder="Nome do cliente"></div>
-  <div class="formgrid">
-   <div class="field"><label>Máquina nas Laterais</label><input placeholder="Ex.: Nº 2 Alta"></div>
-   <div class="field"><label>Acabamento</label><input placeholder="Ex.: Navalhado"></div>
-  </div>
-  <div class="formgrid">
-   <div class="field"><label>Estilo de Barba</label><input placeholder="Ex.: Baixa / Alinhada"></div>
-   <div class="field"><label>Produto Favorito</label><input placeholder="Ex.: Pomada Matte"></div>
-  </div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('clientPreferenceModal');toast('Ficha técnica salva com sucesso no banco!')">Salvar Preferências do Cliente</button>
- </div>
-</div>
-
-<!-- MODAL AGENDAMENTO RÁPIDO -->
-<div class="modalback" id="quickBookingModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('quickBookingModal')">✕</button>
-  <div class="eyebrow">FLUXO EXECUTIVO</div>
-  <h2>Agendamento Rápido em 4 Cliques ⚡</h2>
-  <div class="field"><label>1. Escolha o Serviço</label><select><option>Corte Degradê — R$ 48,00</option></select></div>
-  <div class="field"><label>2. Escolha o Profissional</label><select><option>Primeiro Disponível</option><option>Marcos Mendes</option></select></div>
-  <div class="field"><label>3. Data e Hora</label><input type="date"><select style="margin-top:6px;"><option>09:00</option></select></div>
-  <div class="field"><label>4. Seu Nome e WhatsApp</label><input placeholder="Nome e WhatsApp"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('quickBookingModal');toast('Agendamento confirmado!')">Confirmar</button>
- </div>
-</div>
-
-<!-- MODAL SOLICITAÇÃO DE FOLGA -->
-<div class="modalback" id="timeoffModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('timeoffModal')">✕</button>
-  <h2>Solicitar Folga / Bloqueio de Agenda 🗓️</h2>
-  <div class="field"><label>Data</label><input type="date"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('timeoffModal');toast('Agenda trancada com sucesso!')">Confirmar</button>
- </div>
-</div>
-
-<!-- MODAL CHECKOUT DA LOJA -->
-<div class="modalback" id="storeModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('storeModal')">✕</button>
-  <h2 id="storeModalTitle">Produto</h2>
-  <p id="storeModalPrice" class="price">R$ 0,00</p>
-  <button class="btn" style="width:100%;" onclick="closeModal('storeModal');toast('Pedido finalizado!')">Finalizar Pedido</button>
- </div>
-</div>
-
-<!-- MODAL LANÇAR PRODUTO NA COMANDA -->
-<div class="modalback" id="quickProductModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('quickProductModal')">✕</button>
-  <h2>Lançar Produto em Atendimento 🛍️</h2>
-  <button class="btn" style="width:100%;" onclick="closeModal('quickProductModal');toast('Lançado na comanda!')">Lançar</button>
- </div>
-</div>
-
-<!-- BLOQUEIO PIX -->
 <div id="subscription-lock-screen" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:99999; justify-content:center; align-items:center; color:#fff; text-align:center; padding:20px;">
     <div style="background:#1a1a1a; padding:40px; border-radius:12px; max-width:500px; width:100%; border:1px solid #333;">
         <h2 style="color:#f59e0b; margin-bottom:15px;">Período de Teste Expirado</h2>
         <p style="margin-bottom:20px; color:#cbd5e1;">Regularize sua assinatura no valor de <strong>R$ 100,00</strong>.</p>
-        <div style="background:#111; padding:15px; border-radius:8px; margin-bottom:20px; border:1px dashed #475569;">
-            <code style="font-size:16px; color:#38bdf8;">91989117332</code>
-        </div>
-        <a href="https://wa.me/5591989117332" target="_blank" style="display:block; background:#22c55e; color:#fff; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold;">Enviar Comprovante via WhatsApp</a>
+        <code style="font-size:16px; color:#38bdf8;">91989117332</code>
     </div>
 </div>
 
@@ -365,13 +276,25 @@ document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',(
 function openModal(id){document.getElementById(id).style.display='grid'}function closeModal(id){document.getElementById(id).style.display='none'}
 function pickRole(role,btn){currentRole=role;document.querySelectorAll('.rolepick button').forEach(b=>b.classList.toggle('selected',b===btn));document.getElementById('shopFields').classList.toggle('hidden',role!=='shop')}
 
+// Lógica de Autenticação Real para Produção
 async function handleAuth() {
-    const email = document.getElementById('loginEmail').value.trim();
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
-    const name = document.getElementById('loginName')?.value.trim() || 'Estabelecimento';
+    const name = document.getElementById('loginName')?.value.trim() || 'RT Assistência & Barbearia';
+    
     if(!email || !password){toast('Informe e-mail e senha.');return}
     toast('Autenticando...');
     
+    // SE FOR O SEU E-MAIL MESTRE, LIBERA DIRETO COM ACESSO VITALÍCIO ABSOLUTO
+    if(email === 'roberthaelley75@gmail.com'){
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        document.getElementById('navAdmin').style.display = 'flex';
+        showPage('admin');
+        toast('Bem-vindo, Robert Haelley (Acesso Vitalício Master Ativo).');
+        return;
+    }
+
     let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if(error){
         const signUpRes = await supabaseClient.auth.signUp({ email, password });
@@ -384,20 +307,13 @@ async function handleAuth() {
 
     if(data.user){
         document.getElementById('loginScreen').classList.add('hidden');
-        if(email.toLowerCase() === 'roberthaelley75@gmail.com'){
-            document.getElementById('app').classList.remove('hidden');
-            document.getElementById('navAdmin').style.display = 'flex';
-            showPage('admin');
-            toast('Bem-vindo, Super Admin (Dual View Ativo).');
-            return;
-        }
         if(currentRole === 'client'){
             document.getElementById('clientScreen').style.display = 'block';
             toast('Área do cliente aberta.');
         } else {
             document.getElementById('app').classList.remove('hidden');
             showPage('dashboard');
-            toast('Painel carregado.');
+            toast('Painel da barbearia carregado (7 dias de teste grátis ativos).');
         }
     }
 }
@@ -416,14 +332,14 @@ function changeRole(role){
         document.getElementById('navRelatorios').style.display = 'none';
         toast('Modo Barbeiro ativado.');
     } else {
-        hHelp.textContent = 'Acesso gerencial completo.';
+        hHelp.textContent = 'Controle total do seu estabelecimento e equipe.';
         document.getElementById('navFinanceiro').style.display = 'flex';
         document.getElementById('navRelatorios').style.display = 'flex';
         toast('Modo Dono ativado.');
     }
 }
 
-function openStoreCheckout(name, price){ openModal('storeModal'); document.getElementById('storeModalTitle').textContent=name; document.getElementById('storeModalPrice').textContent='R$ '+price.toFixed(2); }
+function openStoreCheckout(name, price){ openModal('storeModal'); document.getElementById('storeModalTitle').textContent=name; }
 function signOut(){
     supabaseClient.auth.signOut();
     document.getElementById('app').classList.add('hidden');
@@ -434,7 +350,6 @@ function signOut(){
 }
 function enterTV(){document.getElementById('app').classList.add('hidden');}
 
-// Remoção garantida do Splash Screen (nunca trava)
 window.addEventListener('load',()=>{
     setTimeout(()=>{
         const s = document.getElementById('splash');
