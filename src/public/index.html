@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#08090b">
 <title>NAVALHA — Gestão inteligente</title>
-<!-- Integração Supabase -->
+<!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{--bg:#08090b;--panel:#101216;--panel2:#15181e;--line:#262a31;--text:#f4f4f2;--muted:#9298a2;--gold:#d7b15b;--gold2:#f0d38a;--green:#55c69a;--red:#f07878}
@@ -45,13 +44,9 @@
 .client-bottomnav button strong{display:block;font-size:11px;color:inherit;margin-bottom:3px}
 .client-bottomnav button.active{color:var(--gold2)}
 @media(max-width:768px){.client-bottomnav{display:grid}}
-
-#splash{position:fixed;inset:0;z-index:9999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity .45s ease;overflow:hidden}
-#splash.hide{opacity:0;pointer-events:none}
 </style>
 </head>
 <body>
-<div id="splash"><h2>Carregando...</h2></div>
 
 <!-- TELA DE LOGIN -->
 <div id="loginScreen" class="loginpage">
@@ -264,6 +259,11 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// Inicialização segura do Supabase (embutida para evitar falhas de arquivo externo)
+const SUPABASE_URL = 'https://seu-projeto.supabase.co'; // Substitua caso necessário ou use o cliente padrão
+const SUPABASE_ANON_KEY = 'sua-chave-anon';
+const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
 let currentRole='client';
 function toast(msg){
     const t=document.getElementById('toast');
@@ -276,7 +276,7 @@ function toast(msg){
 function showPage(page){
     document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
     const target=document.getElementById('page-'+page);
-    if(target)target.classList.add('active');
+    if(target) target.classList.add('active');
     document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
 }
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
@@ -327,7 +327,7 @@ function handleAuth() {
         return;
     }
 
-    // Login normal para clientes ou barbearias
+    // Login normal simulado para testes rápidos dos seus clientes amanhã
     setTimeout(() => {
         const ls = document.getElementById('loginScreen');
         if(ls) ls.classList.add('hidden');
@@ -342,7 +342,7 @@ function handleAuth() {
             showPage('dashboard');
             toast('Painel carregado (7 dias de teste grátis).');
         }
-    }, 600);
+    }, 500);
 }
 
 function dualViewEnter(shopName){
@@ -393,14 +393,6 @@ function enterTV(){
     const app = document.getElementById('app');
     if(app) app.classList.add('hidden');
 }
-
-// Remove o splash com segurança imediata
-window.addEventListener('load',()=>{
-    setTimeout(()=>{
-        const s = document.getElementById('splash');
-        if(s){ s.classList.add('hide'); setTimeout(()=>s.remove(), 300); }
-    }, 400);
-});
 </script>
 </body>
 </html>
