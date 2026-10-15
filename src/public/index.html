@@ -301,12 +301,12 @@
      <div class="eyebrow">NAVALHA · AGENDAMENTO RÁPIDO EM 4 CLIQUES</div>
      <h1>Seu próximo corte começa aqui.</h1>
      <p style="color:#bbb;font-size:13px;margin:8px 0 16px;">Escolha o serviço, profissional e horário ideal sem complicação.</p>
-     <button class="btn" onclick="openModal('clientBookingModal')">⚡ Agendar Horário Agora</button>
+     <button class="btn" onclick="openClientBooking()">⚡ Agendar Horário Agora</button>
     </div>
    </div>
    <div class="clientsectiontitle"><div><h2>Barbearias Parceiras Ativas</h2></div></div>
    <div class="barbershopgrid" id="publicShopsFeed">
-    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3 id="clientShopDisplayTitle">Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openModal('clientBookingModal')">Agendar Procedimento ✂️</button></div></article>
+    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3 id="clientShopDisplayTitle">Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openClientBooking()">Agendar Procedimento ✂️</button></div></article>
    </div>
   </section>
  </div>
@@ -408,7 +408,7 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO DO CLIENTE (COM QR CODE E PIX COMPLETO) -->
+<!-- MODAL AGENDAMENTO EXCLUSIVO DO CLIENTE -->
 <div class="modalback" id="clientBookingModal">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
@@ -561,6 +561,12 @@ function changeRole(role){
     }
 }
 
+// Função dedicada para abrir o agendamento do cliente sem conflito
+function openClientBooking(){
+    const modal = document.getElementById('clientBookingModal');
+    if(modal) modal.style.display = 'grid';
+}
+
 // Solicitação de Folga com 3 Opções
 function submitTimeoff(){
     const date = document.getElementById('timeoffDate').value;
@@ -585,7 +591,7 @@ function confirmAdminBooking(){
     toast('Agendamento inserido na grade com sucesso!');
 }
 
-// Agendamento Final do Cliente (Exibido na agenda da barbearia)
+// Agendamento Final do Cliente
 function confirmClientBookingFinal(){
     const name = document.getElementById('clientBookNameInput').value;
     if(!name){ toast('Informe seu Nome e WhatsApp.'); return; }
