@@ -356,7 +356,7 @@
  </div>
 </div>
 
-<!-- MODAL SOLICITAÇÃO DE FOLGA (BARBEIRO) COM AS 3 OPÇÕES -->
+<!-- MODAL SOLICITAÇÃO DE FOLGA (BARBEIRO) -->
 <div class="modalback" id="timeoffModal">
  <div class="modal">
   <button class="close" onclick="closeModal('timeoffModal')">✕</button>
@@ -408,7 +408,7 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO RÁPIDO DO CLIENTE (COM PIX COMPLETO E PAGO NO LOCAL) -->
+<!-- MODAL AGENDAMENTO DO CLIENTE (COM QR CODE E PIX COMPLETO) -->
 <div class="modalback" id="clientBookingModal">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
@@ -418,24 +418,24 @@
   <div class="field"><label>2. Profissional</label><select><option>Primeiro Disponível</option><option>Marcos Mendes</option><option>Bruno Costa</option></select></div>
   <div class="field"><label>3. Data e Horário</label><input type="date"><select style="margin-top:6px;"><option>09:00</option><option>10:00</option></select></div>
   <div class="field"><label>Forma de Pagamento</label>
-    <select id="bookingPayMethod" onchange="toggleBookingPix(this.value)">
-      <option value="local">Pagar no Local (Dinheiro / Cartão / Pix Presencial)</option>
+    <select id="clientPayMethod" onchange="toggleClientPix(this.value)">
+      <option value="local">Pagar no Local (Presencial)</option>
       <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
     </select>
   </div>
-  <div id="bookingPixBox" class="hidden" style="background:#171a20; border:1px solid #30343b; padding:15px; border-radius:12px; margin-bottom:12px; text-align:center;">
+  <div id="clientPixBox" class="hidden" style="background:#171a20; border:1px solid #30343b; padding:15px; border-radius:12px; margin-bottom:12px; text-align:center;">
     <div style="background:#fff; width:110px; height:110px; margin:0 auto 10px; border-radius:6px; display:grid; place-items:center; padding:6px;">
       <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
         <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10z" fill="#000"/>
         <path d="M45 10h10v10H45zM10 45h10v10H10zM60 45h10v10H60zM45 45h10v10H45zM75 60h15v15H75zM60 75h15v15H60zM45 75h10v15H45z" fill="#000"/>
       </svg>
     </div>
-    <small class="muted" style="display:block; margin-bottom:6px;">Escaneie o QR Code ou use o Pix Copia e Cola:</small>
-    <div id="bookingPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
+    <small class="muted" style="display:block; margin-bottom:6px;">Pix Copia e Cola:</small>
+    <div id="clientPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
     <button class="btn" style="width:100%; margin-top:8px; font-size:11px;" onclick="toast('Chave Pix copiada com sucesso!')">📋 Copiar Chave Pix</button>
   </div>
-  <div class="field"><label>Seu Nome e WhatsApp</label><input placeholder="Nome e WhatsApp"></div>
-  <button class="btn" style="width:100%;margin-top:6px;" onclick="confirmClientBooking()">Confirmar Agendamento</button>
+  <div class="field"><label>Seu Nome e WhatsApp</label><input id="clientBookNameInput" placeholder="Nome e WhatsApp"></div>
+  <button class="btn" style="width:100%;margin-top:6px;" onclick="confirmClientBookingFinal()">Confirmar Agendamento</button>
  </div>
 </div>
 
@@ -518,7 +518,7 @@ function handleAuth() {
     }, 500);
 }
 
-// Configurações & Permissões Estritas do Barbeiro Convidado
+// Configurações & Permissões do Barbeiro Convidado
 function changeRole(role){
     currentRole = role;
     const hHelp = document.getElementById('roleHelp');
@@ -585,12 +585,15 @@ function confirmAdminBooking(){
     toast('Agendamento inserido na grade com sucesso!');
 }
 
-// Agendamento Feito pelo Cliente (Exibido exclusivamente na Agenda da Barbearia sem misturar painéis)
-function confirmClientBooking(){
+// Agendamento Final do Cliente (Exibido na agenda da barbearia)
+function confirmClientBookingFinal(){
+    const name = document.getElementById('clientBookNameInput').value;
+    if(!name){ toast('Informe seu Nome e WhatsApp.'); return; }
+
     closeModal('clientBookingModal');
     const tbody = document.getElementById('agendaTableBody');
-    tbody.innerHTML += `<tr><td><b>11:30</b></td><td>Cliente Web</td><td>Corte Degradê (30 min)</td><td>Primeiro Disponível</td><td><span class="status wait">Pendente / Pix</span></td></tr>`;
-    toast('Agendamento realizado com sucesso! Registrado na agenda da barbearia.');
+    tbody.innerHTML += `<tr><td><b>11:30</b></td><td>${name} (App Cliente)</td><td>Corte Degradê (30 min)</td><td>Primeiro Disponível</td><td><span class="status wait">Agendado (App)</span></td></tr>`;
+    toast('Agendamento realizado com sucesso! Sua vaga está garantida.');
 }
 
 function saveShopSettings(){
@@ -601,7 +604,7 @@ function saveShopSettings(){
 
     document.getElementById('shopTitleHeader').textContent = 'Bom dia, Robert (' + shopConfig.name + ').';
     document.getElementById('dynamicPixKey').textContent = shopConfig.pix;
-    document.getElementById('bookingPixKeyDisplay').textContent = shopConfig.pix;
+    document.getElementById('clientPixKeyDisplay').textContent = shopConfig.pix;
     document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
     document.getElementById('tvShopTitle').textContent = shopConfig.name;
 
@@ -629,7 +632,7 @@ function closeTVMode(){ document.getElementById('tvScreen').style.display = 'non
 function openClientView(){ document.getElementById('app').classList.add('hidden'); document.getElementById('clientScreen').style.display = 'block'; toast('Visualizando como Cliente 👁️'); }
 function closeClientView(){ document.getElementById('clientScreen').style.display = 'none'; document.getElementById('app').classList.remove('hidden'); toast('Retornando ao painel.'); }
 
-function toggleBookingPix(val){ document.getElementById('bookingPixBox').classList.toggle('hidden', val !== 'pix'); }
+function toggleClientPix(val){ document.getElementById('clientPixBox').classList.toggle('hidden', val !== 'pix'); }
 
 function saveBarber(){
     const name = document.getElementById('bNameInput').value;
