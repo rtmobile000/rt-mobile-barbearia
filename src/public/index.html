@@ -50,12 +50,12 @@
   <div id="shopFields" class="hidden">
    <div class="field"><label>Nome da Barbearia / Franqueado</label><input id="loginName" placeholder="Ex.: Barbearia Imperial"></div>
   </div>
-  <button class="btn" style="width:100%;padding:14px;margin-top:4px;" onclick="handleAuth()">Entrar / Acessar Painel</button>
-  <p class="tiny" style="margin-top:15px">Sistema verificado e validado para uso profissional.</p>
+  <button class="btn" style="width:100%;padding:14px;margin-top:4px;" onclick="handleAuth()">Entrar / Acessar Sistema</button>
+  <p class="tiny" style="margin-top:15px">7 dias de teste grátis para novas barbearias e acesso vitalício para administradores.</p>
  </div>
 </div>
 
-<!-- PAINEL EMPRESARIAL (FRANQUEADO / DONO) -->
+<!-- PAINEL EMPRESARIAL (COM CONTADOR DE 7 DIAS GRÁTIS) -->
 <div id="app" class="app hidden">
 <aside class="sidebar">
   <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>BARBEARIA · GESTÃO</small></div></div>
@@ -73,8 +73,9 @@
     <button data-page="admin" id="navAdmin" style="display:none"><span>♛</span><span class="navtxt">Super Admin (SaaS)</span></button>
   </nav>
   <div class="sidebottom">
-    <div class="eyebrow">PLANO FRANQUIA</div>
-    <p id="trialCounterText">Assinatura Ativa & Validada.</p>
+    <div class="eyebrow">PLANO TRIAL BARBEARIA</div>
+    <p id="trialCounterText">7 dias restantes no teste grátis.</p>
+    <button class="btn secondary" onclick="openModal('plansModal')" style="margin-bottom:8px;">Fazer Upgrade (R$ 100)</button>
     <button class="btn danger" onclick="signOut()" style="width:100%;">Sair / Trocar conta</button>
   </div>
 </aside>
@@ -83,8 +84,8 @@
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
       <button class="btn secondary" onclick="openTVMode()">▣ Modo TV</button>
-      <span class="pill" id="userBadge">● FRANQUIA ATIVA</span>
-      <div class="avatar" id="userAvatar">RF</div>
+      <span class="pill" id="userBadge">● TESTE GRÁTIS</span>
+      <div class="avatar" id="userAvatar">BB</div>
     </div>
   </header>
   <div class="content">
@@ -92,7 +93,7 @@
     <!-- DASHBOARD -->
     <section class="section active" id="page-dashboard">
       <div class="role-banner">
-        <div><strong id="roleLabel">Painel da Barbearia (Franqueado)</strong><p id="roleHelp">Controle gerencial completo do seu estabelecimento.</p></div>
+        <div><strong id="roleLabel">Painel da Barbearia (Proprietário)</strong><p id="roleHelp">Controle gerencial completo do seu estabelecimento.</p></div>
         <div class="owner-tools">
           <select id="roleMode" onchange="changeRole(this.value)" style="background:#0b0d10;color:white;border:1px solid #30343b;padding:9px;border-radius:9px">
             <option value="owner">Proprietário / Franqueado</option>
@@ -101,7 +102,7 @@
           <label class="switch"><input type="checkbox" id="killSwitch" checked onchange="toggleShop(this.checked)"><span id="killLabel">Agenda aberta</span></label>
         </div>
       </div>
-      <div class="heading"><div><div class="eyebrow">OPERAÇÃO VALIDADA</div><h1 id="shopTitleHeader">Painel Administrativo.</h1><p>Sistema pronto e operando em tempo real.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
+      <div class="heading"><div><div class="eyebrow">ESTABELECIMENTO ATIVO</div><h1 id="shopTitleHeader">Painel Administrativo.</h1><p>Sistema pronto para operação comercial e vendas.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
       <div class="stats">
         <div class="stat"><div class="stathead">Faturamento de hoje</div><strong>R$ 0,00</strong><small>Operação iniciada</small></div>
         <div class="stat"><div class="stathead">Agendamentos</div><strong>0</strong><small>Escala livre</small></div>
@@ -208,7 +209,7 @@
           <table>
             <thead><tr><th>DATA / HORA</th><th>OPERAÇÃO</th><th>VALOR</th><th>RESPONSÁVEL</th></tr></thead>
             <tbody id="cashHistoryTable">
-              <tr><td>15/10/2026 02:30</td><td>Abertura de Caixa</td><td>R$ 150,00 (Troco)</td><td>Franqueado</td></tr>
+              <tr><td>15/10/2026 02:30</td><td>Abertura de Caixa</td><td>R$ 150,00 (Troco)</td><td>Proprietário</td></tr>
             </tbody>
           </table>
         </div>
@@ -248,7 +249,7 @@
     <section class="section" id="page-admin">
       <div class="heading"><div><div class="eyebrow">PAINEL MESTRE SAAS</div><h1>Gerenciador de Lojas 🏢</h1></div></div>
       <div class="stats"><div class="stat"><div class="stathead">Total de Lojas</div><strong>1</strong></div><div class="stat"><div class="stathead">MRR SaaS</div><strong>R$ 100,00</strong></div></div>
-      <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody><tr><td><b>Barbearia Imperial Pro</b></td><td><span class="pill">Pro R$ 100</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
+      <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody><tr><td><b>Barbearia Imperial Pro</b></td><td><span class="pill">Trial 7 Dias</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
     </section>
 
   <footer class="devfooter">Desenvolvido por <strong style="color:#d7b15b">RT Mobile</strong></footer>
@@ -434,7 +435,7 @@ window.addEventListener('load', () => {
     renderClientShopping();
 });
 
-// VALIDAÇÃO RIGOROSA DE ACESSO POR E-MAIL E PAPEL
+// AUTENTICAÇÃO COM SEPARAÇÃO E VALIDAÇÃO RIGOROSA
 function handleAuth() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
@@ -445,7 +446,7 @@ function handleAuth() {
 
     if(rememberMe) localStorage.setItem('navalha_saved_email', email);
 
-    // EXCLUSIVO: Apenas o seu e-mail dev mestre pode acessar tudo livremente
+    // 1. ACESSO MESTRE VITALÍCIO (EXCLUSIVO DO SEU E-MAIL DE DESENVOLVEDOR)
     if(email === 'roberthaelley75@gmail.com'){
         document.getElementById('loginScreen').classList.add('hidden');
         if(currentRole === 'client'){
@@ -455,11 +456,11 @@ function handleAuth() {
             document.getElementById('navAdmin').style.display = 'flex';
             showPage('dashboard');
         }
-        toast('Bem-vindo, Desenvolvedor Master!');
+        toast('Acesso Master Autorizado!');
         return;
     }
 
-    // ACESSO DE CLIENTE COMUM (Isolado somente para a Área do Cliente)
+    // 2. SE O USUÁRIO LOGOU COMO CLIENTE (Acesso comum, estritamente à Área do Cliente)
     if(currentRole === 'client'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('clientScreen').style.display = 'block';
@@ -467,12 +468,12 @@ function handleAuth() {
         return;
     }
 
-    // ACESSO DE FRANQUEADO / PROPRIETÁRIO DE BARBEARIA
+    // 3. SE O USUÁRIO LOGOU COMO BARBEARIA / FRANQUEADO (Inicia com Teste Grátis de 7 Dias)
     if(currentRole === 'shop'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
         showPage('dashboard');
-        toast('Painel da Franquia carregado com sucesso.');
+        toast('Franquia carregada (Período de Teste Grátis: 7 dias).');
         return;
     }
 }
@@ -486,9 +487,9 @@ function changeRole(role){
         if(hHelp) hHelp.textContent = 'Visão restrita: Apenas sua agenda, equipe e clientes.';
         toast('Modo Barbeiro ativado.');
     } else {
-        roleLabel.textContent = 'Painel da Barbearia (Franqueado)';
+        roleLabel.textContent = 'Painel da Barbearia (Proprietário)';
         if(hHelp) hHelp.textContent = 'Controle gerencial completo.';
-        toast('Modo Franqueado ativado.');
+        toast('Modo Proprietário ativado.');
     }
 }
 
@@ -499,7 +500,7 @@ function openClientBooking(){
 
 function submitTimeoff(){
     closeModal('timeoffModal');
-    toast('Solicitação de folga enviada ao franqueado!');
+    toast('Solicitação de folga enviada ao proprietário!');
 }
 
 function confirmAdminBooking(){
