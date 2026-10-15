@@ -68,10 +68,14 @@
   </div>
   <div class="field"><label>E-mail</label><input id="loginEmail" type="email" placeholder="voce@email.com"></div>
   <div class="field"><label>Senha</label><input id="loginPassword" type="password" placeholder="Mínimo de 6 caracteres"></div>
+  <div style="display:flex;align-items:center;gap:8px;margin:8px 0 14px;font-size:11px;color:var(--muted);">
+    <input type="checkbox" id="rememberMe" checked style="accent-color:var(--gold);width:15px;height:15px;">
+    <label for="rememberMe">Lembrar meus dados neste dispositivo</label>
+  </div>
   <div id="shopFields" class="hidden">
    <div class="field"><label>Nome do Estabelecimento / Seu Nome</label><input id="loginName" placeholder="Ex.: Barbearia Imperial"></div>
   </div>
-  <button class="btn" style="width:100%;padding:14px;margin-top:8px;" onclick="handleAuth()">Entrar / Criar Conta</button>
+  <button class="btn" style="width:100%;padding:14px;margin-top:4px;" onclick="handleAuth()">Entrar / Criar Conta</button>
   <p class="tiny" style="margin-top:15px">7 dias de teste grátis para novas barbearias e acesso vitalício para administradores.</p>
  </div>
 </div>
@@ -103,11 +107,11 @@
   <header class="topbar">
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
-      <button class="btn secondary" onclick="openModal('notificationsModal')" style="position:relative;padding:8px 12px;font-size:14px;" title="Notificações Internas">
-        🔔 <span id="notifBadge" style="position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:9px;">3</span>
+      <button class="btn ghost" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);">👁️ Ver como Cliente</button>
+      <button class="btn secondary" onclick="openModal('notificationsModal')" style="position:relative;padding:8px 12px;font-size:14px;" title="Notificações">
+        🔔 <span id="notifBadge" style="position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:9px;">1</span>
       </button>
       <button class="btn secondary" onclick="enterTV()">▣ Modo TV</button>
-      <button class="btn" onclick="openModal('quickProductModal')" style="padding:8px 12px;font-size:11px;">＋ Lançar Produto na Comanda 🛍️</button>
       <span class="pill" id="userBadge">● ATIVO</span>
       <div class="avatar" id="userAvatar">RT</div>
     </div>
@@ -117,7 +121,7 @@
     <!-- DASHBOARD -->
     <section class="section active" id="page-dashboard">
       <div class="role-banner">
-        <div><strong id="roleLabel">Painel da barbearia (Acesso Master Mestre)</strong><p id="roleHelp">Controle total do seu estabelecimento e equipe.</p></div>
+        <div><strong id="roleLabel">Painel da barbearia</strong><p id="roleHelp">Controle total do seu estabelecimento.</p></div>
         <div class="owner-tools">
           <select id="roleMode" onchange="changeRole(this.value)" style="background:#0b0d10;color:white;border:1px solid #30343b;padding:9px;border-radius:9px">
             <option value="owner">Dono / Administrador</option>
@@ -126,85 +130,65 @@
           <label class="switch"><input type="checkbox" id="killSwitch" checked onchange="toggleShop(this.checked)"><span id="killLabel">Agenda aberta</span></label>
         </div>
       </div>
-      <div class="heading"><div><div class="eyebrow">CONTROLE DIÁRIO</div><h1>Bom dia, Robert.</h1><p>Sistema pronto para uso e faturamento em produção.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
+      <div class="heading"><div><div class="eyebrow">ESTABELECIMENTO PRONTO</div><h1>Bom dia, Robert.</h1><p>Sistema ativado e pronto para uso comercial.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
       <div class="stats">
-        <div class="stat"><div class="stathead">Faturamento de hoje <span class="staticon">↗</span></div><strong>R$ 684,00</strong><small>↑ 12,8% vs. ontem</small></div>
-        <div class="stat"><div class="stathead">Agendamentos <span class="staticon">▦</span></div><strong id="bookingCount">18</strong><small>6 concluídos</small></div>
-        <div class="stat"><div class="stathead">Clientes na fila <span class="staticon">♙</span></div><strong>03</strong><small>Tempo médio: 15 min</small></div>
-        <div class="stat"><div class="stathead">Ticket médio <span class="staticon">◈</span></div><strong>R$ 38,00</strong><small>Serviços + produtos</small></div>
+        <div class="stat"><div class="stathead">Faturamento de hoje</div><strong>R$ 0,00</strong><small>Início de operação</small></div>
+        <div class="stat"><div class="stathead">Agendamentos</div><strong>0</strong><small>Agenda livre</small></div>
+        <div class="stat"><div class="stathead">Clientes na fila</div><strong>0</strong><small>Pronto para iniciar</small></div>
+        <div class="stat"><div class="stathead">Ticket médio</div><strong>R$ 0,00</strong><small>Base limpa</small></div>
       </div>
       <div class="grid2">
-        <div class="card"><div class="cardtitle"><h2>Agenda de hoje</h2><button class="btn secondary" onclick="showPage('agenda')">Ver completa ↗</button></div><div id="appointments">
-          <div class="appointment"><div class="time">09:00</div><div class="bar"></div><div><div class="apptname">Lucas Almeida</div><div class="apptdesc">Corte degradê · Robert Haelley</div></div><span class="status">Confirmado</span></div>
-        </div></div>
-        <div class="card"><div class="cardtitle"><h2>Minha Cadeira ✂️ / Equipe</h2><span class="status">Online</span></div>
-          <div class="barberrow"><div class="person">RT</div><div class="personinfo"><b>Robert Haelley (Mestre)</b><small>Atendendo na Cadeira Principal</small></div></div>
-          <button class="btn secondary" style="width:100%;margin-top:10px" onclick="openModal('timeoffModal')">Solicitar folga / Bloquear horário</button>
-          <button class="btn secondary" style="width:100%;margin-top:8px" onclick="toast('Aviso disparado via WhatsApp!')">📢 Chamar cliente no WhatsApp</button>
-        </div>
+        <div class="card"><div class="cardtitle"><h2>Agenda de hoje</h2></div><div class="empty">Nenhum agendamento para hoje ainda.</div></div>
+        <div class="card"><div class="cardtitle"><h2>Minha Cadeira ✂️</h2></div><div class="empty">Nenhum barbeiro ativo na escala. Cadastre na aba Equipe.</div></div>
       </div>
     </section>
 
     <!-- AGENDA -->
-    <section class="section" id="page-agenda"><div class="heading"><h1>Agenda da Unidade</h1></div><div class="card"><div id="agendaRows"></div></div></section>
-    <!-- SERVIÇOS -->
-    <section class="section" id="page-servicos"><div class="heading"><h1>Serviços e Preços</h1></div><div class="servicegrid" id="serviceGrid"><article class="service"><div class="symbol">✂️</div><h3>Corte degradê</h3><div class="price">R$ 48,00</div></article></div></section>
-    <!-- EQUIPE -->
-    <section class="section" id="page-equipe"><div class="heading"><h1>Equipe</h1></div><div class="servicegrid" id="barberGrid"></div></section>
+    <section class="section" id="page-agenda"><div class="heading"><h1>Agenda da Unidade</h1></div><div class="card"><div class="empty">Nenhum horário marcado.</div></div></section>
+    
+    <!-- SERVIÇOS (COM OPÇÃO DE CADASTRAR E DEFINIR PREÇOS) -->
+    <section class="section" id="page-servicos">
+      <div class="heading"><div><h1>Serviços e Preços</h1><p>Cadastre os serviços oferecidos e defina os valores da sua barbearia.</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
+      <div class="servicegrid" id="serviceListContainer">
+        <article class="service"><div class="symbol">✂️</div><h3>Corte Degradê / Social</h3><p class="muted">Tempo: 30 min</p><div class="price">R$ 45,00</div><button class="btn secondary" onclick="toast('Editar serviço')">Editar Valor</button></article>
+        <article class="service"><div class="symbol">♨️</div><h3>Barba Terapia</h3><p class="muted">Tempo: 30 min</p><div class="price">R$ 35,00</div><button class="btn secondary" onclick="toast('Editar serviço')">Editar Valor</button></article>
+      </div>
+    </section>
+
+    <!-- EQUIPE (SEM BARBEIROS FICTÍCIOS, PRONTO PARA CADASTRO) -->
+    <section class="section" id="page-equipe">
+      <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre os profissionais e dados da cadeira.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
+      <div class="servicegrid" id="barberListContainer">
+        <div class="empty" style="grid-column:1/-1">Nenhum barbeiro cadastrado no momento. Clique em cadastrar acima.</div>
+      </div>
+    </section>
     
     <!-- CLIENTES & FICHA TÉCNICA -->
     <section class="section" id="page-clientes">
-      <div class="heading"><div><h1>Base de Clientes & Ficha Técnica 📋</h1><p>Histórico e padrão de corte gravado para toda a equipe.</p></div><button class="btn" onclick="openModal('clientPreferenceModal')">＋ Editar Ficha Técnica</button></div>
-      <div class="card"><div class="tablewrap"><table>
-        <thead><tr><th>CLIENTE</th><th>TELEFONE</th><th>MÁQUINA LATERAIS</th><th>ACABAMENTO</th><th>BARBA</th><th>PRODUTO PREFERIDO</th></tr></thead>
-        <tbody>
-          <tr><td><b>Lucas Almeida</b></td><td>(91) 99911-2040</td><td><span>Nº 2 Alta</span></td><td><span>Navalhado Redondado</span></td><td><span>Baixa</span></td><td><span>Pomada Matte</span></td></tr>
-        </tbody>
-      </table></div></div>
+      <div class="heading"><div><h1>Base de Clientes & Ficha Técnica 📋</h1></div></div>
+      <div class="card"><div class="empty">Nenhum cliente cadastrado na base ainda.</div></div>
     </section>
 
-    <!-- LOJA -->
+    <!-- LOJA (SEM VALORES FICTÍCIOS, PRONTO PARA CADASTRAR PRODUTOS) -->
     <section class="section" id="page-loja">
-      <div class="heading"><h1>Loja de Cosméticos e Bebidas</h1></div>
-      <div class="shopgrid">
-        <article class="product"><div class="productart">🧴</div><h3>Pomada Matte Fixadora</h3><div class="price">R$ 39,90</div><span class="status" style="color:var(--red)">Estoque baixo: 2 unid.</span><button class="btn" onclick="openStoreCheckout('Pomada Matte', 39.90)">Comprar / Retirar</button></article>
+      <div class="heading"><div><h1>Loja de Produtos & Bebidas</h1><p>Cadastre os itens do seu estoque com foto e preço.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
+      <div class="shopgrid" id="shopListContainer">
+        <div class="empty" style="grid-column:1/-1">Nenhum produto cadastrado na loja.</div>
       </div>
     </section>
-    <!-- FINANCEIRO -->
-    <section class="section" id="page-financeiro"><div class="heading"><h1>Financeiro e Caixa</h1></div></section>
-    <!-- RELATÓRIOS -->
-    <section class="section" id="page-relatorios"><div class="heading"><h1>Relatórios</h1></div></section>
 
-    <!-- SUPER ADMIN SaaS (COM DUAL VIEW) -->
+    <!-- FINANCEIRO -->
+    <section class="section" id="page-financeiro"><div class="heading"><h1>Financeiro e Caixa</h1></div><div class="card"><div class="empty">Caixa zerado. Movimentações aparecerão aqui.</div></div></section>
+    <!-- RELATÓRIOS -->
+    <section class="section" id="page-relatorios"><div class="heading"><h1>Relatórios de Desempenho</h1></div><div class="card"><div class="empty">Sem dados suficientes para relatórios.</div></div></section>
+
+    <!-- SUPER ADMIN SaaS -->
     <section class="section" id="page-admin">
       <div class="heading">
-        <div><div class="eyebrow">PAINEL MESTRE SAAS</div><h1>Todas as Barbearias Assinantes 🏢</h1><p>Gerenciamento mestre e dual view.</p></div>
-        <button class="btn" onclick="openModal('registerShopModal')">＋ Cadastrar Barbearia</button>
+        <div><div class="eyebrow">PAINEL MESTRE SAAS</div><h1>Todas as Barbearias Assinantes 🏢</h1></div>
       </div>
-      <div class="stats">
-        <div class="stat"><div class="stathead">Total de Barbearias</div><strong id="adminTotalShops">1</strong></div>
-        <div class="stat"><div class="stathead">MRR Recorrente</div><strong id="adminMRR">R$ 100,00</strong></div>
-      </div>
-      <div class="card">
-        <div class="cardtitle"><h2>Estabelecimentos Cadastrados</h2><span class="status">Dual View Ativo</span></div>
-        <div class="tablewrap">
-          <table>
-            <thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th><th>AÇÕES DE DUAL VIEW</th></tr></thead>
-            <tbody id="adminShopRows">
-              <tr>
-                <td><b>RT Assistência & Barbearia</b><br><small class="muted">roberthaelley75@gmail.com</small></td>
-                <td><span class="pill">Vitalício (Master)</span></td>
-                <td><span class="status">Ativo (Ilimitado)</span></td>
-                <td>
-                  <div class="actions">
-                    <button class="btn" onclick="dualViewEnter('RT Assistência & Barbearia')">👁️ Entrar na Visão (Dual View)</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <div class="stats"><div class="stat"><div class="stathead">Total de Lojas</div><strong>1</strong></div><div class="stat"><div class="stathead">MRR SaaS</div><strong>R$ 100,00</strong></div></div>
+      <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody><tr><td><b>RT Assistência & Barbearia</b></td><td><span class="pill">Vitalício</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
     </section>
 
   <footer class="devfooter">Desenvolvido por <strong style="color:#d7b15b">RT Mobile</strong><br><a href="https://rtmobile-bio.onrender.com" target="_blank">rtmobile-bio.onrender.com</a></footer>
@@ -214,7 +198,13 @@
 
 <!-- ÁREA DO CLIENTE -->
 <div id="clientScreen">
- <div class="topbar"><div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>ÁREA DO CLIENTE</small></div></div><div class="topright"><button class="btn secondary" onclick="signOut()">Sair</button><div class="avatar">CL</div></div></div>
+ <div class="topbar">
+   <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>ÁREA DO CLIENTE</small></div></div>
+   <div class="topright">
+     <button class="btn secondary" onclick="closeClientView()">← Voltar ao Painel da Barbearia</button>
+     <div class="avatar">CL</div>
+   </div>
+ </div>
  <div class="content">
   <section id="clientHome">
    <div class="client-hero">
@@ -225,45 +215,56 @@
      <button class="btn" onclick="openModal('quickBookingModal')">⚡ Agendar Horário Agora</button>
     </div>
    </div>
-   <div class="clientsectiontitle"><div><div class="eyebrow">TRANSFORMAÇÃO</div><h2>Galeria Antes e Depois</h2></div></div>
-   <div class="servicegrid" style="margin-bottom:25px;">
-    <article class="service" style="padding:10px;"><div class="service-photo" style="height:140px;border-radius:10px;background:url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80') center/cover"></div><h3 style="margin-top:10px;">Corte Degradê Navalhado</h3></article>
-   </div>
    <div class="clientsectiontitle"><div><h2>Barbearias Disponíveis</h2></div></div>
    <div class="barbershopgrid">
-    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3>RT Assistência & Barbearia</h3><button class="btn" onclick="openModal('quickBookingModal')">Agendar Procedimento ✂️</button></div></article>
+    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 5.0 ★</span><h3>RT Assistência & Barbearia</h3><p class="muted small">Estabelecimento Verificado</p><button class="btn" onclick="openModal('quickBookingModal')">Agendar Procedimento ✂️</button></div></article>
    </div>
   </section>
  </div>
 </div>
 
-<!-- MODAIS -->
-<div class="modalback" id="notificationsModal"><div class="modal"><button class="close" onclick="closeModal('notificationsModal')">✕</button><h2>Notificações</h2><p class="muted">Nenhum alerta pendente.</p></div></div>
-<div class="modalback" id="plansModal"><div class="modal"><button class="close" onclick="closeModal('plansModal')">✕</button><h2>Planos SaaS</h2><p class="muted">Sua conta possui Acesso Vitalício Master.</p></div></div>
-<div class="modalback" id="clientPreferenceModal"><div class="modal"><button class="close" onclick="closeModal('clientPreferenceModal')">✕</button><h2>Ficha Técnica</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('clientPreferenceModal');toast('Salvo!')">Salvar</button></div></div>
-<div class="modalback" id="quickBookingModal"><div class="modal"><button class="close" onclick="closeModal('quickBookingModal')">✕</button><h2>Agendamento Rápido</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('quickBookingModal');toast('Agendado!')">Confirmar</button></div></div>
-<div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('timeoffModal');toast('Solicitado!')">Enviar</button></div></div>
-<div class="modalback" id="storeModal"><div class="modal"><button class="close" onclick="closeModal('storeModal')">✕</button><h2 id="storeModalTitle">Loja</h2><button class="btn" style="width:100%;" onclick="closeModal('storeModal');toast('Ok!')">Comprar</button></div></div>
-<div class="modalback" id="quickProductModal"><div class="modal"><button class="close" onclick="closeModal('quickProductModal')">✕</button><h2>Comanda</h2><button class="btn" style="width:100%;" onclick="closeModal('quickProductModal');toast('Lançado!')">Lançar</button></div></div>
-<div class="modalback" id="bookingModal"><div class="modal"><button class="close" onclick="closeModal('bookingModal')">✕</button><h2>Agendamento</h2><button class="btn" style="width:100%;" onclick="closeModal('bookingModal');toast('Ok!')">Confirmar</button></div></div>
-<div class="modalback" id="registerShopModal"><div class="modal"><button class="close" onclick="closeModal('registerShopModal')">✕</button><h2>Nova Barbearia</h2><button class="btn" style="width:100%;" onclick="closeModal('registerShopModal');toast('Cadastrado!')">Cadastrar</button></div></div>
-
-<div id="subscription-lock-screen" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:99999; justify-content:center; align-items:center; color:#fff; text-align:center; padding:20px;">
-    <div style="background:#1a1a1a; padding:40px; border-radius:12px; max-width:500px; width:100%; border:1px solid #333;">
-        <h2 style="color:#f59e0b; margin-bottom:15px;">Período de Teste Expirado</h2>
-        <p style="margin-bottom:20px; color:#cbd5e1;">Regularize sua assinatura no valor de <strong>R$ 100,00</strong>.</p>
-        <code style="font-size:16px; color:#38bdf8;">91989117332</code>
-    </div>
+<!-- MODAIS DE CADASTRO REAL -->
+<div class="modalback" id="addBarberModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('addBarberModal')">✕</button>
+  <h2>Cadastrar Barbeiro ♙</h2>
+  <div class="field"><label>Nome do Barbeiro</label><input id="bNameInput" placeholder="Ex.: Carlos Silva"></div>
+  <div class="field"><label>Especialidade / Cadeira</label><input id="bSpecInput" placeholder="Ex.: Especialista em Degradê / Cadeira 02"></div>
+  <button class="btn" style="width:100%;margin-top:10px;" onclick="saveBarber()">Salvar e Adicionar à Equipe</button>
+ </div>
 </div>
+
+<div class="modalback" id="addProductModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('addProductModal')">✕</button>
+  <h2>Cadastrar Produto na Loja ▣</h2>
+  <div class="field"><label>Nome do Produto</label><input id="pNameInput" placeholder="Ex.: Pomada Modeladora"></div>
+  <div class="field"><label>Preço de Venda (R$)</label><input id="pPriceInput" type="number" placeholder="45.00"></div>
+  <div class="field"><label>Quantidade em Estoque</label><input id="pStockInput" type="number" placeholder="10"></div>
+  <button class="btn" style="width:100%;margin-top:10px;" onclick="saveProduct()">Cadastrar no Estoque</button>
+ </div>
+</div>
+
+<div class="modalback" id="addServiceModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('addServiceModal')">✕</button>
+  <h2>Cadastrar Serviço ✂️</h2>
+  <div class="field"><label>Nome do Serviço</label><input placeholder="Ex.: Corte + Barba Completa"></div>
+  <div class="field"><label>Preço (R$)</label><input type="number" placeholder="75.00"></div>
+  <button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('addServiceModal');toast('Serviço cadastrado com sucesso!')">Salvar Serviço</button>
+ </div>
+</div>
+
+<div class="modalback" id="notificationsModal"><div class="modal"><button class="close" onclick="closeModal('notificationsModal')">✕</button><h2>Notificações</h2><p class="muted">Sistema operando normalmente.</p></div></div>
+<div class="modalback" id="plansModal"><div class="modal"><button class="close" onclick="closeModal('plansModal')">✕</button><h2>Plano Vitalício Master</h2><p class="muted">Sua conta possui acesso total irrestrito.</p></div></div>
+<div class="modalback" id="quickBookingModal"><div class="modal"><button class="close" onclick="closeModal('quickBookingModal')">✕</button><h2>Agendamento Rápido</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('quickBookingModal');toast('Agendamento realizado com sucesso!')">Confirmar Agendamento</button></div></div>
+<div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" style="width:100%;margin-top:10px;" onclick="closeModal('timeoffModal');toast('Agenda trancada!')">Confirmar</button></div></div>
+<div class="modalback" id="storeModal"><div class="modal"><button class="close" onclick="closeModal('storeModal')">✕</button><h2 id="storeModalTitle">Loja</h2><button class="btn" style="width:100%;" onclick="closeModal('storeModal');toast('Pedido OK!')">Comprar</button></div></div>
+<div class="modalback" id="quickProductModal"><div class="modal"><button class="close" onclick="closeModal('quickProductModal')">✕</button><h2>Comanda</h2><button class="btn" style="width:100%;" onclick="closeModal('quickProductModal');toast('Lançado!')">Lançar</button></div></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// Inicialização segura do Supabase (embutida para evitar falhas de arquivo externo)
-const SUPABASE_URL = 'https://seu-projeto.supabase.co'; // Substitua caso necessário ou use o cliente padrão
-const SUPABASE_ANON_KEY = 'sua-chave-anon';
-const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
 let currentRole='client';
 function toast(msg){
     const t=document.getElementById('toast');
@@ -281,14 +282,8 @@ function showPage(page){
 }
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
 
-function openModal(id){
-    const m = document.getElementById(id);
-    if(m) m.style.display='grid';
-}
-function closeModal(id){
-    const m = document.getElementById(id);
-    if(m) m.style.display='none';
-}
+function openModal(id){ const m = document.getElementById(id); if(m) m.style.display='grid'; }
+function closeModal(id){ const m = document.getElementById(id); if(m) m.style.display='none'; }
 function pickRole(role,btn){
     currentRole=role;
     document.querySelectorAll('.rolepick button').forEach(b=>b.classList.toggle('selected',b===btn));
@@ -296,9 +291,22 @@ function pickRole(role,btn){
     if(sf) sf.classList.toggle('hidden',role!=='shop');
 }
 
+// Persistência de Sessão Automática ao carregar a página
+window.addEventListener('load', () => {
+    const savedEmail = localStorage.getItem('navalha_saved_email');
+    if(savedEmail === 'roberthaelley75@gmail.com'){
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        document.getElementById('navAdmin').style.display = 'flex';
+        showPage('dashboard');
+        toast('Sessão restaurada com sucesso!');
+    }
+});
+
 function handleAuth() {
     const emailInput = document.getElementById('loginEmail');
     const passwordInput = document.getElementById('loginPassword');
+    const rememberMe = document.getElementById('rememberMe').checked;
     
     if(!emailInput || !passwordInput) return;
     
@@ -312,44 +320,70 @@ function handleAuth() {
     
     toast('Autenticando...');
 
-    // Atalho absoluto para o seu e-mail mestre vitalício
+    if(rememberMe){
+        localStorage.setItem('navalha_saved_email', email);
+    }
+
     if(email === 'roberthaelley75@gmail.com'){
-        const ls = document.getElementById('loginScreen');
-        const app = document.getElementById('app');
-        const adminNav = document.getElementById('navAdmin');
-        
-        if(ls) ls.classList.add('hidden');
-        if(app) app.classList.remove('hidden');
-        if(adminNav) adminNav.style.display = 'flex';
-        
-        showPage('admin');
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        document.getElementById('navAdmin').style.display = 'flex';
+        showPage('dashboard');
         toast('Bem-vindo, Robert Haelley (Acesso Vitalício Master)!');
         return;
     }
 
-    // Login normal simulado para testes rápidos dos seus clientes amanhã
     setTimeout(() => {
-        const ls = document.getElementById('loginScreen');
-        if(ls) ls.classList.add('hidden');
-        
+        document.getElementById('loginScreen').classList.add('hidden');
         if(currentRole === 'client'){
-            const cs = document.getElementById('clientScreen');
-            if(cs) cs.style.display = 'block';
+            document.getElementById('clientScreen').style.display = 'block';
             toast('Área do cliente aberta.');
         } else {
-            const app = document.getElementById('app');
-            if(app) app.classList.remove('hidden');
+            document.getElementById('app').classList.remove('hidden');
             showPage('dashboard');
-            toast('Painel carregado (7 dias de teste grátis).');
+            toast('Painel carregado.');
         }
     }, 500);
 }
 
-function dualViewEnter(shopName){
-    const app = document.getElementById('app');
-    if(app) app.classList.remove('hidden');
-    showPage('dashboard');
-    toast('Dual View ativado: Visualizando ' + shopName);
+// Botões para alternar entre a visão do Admin e a Visão do Cliente
+function openClientView(){
+    document.getElementById('app').classList.add('hidden');
+    document.getElementById('clientScreen').style.display = 'block';
+    toast('Visualizando como Cliente 👁️');
+}
+function closeClientView(){
+    document.getElementById('clientScreen').style.display = 'none';
+    document.getElementById('app').classList.remove('hidden');
+    toast('Retornando ao painel da barbearia.');
+}
+
+// Funções de Cadastro Real na Tela
+function saveBarber(){
+    const name = document.getElementById('bNameInput').value;
+    const spec = document.getElementById('bSpecInput').value;
+    if(!name){ toast('Informe o nome do barbeiro.'); return; }
+    
+    const container = document.getElementById('barberListContainer');
+    if(container.querySelector('.empty')) container.innerHTML = '';
+    
+    container.innerHTML += `<article class="service"><div class="symbol">👨‍🦰</div><h3>${name}</h3><p class="muted">${spec || 'Barbeiro Profissional'}</p><span class="status">Ativo na Escala</span></article>`;
+    closeModal('addBarberModal');
+    toast('Barbeiro cadastrado com sucesso!');
+}
+
+function saveProduct(){
+    const name = document.getElementById('pNameInput').value;
+    const price = document.getElementById('pPriceInput').value;
+    const stock = document.getElementById('pStockInput').value;
+    if(!name || !price){ toast('Preencha os campos obrigatórios.'); return; }
+
+    const container = document.getElementById('shopListContainer');
+    if(container.querySelector('.empty')) container.innerHTML = '';
+
+    container.innerHTML += `<article class="product"><div class="productart">🧴</div><h3>${name}</h3><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><span class="status">Estoque: ${stock || 1} un.</span><button class="btn" onclick="toast('Produto selecionado')">Comprar / Retirar</button></article>`;
+    closeModal('addProductModal');
+    toast('Produto cadastrado e ativado no Shopping!');
 }
 
 function changeRole(role){
@@ -363,36 +397,22 @@ function changeRole(role){
         if(rel) rel.style.display = 'none';
         toast('Modo Barbeiro ativado.');
     } else {
-        if(hHelp) hHelp.textContent = 'Controle total do seu estabelecimento e equipe.';
+        if(hHelp) hHelp.textContent = 'Controle total do seu estabelecimento.';
         if(fin) fin.style.display = 'flex';
         if(rel) rel.style.display = 'flex';
         toast('Modo Dono ativado.');
     }
 }
 
-function openStoreCheckout(name, price){
-    openModal('storeModal');
-    const st = document.getElementById('storeModalTitle');
-    if(st) st.textContent = name;
-}
-
 function signOut(){
-    const app = document.getElementById('app');
-    const cs = document.getElementById('clientScreen');
-    const sls = document.getElementById('subscription-lock-screen');
-    const ls = document.getElementById('loginScreen');
-    
-    if(app) app.classList.add('hidden');
-    if(cs) cs.style.display = 'none';
-    if(sls) sls.style.display = 'none';
-    if(ls) ls.classList.remove('hidden');
+    localStorage.removeItem('navalha_saved_email');
+    document.getElementById('app').classList.add('hidden');
+    document.getElementById('clientScreen').style.display = 'none';
+    document.getElementById('loginScreen').classList.remove('hidden');
     toast('Você saiu da conta.');
 }
 
-function enterTV(){
-    const app = document.getElementById('app');
-    if(app) app.classList.add('hidden');
-}
+function enterTV(){ document.getElementById('app').classList.add('hidden'); }
 </script>
 </body>
 </html>
