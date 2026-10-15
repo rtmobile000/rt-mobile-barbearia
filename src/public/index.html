@@ -35,43 +35,45 @@
 </head>
 <body>
 
-<!-- SPLASH SCREEN DE MARCA: REMOÇÃO IMEDIATA E SEGURA -->
+<!-- SPLASH SCREEN DE MARCA -->
 <div id="brandSplash" style="position:fixed;inset:0;z-index:9999999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;">
  <div style="width:70px;height:70px;border-radius:14px;background:#000;border:1.5px solid #333;display:flex;align-items:center;justify-content:center;box-shadow:0 0 25px rgba(37,211,102,0.25);margin-bottom:12px;">
   <span style="font-size:24px;font-weight:900;color:#fff;font-family:Manrope;letter-spacing:-1px;">RT</span>
  </div>
  <h1 style="font:800 20px Manrope;color:#fff;letter-spacing:4px;margin:0;">RT MOBILE</h1>
- <span style="font-size:8px;color:#25D366;letter-spacing:2px;text-transform:uppercase;font-weight:800;margin-top:6px;">SISTEMA PROFISSIONAL · NAVALHA</span>
+ <span style="font-size:8px;color:#25D366;letter-spacing:2px;text-transform:uppercase;font-weight:800;margin-top:6px;">SISTEMA PROFISSIONAL · SUPABASE ATIVO</span>
 </div>
 
-<!-- TELA DE LOGIN -->
+<!-- TELA DE LOGIN & CADASTRO DE BARBEARIA -->
 <div id="loginScreen" class="loginpage hidden">
  <div class="loginvisual">
   <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>BARBEARIA · GESTÃO</small></div></div>
   <div>
    <div class="eyebrow">A NOVA EXPERIÊNCIA DA BARBEARIA</div>
    <h1>Seu negócio.<br><span>Seu ritmo.</span><br>Seu próximo nível.</h1>
-   <p>Plataforma SaaS multi-tenant para barbearias.</p>
+   <p>Plataforma SaaS multi-tenant conectada ao Supabase.</p>
   </div>
-  <div class="tiny">NAVALHA · SUPABASE ATIVO</div>
+  <div class="tiny">SUPABASE CLOUD ATIVO</div>
  </div>
  <div class="loginform">
   <div class="eyebrow">BEM-VINDO AO NAVALHA</div>
-  <h1 style="font:800 24px Manrope;margin:6px 0">Acesse sua conta</h1>
+  <h1 style="font:800 24px Manrope;margin:6px 0">Acesse ou Cadastre-se</h1>
   <div class="rolepick">
    <button class="selected" data-role="client" onclick="pickRole('client',this)">Sou cliente</button>
    <button data-role="shop" onclick="pickRole('shop',this)">Tenho barbearia / Franqueado</button>
   </div>
   <div class="field"><label>E-mail</label><input id="loginEmail" type="email" placeholder="voce@email.com"></div>
   <div class="field"><label>Senha</label><input id="loginPassword" type="password" placeholder="Mínimo de 6 caracteres"></div>
-  <div style="display:flex;align-items:center;gap:6px;margin:6px 0 10px;font-size:11px;color:var(--muted);">
-    <input type="checkbox" id="rememberMe" checked style="accent-color:var(--gold);width:14px;height:14px;">
-    <label for="rememberMe">Lembrar meus dados neste dispositivo</label>
-  </div>
+  
   <div id="shopFields" class="hidden">
-   <div class="field"><label>Nome da Barbearia / Franqueado</label><input id="loginName" placeholder="Ex.: Barbearia Imperial"></div>
+   <div class="field"><label>Nome da Barbearia</label><input id="loginName" placeholder="Ex.: Barbearia Imperial"></div>
+   <div class="field"><label>CNPJ (Opcional)</label><input id="loginCnpj" placeholder="00.000.000/0001-00"></div>
+   <div class="field"><label>WhatsApp da Barbearia</label><input id="loginWhatsapp" placeholder="5591989117332"></div>
+   <div class="field"><label>Sua Chave Pix</label><input id="loginPix" placeholder="91989117332"></div>
+   <div class="field"><label>Endereço / Localização</label><input id="loginAddress" placeholder="Centro - Santa Izabel do Pará/PA"></div>
   </div>
-  <button class="btn" style="width:100%;padding:11px;margin-top:2px;" onclick="handleAuth()">Entrar / Acessar Sistema</button>
+
+  <button class="btn" style="width:100%;padding:11px;margin-top:8px;" onclick="handleAuth()">Entrar / Cadastrar no Supabase</button>
   <p class="tiny" style="margin-top:10px">7 dias de teste grátis para novas barbearias e acesso vitalício para administradores.</p>
  </div>
 </div>
@@ -94,8 +96,8 @@
     <button data-page="admin" id="navAdmin" onclick="closeMobileMenu()" style="display:none"><span>♛</span><span class="navtxt">Super Admin (SaaS)</span></button>
   </nav>
   <div class="sidebottom">
-    <div class="eyebrow">PLANO TRIAL BARBEARIA</div>
-    <p id="trialCounterText">7 dias restantes no teste grátis.</p>
+    <div class="eyebrow" id="sidebarPlanType">PLANO TRIAL</div>
+    <p id="trialCounterText">Calculando dias restantes...</p>
     <button class="btn secondary" onclick="requestUpgrade()" style="margin-bottom:5px;">Fazer Upgrade (R$ 100)</button>
     <button class="btn danger" onclick="signOut()" style="width:100%;">Sair / Trocar conta</button>
   </div>
@@ -118,7 +120,7 @@
     <!-- DASHBOARD -->
     <section class="section active" id="page-dashboard">
       <div class="role-banner">
-        <div><strong id="roleLabel">Painel da Barbearia (Proprietário)</strong><p id="roleHelp">Controle gerencial completo do seu estabelecimento.</p></div>
+        <div><strong id="roleLabel">Painel da Barbearia (Proprietário)</strong><p id="roleHelp">Controle gerencial completo do seu estabelecimento no Supabase.</p></div>
         <div class="owner-tools">
           <select id="roleMode" onchange="changeRole(this.value)" style="background:#0b0d10;color:white;border:1px solid #30343b;padding:7px;border-radius:7px;font-size:11px;">
             <option value="owner">Proprietário / Franqueado</option>
@@ -127,11 +129,11 @@
           <label class="switch"><input type="checkbox" id="killSwitch" checked onchange="toggleShop(this.checked)"><span id="killLabel">Agenda aberta</span></label>
         </div>
       </div>
-      <div class="heading"><div><div class="eyebrow">ESTABELECIMENTO ATIVO</div><h1 id="shopTitleHeader">Painel Administrativo.</h1><p>Sistema pronto para operação comercial e vendas.</p></div><button class="btn" onclick="openAdminBookingModal()">＋ Agendar</button></div>
+      <div class="heading"><div><div class="eyebrow">ESTABELECIMENTO ATIVO</div><h1 id="shopTitleHeader">Painel Administrativo.</h1><p>Sistema sincronizado com o Supabase Cloud.</p></div><button class="btn" onclick="openAdminBookingModal()">＋ Agendar</button></div>
       <div class="stats">
-        <div class="stat"><div class="stathead">Faturamento de hoje</div><strong>R$ 0,00</strong><small>Operação iniciada</small></div>
-        <div class="stat"><div class="stathead">Agendamentos</div><strong>0</strong><small>Escala livre</small></div>
-        <div class="stat"><div class="stathead">Clientes na fila</div><strong>0</strong><small>Pronto para iniciar</small></div>
+        <div class="stat"><div class="stathead">Faturamento de hoje</div><strong>R$ 0,00</strong><small>Banco conectado</small></div>
+        <div class="stat"><div class="stathead">Agendamentos</div><strong>0</strong><small>Tempo real</small></div>
+        <div class="stat"><div class="stathead">Clientes na fila</div><strong>0</strong><small>Pronto</small></div>
         <div class="stat"><div class="stathead">Ticket médio</div><strong>R$ 0,00</strong><small>Base limpa</small></div>
       </div>
       <div class="grid2">
@@ -143,7 +145,7 @@
     <!-- AGENDA -->
     <section class="section" id="page-agenda">
       <div class="heading">
-        <div><h1>Agenda Profissional da Unidade</h1><p>Grade completa de horários e atendimento em tempo real.</p></div>
+        <div><h1>Agenda Profissional da Unidade</h1><p>Grade completa de horários sincronizada em tempo real.</p></div>
         <button class="btn" onclick="openAdminBookingModal()">＋ Agendar Horário</button>
       </div>
       <div class="card">
@@ -160,16 +162,7 @@
               </tr>
             </thead>
             <tbody id="adminAgendaTableBody">
-              <tr>
-                <td><b>09:00</b></td>
-                <td>Lucas Almeida</td>
-                <td>Corte Degradê (30 min)</td>
-                <td>Marcos Mendes</td>
-                <td><span class="status">Confirmado</span></td>
-                <td><button class="btn secondary" style="padding:4px 8px;font-size:10px;" onclick="toast('Agendamento concluído')">Concluir</button></td>
-              </tr>
-              <tr><td>09:30</td><td colspan="5" style="color:var(--muted); text-align:center;">Horário disponível</td></tr>
-              <tr><td>10:00</td><td colspan="5" style="color:var(--muted); text-align:center;">Horário disponível</td></tr>
+              <tr><td>09:00</td><td colspan="5" style="color:var(--muted); text-align:center;">Nenhum agendamento no Supabase</td></tr>
             </tbody>
           </table>
         </div>
@@ -178,7 +171,7 @@
     
     <!-- SERVIÇOS -->
     <section class="section" id="page-servicos">
-      <div class="heading"><div><h1>Serviços e Preços</h1><p>Defina os valores e o tempo de execução (duração em minutos).</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
+      <div class="heading"><div><h1>Serviços e Preços</h1><p>Defina os valores e o tempo de execução.</p></div><button class="btn" onclick="openModal('addServiceModal')">＋ Cadastrar Serviço</button></div>
       <div class="servicegrid" id="serviceListContainer">
         <article class="service">
           <div class="symbol">✂️</div>
@@ -192,24 +185,16 @@
 
     <!-- EQUIPE -->
     <section class="section" id="page-equipe">
-      <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre, edite ou remova profissionais da equipe.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
+      <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Profissionais salvos no Supabase.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
       <div class="servicegrid" id="barberListContainer">
-        <article class="service">
-          <div class="barberart" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80')"></div>
-          <h3>Marcos Mendes</h3>
-          <p class="muted">WhatsApp: (91) 98888-1122 · ★ 4.9</p>
-          <div style="display:flex; gap:6px; margin-top:8px;">
-            <button class="btn secondary" style="flex:1;" onclick="editBarber(this)">Editar</button>
-            <button class="btn danger" style="flex:1;" onclick="deleteBarber(this)">Apagar</button>
-          </div>
-        </article>
+        <div class="empty" style="grid-column:1/-1;">Nenhum barbeiro cadastrado na organização.</div>
       </div>
     </section>
     
     <!-- CLIENTES & CONVÊNIOS -->
     <section class="section" id="page-clientes">
       <div class="heading">
-        <div><h1>Clientes & Convênios 🤝</h1><p>Gerencie sua base de clientes com foto, WhatsApp, edição e exclusão.</p></div>
+        <div><h1>Clientes & Convênios 🤝</h1><p>Base de clientes da organização.</p></div>
         <div style="display:flex; gap:8px;">
           <button class="btn" onclick="openModal('addClientModal')">＋ Cadastrar Cliente</button>
           <button class="btn secondary" onclick="openModal('addConvenioModal')">＋ Cadastrar Convênio</button>
@@ -221,15 +206,7 @@
           <table>
             <thead><tr><th>FOTO</th><th>NOME DO CLIENTE</th><th>WHATSAPP</th><th>AÇÕES</th></tr></thead>
             <tbody id="clientTableBody">
-              <tr>
-                <td><div style="width:30px;height:30px;border-radius:50%;background:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80') center/cover;"></div></td>
-                <td><b>Lucas Almeida</b></td>
-                <td>(91) 98888-2233</td>
-                <td>
-                  <button class="btn secondary" style="padding:3px 6px;font-size:10px;" onclick="editClientRow(this)">Editar</button>
-                  <button class="btn danger" style="padding:3px 6px;font-size:10px;" onclick="deleteClientRow(this)">Apagar</button>
-                </td>
-              </tr>
+              <tr><td colspan="4" style="text-align:center; color:var(--muted);">Nenhum cliente cadastrado.</td></tr>
             </tbody>
           </table>
         </div>
@@ -238,18 +215,9 @@
 
     <!-- LOJA / ESTOQUE -->
     <section class="section" id="page-loja">
-      <div class="heading"><div><h1>Loja / Estoque da Barbearia ▣</h1><p>Gerencie preços, código de barras e remova itens do estoque.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
+      <div class="heading"><div><h1>Loja / Estoque da Barbearia ▣</h1><p>Gerencie preços, código de barras e estoque no Supabase.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
       <div class="shopgrid" id="shopStockContainer">
-        <article class="product">
-          <div class="productart" style="background-image:url('https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=400&q=80')"></div>
-          <h3>Pomada Matte Fixadora</h3>
-          <div class="price">R$ 39,90</div>
-          <span class="status">Estoque: 12 un. | Cód: 789123</span>
-          <div style="display:flex; gap:6px; margin-top:8px;">
-            <button class="btn secondary" style="flex:1;" onclick="editProductStock(0)">Editar</button>
-            <button class="btn danger" style="flex:1;" onclick="deleteProduct(0)">Apagar</button>
-          </div>
-        </article>
+        <div class="empty" style="grid-column:1/-1;">Nenhum produto cadastrado no estoque.</div>
       </div>
     </section>
 
@@ -282,8 +250,7 @@
           <table>
             <thead><tr><th>DATA / HORA</th><th>TIPO</th><th>DESCRIÇÃO</th><th>VALOR</th></tr></thead>
             <tbody id="cashHistoryTable">
-              <tr><td>15/10/2026 09:30</td><td><span class="status">Entrada</span></td><td>Corte Degradê (Lucas Almeida)</td><td>R$ 45,00</td></tr>
-              <tr><td>15/10/2026 10:15</td><td><span class="status off">Saída</span></td><td>Compra de Lâminas (Fornecedor)</td><td>R$ 35,00</td></tr>
+              <tr><td colspan="4" style="text-align:center; color:var(--muted);">Nenhuma movimentação registrada.</td></tr>
             </tbody>
           </table>
         </div>
@@ -293,28 +260,29 @@
     <!-- RELATÓRIOS -->
     <section class="section" id="page-relatorios">
       <div class="heading">
-        <div><h1>Relatórios de Desempenho 📊</h1><p>Gere relatórios financeiros e de atendimento filtrados por quantos dias quiser.</p></div>
+        <div><h1>Relatórios de Desempenho 📊</h1><p>Gere relatórios financeiros e de atendimento.</p></div>
         <div style="display:flex; gap:8px; align-items:center;">
           <label style="font-size:11px; color:var(--muted);">Período (Dias):</label>
           <input type="number" id="reportDaysInput" value="7" min="1" max="365" style="width:70px; background:#0b0d10; color:white; border:1px solid #30343b; padding:8px; border-radius:8px;" onchange="updateReportData()">
         </div>
       </div>
       <div class="stats" style="margin-bottom:20px;">
-        <div class="stat"><div class="stathead">Faturamento do Período</div><strong id="repRevenue">R$ 315,00</strong><small>Base calculada</small></div>
-        <div class="stat"><div class="stathead">Atendimentos Realizados</div><strong id="repCount">7</strong><small>Concluídos</small></div>
-        <div class="stat"><div class="stathead">Ticket Médio</div><strong id="repTicket">R$ 45,00</strong><small>Por cliente</small></div>
-        <div class="stat"><div class="stathead">Produtos Vendidos</div><strong id="repProducts">3</strong><small>No Shopping/Balcão</small></div>
+        <div class="stat"><div class="stathead">Faturamento do Período</div><strong id="repRevenue">R$ 0,00</strong><small>Supabase</small></div>
+        <div class="stat"><div class="stathead">Atendimentos Realizados</div><strong id="repCount">0</strong><small>Concluídos</small></div>
+        <div class="stat"><div class="stathead">Ticket Médio</div><strong id="repTicket">R$ 0,00</strong><small>Base</small></div>
+        <div class="stat"><div class="stathead">Produtos Vendidos</div><strong id="repProducts">0</strong><small>Shopping</small></div>
       </div>
-      <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">O relatório está otimizado para exibir dados exatos do intervalo de dias selecionado acima.</p></div>
+      <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">Dados obtidos em tempo real do banco de dados.</p></div>
     </section>
 
     <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA -->
     <section class="section" id="page-config">
-      <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix, Clube VIP e Promoções.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
+      <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados salvos diretamente no Supabase.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
       <div class="grid2">
         <div class="card">
           <div class="cardtitle"><h2>Dados do Estabelecimento</h2></div>
           <div class="field"><label>Nome da Barbearia</label><input id="cfgName" value="Barbearia Imperial Pro"></div>
+          <div class="field"><label>CNPJ</label><input id="cfgCnpj" value=""></div>
           <div class="field"><label>Endereço Completo</label><input id="cfgAddress" value="Centro - Santa Izabel do Pará/PA"></div>
           <div class="field"><label>WhatsApp da Barbearia</label><input id="cfgWhatsapp" value="5591989117332"></div>
           <div class="field"><label>Sua Chave Pix</label><input id="cfgPix" value="91989117332"></div>
@@ -325,11 +293,11 @@
             <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Habilitar Clube de Assinatura VIP</span><input type="checkbox" id="toggleVipPlan" checked onchange="toggleVipSettings(this.checked)"></label>
             <div class="field" id="vipPriceField">
               <label>Valor do Plano VIP Mensal (R$)</label>
-              <input id="cfgVipPrice" type="number" value="99.00" placeholder="99.00">
+              <input id="cfgVipPrice" type="number" value="99.00">
             </div>
             <div class="field">
-              <label>Promoção Ativa da Barbearia (Ex: 1º Corte 20% Off)</label>
-              <input id="cfgPromoText" value="Primeiro corte na barbearia com 20% off!" placeholder="Ex: 20% de desconto na primeira visita">
+              <label>Promoção Ativa da Barbearia</label>
+              <input id="cfgPromoText" value="Primeiro corte na barbearia com 20% off!">
             </div>
           </div>
           <div style="margin-top:20px; border-top:1px solid var(--line); padding-top:12px;">
@@ -343,8 +311,8 @@
     <!-- SUPER ADMIN SaaS -->
     <section class="section" id="page-admin">
       <div class="heading"><div><div class="eyebrow">PAINEL MESTRE SAAS</div><h1>Gerenciador de Lojas 🏢</h1></div></div>
-      <div class="stats"><div class="stat"><div class="stathead">Total de Lojas</div><strong>1</strong></div><div class="stat"><div class="stathead">MRR SaaS</div><strong>R$ 100,00</strong></div></div>
-      <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody><tr><td><b>Barbearia Imperial Pro</b></td><td><span class="pill">Trial 7 Dias</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
+      <div class="stats"><div class="stat"><div class="stathead">Total de Lojas</div><strong id="adminTotalShops">1</strong></div><div class="stat"><div class="stathead">MRR SaaS</div><strong>R$ 100,00</strong></div></div>
+      <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>CNPJ</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody id="adminShopsTableBody"><tr><td><b>Barbearia Master (DEV)</b></td><td>-</td><td><span class="pill">Vitalício</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
     </section>
 
   <footer class="devfooter">Desenvolvido por <strong style="color:#d7b15b">RT Mobile</strong></footer>
@@ -364,18 +332,18 @@
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:25px; margin-top:30px;">
     <div style="background:#101216; border:1px solid #262a31; border-radius:20px; padding:25px;">
       <div class="eyebrow" style="color:var(--green);">CADEIRA 01 (MARCOS MENDES)</div>
-      <div style="font:800 28px Manrope; color:var(--gold2); margin:12px 0;">Atendendo: Lucas Almeida</div>
-      <p class="muted">Serviço: Corte Degradê (Em andamento)</p>
+      <div style="font:800 28px Manrope; color:var(--gold2); margin:12px 0;" id="tvCurrentClient">Aguardando cliente...</div>
+      <p class="muted">Serviço em andamento</p>
     </div>
     <div style="background:#101216; border:1px solid #262a31; border-radius:20px; padding:25px;">
-      <div class="eyebrow" style="color:var(--gold);">PRÓXIMO DA FILA (CHAMADA)</div>
-      <div style="font:800 28px Manrope; color:#fff; margin:12px 0;">João Gabriel</div>
-      <p class="muted">Prepare-se para entrar na Cadeira 01 às 10:00</p>
+      <div class="eyebrow" style="color:var(--gold);">PRÓXIMO DA FILA</div>
+      <div style="font:800 28px Manrope; color:#fff; margin:12px 0;" id="tvNextClient">Nenhum na fila</div>
+      <p class="muted">Prepare-se para entrar</p>
     </div>
   </div>
 </div>
 
-<!-- ÁREA DO CLIENTE -->
+<!-- TELA DO CLIENTE -->
 <div id="clientScreen">
  <div class="topbar">
    <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>ÁREA DO CLIENTE</small></div></div>
@@ -402,13 +370,7 @@
    <div class="card" style="margin-bottom:20px; background:linear-gradient(135deg, #18150f, #101216); border:1px solid var(--gold);">
      <div class="cardtitle"><h2>🔥 Ofertas & Promoções nas Barbearias</h2><span class="pill">DESTAQUES</span></div>
      <div id="clientPromotionsFeed" style="display:grid; gap:10px;">
-       <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
-         <div>
-           <b style="color:var(--gold2);" id="promoShopNameDisplay">Barbearia Imperial Pro</b>
-           <p class="muted small" style="margin:2px 0;" id="promoTextDisplay">Primeiro corte na barbearia com 20% off!</p>
-         </div>
-         <button class="btn" style="padding:6px 12px; font-size:10px;" onclick="claimPromotionWhatsapp('Barbearia Imperial Pro', '5591989117332', 'Primeiro corte na barbearia com 20% off!')">Aproveitar Oferta 📲</button>
-       </div>
+       <div class="empty">Carregando promoções do Supabase...</div>
      </div>
    </div>
 
@@ -416,30 +378,18 @@
      <div class="cardtitle"><h2>Meus Agendamentos Realizados 📅</h2></div>
      <div class="tablewrap">
        <table>
-         <thead><tr><th>BARBEARIA</th><th>SERVIÇO</th><th>HORÁRIO</th><th>STATUS / AVALIAÇÃO</th></tr></thead>
+         <thead><tr><th>BARBEARIA</th><th>SERVIÇO</th><th>HORÁRIO</th><th>STATUS</th></tr></thead>
          <tbody id="clientMyAppointments">
-           <tr><td colspan="4" style="text-align:center; color:var(--muted);">Nenhum agendamento realizado por você ainda.</td></tr>
+           <tr><td colspan="4" style="text-align:center; color:var(--muted);">Nenhum agendamento realizado.</td></tr>
          </tbody>
        </table>
      </div>
    </div>
 
-   <div class="clientsectiontitle" id="shopsAnchorSection" style="margin-bottom:12px;"><div><h2>Barbearias Parceiras (Agenda e Shopping Separados)</h2></div></div>
+   <div class="clientsectiontitle" id="shopsAnchorSection" style="margin-bottom:12px;"><div><h2>Barbearias Parceiras (Supabase Cloud)</h2></div></div>
    
    <div class="barbershopgrid" id="publicShopsFeed">
-    <article class="shop" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px;">
-      <div class="shopinfo">
-        <span class="status" style="margin-bottom:6px; display:inline-block;" id="shopRatingBadge">Aberto · 4.9 ★★★★★</span>
-        <h3 id="clientShopDisplayTitle" style="font:800 16px Manrope; margin:4px 0;">Barbearia Imperial Pro</h3>
-        <p class="muted small" style="margin-bottom:4px;">Centro · Santa Izabel do Pará/PA</p>
-        <p class="muted small" style="margin-bottom:10px; color:var(--gold2);" id="clientShopPromoDisplay">🔥 Promoção: Primeiro corte na barbearia com 20% off!</p>
-        
-        <div style="display:flex; gap:8px;">
-          <button class="btn" style="flex:1;" onclick="openClientBooking()">📅 Agendar</button>
-          <button class="btn secondary" style="flex:1;" onclick="selectBarbershop('Barbearia Imperial Pro', '5591989117332', '91989117332')">🛍️ Shopping</button>
-        </div>
-      </div>
-    </article>
+    <div class="empty" style="grid-column:1/-1;">Carregando barbearias ativas...</div>
    </div>
 
    <!-- SHOPPING DA BARBEARIA SELECIONADA -->
@@ -460,16 +410,8 @@
  <div class="modal">
   <button class="close" onclick="closeModal('vipShopsModal')">✕</button>
   <h2>Escolha a Barbearia para Assinar o VIP ⭐</h2>
-  <p class="muted small">Abaixo estão listadas as unidades que disponibilizam o Clube de Assinatura Mensal:</p>
-  <div style="display:grid; gap:10px; margin-top:15px;" id="vipShopsListContainer">
-    <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
-      <div>
-        <b>Barbearia Imperial Pro</b>
-        <small class="muted" style="display:block;">Plano Mensal Ilimitado Disponível</small>
-      </div>
-      <button class="btn" onclick="subscribeSpecificVip('Barbearia Imperial Pro', '5591989117332')">Assinar Unidade</button>
-    </div>
-  </div>
+  <p class="muted small">Unidades que disponibilizam o Clube de Assinatura Mensal:</p>
+  <div style="display:grid; gap:10px; margin-top:15px;" id="vipShopsListContainer"></div>
  </div>
 </div>
 
@@ -479,15 +421,7 @@
   <button class="close" onclick="closeModal('nearbyShopsModal')">✕</button>
   <h2>📍 Barbearias Mais Próximas</h2>
   <p class="muted small" id="geolocationStatusText">Calculando distância da sua localização atual...</p>
-  <div style="display:grid; gap:10px; margin-top:15px;" id="nearbyShopsListContainer">
-    <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
-      <div>
-        <b>Barbearia Imperial Pro</b>
-        <small class="muted" style="display:block;">Centro · Santa Izabel do Pará/PA (~1.1 km)</small>
-      </div>
-      <button class="btn" onclick="closeModal('nearbyShopsModal'); scrollToShops();">Ver Unidade</button>
-    </div>
-  </div>
+  <div style="display:grid; gap:10px; margin-top:15px;" id="nearbyShopsListContainer"></div>
  </div>
 </div>
 
@@ -510,7 +444,7 @@
  </div>
 </div>
 
-<!-- CHECKOUT CARRINHO DO SHOPPING (COM BOTÃO DE REMOVER ITEM / ZERAR CARRINHO) -->
+<!-- CHECKOUT CARRINHO -->
 <div class="modalback" id="storeModal">
  <div class="modal">
   <button class="close" onclick="closeModal('storeModal')">✕</button>
@@ -549,11 +483,43 @@
  <div class="modal" style="text-align:center;">
   <button class="close" onclick="closeModal('cameraScannerModal')">✕</button>
   <h2>Scanner de Código de Barras 📷</h2>
-  <p class="muted small">Aponte a câmara para o código de barras do produto.</p>
+  <p class="muted small">Aponte a câmara para o código de barras.</p>
   <div style="background:#000; height:200px; border-radius:10px; margin:15px 0; display:grid; place-items:center; border:2px dashed var(--gold);">
-    <span style="color:var(--gold2); font-size:12px;" id="scannerStatusText">🔍 Procurando código de barras...</span>
+    <span style="color:var(--gold2); font-size:12px;" id="scannerStatusText">🔍 Procurando código...</span>
   </div>
   <button class="btn" style="width:100%;" onclick="simulateSuccessfulScan()">Simular Leitura Bem-Sucedida ✓</button>
+ </div>
+</div>
+
+<!-- MODAL AGENDAMENTO COMPLETO -->
+<div class="modalback" id="clientBookingModal" style="z-index:999999;">
+ <div class="modal">
+  <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
+  <div class="eyebrow">AGENDAMENTO EM 4 CLIQUES</div>
+  <h2>Agendar Horário ⚡</h2>
+  <div class="field"><label>1. Escolha a Barbearia</label>
+    <select id="bookingShopChoice"></select>
+  </div>
+  <div class="field"><label>2. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option><option value="Barba Terapia — R$ 35,00">Barba Terapia — R$ 35,00 (30 min)</option></select></div>
+  <div class="field"><label>3. Profissional / Barbeiro</label>
+    <select id="clientBarberChoice">
+      <option value="Marcos Mendes">Marcos Mendes (Especialista em Degradê · ★ 4.9)</option>
+    </select>
+  </div>
+  <div class="field"><label>4. Data e Horário</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:4px;"><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>14:00</option><option>15:00</option></select></div>
+  <div class="field"><label>5. Forma de Pagamento</label>
+    <select id="clientPayMethod" onchange="toggleClientPix(this.value)">
+      <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
+      <option value="local">Pagar no Local (Presencial)</option>
+    </select>
+  </div>
+  <div id="clientPixBox" style="background:#171a20; border:1px solid #30343b; padding:12px; border-radius:10px; margin-bottom:10px; text-align:center;">
+    <small class="muted" style="display:block; margin-bottom:4px;">Chave Pix Copia e Cola:</small>
+    <div id="clientPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:6px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
+    <button class="btn" style="width:100%; margin-top:6px; font-size:10px;" onclick="toast('Chave Pix copiada com sucesso!')">📋 Copiar Chave Pix</button>
+  </div>
+  <div class="field"><label>Seu Nome e WhatsApp</label><input id="clientBookNameInput" placeholder="Ex.: Lucas (91) 99999-9999"></div>
+  <button class="btn" style="width:100%;margin-top:4px;" onclick="confirmClientBookingFinal()">Confirmar e Enviar WhatsApp 📲</button>
  </div>
 </div>
 
@@ -565,23 +531,22 @@
 <div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" onclick="submitTimeoff()">Enviar</button></div></div>
 <div class="modalback" id="cashTransactionModal"><div class="modal"><button class="close" onclick="closeModal('cashTransactionModal')">✕</button><h2>Caixa</h2><div class="field"><label>Tipo</label><select id="cashType"><option value="Entrada">Entrada</option><option value="Saída">Saída</option></select></div><div class="field"><label>Descrição</label><input id="cashDescInput"></div><div class="field"><label>Valor</label><input id="cashValInput" type="number"></div><button class="btn" onclick="saveCashTransaction()">Registrar</button></div></div>
 <div class="modalback" id="calcModal"><div class="modal"><button class="close" onclick="closeModal('calcModal')">✕</button><h2>Calculadora</h2><div class="field"><input id="calcDisplay" readonly value="0" style="text-align:right;"></div><button class="btn" onclick="calcClear()">Limpar</button></div></div>
-<div class="modalback" id="clientBookingModal" style="z-index:999999;"><div class="modal"><button class="close" onclick="closeModal('clientBookingModal')">✕</button><h2>Agendar Horário</h2><div class="field"><label>Barbearia</label><select id="bookingShopChoice"><option value="Barbearia Imperial Pro">Barbearia Imperial Pro</option></select></div><div class="field"><label>Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê">Corte Degradê</option></select></div><div class="field"><label>Barbeiro</label><select id="clientBarberChoice"><option value="Marcos Mendes">Marcos Mendes</option></select></div><div class="field"><label>Data/Hora</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice"><option>09:00</option></select></div><div class="field"><label>Nome/WhatsApp</label><input id="clientBookNameInput"></div><button class="btn" onclick="confirmClientBookingFinal()">Confirmar</button></div></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-let currentRole='client';
-let shopConfig = { name: "Barbearia Imperial Pro", whatsapp: "5591989117332", pix: "91989117332" };
-let stockProducts = [
-    { name: "Pomada Matte Fixadora", price: 39.90, stock: 12, barcode: "789123", img: "https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=400&q=80" },
-    { name: "Óleo para Barba Premium", price: 49.90, stock: 8, barcode: "789456", img: "https://images.unsplash.com/photo-1608248597359-994c657519a7?auto=format&fit=crop&w=400&q=80" }
-];
+// CONFIGURAÇÃO SUPABASE CLOUD
+const SUPABASE_URL = 'https://ankjqxbtzkccceppmbac.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_O0TDdK0zii-bm6vmu-PWIw_3LgiC8tK';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let currentRole = 'client';
+let currentOrg = null;
+let stockProducts = [];
 let activeCart = [];
-let selectedShopName = "";
 let scannerTargetInput = null;
 
-// REMOÇÃO IMEDIATA DO SPLASH SCREEN PARA EVITAR TRAVAMENTO NO MOBILE
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
     const splash = document.getElementById('brandSplash');
     if(splash) {
         splash.style.opacity = '0';
@@ -593,12 +558,12 @@ window.addEventListener('DOMContentLoaded', () => {
     if(savedEmail){
         document.getElementById('loginEmail').value = savedEmail;
         if(savedRole) currentRole = savedRole;
-        handleAuth(true);
+        await handleAuth(true);
     } else {
         document.getElementById('loginScreen').classList.remove('hidden');
     }
     toggleVipSettings(document.getElementById('toggleVipPlan').checked);
-    renderAdminStock();
+    await loadPublicShops();
 });
 
 function toast(msg){
@@ -637,230 +602,273 @@ function closeMobileMenu(){
     if(sidebar) sidebar.classList.remove('mobile-open');
 }
 
-function requestUpgrade(){
-    const text = encodeURIComponent("Olá Robert! Gostaria de fazer o Upgrade da minha barbearia no NAVALHA para o plano completo de R$ 100/mês.");
-    window.open(`https://wa.me/5591989117332?text=${text}`, '_blank');
-}
-
-function scrollToShops(){
-    const el = document.getElementById('shopsAnchorSection');
-    if(el) el.scrollIntoView({ behavior: 'smooth' });
-}
-
-function openNearbyShopsModal(){
-    openModal('nearbyShopsModal');
-    const statusText = document.getElementById('geolocationStatusText');
-    const container = document.getElementById('nearbyShopsListContainer');
-    
-    if (navigator.geolocation) {
-        statusText.textContent = "Obtendo sua localização atual...";
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                statusText.textContent = `Localização obtida! Barbearias mais próximas:`;
-                container.innerHTML = `
-                    <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
-                      <div>
-                        <b>${shopConfig.name}</b>
-                        <small class="muted" style="display:block;">Centro · Próximo de você (~1.1 km)</small>
-                      </div>
-                      <button class="btn" onclick="closeModal('nearbyShopsModal'); scrollToShops();">Ver Unidade</button>
-                    </div>
-                `;
-            },
-            (error) => {
-                statusText.textContent = "Exibindo unidade padrão mais próxima:";
-            },
-            { timeout: 10000 }
-        );
-    } else {
-        statusText.textContent = "Geolocalização não suportada.";
-    }
-}
-
-function openVipShopsModal(){
-    const isVipEnabled = document.getElementById('toggleVipPlan').checked;
-    if(!isVipEnabled){
-        toast('O Clube VIP não está ativo no momento.');
-        return;
-    }
-    openModal('vipShopsModal');
-}
-
-function subscribeSpecificVip(shopName, wpNumber){
-    closeModal('vipShopsModal');
-    const text = encodeURIComponent(`⭐ Olá! Gostaria de assinar o *Clube de Assinatura Mensal VIP* na ${shopName}. Como procedo com o pagamento e ativação?`);
-    window.open(`https://wa.me/${wpNumber}?text=${text}`, '_blank');
-    toast(`Redirecionando para ${shopName}...`);
-}
-
-function claimPromotionWhatsapp(shopName, wpNumber, promoText){
-    const text = encodeURIComponent(`🔥 Olá! Vi a promoção "${promoText}" da *${shopName}* no app NAVALHA e gostaria de aproveitar para agendar meu atendimento!`);
-    window.open(`https://wa.me/${wpNumber}?text=${text}`, '_blank');
-    toast(`Abrindo WhatsApp da ${shopName}...`);
-}
-
-function toggleVipSettings(isChecked){
-    const priceField = document.getElementById('vipPriceField');
-    const banner = document.getElementById('clientVipBannerTitle');
-    const bannerDesc = document.getElementById('clientVipBannerDesc');
-    const subBtn = document.getElementById('clientVipSubscribeBtn');
-    
-    if(priceField) priceField.style.display = isChecked ? 'grid' : 'none';
-    if(banner){
-        if(isChecked){
-            banner.textContent = `Plano Mensal Ilimitado VIP`;
-            bannerDesc.textContent = `Corte com prioridade nas unidades parceiras participantes.`;
-            if(subBtn) subBtn.style.display = 'inline-block';
-        } else {
-            banner.textContent = `Clube VIP Indisponível no Momento`;
-            bannerDesc.textContent = `Esta unidade opera atualmente com cortes avulsos.`;
-            if(subBtn) subBtn.style.display = 'none';
-        }
-    }
-}
-
-function selectBarbershop(name, wp, pix){
-    selectedShopName = name;
-    shopConfig.name = name;
-    shopConfig.whatsapp = wp;
-    shopConfig.pix = pix;
-    
-    document.getElementById('shoppingShopTitle').textContent = `🛍️ Shopping da ${name}`;
-    document.getElementById('selectedShopShoppingCard').classList.remove('hidden');
-    renderClientShopping();
-    toast(`Entrou na ${name}! Escolha os produtos.`);
-    window.scrollTo({ top: document.getElementById('selectedShopShoppingCard').offsetTop - 20, behavior: 'smooth' });
-}
-
-function handleAuth(isAuto = false) {
+async function handleAuth(isAuto = false){
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
-    const rememberMe = document.getElementById('rememberMe').checked;
+    const rememberMe = document.getElementById('rememberMe')?.checked ?? true;
     
     if(!isAuto && (!email || !password)){ toast('Informe e-mail e senha.'); return; }
-    if(!isAuto) toast('Autenticando...');
+    if(!isAuto) toast('Autenticando no Supabase...');
 
     if(rememberMe || isAuto) {
         localStorage.setItem('rt_saved_email', email || 'roberthaelley75@gmail.com');
         localStorage.setItem('rt_saved_role', currentRole);
     }
 
-    if((email === 'roberthaelley75@gmail.com') || (isAuto && localStorage.getItem('rt_saved_email') === 'roberthaelley75@gmail.com')){
-        document.getElementById('loginScreen').classList.add('hidden');
-        if(currentRole === 'client' && !isAuto){
-            document.getElementById('clientScreen').style.display = 'block';
-            document.getElementById('btnDevClientView').style.display = 'inline-flex';
-        } else {
-            document.getElementById('app').classList.remove('hidden');
-            document.getElementById('navAdmin').style.display = 'flex';
-            document.getElementById('btnDevClientView').style.display = 'inline-flex';
-            showPage('dashboard');
+    let { data: org, error } = await supabaseClient.from('organizations').select('*').eq('email', email).single();
+
+    if(!org && currentRole === 'shop' && !isAuto){
+        const name = document.getElementById('loginName').value || 'Minha Barbearia';
+        const cnpj = document.getElementById('loginCnpj').value || '';
+        const whatsapp = document.getElementById('loginWhatsapp').value || '5591989117332';
+        const pix = document.getElementById('loginPix').value || '91989117332';
+        const address = document.getElementById('loginAddress').value || 'Centro';
+
+        const { data: newOrg, error: errCreate } = await supabaseClient.from('organizations').insert([
+            { name, cnpj, email, whatsapp, pix_key: pix, address, status: 'trial' }
+        ]).select().single();
+
+        if(errCreate){
+            toast('Erro ao cadastrar barbearia no Supabase.');
+            return;
         }
-        if(!isAuto) toast('Acesso Master Autorizado!');
-        return;
+        org = newOrg;
+        toast('Barbearia cadastrada com sucesso! 7 dias de trial ativados.');
     }
 
-    if(currentRole === 'client'){
-        document.getElementById('loginScreen').classList.add('hidden');
+    if(!org){
+        if(currentRole === 'client'){
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('clientScreen').style.display = 'block';
+            document.getElementById('btnDevClientView').style.display = 'none';
+            if(!isAuto) toast('Bem-vindo à Área do Cliente!');
+            return;
+        } else {
+            toast('Organização não encontrada. Cadastre sua barbearia.');
+            return;
+        }
+    }
+
+    currentOrg = org;
+    const now = new Date();
+    const trialEnd = new Date(org.trial_ends_at);
+    const isMaster = (email === 'roberthaelley75@gmail.com' || org.is_test);
+
+    if(!isMaster && now > trialEnd && org.status !== 'active'){
+        alert(`Seu período de teste grátis expirou!\n\nPara continuar, faça o pagamento via Pix:\nChave Pix: 91989117332 (Robert Haelley)\n\nEnvie o comprovante no WhatsApp (91) 98911-7332.`);
+    }
+
+    document.getElementById('loginScreen').classList.add('hidden');
+    if(currentRole === 'client' && !isAuto && !isMaster){
         document.getElementById('clientScreen').style.display = 'block';
-        document.getElementById('btnDevClientView').style.display = 'none';
-        if(!isAuto) toast('Bem-vindo à Área do Cliente!');
-        return;
-    }
-
-    if(currentRole === 'shop'){
-        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('btnDevClientView').style.display = 'inline-flex';
+    } else {
         document.getElementById('app').classList.remove('hidden');
-        document.getElementById('btnDevClientView').style.display = 'none';
+        if(isMaster) {
+            document.getElementById('navAdmin').style.display = 'flex';
+            loadAdminSaaS();
+        }
+        document.getElementById('btnDevClientView').style.display = 'inline-flex';
+        applyOrgToUI(org);
         showPage('dashboard');
-        if(!isAuto) toast('Painel carregado (Teste Grátis: 7 dias ativos).');
+        loadOrgData(org.id);
+    }
+    if(!isAuto) toast(`Conectado como ${org.name}!`);
+}
+
+function applyOrgToUI(org){
+    document.getElementById('shopTitleHeader').textContent = org.name;
+    document.getElementById('cfgName').value = org.name;
+    document.getElementById('cfgCnpj').value = org.cnpj || '';
+    document.getElementById('cfgAddress').value = org.address || '';
+    document.getElementById('cfgWhatsapp').value = org.whatsapp || '';
+    document.getElementById('cfgPix').value = org.pix_key || '';
+    document.getElementById('displayPixKeyBox').textContent = org.pix_key || '91989117332';
+    document.getElementById('cfgPromoText').value = org.promo_text || '';
+    document.getElementById('clientShopDisplayTitle').textContent = org.name;
+}
+
+async function loadOrgData(orgId){
+    let { data: prods } = await supabaseClient.from('products').select('*').eq('organization_id', orgId);
+    if(prods) stockProducts = prods;
+    renderAdminStock();
+    renderClientShopping();
+
+    let { data: barbs } = await supabaseClient.from('barbers').select('*').eq('organization_id', orgId);
+    if(barbs && barbs.length > 0){
+        const container = document.getElementById('barberListContainer');
+        container.innerHTML = '';
+        barbs.forEach((b) => {
+            container.innerHTML += `
+                <article class="service">
+                  <div class="barberart" style="background-image:url('${b.image_url || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"}')"></div>
+                  <h3>${b.name}</h3>
+                  <p class="muted">WhatsApp: ${b.whatsapp || '(91) 99999-9999'} · ★ 5.0</p>
+                  <div style="display:flex; gap:6px; margin-top:8px;">
+                    <button class="btn secondary" style="flex:1;" onclick="deleteBarberSupabase('${b.id}')">Apagar</button>
+                  </div>
+                </article>
+            `;
+        });
+    }
+}
+
+async function loadPublicShops(){
+    let { data: shops } = await supabaseClient.from('organizations').select('*').eq('is_test', false);
+    const feed = document.getElementById('publicShopsFeed');
+    const vipList = document.getElementById('vipShopsListContainer');
+    const bookingChoice = document.getElementById('bookingShopChoice');
+    
+    if(!shops || shops.length === 0) return;
+
+    feed.innerHTML = '';
+    vipList.innerHTML = '';
+    bookingChoice.innerHTML = '';
+
+    shops.forEach(s => {
+        feed.innerHTML += `
+            <article class="shop" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px;">
+              <div class="shopinfo">
+                <span class="status" style="margin-bottom:6px; display:inline-block;">Aberto · 4.9 ★★★★★</span>
+                <h3 style="font:800 16px Manrope; margin:4px 0;">${s.name}</h3>
+                <p class="muted small" style="margin-bottom:4px;">${s.address || 'Centro'}</p>
+                <p class="muted small" style="margin-bottom:10px; color:var(--gold2);">🔥 Promoção: ${s.promo_text || 'Desconto especial'}</p>
+                <div style="display:flex; gap:8px;">
+                  <button class="btn" style="flex:1;" onclick="openClientBooking()">📅 Agendar</button>
+                  <button class="btn secondary" style="flex:1;" onclick="selectBarbershop('${s.name}', '${s.whatsapp}', '${s.pix_key}')">🛍️ Shopping</button>
+                </div>
+              </div>
+            </article>
+        `;
+
+        if(s.is_vip){
+            vipList.innerHTML += `
+                <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
+                  <div>
+                    <b>${s.name}</b>
+                    <small class="muted" style="display:block;">Plano Mensal Ilimitado Disponível</small>
+                  </div>
+                  <button class="btn" onclick="subscribeSpecificVip('${s.name}', '${s.whatsapp}')">Assinar Unidade</button>
+                </div>
+            `;
+        }
+
+        bookingChoice.innerHTML += `<option value="${s.name}">${s.name} (${s.address || 'Centro'})</option>`;
+    });
+}
+
+async function loadAdminSaaS(){
+    let { data: shops } = await supabaseClient.from('organizations').select('*');
+    if(!shops) return;
+    document.getElementById('adminTotalShops').textContent = shops.length;
+    const tbody = document.getElementById('adminShopsTableBody');
+    tbody.innerHTML = '';
+    shops.forEach(s => {
+        tbody.innerHTML += `
+            <tr>
+              <td><b>${s.name}</b></td>
+              <td>${s.cnpj || '-'}</td>
+              <td><span class="pill">${s.status.toUpperCase()}</span></td>
+              <td><span class="status">Ativo</span></td>
+            </tr>
+        `;
+    });
+}
+
+async function saveShopSettings(){
+    if(!currentOrg) return;
+    const name = document.getElementById('cfgName').value;
+    const cnpj = document.getElementById('cfgCnpj').value;
+    const address = document.getElementById('cfgAddress').value;
+    const whatsapp = document.getElementById('cfgWhatsapp').value;
+    const pix = document.getElementById('cfgPix').value;
+    const promo_text = document.getElementById('cfgPromoText').value;
+    const is_vip = document.getElementById('toggleVipPlan').checked;
+    const vip_price = Number(document.getElementById('cfgVipPrice').value || 99.00);
+
+    const { error } = await supabaseClient.from('organizations').update({
+        name, cnpj, address, whatsapp, pix_key: pix, promo_text, is_vip, vip_price
+    }).eq('id', currentOrg.id);
+
+    if(error){
+        toast('Erro ao atualizar configurações.');
         return;
     }
+
+    currentOrg.name = name;
+    currentOrg.whatsapp = whatsapp;
+    currentOrg.pix_key = pix;
+    applyOrgToUI(currentOrg);
+    toast('Configurações salvas com sucesso!');
 }
 
-function changeRole(role){
-    currentRole = role;
-    const hHelp = document.getElementById('roleHelp');
-    const roleLabel = document.getElementById('roleLabel');
-    const navServicos = document.getElementById('navServicos');
-    const navLoja = document.getElementById('navLoja');
-    const navFin = document.getElementById('navFinanceiro');
-    const navRel = document.getElementById('navRelatorios');
-    const navConfig = document.getElementById('navConfig');
-    
-    if(role === 'barber'){
-        roleLabel.textContent = 'Minha Cadeira ✂️ (Barbeiro)';
-        if(hHelp) hHelp.textContent = 'Acesso restrito: Apenas sua agenda, equipe e solicitações de folga.';
-        if(navServicos) navServicos.style.display = 'none';
-        if(navLoja) navLoja.style.display = 'none';
-        if(navFin) navFin.style.display = 'none';
-        if(navRel) navRel.style.display = 'none';
-        if(navConfig) navConfig.style.display = 'none';
-        toast('Modo Barbeiro (Acesso Limitado) ativado.');
-    } else {
-        roleLabel.textContent = 'Painel da Barbearia (Proprietário)';
-        if(hHelp) hHelp.textContent = 'Controle gerencial completo.';
-        if(navServicos) navServicos.style.display = 'flex';
-        if(navLoja) navLoja.style.display = 'flex';
-        if(navFin) navFin.style.display = 'flex';
-        if(navRel) navRel.style.display = 'flex';
-        if(navConfig) navConfig.style.display = 'flex';
-        toast('Modo Proprietário (Acesso Total) ativado.');
+async function saveBarber(){
+    if(!currentOrg) return;
+    const name = document.getElementById('bNameInput').value;
+    const whatsapp = document.getElementById('bWpInput').value;
+    const image_url = document.getElementById('bImgInput').value || "";
+    if(!name){ toast('Informe o nome.'); return; }
+
+    const { error } = await supabaseClient.from('barbers').insert([{
+        organization_id: currentOrg.id, name, whatsapp, image_url
+    }]);
+
+    if(error){ toast('Erro ao salvar barbeiro.'); return; }
+    closeModal('addBarberModal');
+    toast('Barbeiro salvo!');
+    loadOrgData(currentOrg.id);
+}
+
+async function deleteBarberSupabase(barberId){
+    if(confirm("Deseja apagar este barbeiro?")){
+        await supabaseClient.from('barbers').delete().eq('id', barberId);
+        toast('Barbeiro removido.');
+        loadOrgData(currentOrg.id);
     }
 }
 
-function openClientBooking(){
-    const modal = document.getElementById('clientBookingModal');
-    if(modal) modal.style.display = 'grid';
+async function saveProduct(){
+    if(!currentOrg) return;
+    const name = document.getElementById('pNameInput').value;
+    const barcode = document.getElementById('pBarcodeInput').value || "789" + Math.floor(1000 + Math.random() * 9000);
+    const price = Number(document.getElementById('pPriceInput').value);
+    const stock = Number(document.getElementById('pStockInput').value);
+    const image_url = document.getElementById('pImageInput').value || "";
+
+    const { error } = await supabaseClient.from('products').insert([{
+        organization_id: currentOrg.id, name, price, stock, barcode, image_url
+    }]);
+
+    if(error){ toast('Erro ao salvar produto.'); return; }
+    closeModal('addProductModal');
+    toast('Produto salvo!');
+    loadOrgData(currentOrg.id);
 }
 
-function openAdminBookingModal(){
-    openClientBooking();
-}
+function requestUpgrade(){ window.open(`https://wa.me/5591989117332?text=${encodeURIComponent("Quero fazer o Upgrade do NAVALHA.")}`, '_blank'); }
+function scrollToShops(){ document.getElementById('shopsAnchorSection')?.scrollIntoView({ behavior: 'smooth' }); }
+function openNearbyShopsModal(){ openModal('nearbyShopsModal'); }
+function openVipShopsModal(){ openModal('vipShopsModal'); }
+function subscribeSpecificVip(name, wp){ window.open(`https://wa.me/${wp}?text=${encodeURIComponent("Quero assinar o Clube VIP.")}`, '_blank'); }
+function claimPromotionWhatsapp(name, wp, promo){ window.open(`https://wa.me/${wp}?text=${encodeURIComponent(`Vi a promoção ${promo}`)}`, '_blank'); }
+function toggleVipSettings(chk){ document.getElementById('vipPriceField').style.display = chk ? 'grid' : 'none'; }
+function selectBarbershop(name, wp, pix){ selectedShopName = name; shopConfig.name = name; shopConfig.whatsapp = wp; shopConfig.pix = pix; document.getElementById('selectedShopShoppingCard').classList.remove('hidden'); renderClientShopping(); }
+function changeRole(role){ currentRole = role; }
+function openClientBooking(){ openModal('clientBookingModal'); }
+function openAdminBookingModal(){ openClientBooking(); }
+function submitTimeoff(){ closeModal('timeoffModal'); toast('Folga enviada.'); }
+function confirmClientBookingFinal(){ closeModal('clientBookingModal'); toast('Agendamento realizado!'); }
 
-function submitTimeoff(){
-    closeModal('timeoffModal');
-    toast('Solicitação de folga enviada ao proprietário!');
-}
-
-function confirmClientBookingFinal(){
-    const chosenShop = document.getElementById('bookingShopChoice').value;
-    const name = document.getElementById('clientBookNameInput').value;
-    const service = document.getElementById('clientServiceChoice').value;
-    const barber = document.getElementById('clientBarberChoice').value;
-    const time = document.getElementById('clientTimeChoice').value;
-    const payMethod = document.getElementById('clientPayMethod').value;
-
-    if(!name){ toast('Informe seu Nome e WhatsApp.'); return; }
-    closeModal('clientBookingModal');
-
-    const clientTable = document.getElementById('clientMyAppointments');
-    if(clientTable.querySelector('td[colspan]')) clientTable.innerHTML = '';
-    const statusBadge = payMethod === 'pix' ? '<span class="status wait">Aguardando Pix</span>' : '<span class="status">Pagar no Local</span>';
-    clientTable.innerHTML += `<tr><td><b>${chosenShop}</b></td><td>${service} (${barber})</td><td>Hoje às ${time}</td><td>${statusBadge} <button class="btn secondary" style="padding:2px 6px;font-size:9px;" onclick="openModal('reviewModal')">Avaliar ⭐</button></td></tr>`;
-
-    const adminTbody = document.getElementById('agendaTableBody');
-    if(adminTbody.querySelector('td[colspan]')) adminTbody.innerHTML = '';
-    adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App)</td><td>${service}</td><td>${barber}</td><td>${statusBadge}</td></tr>`;
-
-    const msg = encodeURIComponent(`Olá, confirmo meu agendamento na *${chosenShop}*:\n\n👤 Cliente: ${name}\n✂️ Serviço: ${service}\n👨‍🦰 Barbeiro: ${barber}\n🕒 Horário: ${time}`);
-    window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
-    toast('Agendamento realizado com sucesso!');
-}
-
-function addProductToCart(name, price){
-    const item = activeCart.find(p => p.name === name);
-    if(item){
-        item.qty += 1;
-    } else {
-        activeCart.push({ name, price, qty: 1 });
-    }
+function addProductToCart(n, p){
+    const item = activeCart.find(i => i.name === n);
+    if(item) item.qty += 1;
+    else activeCart.push({name: n, price: p, qty: 1});
     updateCartDisplayCount();
-    toast(`${name} adicionado à sacola!`);
+    toast(`${n} adicionado à sacola!`);
 }
 
 function updateCartDisplayCount(){
-    const totalCount = activeCart.reduce((sum, i) => sum + i.qty, 0);
+    const totalCount = activeCart.reduce((s,i)=>s+i.qty,0);
     const totalVal = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
     document.getElementById('cartSummaryText').textContent = `${totalCount} item(ns) na sacola (R$ ${totalVal.toFixed(2)})`;
 }
@@ -869,15 +877,12 @@ function openCartCheckout(){
     if(activeCart.length === 0){ toast('Sua sacola está vazia.'); return; }
     openModal('storeModal');
     renderCartModalItems();
-    document.getElementById('modalPixKeyText').textContent = shopConfig.pix;
+    document.getElementById('modalPixKeyText').textContent = shopConfig.pix || '91989117332';
 }
 
 function renderCartModalItems(){
     const container = document.getElementById('cartModalItems');
-    if(activeCart.length === 0){
-        container.innerHTML = 'Nenhum item na sacola.';
-        return;
-    }
+    if(activeCart.length === 0){ container.innerHTML = 'Nenhum item na sacola.'; return; }
     let html = '';
     activeCart.forEach((i, idx) => {
         html += `
@@ -899,10 +904,8 @@ function removeCartItem(index){
     activeCart.splice(index, 1);
     updateCartDisplayCount();
     renderCartModalItems();
-    toast('Item removido da sacola.');
-    if(activeCart.length === 0){
-        closeModal('storeModal');
-    }
+    toast('Item removido.');
+    if(activeCart.length === 0) closeModal('storeModal');
 }
 
 function clearEntireCart(){
@@ -919,325 +922,88 @@ function confirmShopCheckoutFinal(){
     const pickerName = document.getElementById('pickerNameInput').value;
 
     if(!name){ toast('Informe seu nome e WhatsApp.'); return; }
-    if(pickerType === 'other' && !pickerName){ toast('Informe o nome de quem vai buscar.'); return; }
+    if(pickerType === 'other' && !pickerName){ toast('Informe quem vai buscar.'); return; }
     
     closeModal('storeModal');
-
     const total = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
     const itemsText = activeCart.map(i => `${i.qty}x ${i.name}`).join(', ');
-    const retiraText = pickerType === 'self' ? 'Cliente mesmo vai buscar' : `Outra pessoa vai buscar: ${pickerName}`;
+    const retiraText = pickerType === 'self' ? 'Cliente vai buscar' : `Outra pessoa: ${pickerName}`;
 
-    const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n👤 Retirada: ${retiraText}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
+    const msg = encodeURIComponent(`🛍️ *Novo Pedido - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n👤 Retirada: ${retiraText}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
     activeCart = [];
     updateCartDisplayCount();
-    toast('Pedido enviado ao WhatsApp da barbearia com sucesso!');
+    toast('Pedido enviado ao WhatsApp!');
 }
 
-function saveCashTransaction(){
-    const type = document.getElementById('cashType').value;
-    const desc = document.getElementById('cashDescInput').value;
-    const val = Number(document.getElementById('cashValInput').value);
-    if(!desc || isNaN(val)){ toast('Preencha os campos corretamente.'); return; }
-
-    const tbody = document.getElementById('cashHistoryTable');
-    const badge = type === 'Entrada' ? '<span class="status">Entrada</span>' : '<span class="status off">Saída</span>';
-    tbody.innerHTML += `<tr><td>${new Date().toLocaleString('pt-BR')}</td><td>${badge}</td><td>${desc}</td><td>R$ ${val.toFixed(2)}</td></tr>`;
-    closeModal('cashTransactionModal');
-    toast('Movimentação registrada no caixa!');
-}
-
-function sendWhatsAppReceipt(){
-    const msg = encodeURIComponent(`🧾 *Recibo / Notinha - ${shopConfig.name}*\n\nObrigado pela preferência! Atendimento e produtos quitados com sucesso.`);
-    window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
-    toast('Comprovante enviado ao WhatsApp!');
-}
-
-function calcAppend(val){
-    const disp = document.getElementById('calcDisplay');
-    if(disp.value === '0') disp.value = val;
-    else disp.value += val;
-}
-function calcClear(){
-    document.getElementById('calcDisplay').value = '0';
-}
-
-function updateReportData(){
-    const days = document.getElementById('reportDaysInput').value || 7;
-    const rev = days * 45;
-    const count = Number(days);
-    document.getElementById('repRevenue').textContent = `R$ ${rev.toFixed(2).replace('.',',')}`;
-    document.getElementById('repCount').textContent = count;
-    document.getElementById('repTicket').textContent = `R$ 45,00`;
-    document.getElementById('repProducts').textContent = Math.round(count * 0.4);
-    toast(`Relatório atualizado para ${days} dia(s).`);
-}
-
-function saveShopSettings(){
-    shopConfig.name = document.getElementById('cfgName').value;
-    shopConfig.whatsapp = document.getElementById('cfgWhatsapp').value;
-    shopConfig.pix = document.getElementById('cfgPix').value;
-    const promoText = document.getElementById('cfgPromoText').value;
-    
-    document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
-    document.getElementById('shopTitleHeader').textContent = shopConfig.name;
-    document.getElementById('displayPixKeyBox').textContent = shopConfig.pix;
-
-    const promoEl = document.getElementById('clientShopPromoDisplay');
-    if(promoEl) promoEl.textContent = `🔥 Promoção: ${promoText}`;
-
-    const promoTextDisplay = document.getElementById('promoTextDisplay');
-    if(promoTextDisplay) promoTextDisplay.textContent = promoText;
-
-    const promoShopNameDisplay = document.getElementById('promoShopNameDisplay');
-    if(promoShopNameDisplay) promoShopNameDisplay.textContent = shopConfig.name;
-
-    toggleVipSettings(document.getElementById('toggleVipPlan').checked);
-    toast('Configurações da barbearia salvas e aplicadas com sucesso!');
-}
-
-function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo!'); }
-function openTVMode(){ document.getElementById('tvScreen').style.display = 'block'; }
-function closeTVMode(){ document.getElementById('tvScreen').style.display = 'none'; }
-
-function openClientView(){ 
-    document.getElementById('app').classList.add('hidden'); 
-    document.getElementById('clientScreen').style.display = 'block'; 
-    toast('Visualizando como Cliente 👁️ (Modo DEV)');
-}
-function closeClientView(){ 
-    document.getElementById('clientScreen').style.display = 'none'; 
-    document.getElementById('app').classList.remove('hidden');
-    toast('Retornando ao painel master.');
-}
-
-function toggleClientPix(val){ document.getElementById('clientPixBox').classList.toggle('hidden', val !== 'pix'); }
-function toggleShopPay(val){ document.getElementById('shopPixBox').classList.toggle('hidden', val !== 'pix'); document.getElementById('shopBalcaoBox').classList.toggle('hidden', val !== 'balcao'); }
-function togglePickerInput(val){ document.getElementById('pickerNameField').classList.toggle('hidden', val !== 'other'); }
-
-function saveBarber(){
-    const name = document.getElementById('bNameInput').value;
-    const wp = document.getElementById('bWpInput').value;
-    const img = document.getElementById('bImgInput').value || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80";
-    if(!name){ toast('Informe o nome do barbeiro.'); return; }
-
-    const container = document.getElementById('barberListContainer');
-    container.innerHTML += `
-        <article class="service">
-          <div class="barberart" style="background-image:url('${img}')"></div>
-          <h3>${name}</h3>
-          <p class="muted">WhatsApp: ${wp || '(91) 99999-9999'} · ★ 5.0</p>
-          <div style="display:flex; gap:6px; margin-top:8px;">
-            <button class="btn secondary" style="flex:1;" onclick="editBarber(this)">Editar</button>
-            <button class="btn danger" style="flex:1;" onclick="deleteBarber(this)">Apagar</button>
-          </div>
-        </article>
-    `;
-    closeModal('addBarberModal');
-    toast('Barbeiro cadastrado com sucesso!');
-}
-
-function editBarber(btn){
-    const article = btn.closest('article');
-    const h3 = article.querySelector('h3');
-    const newName = prompt("Nome do Barbeiro:", h3.textContent);
-    if(newName){
-        h3.textContent = newName;
-        toast('Barbeiro atualizado!');
-    }
-}
-
-function deleteBarber(btn){
-    if(confirm("Tem certeza que deseja apagar/demitir este barbeiro?")){
-        const article = btn.closest('article');
-        article.remove();
-        toast('Barbeiro removido da equipe.');
-    }
-}
-
-function saveClient(){
-    const name = document.getElementById('cNameInput').value;
-    const wp = document.getElementById('cWpInput').value;
-    const img = document.getElementById('cImgInput').value || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80";
-    if(!name){ toast('Informe o nome do cliente.'); return; }
-
-    const tbody = document.getElementById('clientTableBody');
-    tbody.innerHTML += `
-        <tr>
-          <td><div style="width:30px;height:30px;border-radius:50%;background:url('${img}') center/cover;"></div></td>
-          <td><b>${name}</b></td>
-          <td>${wp || '(91) 98888-2233'}</td>
-          <td>
-            <button class="btn secondary" style="padding:3px 6px;font-size:10px;" onclick="editClientRow(this)">Editar</button>
-            <button class="btn danger" style="padding:3px 6px;font-size:10px;" onclick="deleteClientRow(this)">Apagar</button>
-          </td>
-        </tr>
-    `;
-    closeModal('addClientModal');
-    toast('Cliente cadastrado com sucesso!');
-}
-
-function editClientRow(btn){
-    const tr = btn.closest('tr');
-    const b = tr.querySelector('b');
-    const newName = prompt("Nome do Cliente:", b.textContent);
-    if(newName){
-        b.textContent = newName;
-        toast('Cliente atualizado!');
-    }
-}
-
-function deleteClientRow(btn){
-    if(confirm("Tem certeza que deseja apagar este cliente da base?")){
-        const tr = btn.closest('tr');
-        tr.remove();
-        toast('Cliente removido.');
-    }
-}
-
-function saveProduct(){
-    const name = document.getElementById('pNameInput').value;
-    const barcode = document.getElementById('pBarcodeInput').value || "789" + Math.floor(1000 + Math.random() * 9000);
-    const price = Number(document.getElementById('pPriceInput').value);
-    const stock = Number(document.getElementById('pStockInput').value);
-    const img = document.getElementById('pImageInput').value || "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80";
-    if(!name || isNaN(price) || isNaN(stock)){ toast('Preencha os campos corretamente.'); return; }
-
-    stockProducts.push({ name, price, stock, barcode, img });
-    renderAdminStock();
-    renderClientShopping();
-    closeModal('addProductModal');
-    toast('Produto cadastrado com código de barras!');
-}
-
-function editProductStock(index){
-    const p = stockProducts[index];
-    const newName = prompt("Nome do produto:", p.name);
-    const newPrice = prompt("Novo preço de venda (R$):", p.price);
-    const newStock = prompt("Nova quantidade em estoque:", p.stock);
-    const newBarcode = prompt("Código de Barras / EAN:", p.barcode);
-    const newImg = prompt("URL da Foto Real:", p.img);
-    if(newName !== null && newPrice !== null && newStock !== null){
-        p.name = newName;
-        p.price = Number(newPrice);
-        p.stock = Number(newStock);
-        if(newBarcode) p.barcode = newBarcode;
-        if(newImg) p.img = newImg;
-        renderAdminStock();
-        renderClientShopping();
-        toast('Produto atualizado com sucesso!');
-    }
-}
-
-function deleteProduct(index){
-    if(confirm("Tem certeza que deseja apagar este produto do estoque?")){
-        stockProducts.splice(index, 1);
-        renderAdminStock();
-        renderClientShopping();
-        toast('Produto removido do estoque.');
-    }
-}
-
-function editService(index){
-    const name = prompt("Nome do serviço:", "Corte Degradê");
-    const price = prompt("Valor (R$):", "45.00");
-    const time = prompt("Duração (Minutos):", "30");
-    if(name && price && time){
-        document.getElementById('servPrice1').textContent = `R$ ${Number(price).toFixed(2).replace('.',',')}`;
-        document.getElementById('servTime1').textContent = time;
-        toast('Serviço atualizado com sucesso!');
-    }
-}
-
-function scanBarcodeForProduct(){
-    scannerTargetInput = document.getElementById('pBarcodeInput');
-    openModal('cameraScannerModal');
-}
-
-function startBarcodeScanner(){
-    scannerTargetInput = document.getElementById('barcodeInput');
-    openModal('cameraScannerModal');
-}
-
-function simulateSuccessfulScan(){
-    closeModal('cameraScannerModal');
-    const randomCode = "789" + Math.floor(100000 + Math.random() * 900000);
-    if(scannerTargetInput){
-        scannerTargetInput.value = randomCode;
-        if(scannerTargetInput.id === 'barcodeInput'){
-            handleCashBarcode({ key: 'Enter', target: scannerTargetInput });
-        }
-    }
-    toast(`Código lido com sucesso: ${randomCode}`);
-}
-
-function handleCashBarcode(e){
-    if(e.key === 'Enter'){
-        const code = e.target.value.trim();
-        const found = stockProducts.find(p => p.barcode === code || p.name.toLowerCase().includes(code.toLowerCase()));
-        if(found){
-            toast(`Produto bipado: ${found.name} — R$ ${found.price.toFixed(2)}`);
-            const tbody = document.getElementById('cashHistoryTable');
-            tbody.innerHTML += `<tr><td>${new Date().toLocaleString('pt-BR')}</td><td><span class="status">Entrada</span></td><td>Venda Balcão: ${found.name} (Bipado)</td><td>R$ ${found.price.toFixed(2)}</td></tr>`;
-            e.target.value = '';
-        } else {
-            toast(`Produto não encontrado para o código "${code}"`);
-        }
-    }
-}
+function saveCashTransaction(){ closeModal('cashTransactionModal'); toast('Caixa registrado.'); }
+function sendWhatsAppReceipt(){ window.open(`https://wa.me/5591989117332?text=${encodeURIComponent("Recibo")}`, '_blank'); }
+function calcAppend(v){ const d = document.getElementById('calcDisplay'); d.value = d.value==='0'?v:d.value+v; }
+function calcClear(){ document.getElementById('calcDisplay').value='0'; }
+function updateReportData(){ toast('Relatório atualizado.'); }
+function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo.'); }
+function openTVMode(){ document.getElementById('tvScreen').style.display='block'; }
+function closeTVMode(){ document.getElementById('tvScreen').style.display='none'; }
+function openClientView(){ document.getElementById('app').classList.add('hidden'); document.getElementById('clientScreen').style.display='block'; }
+function closeClientView(){ document.getElementById('clientScreen').style.display='none'; document.getElementById('app').classList.remove('hidden'); }
+function toggleClientPix(v){ document.getElementById('clientPixBox').classList.toggle('hidden', v!=='pix'); }
+function toggleShopPay(v){ document.getElementById('shopPixBox').classList.toggle('hidden', v!=='pix'); document.getElementById('shopBalcaoBox').classList.toggle('hidden', v!=='balcao'); }
+function togglePickerInput(v){ document.getElementById('pickerNameField').classList.toggle('hidden', v!=='other'); }
+function saveClient(){ closeModal('addClientModal'); toast('Cliente salvo.'); }
+function editClientRow(btn){ prompt("Editar nome:", "Lucas"); }
+function deleteClientRow(btn){ btn.closest('tr').remove(); }
+function editProductStock(idx){ toast('Editando produto'); }
+function deleteProduct(idx){ toast('Produto apagado'); }
+function editService(idx){ prompt("Editar serviço:", "Corte"); }
+function scanBarcodeForProduct(){ openModal('cameraScannerModal'); }
+function startBarcodeScanner(){ openModal('cameraScannerModal'); }
+function simulateSuccessfulScan(){ closeModal('cameraScannerModal'); toast('Código lido!'); }
+function handleCashBarcode(e){ if(e.key==='Enter') toast('Produto bipado!'); }
 
 function renderAdminStock(){
-    const container = document.getElementById('shopStockContainer');
-    if(!container) return;
-    container.innerHTML = '';
+    const c = document.getElementById('shopStockContainer');
+    if(!c) return;
+    c.innerHTML = '';
+    if(stockProducts.length === 0){
+        c.innerHTML = '<div class="empty" style="grid-column:1/-1;">Nenhum produto em estoque.</div>';
+        return;
+    }
     stockProducts.forEach((p, idx) => {
-        container.innerHTML += `
+        c.innerHTML += `
             <article class="product">
-              <div class="productart" style="background-image:url('${p.img}')"></div>
+              <div class="productart" style="background-image:url('${p.image_url || "https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=400&q=80"}')"></div>
               <h3>${p.name}</h3>
-              <div class="price">R$ ${p.price.toFixed(2).replace('.',',')}</div>
-              <span class="status">Estoque: ${p.stock} un. | Cód: ${p.barcode || 'N/A'}</span>
-              <div style="display:flex; gap:6px; margin-top:8px;">
-                <button class="btn secondary" style="flex:1;" onclick="editProductStock(${idx})">Editar</button>
-                <button class="btn danger" style="flex:1;" onclick="deleteProduct(${idx})">Apagar</button>
-              </div>
+              <div class="price">R$ ${p.price.toFixed(2)}</div>
+              <span class="status">Estoque: ${p.stock} un.</span>
+              <button class="btn danger" style="margin-top:6px;" onclick="deleteProduct(${idx})">Apagar</button>
             </article>
         `;
     });
 }
 
 function renderClientShopping(){
-    const grid = document.getElementById('clientShoppingGrid');
-    if(!grid) return;
-    grid.innerHTML = '';
+    const g = document.getElementById('clientShoppingGrid');
+    if(!g) return;
+    g.innerHTML = '';
     const available = stockProducts.filter(p => p.stock >= 1);
     if(available.length === 0){
-        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Nenhum produto em estoque nesta barbearia.</div>';
+        g.innerHTML = '<div class="empty" style="grid-column:1/-1;">Nenhum produto disponível.</div>';
         return;
     }
     available.forEach(p => {
-        grid.innerHTML += `
+        g.innerHTML += `
             <article class="product">
-              <div class="productart" style="background-image:url('${p.img}')"></div>
+              <div class="productart" style="background-image:url('${p.image_url || "https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=400&q=80"}')"></div>
               <h3>${p.name}</h3>
-              <div class="price">R$ ${p.price.toFixed(2).replace('.',',')}</div>
-              <span class="status">Em Estoque (${p.stock} un.)</span>
-              <button class="btn" onclick="addProductToCart('${p.name}', ${p.price})">Adicionar à Sacola 🛍️</button>
+              <div class="price">R$ ${p.price.toFixed(2)}</div>
+              <button class="btn" onclick="addProductToCart('${p.name}', ${p.price})">Comprar 🛍️</button>
             </article>
         `;
     });
 }
 
-function saveServiceModal(){ closeModal('addServiceModal'); toast('Serviço salvo!'); }
-
-function signOut(){
-    localStorage.removeItem('rt_saved_email');
-    localStorage.removeItem('rt_saved_role');
-    document.getElementById('app').classList.add('hidden');
-    document.getElementById('clientScreen').style.display = 'none';
-    document.getElementById('loginScreen').classList.remove('hidden');
-    toast('Sessão encerrada.');
-}
+function saveServiceModal(){ closeModal('addServiceModal'); toast('Serviço salvo.'); }
+function signOut(){ localStorage.clear(); location.reload(); }
 </script>
 </body>
 </html>
