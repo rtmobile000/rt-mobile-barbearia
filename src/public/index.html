@@ -9,7 +9,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{--bg:#08090b;--panel:#101216;--panel2:#15181e;--line:#262a31;--text:#f4f4f2;--muted:#9298a2;--gold:#d7b15b;--gold2:#f0d38a;--green:#55c69a;--red:#f07878}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;max-width:100vw;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{padding:25px 17px;border-right:1px solid var(--line);background:#0b0c0f;display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brandmark{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,var(--gold2),#9b762c);display:grid;place-items:center;color:#17130a;font-weight:900;font-family:Manrope}.brand strong{font:800 16px Manrope;letter-spacing:.7px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:2px}.navlabel{color:#606671;font-size:10px;font-weight:700;letter-spacing:1.8px;padding:0 12px;margin-bottom:-14px}.nav{display:grid;gap:5px}.nav button{display:flex;align-items:center;gap:12px;background:transparent;color:#a6abb4;padding:12px;border-radius:11px;text-align:left;font-size:13px}.nav button span{width:18px;text-align:center;font-size:16px}.nav button.active,.nav button:hover{background:#242016;color:var(--gold2)}.sidebottom{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:15px;background:linear-gradient(135deg,#17150f,#101216)}.sidebottom p{font-size:12px;color:var(--muted);line-height:1.5}.sidebottom button{width:100%}.main{min-width:0;width:100%}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;gap:18px}.crumb{font-size:12px;color:var(--muted)}.crumb b{color:#fff;font-weight:600}.topright{display:flex;align-items:center;gap:12px}.pill{border:1px solid #34302a;color:var(--gold2);background:#1a1710;border-radius:99px;padding:7px 11px;font-size:11px}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#d4b05a;color:#1b1608;font-weight:800}.content{max-width:1500px;margin:auto;padding:30px 34px 50px}.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:800;text-transform:uppercase}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:24px}.heading h1{font:800 clamp(24px,3vw,34px) Manrope;margin:7px 0}.heading p{margin:0;color:var(--muted);font-size:13px}.btn{border-radius:10px;padding:11px 15px;font-size:12px;font-weight:700;background:var(--gold);color:#191407;transition:.2s}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#1b1e24;color:#e9e9e7;border:1px solid #30343c}.btn.ghost{background:transparent;color:var(--gold2);border:1px solid #51452a}.btn.danger{background:#361b1e;color:#ffb5b5;border:1px solid #623237}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px}.stat{padding:19px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.staticon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#282216;color:var(--gold2)}.stat strong{display:block;font:800 25px Manrope;margin:16px 0 6px}.stat small{color:var(--green);font-size:11px}.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,1fr);gap:17px}.card{padding:21px;min-width:0}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.cardtitle h2{font:700 15px Manrope;margin:0}.muted{color:var(--muted)}.small{font-size:11px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:550px}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #272a30;font-size:11px}th{color:var(--muted);font-weight:600}td{color:#e4e5e7}.status{font-size:10px;border-radius:99px;padding:6px 8px;background:#173126;color:#7ee0b4;white-space:nowrap}.status.wait{background:#332918;color:#e7c477}.status.off{background:#351e22;color:#f2a0a0}.section{display:none}.section.active{display:block}.servicegrid,.shopgrid,.barbershopgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.service,.product,.shop{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px}.service h3,.product h3,.shop h3{font:700 14px Manrope;margin:0 0 6px}.service p,.product p,.shop p{font-size:11px;color:var(--muted);line-height:1.5}.price{font:800 20px Manrope;color:var(--gold2);margin:14px 0}.service button,.product button,.shop button{width:100%;margin-top:8px}.productart{height:100px;border-radius:12px;background:radial-gradient(circle at 50% 35%,#3b3322,#181a1e 65%);display:grid;place-items:center;font-size:37px;margin-bottom:14px;background-size:cover;background-position:center}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:11px;color:#b6bbc3}.field input,.field select{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #30343b;background:#0b0d10;color:white;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed #30343b;border-radius:12px;font-size:12px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#f1d181;color:#171207;border-radius:12px;padding:12px 18px;font-size:12px;font-weight:700;box-shadow:0 8px 30px #0008;display:none;z-index:99;max-width:90vw}.modalback{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:18px;z-index:100000}.modal{background:#111419;border:1px solid #373b43;border-radius:18px;padding:24px;width:min(470px,100%);max-height:90vh;overflow:auto}.modal h2{font:800 21px Manrope;margin:0 0 8px}.modal p{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;background:#272a30;color:white;border-radius:8px;padding:6px 10px}.loginpage{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:fixed;inset:0;z-index:1000;background:var(--bg)}.loginvisual{padding:8%;background:radial-gradient(circle at 25% 20%,#392b13,#101114 55%,#08090b);display:flex;flex-direction:column;justify-content:space-between}.loginvisual h1{font:800 clamp(32px,5vw,60px) Manrope;line-height:1.05;max-width:600px}.loginvisual h1 span{color:var(--gold2)}.loginvisual p{color:#b2b0a9;max-width:410px;line-height:1.7}.loginform{padding:8%;display:flex;flex-direction:column;justify-content:center;max-width:620px;width:100%;margin:auto}.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}.rolepick button{padding:12px;border-radius:10px;background:#1a1d22;border:1px solid #30343b;color:#c7c9ce;font-size:12px}.rolepick button.selected{border-color:var(--gold);color:var(--gold2);background:#282216}.tiny{font-size:10px;color:var(--muted);line-height:1.6}.hidden{display:none!important}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;max-width:100vw;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{padding:25px 17px;border-right:1px solid var(--line);background:#0b0c0f;display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brandmark{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,var(--gold2),#9b762c);display:grid;place-items:center;color:#17130a;font-weight:900;font-family:Manrope}.brand strong{font:800 16px Manrope;letter-spacing:.7px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:2px}.navlabel{color:#606671;font-size:10px;font-weight:700;letter-spacing:1.8px;padding:0 12px;margin-bottom:-14px}.nav{display:grid;gap:5px}.nav button{display:flex;align-items:center;gap:12px;background:transparent;color:#a6abb4;padding:12px;border-radius:11px;text-align:left;font-size:13px}.nav button span{width:18px;text-align:center;font-size:16px}.nav button.active,.nav button:hover{background:#242016;color:var(--gold2)}.sidebottom{margin-top:auto;border:1px solid var(--line);border-radius:14px;padding:15px;background:linear-gradient(135deg,#17150f,#101216)}.sidebottom p{font-size:12px;color:var(--muted);line-height:1.5}.sidebottom button{width:100%}.main{min-width:0;width:100%}.topbar{height:76px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;gap:18px}.crumb{font-size:12px;color:var(--muted)}.crumb b{color:#fff;font-weight:600}.topright{display:flex;align-items:center;gap:12px}.pill{border:1px solid #34302a;color:var(--gold2);background:#1a1710;border-radius:99px;padding:7px 11px;font-size:11px}.avatar{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#d4b05a;color:#1b1608;font-weight:800}.content{max-width:1500px;margin:auto;padding:30px 34px 50px}.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:800;text-transform:uppercase}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:24px}.heading h1{font:800 clamp(24px,3vw,34px) Manrope;margin:7px 0}.heading p{margin:0;color:var(--muted);font-size:13px}.btn{border-radius:10px;padding:11px 15px;font-size:12px;font-weight:700;background:var(--gold);color:#191407;transition:.2s}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#1b1e24;color:#e9e9e7;border:1px solid #30343c}.btn.ghost{background:transparent;color:var(--gold2);border:1px solid #51452a}.btn.danger{background:#361b1e;color:#ffb5b5;border:1px solid #623237}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px}.stat{padding:19px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.staticon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#282216;color:var(--gold2)}.stat strong{display:block;font:800 25px Manrope;margin:16px 0 6px}.stat small{color:var(--green);font-size:11px}.grid2{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,1fr);gap:17px}.card{padding:21px;min-width:0}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.cardtitle h2{font:700 15px Manrope;margin:0}.muted{color:var(--muted)}.small{font-size:11px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:550px}th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #272a30;font-size:11px}th{color:var(--muted);font-weight:600}td{color:#e4e5e7}.status{font-size:10px;border-radius:99px;padding:6px 8px;background:#173126;color:#7ee0b4;white-space:nowrap}.status.wait{background:#332918;color:#e7c477}.status.off{background:#351e22;color:#f2a0a0}.section{display:none}.section.active{display:block}.servicegrid,.shopgrid,.barbershopgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.service,.product,.shop{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:18px}.service h3,.product h3,.shop h3{font:700 14px Manrope;margin:0 0 6px}.service p,.product p,.shop p{font-size:11px;color:var(--muted);line-height:1.5}.price{font:800 20px Manrope;color:var(--gold2);margin:14px 0}.service button,.product button,.shop button{width:100%;margin-top:8px}.productart{height:100px;border-radius:12px;background:radial-gradient(circle at 50% 35%,#3b3322,#181a1e 65%);display:grid;place-items:center;font-size:37px;margin-bottom:14px;background-size:cover;background-position:center}.field{display:grid;gap:7px;margin-bottom:14px}.field label{font-size:11px;color:#b6bbc3}.field input,.field select{width:100%;padding:12px 13px;border-radius:10px;border:1px solid #30343b;background:#0b0d10;color:white;outline:none}.field input:focus,.field select:focus{border-color:var(--gold)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed #30343b;border-radius:12px;font-size:12px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#f1d181;color:#171207;border-radius:12px;padding:12px 18px;font-size:12px;font-weight:700;box-shadow:0 8px 30px #0008;display:none;z-index:99;max-width:90vw}.modalback{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:18px;z-index:999999}.modal{background:#111419;border:1px solid #373b43;border-radius:18px;padding:24px;width:min(470px,100%);max-height:90vh;overflow:auto}.modal h2{font:800 21px Manrope;margin:0 0 8px}.modal p{font-size:12px;color:var(--muted);line-height:1.6}.close{float:right;background:#272a30;color:white;border-radius:8px;padding:6px 10px}.loginpage{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:fixed;inset:0;z-index:1000;background:var(--bg)}.loginvisual{padding:8%;background:radial-gradient(circle at 25% 20%,#392b13,#101114 55%,#08090b);display:flex;flex-direction:column;justify-content:space-between}.loginvisual h1{font:800 clamp(32px,5vw,60px) Manrope;line-height:1.05;max-width:600px}.loginvisual h1 span{color:var(--gold2)}.loginvisual p{color:#b2b0a9;max-width:410px;line-height:1.7}.loginform{padding:8%;display:flex;flex-direction:column;justify-content:center;max-width:620px;width:100%;margin:auto}.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}.rolepick button{padding:12px;border-radius:10px;background:#1a1d22;border:1px solid #30343b;color:#c7c9ce;font-size:12px}.rolepick button.selected{border-color:var(--gold);color:var(--gold2);background:#282216}.tiny{font-size:10px;color:var(--muted);line-height:1.6}.hidden{display:none!important}
 
 @media(max-width:768px){body,.app,.main{max-width:100vw;overflow-x:hidden}.loginpage{grid-template-columns:1fr;padding:12px}.loginvisual{display:none}.loginform{padding:18px 12px;max-width:100%}.app{display:block;padding-bottom:70px}.sidebar{display:none}.topbar{height:60px;padding:0 12px}.content{padding:15px 12px 60px}}
 .devfooter{padding:28px 0 10px;text-align:center;color:#7e838c;font-size:11px;line-height:1.8}.devfooter a{color:var(--gold2);text-decoration:underline;text-underline-offset:3px}
@@ -318,9 +318,34 @@
      </div>
    </div>
 
-   <div class="clientsectiontitle"><div><h2>Barbearias Parceiras Ativas</h2></div></div>
+   <div class="clientsectiontitle" style="margin-bottom:15px;"><div><h2>Barbearias Parceiras & Profissionais</h2></div></div>
+   
+   <!-- CATALOGO COMPLETO COM PERFIL DE BARBEIROS E AVALIAÇÕES -->
    <div class="barbershopgrid" id="publicShopsFeed">
-    <article class="shop"><div class="shopinfo"><span class="status">Aberto · 4.9 ★</span><h3 id="clientShopDisplayTitle">Barbearia Imperial Pro</h3><p class="muted small">Centro · Atendimento Premium</p><button class="btn" onclick="openClientBooking()">Agendar Procedimento ✂️</button></div></article>
+    <article class="shop" style="background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:20px;">
+      <div class="shopinfo">
+        <span class="status" style="margin-bottom:8px; display:inline-block;">Aberto · 4.9 ★★★★★</span>
+        <h3 id="clientShopDisplayTitle" style="font:800 18px Manrope; margin:5px 0;">Barbearia Imperial Pro</h3>
+        <p class="muted small" style="margin-bottom:12px;">Centro · Atendimento Premium com Especialistas</p>
+        
+        <!-- Lista de Barbeiros da Barbearia com Fotos e Avaliações -->
+        <div style="background:#15181e; border-radius:12px; padding:12px; margin-bottom:14px; border:1px solid #262a31;">
+          <div class="eyebrow" style="margin-bottom:8px; color:var(--gold);">PROFISSIONAIS EM DESTAQUE</div>
+          <div style="display:grid; gap:8px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:34px; height:34px; border-radius:50%; background:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80') center/cover;"></div>
+              <div style="flex:1;"><b style="font-size:12px; display:block;">Marcos Mendes</b><small class="muted">Especialista em Degradê · ★ 4.9</small></div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div style="width:34px; height:34px; border-radius:50%; background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80') center/cover;"></div>
+              <div style="flex:1;"><b style="font-size:12px; display:block;">Bruno Costa</b><small class="muted">Barba Terapia & Platinados · ★ 5.0</small></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn" style="width:100%;" onclick="openClientBooking()">Agendar com Escolha de Barbeiro ✂️</button>
+      </div>
+    </article>
    </div>
   </section>
  </div>
@@ -399,7 +424,7 @@
  </div>
 </div>
 
-<!-- MODAL CHECKOUT COM PIX PROFISSIONAL -->
+<!-- MODAL CHECKOUT DE PRODUTOS COM PIX -->
 <div class="modalback" id="storeModal">
  <div class="modal">
   <button class="close" onclick="closeModal('storeModal')">✕</button>
@@ -422,16 +447,21 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO EXCLUSIVO DO CLIENTE (COM Z-INDEX ALTO) -->
+<!-- MODAL AGENDAMENTO EXCLUSIVO DO CLIENTE COM ESCOLHA DE BARBEIRO E PIX COMPLETO -->
 <div class="modalback" id="clientBookingModal" style="z-index:999999;">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
   <div class="eyebrow">AGENDAMENTO EM 4 CLIQUES</div>
   <h2>Agendar Horário ⚡</h2>
-  <div class="field"><label>1. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option></select></div>
-  <div class="field"><label>2. Profissional</label><select><option>Primeiro Disponível</option><option>Marcos Mendes</option><option>Bruno Costa</option></select></div>
-  <div class="field"><label>3. Data e Horário</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:6px;"><option>09:00</option><option>10:00</option><option>11:00</option><option>14:00</option></select></div>
-  <div class="field"><label>Forma de Pagamento</label>
+  <div class="field"><label>1. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option><option value="Barba Terapia — R$ 35,00">Barba Terapia — R$ 35,00 (30 min)</option></select></div>
+  <div class="field"><label>2. Escolha o Profissional / Barbeiro</label>
+    <select id="clientBarberChoice">
+      <option value="Marcos Mendes (★ 4.9)">Marcos Mendes (Especialista em Degradê · ★ 4.9)</option>
+      <option value="Bruno Costa (★ 5.0)">Bruno Costa (Barba Terapia & Platinados · ★ 5.0)</option>
+    </select>
+  </div>
+  <div class="field"><label>3. Data e Horário Disponível</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:6px;"><option>08:00 (Livre)</option><option>09:00 (Livre)</option><option>10:00 (Livre)</option><option>11:00 (Livre)</option><option>14:00 (Livre)</option><option>15:00 (Livre)</option></select></div>
+  <div class="field"><label>4. Forma de Pagamento</label>
     <select id="clientPayMethod" onchange="toggleClientPix(this.value)">
       <option value="local">Pagar no Local (Presencial)</option>
       <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
@@ -444,11 +474,11 @@
         <path d="M45 10h10v10H45zM10 45h10v10H10zM60 45h10v10H60zM45 45h10v10H45zM75 60h15v15H75zM60 75h15v15H60zM45 75h10v15H45z" fill="#000"/>
       </svg>
     </div>
-    <small class="muted" style="display:block; margin-bottom:6px;">Pix Copia e Cola:</small>
+    <small class="muted" style="display:block; margin-bottom:6px;">Chave Pix Copia e Cola:</small>
     <div id="clientPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
     <button class="btn" style="width:100%; margin-top:8px; font-size:11px;" onclick="toast('Chave Pix copiada com sucesso!')">📋 Copiar Chave Pix</button>
   </div>
-  <div class="field"><label>Seu Nome e WhatsApp</label><input id="clientBookNameInput" placeholder="Nome e WhatsApp"></div>
+  <div class="field"><label>Seu Nome e WhatsApp</label><input id="clientBookNameInput" placeholder="Ex.: Lucas (91) 99999-9999"></div>
   <button class="btn" style="width:100%;margin-top:6px;" onclick="confirmClientBookingFinal()">Confirmar Agendamento</button>
  </div>
 </div>
@@ -575,13 +605,11 @@ function changeRole(role){
     }
 }
 
-// Função dedicada exclusivamente para abrir o agendamento do cliente
+// Abre o modal do cliente com prioridade máxima
 function openClientBooking(){
     const modal = document.getElementById('clientBookingModal');
     if(modal) {
         modal.style.display = 'grid';
-    } else {
-        alert('Erro ao abrir agendamento.');
     }
 }
 
@@ -609,10 +637,11 @@ function confirmAdminBooking(){
     toast('Agendamento inserido na grade com sucesso!');
 }
 
-// Agendamento Final do Cliente (Exibido na área do cliente e na barbearia)
+// Agendamento Final Realizado pelo Cliente
 function confirmClientBookingFinal(){
     const name = document.getElementById('clientBookNameInput').value;
     const service = document.getElementById('clientServiceChoice').value;
+    const barber = document.getElementById('clientBarberChoice').value;
     const time = document.getElementById('clientTimeChoice').value;
     const payMethod = document.getElementById('clientPayMethod').value;
 
@@ -620,16 +649,16 @@ function confirmClientBookingFinal(){
 
     closeModal('clientBookingModal');
 
-    // Atualiza a tabela exclusiva do painel do cliente
+    // Atualiza a tabela na Área do Cliente
     const clientTable = document.getElementById('clientMyAppointments');
     if(clientTable.querySelector('td[colspan]')) clientTable.innerHTML = '';
 
     const statusBadge = payMethod === 'pix' ? '<span class="status wait">Aguardando Pix</span>' : '<span class="status">Pagar no Local</span>';
-    clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service}</td><td>Hoje às ${time}</td><td>${statusBadge}</td></tr>`;
+    clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service} (${barber})</td><td>Hoje às ${time}</td><td>${statusBadge}</td></tr>`;
 
     // Envia também para a agenda interna da barbearia
     const adminTbody = document.getElementById('agendaTableBody');
-    adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App Cliente)</td><td>${service}</td><td>Primeiro Disponível</td><td>${statusBadge}</td></tr>`;
+    adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App Cliente)</td><td>${service}</td><td>${barber}</td><td>${statusBadge}</td></tr>`;
 
     toast('Agendamento realizado com sucesso! Sua vaga está garantida.');
 }
