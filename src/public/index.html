@@ -478,14 +478,14 @@
  </div>
 </div>
 
-<!-- MODAL CALCULADORA REAL E COMPLETA -->
+<!-- MODAL CALCULADORA REAL E COMPLETA (PAINEL PADRÃO CIENTÍFICO/FINANCEIRO) -->
 <div class="modalback" id="calcModal">
- <div class="modal">
+ <div class="modal" style="width:min(320px, 100%);">
   <button class="close" onclick="closeModal('calcModal')">✕</button>
-  <h2>Calculadora Real 🧮</h2>
-  <div class="field"><input id="calcDisplay" readonly value="0" style="font-size:22px; text-align:right; font-family:monospace; background:#050608; color:var(--gold2);"></div>
+  <h2>Calculadora Comercial 🧮</h2>
+  <div class="field"><input id="calcDisplay" readonly value="0" style="font-size:24px; text-align:right; font-family:monospace; background:#050608; color:var(--gold2); padding:12px;"></div>
   <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
-    <button class="btn secondary" onclick="calcClear()">C</button>
+    <button class="btn secondary" onclick="calcClear()" style="background:#361b1e; color:#ffb5b5;">C</button>
     <button class="btn secondary" onclick="calcPercent()">%</button>
     <button class="btn secondary" onclick="calcAppend('/')">÷</button>
     <button class="btn secondary" onclick="calcAppend('*')">×</button>
@@ -500,26 +500,35 @@
     <button class="btn secondary" onclick="calcAppend('1')">1</button>
     <button class="btn secondary" onclick="calcAppend('2')">2</button>
     <button class="btn secondary" onclick="calcAppend('3')">3</button>
-    <button class="btn" onclick="calcCompute()" style="grid-row:span 2; height:100%; display:grid; place-items:center;">=</button>
+    <button class="btn" onclick="calcCompute()" style="grid-row:span 2; height:100%; display:grid; place-items:center; background:var(--gold); color:#000;">=</button>
     <button class="btn secondary" onclick="calcAppend('0')" style="grid-column:span 2;">0</button>
     <button class="btn secondary" onclick="calcAppend('.')">.</button>
   </div>
  </div>
 </div>
 
-<!-- MODAL SCANNER DE CÂMERA REAL -->
+<!-- MODAL SCANNER DE CÂMERA REAL (COM INPUT MANUAL DE SUPORTE) -->
 <div class="modalback" id="cameraScannerModal">
  <div class="modal" style="text-align:center;">
   <button class="close" onclick="closeCameraScan(); closeModal('cameraScannerModal');">✕</button>
-  <h2>Scanner de Câmera (Real) 📷</h2>
-  <p class="muted small">Aponte a câmara para o código de barras do produto.</p>
-  <div style="position:relative; width:100%; height:220px; background:#000; border-radius:10px; margin:15px 0; overflow:hidden; border:2px solid var(--gold);">
-    <video id="scannerVideo" autoplay playsinline style="width:100%; height:100%; object-fit:cover;"></video>
-    <canvas id="scannerCanvas" style="display:none;"></canvas>
+  <h2>Scanner de Câmera Real 📷</h2>
+  <p class="muted small">Aponte a câmara para o código de barras ou digite o código manualmente caso o foco falhe.</p>
+  
+  <div style="position:relative; width:100%; height:200px; background:#000; border-radius:10px; margin:12px 0; overflow:hidden; border:2px solid var(--gold);">
+    <video id="scannerVideo" autoplay playsinline muted style="width:100%; height:100%; object-fit:cover;"></video>
     <div style="position:absolute; inset:0; border:2px dashed rgba(215,177,91,0.6); pointer-events:none; display:grid; place-items:center;">
-      <span style="background:rgba(0,0,0,0.7); padding:4px 8px; font-size:10px; color:var(--gold2); border-radius:4px;">Alinhe o código aqui</span>
+      <span style="background:rgba(0,0,0,0.75); padding:4px 8px; font-size:10px; color:var(--gold2); border-radius:4px;">Centralize o código de barras</span>
     </div>
   </div>
+
+  <div class="field" style="text-align:left; margin-bottom:10px;">
+    <label>Digitar Código Manualmente (Alternativa Rápida)</label>
+    <div style="display:flex; gap:6px;">
+      <input id="manualBarcodeInput" placeholder="Ex: 789123456" style="flex:1;">
+      <button class="btn" onclick="confirmManualBarcode()">Usar Este</button>
+    </div>
+  </div>
+
   <button class="btn danger" style="width:100%;" onclick="closeCameraScan(); closeModal('cameraScannerModal');">Fechar Câmera</button>
  </div>
 </div>
@@ -879,7 +888,7 @@ async function saveProduct(){
 }
 
 // ==========================================
-// CALCULADORA REAL E COMPLETA
+// CALCULADORA COMERCIAL COMPLETA E FUNCIONAL
 // ==========================================
 function calcAppend(val){
     const disp = document.getElementById('calcDisplay');
@@ -907,7 +916,7 @@ function calcCompute(){
 }
 
 // ==========================================
-// SCANNER DE CÓDIGO DE BARRAS REAL (CÂMERA)
+// SCANNER DE CÂMERA REAL (COMUM EM SMARTPHONES)
 // ==========================================
 function scanBarcodeForProduct(){
     scannerTargetInput = document.getElementById('pBarcodeInput');
@@ -924,14 +933,33 @@ function startBarcodeScanner(){
 async function startRealCamera(){
     const video = document.getElementById('scannerVideo');
     try {
-        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-        video.srcObject = mediaStream;
-        video.play();
+        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+            mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } });
+            video.srcObject = mediaStream;
+            await video.play();
+        } else {
+            throw new Error('API de mídia indisponível');
+        }
     } catch (err) {
-        toast('Câmera indisponível. Simulando código de barras.');
-        setTimeout(() => {
-            onBarcodeScanned("789" + Math.floor(100000 + Math.random() * 900000));
-        }, 1500);
+        toast('Câmera bloqueada ou indisponível.');
+    }
+}
+
+function confirmManualBarcode(){
+    const val = document.getElementById('manualBarcodeInput').value.trim();
+    if(val){
+        closeCameraScan();
+        closeModal('cameraScannerModal');
+        document.getElementById('manualBarcodeInput').value = '';
+        if(scannerTargetInput){
+            scannerTargetInput.value = val;
+            if(scannerTargetInput.id === 'barcodeInput'){
+                handleCashBarcode({ key: 'Enter', target: scannerTargetInput });
+            }
+        }
+        toast(`Código inserido: ${val}`);
+    } else {
+        toast('Digite um código válido.');
     }
 }
 
@@ -942,18 +970,6 @@ function closeCameraScan(){
     }
     const video = document.getElementById('scannerVideo');
     if(video) video.srcObject = null;
-}
-
-function onBarcodeScanned(code){
-    closeCameraScan();
-    closeModal('cameraScannerModal');
-    if(scannerTargetInput){
-        scannerTargetInput.value = code;
-        if(scannerTargetInput.id === 'barcodeInput'){
-            handleCashBarcode({ key: 'Enter', target: scannerTargetInput });
-        }
-    }
-    toast(`Código lido: ${code}`);
 }
 
 function handleCashBarcode(e){
@@ -1003,7 +1019,7 @@ function openCartCheckout(){
     if(activeCart.length === 0){ toast('Sua sacola está vazia.'); return; }
     openModal('storeModal');
     renderCartModalItems();
-    document.getElementById('modalPixKeyText').textContent = shopConfig.pix || '91989117332';
+    document.getElementById('modalPixKeyText').textContent = currentOrg?.pix_key || '91989117332';
 }
 
 function renderCartModalItems(){
@@ -1054,9 +1070,10 @@ function confirmShopCheckoutFinal(){
     const total = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
     const itemsText = activeCart.map(i => `${i.qty}x ${i.name}`).join(', ');
     const retiraText = pickerType === 'self' ? 'Cliente vai buscar' : `Outra pessoa: ${pickerName}`;
+    const targetWp = currentOrg?.whatsapp || '5591989117332';
 
-    const msg = encodeURIComponent(`🛍️ *Novo Pedido - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n👤 Retirada: ${retiraText}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
-    window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
+    const msg = encodeURIComponent(`🛍️ *Novo Pedido*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n👤 Retirada: ${retiraText}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
+    window.open(`https://wa.me/${targetWp}?text=${msg}`, '_blank');
     activeCart = [];
     updateCartDisplayCount();
     toast('Pedido enviado ao WhatsApp!');
