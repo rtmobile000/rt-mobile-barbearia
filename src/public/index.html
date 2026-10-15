@@ -11,13 +11,12 @@
 :root{--bg:#08090b;--panel:#101216;--panel2:#15181e;--line:#262a31;--text:#f4f4f2;--muted:#9298a2;--gold:#d7b15b;--gold2:#f0d38a;--green:#55c69a;--red:#f07878}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;max-width:100vw;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer;border:0;touch-action:manipulation}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh;position:relative}.sidebar{padding:18px 12px;border-right:1px solid var(--line);background:#0b0c0f;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:999}.brand{display:flex;align-items:center;gap:10px;padding:0 6px}.brandmark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--gold2),#9b762c);display:grid;place-items:center;color:#17130a;font-weight:900;font-family:Manrope}.brand strong{font:800 14px Manrope;letter-spacing:.5px}.brand small{display:block;color:var(--muted);font-size:8px;letter-spacing:1px;margin-top:2px}.navlabel{color:#606671;font-size:9px;font-weight:700;letter-spacing:1.5px;padding:0 10px;margin-bottom:-8px}.nav{display:grid;gap:3px}.nav button{display:flex;align-items:center;gap:10px;background:transparent;color:#a6abb4;padding:9px 10px;border-radius:9px;text-align:left;font-size:12px;width:100%}.nav button span{width:16px;text-align:center;font-size:14px}.nav button.active,.nav button:hover{background:#242016;color:var(--gold2)}.sidebottom{margin-top:auto;border:1px solid var(--line);border-radius:10px;padding:10px;background:linear-gradient(135deg,#17150f,#101216)}.sidebottom p{font-size:10px;color:var(--muted);line-height:1.3}.sidebottom button{width:100%;margin-top:4px}.main{min-width:0;width:100%}.topbar{height:64px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:10px;position:relative;z-index:90}.crumb{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.crumb b{color:#fff;font-weight:600}.topright{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.pill{border:1px solid #34302a;color:var(--gold2);background:#1a1710;border-radius:99px;padding:4px 8px;font-size:9px}.avatar{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#d4b05a;color:#1b1608;font-weight:800;font-size:11px}.content{max-width:1300px;margin:auto;padding:24px 14px 40px}.eyebrow{color:var(--gold);font-size:8px;letter-spacing:1.5px;font-weight:800;text-transform:uppercase}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:16px;flex-wrap:wrap}.heading h1{font:800 clamp(20px,2.5vw,26px) Manrope;margin:4px 0}.heading p{margin:0;color:var(--muted);font-size:11px}.btn{border-radius:8px;padding:9px 12px;font-size:11px;font-weight:700;background:var(--gold);color:#191407;transition:.2s;white-space:nowrap;touch-action:manipulation}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#1b1e24;color:#e9e9e7;border:1px solid #30343c}.btn.ghost{background:transparent;color:var(--gold2);border:1px solid #51452a}.btn.danger{background:#361b1e;color:#ffb5b5;border:1px solid #623237}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:12px}.stat{padding:14px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}.stat strong{display:block;font:800 20px Manrope;margin:10px 0 2px}.stat small{color:var(--green);font-size:9px}.grid2{display:grid;grid-template-columns:1fr;gap:12px}@media(min-width:900px){.grid2{grid-template-columns:minmax(0,1.35fr) minmax(240px,1fr)}}.card{padding:16px;min-width:0}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}.cardtitle h2{font:700 13px Manrope;margin:0}.muted{color:var(--muted)}.small{font-size:10px}.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;min-width:480px}th,td{text-align:left;padding:10px 6px;border-bottom:1px solid #272a30;font-size:11px}th{color:var(--muted);font-weight:600}td{color:#e4e5e7}.status{font-size:9px;border-radius:99px;padding:4px 6px;background:#173126;color:#7ee0b4;white-space:nowrap}.status.wait{background:#332918;color:#e7c477}.status.off{background:#351e22;color:#f2a0a0}.section{display:none}.section.active{display:block}.servicegrid,.shopgrid,.barbershopgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.service,.product,.shop{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.service h3,.product h3,.shop h3{font:700 12px Manrope;margin:0 0 3px}.service p,.product p,.shop p{font-size:11px;color:var(--muted);line-height:1.3}.price{font:800 16px Manrope;color:var(--gold2);margin:8px 0}.service button,.product button,.shop button{width:100%;margin-top:5px}.productart,.barberart,.clientart{height:100px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:8px;background-color:#1a1d22}.field{display:grid;gap:5px;margin-bottom:10px}.field label{font-size:11px;color:#b6bbc3}.field input,.field select{width:100%;padding:9px 10px;border-radius:8px;border:1px solid #30343b;background:#0b0d10;color:white;outline:none;font-size:12px}.field input:focus,.field select:focus{border-color:var(--gold)}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed #30343b;border-radius:8px;font-size:11px}.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#f1d181;color:#171207;border-radius:9px;padding:9px 14px;font-size:11px;font-weight:700;box-shadow:0 4px 15px #0008;display:none;z-index:999999;max-width:90vw}.modalback{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:12px;z-index:999999}.modal{background:#111419;border:1px solid #373b43;border-radius:14px;padding:18px;width:min(420px,100%);max-height:90vh;overflow:auto}.modal h2{font:800 17px Manrope;margin:0 0 5px}.modal p{font-size:11px;color:var(--muted);line-height:1.4}.close{float:right;background:#272a30;color:white;border-radius:6px;padding:4px 7px;font-size:11px}.loginpage{min-height:100vh;display:grid;grid-template-columns:1fr;position:fixed;inset:0;z-index:1000;background:var(--bg);overflow-y:auto}@media(min-width:768px){.loginpage{grid-template-columns:1fr 1fr;overflow:hidden}}.loginvisual{padding:5%;background:radial-gradient(circle at 25% 20%,#392b13,#101114 55%,#08090b);display:flex;flex-direction:column;justify-content:space-between}.loginvisual h1{font:800 clamp(26px,3.5vw,46px) Manrope;line-height:1.05;max-width:500px}.loginvisual h1 span{color:var(--gold2)}.loginvisual p{color:#b2b0a9;max-width:350px;line-height:1.5;font-size:12px}.loginform{padding:5%;display:flex;flex-direction:column;justify-content:center;max-width:540px;width:100%;margin:auto}.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0}.rolepick button{padding:10px;border-radius:8px;background:#1a1d22;border:1px solid #30343b;color:#c7c9ce;font-size:11px}.rolepick button.selected{border-color:var(--gold);color:var(--gold2);background:#282216}.tiny{font-size:10px;color:var(--muted);line-height:1.4}.hidden{display:none!important}
 
-/* AJUSTES RESPONSIVOS MÓDULO RETRATO (VERTICAL) COM ESPAÇAMENTO DO TOPO SEGURO */
 @media(max-width:768px){
   body,.app,.main{max-width:100vw;overflow-x:hidden}
   .app{display:block;padding-bottom:50px}
   .sidebar{position:fixed;left:-280px;top:0;bottom:0;width:260px;transition:0.3s ease;box-shadow:5px 0 25px #000c}
   .sidebar.mobile-open{left:0}
-  .topbar{height:60px;padding:0 12px;z-index:90; margin-top: 15px;} /* Afastado da barra de status do iPhone/Android */
+  .topbar{height:60px;padding:0 12px;z-index:90; margin-top: 15px;}
   .content{padding:25px 10px 40px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .role-banner{flex-direction:column;align-items:flex-start}
@@ -237,7 +236,7 @@
       </div>
     </section>
 
-    <!-- LOJA / ESTOQUE (COM OPÇÃO DE SCANNER / CÂMERA DE CÓDIGO DE BARRAS) -->
+    <!-- LOJA / ESTOQUE -->
     <section class="section" id="page-loja">
       <div class="heading"><div><h1>Loja / Estoque da Barbearia ▣</h1><p>Gerencie preços, código de barras e remova itens do estoque.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
       <div class="shopgrid" id="shopStockContainer">
@@ -254,7 +253,7 @@
       </div>
     </section>
 
-    <!-- FINANCEIRO & CAIXA (COM LEITOR ÓPTICO / SCANNER) -->
+    <!-- FINANCEIRO & CAIXA -->
     <section class="section" id="page-financeiro">
       <div class="heading">
         <div><h1>Caixa & Financeiro 💸</h1><p>Controle entradas, saídas, scanner de código de barras e notas via WhatsApp.</p></div>
@@ -271,8 +270,8 @@
         </div>
         <div class="card">
           <div class="cardtitle"><h2>QR Code Pix & Notinha / NF</h2></div>
-          <p class="muted small">Chave Pix de recebimento instantâneo:</p>
-          <div style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; margin-bottom:8px; text-align:center;">91989117332</div>
+          <p class="muted small">Chave Pix configurada:</p>
+          <div id="displayPixKeyBox" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; margin-bottom:8px; text-align:center;">91989117332</div>
           <button class="btn secondary" style="width:100%; margin-bottom:6px;" onclick="toast('Chave Pix copiada!')">📋 Copiar Chave Pix</button>
           <button class="btn" style="width:100%; background:var(--green); color:#000;" onclick="sendWhatsAppReceipt()">📲 Enviar Notinha / Recibo no WhatsApp</button>
         </div>
@@ -309,7 +308,7 @@
       <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">O relatório está otimizado para exibir dados exatos do intervalo de dias selecionado acima.</p></div>
     </section>
 
-    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA -->
+    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA (COM SALVAMENTO CORRETO) -->
     <section class="section" id="page-config">
       <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix, Clube VIP e Promoções.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
       <div class="grid2">
@@ -443,6 +442,7 @@
     </article>
    </div>
 
+   <!-- SHOPPING DA BARBEARIA SELECIONADA -->
    <div class="card hidden" id="selectedShopShoppingCard" style="margin-top:24px; border:1px solid var(--gold);">
      <div class="cardtitle"><h2 id="shoppingShopTitle">🛍️ Shopping da Barbearia</h2><span class="pill">CARRINHO ATIVO</span></div>
      <div class="shopgrid" id="clientShoppingGrid"></div>
@@ -510,6 +510,39 @@
  </div>
 </div>
 
+<!-- CHECKOUT CARRINHO DO SHOPPING (COM QUEM VAI BUSCAR, CHAVE PIX DA BARBEARIA E PAGAR NO LOCAL) -->
+<div class="modalback" id="storeModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('storeModal')">✕</button>
+  <h2>Finalizar Compra / Sacola 🛍️</h2>
+  <div id="cartModalItems" style="margin:10px 0; font-size:12px; color:var(--muted);">Nenhum item na sacola.</div>
+  
+  <div class="field"><label>Quem vai retirar o produto?</label>
+    <select id="pickerType" onchange="togglePickerInput(this.value)">
+      <option value="self">Eu mesmo vou buscar</option>
+      <option value="other">Outra pessoa vai buscar</option>
+    </select>
+  </div>
+  <div class="field hidden" id="pickerNameField"><label>Nome da pessoa que vai buscar</label><input id="pickerNameInput" placeholder="Nome completo"></div>
+
+  <div class="field"><label>Forma de Pagamento</label>
+    <select id="shopPayMethod" onchange="toggleShopPay(this.value)">
+      <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
+      <option value="local">Pagar no Local (Balcão)</option>
+    </select>
+  </div>
+
+  <div id="shopPixBox" style="background:#171a20; padding:12px; border-radius:10px; text-align:center; margin-bottom:10px; border:1px solid #30343b;">
+    <small class="muted" style="display:block; margin-bottom:4px;">Chave Pix da Barbearia (Copia e Cola):</small>
+    <div id="modalPixKeyText" style="font-family:monospace; background:#0b0d10; padding:6px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
+    <button class="btn" style="width:100%; margin-top:6px; font-size:10px;" onclick="toast('Chave Pix copiada!')">📋 Copiar Chave Pix</button>
+  </div>
+
+  <div class="field"><label>Seu Nome e WhatsApp</label><input id="shopClientName" placeholder="Ex: Lucas (91) 99999-9999"></div>
+  <button class="btn" style="width:100%;" onclick="confirmShopCheckoutFinal()">Enviar Pedido ao WhatsApp 🛒</button>
+ </div>
+</div>
+
 <!-- MODAL SCANNER DE CÂMERA -->
 <div class="modalback" id="cameraScannerModal">
  <div class="modal" style="text-align:center;">
@@ -532,7 +565,6 @@
 <div class="modalback" id="cashTransactionModal"><div class="modal"><button class="close" onclick="closeModal('cashTransactionModal')">✕</button><h2>Caixa</h2><div class="field"><label>Tipo</label><select id="cashType"><option value="Entrada">Entrada</option><option value="Saída">Saída</option></select></div><div class="field"><label>Descrição</label><input id="cashDescInput"></div><div class="field"><label>Valor</label><input id="cashValInput" type="number"></div><button class="btn" onclick="saveCashTransaction()">Registrar</button></div></div>
 <div class="modalback" id="calcModal"><div class="modal"><button class="close" onclick="closeModal('calcModal')">✕</button><h2>Calculadora</h2><div class="field"><input id="calcDisplay" readonly value="0" style="text-align:right;"></div><button class="btn" onclick="calcClear()">Limpar</button></div></div>
 <div class="modalback" id="clientBookingModal" style="z-index:999999;"><div class="modal"><button class="close" onclick="closeModal('clientBookingModal')">✕</button><h2>Agendar Horário</h2><div class="field"><label>Barbearia</label><select id="bookingShopChoice"><option value="Barbearia Imperial Pro">Barbearia Imperial Pro</option></select></div><div class="field"><label>Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê">Corte Degradê</option></select></div><div class="field"><label>Barbeiro</label><select id="clientBarberChoice"><option value="Marcos Mendes">Marcos Mendes</option></select></div><div class="field"><label>Data/Hora</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice"><option>09:00</option></select></div><div class="field"><label>Nome/WhatsApp</label><input id="clientBookNameInput"></div><button class="btn" onclick="confirmClientBookingFinal()">Confirmar</button></div></div>
-<div class="modalback" id="storeModal"><div class="modal"><button class="close" onclick="closeModal('storeModal')">✕</button><h2>Sacola</h2><div id="cartModalItems"></div><button class="btn" onclick="confirmShopCheckoutFinal()">Enviar</button></div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -628,8 +660,8 @@ function openNearbyShopsModal(){
                 container.innerHTML = `
                     <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
                       <div>
-                        <b>Barbearia Imperial Pro</b>
-                        <small class="muted" style="display:block;">Centro · Santa Izabel do Pará/PA (~1.1 km)</small>
+                        <b>${shopConfig.name}</b>
+                        <small class="muted" style="display:block;">Centro · Próximo de você (~1.1 km)</small>
                       </div>
                       <button class="btn" onclick="closeModal('nearbyShopsModal'); scrollToShops();">Ver Unidade</button>
                     </div>
@@ -816,46 +848,6 @@ function confirmClientBookingFinal(){
     toast('Agendamento realizado com sucesso!');
 }
 
-// SCANNER DE CÓDIGO DE BARRAS (CÂMERA / LEITOR ÓPTICO)
-function scanBarcodeForProduct(){
-    scannerTargetInput = document.getElementById('pBarcodeInput');
-    openModal('cameraScannerModal');
-}
-
-function startBarcodeScanner(){
-    scannerTargetInput = document.getElementById('barcodeInput');
-    openModal('cameraScannerModal');
-}
-
-function simulateSuccessfulScan(){
-    closeModal('cameraScannerModal');
-    const randomCode = "789" + Math.floor(100000 + Math.random() * 900000);
-    if(scannerTargetInput){
-        scannerTargetInput.value = randomCode;
-        if(scannerTargetInput.id === 'barcodeInput'){
-            // Se for no caixa, dispara a busca rápida
-            handleCashBarcode({ key: 'Enter', target: scannerTargetInput });
-        }
-    }
-    toast(`Código de barras escaneado com sucesso: ${randomCode}`);
-}
-
-function handleCashBarcode(e){
-    if(e.key === 'Enter'){
-        const code = e.target.value.trim();
-        const found = stockProducts.find(p => p.barcode === code || p.name.toLowerCase().includes(code.toLowerCase()));
-        if(found){
-            toast(`Produto localizado: ${found.name} — R$ ${found.price.toFixed(2)}`);
-            // Adiciona automaticamente ao caixa
-            const tbody = document.getElementById('cashHistoryTable');
-            tbody.innerHTML += `<tr><td>${new Date().toLocaleString('pt-BR')}</td><td><span class="status">Entrada</span></td><td>Venda Balcão: ${found.name} (Bipado)</td><td>R$ ${found.price.toFixed(2)}</td></tr>`;
-            e.target.value = '';
-        } else {
-            toast(`Nenhum produto encontrado com o código "${code}"`);
-        }
-    }
-}
-
 function addProductToCart(name, price){
     const item = activeCart.find(p => p.name === name);
     if(item){
@@ -880,12 +872,19 @@ function openCartCheckout(){
 function confirmShopCheckoutFinal(){
     const name = document.getElementById('shopClientName').value;
     const payMethod = document.getElementById('shopPayMethod').value;
+    const pickerType = document.getElementById('pickerType').value;
+    const pickerName = document.getElementById('pickerNameInput').value;
+
     if(!name){ toast('Informe seu nome e WhatsApp.'); return; }
+    if(pickerType === 'other' && !pickerName){ toast('Informe o nome de quem vai buscar.'); return; }
+    
     closeModal('storeModal');
 
     const total = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
     const itemsText = activeCart.map(i => `${i.qty}x ${i.name}`).join(', ');
-    const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
+    const retiraText = pickerType === 'self' ? 'Cliente mesmo vai buscar' : `Outra pessoa vai buscar: ${pickerName}`;
+
+    const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n👤 Retirada: ${retiraText}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
     activeCart = [];
     toast('Pedido enviado ao WhatsApp da barbearia com sucesso!');
@@ -930,6 +929,7 @@ function updateReportData(){
     toast(`Relatório atualizado para ${days} dia(s).`);
 }
 
+// SALVAR CONFIGURAÇÕES DA BARBEARIA (COM ATUALIZAÇÃO IMEDIATA DO PIX E WHATSAPP)
 function saveShopSettings(){
     shopConfig.name = document.getElementById('cfgName').value;
     shopConfig.whatsapp = document.getElementById('cfgWhatsapp').value;
@@ -937,6 +937,9 @@ function saveShopSettings(){
     const promoText = document.getElementById('cfgPromoText').value;
     
     document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
+    document.getElementById('shopTitleHeader').textContent = shopConfig.name;
+    document.getElementById('displayPixKeyBox').textContent = shopConfig.pix;
+
     const promoEl = document.getElementById('clientShopPromoDisplay');
     if(promoEl) promoEl.textContent = `🔥 Promoção: ${promoText}`;
 
@@ -947,7 +950,7 @@ function saveShopSettings(){
     if(promoShopNameDisplay) promoShopNameDisplay.textContent = shopConfig.name;
 
     toggleVipSettings(document.getElementById('toggleVipPlan').checked);
-    toast('Configurações e promoções salvas!');
+    toast('Configurações da barbearia salvas e aplicadas com sucesso!');
 }
 
 function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo!'); }
@@ -1100,6 +1103,43 @@ function editService(index){
         document.getElementById('servPrice1').textContent = `R$ ${Number(price).toFixed(2).replace('.',',')}`;
         document.getElementById('servTime1').textContent = time;
         toast('Serviço atualizado com sucesso!');
+    }
+}
+
+function scanBarcodeForProduct(){
+    scannerTargetInput = document.getElementById('pBarcodeInput');
+    openModal('cameraScannerModal');
+}
+
+function startBarcodeScanner(){
+    scannerTargetInput = document.getElementById('barcodeInput');
+    openModal('cameraScannerModal');
+}
+
+function simulateSuccessfulScan(){
+    closeModal('cameraScannerModal');
+    const randomCode = "789" + Math.floor(100000 + Math.random() * 900000);
+    if(scannerTargetInput){
+        scannerTargetInput.value = randomCode;
+        if(scannerTargetInput.id === 'barcodeInput'){
+            handleCashBarcode({ key: 'Enter', target: scannerTargetInput });
+        }
+    }
+    toast(`Código lido com sucesso: ${randomCode}`);
+}
+
+function handleCashBarcode(e){
+    if(e.key === 'Enter'){
+        const code = e.target.value.trim();
+        const found = stockProducts.find(p => p.barcode === code || p.name.toLowerCase().includes(code.toLowerCase()));
+        if(found){
+            toast(`Produto bipado: ${found.name} — R$ ${found.price.toFixed(2)}`);
+            const tbody = document.getElementById('cashHistoryTable');
+            tbody.innerHTML += `<tr><td>${new Date().toLocaleString('pt-BR')}</td><td><span class="status">Entrada</span></td><td>Venda Balcão: ${found.name} (Bipado)</td><td>R$ ${found.price.toFixed(2)}</td></tr>`;
+            e.target.value = '';
+        } else {
+            toast(`Produto não encontrado para o código "${code}"`);
+        }
     }
 }
 
