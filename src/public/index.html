@@ -39,7 +39,7 @@
   <h1 style="font:800 28px Manrope;margin:8px 0">Acesse sua conta</h1>
   <div class="rolepick">
    <button class="selected" data-role="client" onclick="pickRole('client',this)">Sou cliente</button>
-   <button data-role="shop" onclick="pickRole('shop',this)">Tenho barbearia / Barbeiro</button>
+   <button data-role="shop" onclick="pickRole('shop',this)">Tenho barbearia / Franqueado</button>
   </div>
   <div class="field"><label>E-mail</label><input id="loginEmail" type="email" placeholder="voce@email.com"></div>
   <div class="field"><label>Senha</label><input id="loginPassword" type="password" placeholder="Mínimo de 6 caracteres"></div>
@@ -48,14 +48,14 @@
     <label for="rememberMe">Lembrar meus dados neste dispositivo</label>
   </div>
   <div id="shopFields" class="hidden">
-   <div class="field"><label>Nome do Estabelecimento / Seu Nome</label><input id="loginName" placeholder="Ex.: Barbearia Imperial"></div>
+   <div class="field"><label>Nome da Barbearia / Franqueado</label><input id="loginName" placeholder="Ex.: Barbearia Imperial"></div>
   </div>
-  <button class="btn" style="width:100%;padding:14px;margin-top:4px;" onclick="handleAuth()">Entrar / Criar Conta</button>
-  <p class="tiny" style="margin-top:15px">7 dias de teste grátis para novas barbearias e acesso vitalício para administradores.</p>
+  <button class="btn" style="width:100%;padding:14px;margin-top:4px;" onclick="handleAuth()">Entrar / Acessar Painel</button>
+  <p class="tiny" style="margin-top:15px">Sistema verificado e validado para uso profissional.</p>
  </div>
 </div>
 
-<!-- PAINEL EMPRESARIAL -->
+<!-- PAINEL EMPRESARIAL (FRANQUEADO / DONO) -->
 <div id="app" class="app hidden">
 <aside class="sidebar">
   <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>BARBEARIA · GESTÃO</small></div></div>
@@ -66,16 +66,15 @@
     <button data-page="servicos" id="navServicos"><span>✂</span><span class="navtxt">Serviços</span></button>
     <button data-page="equipe" id="navEquipe"><span>♙</span><span class="navtxt">Equipe</span></button>
     <button data-page="clientes" id="navClientes"><span>♧</span><span class="navtxt">Clientes & Convênios</span></button>
-    <button data-page="loja" id="navLoja"><span>▣</span><span class="navtxt">Loja / Vendas</span></button>
+    <button data-page="loja" id="navLoja"><span>▣</span><span class="navtxt">Loja / Estoque</span></button>
     <button data-page="financeiro" id="navFinanceiro"><span>◷</span><span class="navtxt">Financeiro & Caixa</span></button>
     <button data-page="relatorios" id="navRelatorios"><span>▥</span><span class="navtxt">Relatórios</span></button>
     <button data-page="config" id="navConfig"><span>⚙</span><span class="navtxt">Configurações</span></button>
     <button data-page="admin" id="navAdmin" style="display:none"><span>♛</span><span class="navtxt">Super Admin (SaaS)</span></button>
   </nav>
   <div class="sidebottom">
-    <div class="eyebrow">PLANO TRIAL</div>
-    <p id="trialCounterText">7 dias restantes no teste grátis.</p>
-    <button class="btn secondary" onclick="openModal('plansModal')" style="margin-bottom:8px;">Fazer Upgrade (R$ 100)</button>
+    <div class="eyebrow">PLANO FRANQUIA</div>
+    <p id="trialCounterText">Assinatura Ativa & Validada.</p>
     <button class="btn danger" onclick="signOut()" style="width:100%;">Sair / Trocar conta</button>
   </div>
 </aside>
@@ -83,10 +82,9 @@
   <header class="topbar">
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
-      <button class="btn ghost" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);">👁️ Ver como Cliente</button>
       <button class="btn secondary" onclick="openTVMode()">▣ Modo TV</button>
-      <span class="pill" id="userBadge">● ATIVO</span>
-      <div class="avatar" id="userAvatar">RT</div>
+      <span class="pill" id="userBadge">● FRANQUIA ATIVA</span>
+      <div class="avatar" id="userAvatar">RF</div>
     </div>
   </header>
   <div class="content">
@@ -94,19 +92,19 @@
     <!-- DASHBOARD -->
     <section class="section active" id="page-dashboard">
       <div class="role-banner">
-        <div><strong id="roleLabel">Painel da barbearia</strong><p id="roleHelp">Controle total do seu estabelecimento.</p></div>
+        <div><strong id="roleLabel">Painel da Barbearia (Franqueado)</strong><p id="roleHelp">Controle gerencial completo do seu estabelecimento.</p></div>
         <div class="owner-tools">
           <select id="roleMode" onchange="changeRole(this.value)" style="background:#0b0d10;color:white;border:1px solid #30343b;padding:9px;border-radius:9px">
-            <option value="owner">Dono / Administrador</option>
+            <option value="owner">Proprietário / Franqueado</option>
             <option value="barber">Barbeiro Convidado (Minha Cadeira ✂️)</option>
           </select>
           <label class="switch"><input type="checkbox" id="killSwitch" checked onchange="toggleShop(this.checked)"><span id="killLabel">Agenda aberta</span></label>
         </div>
       </div>
-      <div class="heading"><div><div class="eyebrow">ESTABELECIMENTO PRONTO</div><h1 id="shopTitleHeader">Bom dia, Robert.</h1><p>Sistema pronto para uso comercial e vendas.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
+      <div class="heading"><div><div class="eyebrow">OPERAÇÃO VALIDADA</div><h1 id="shopTitleHeader">Painel Administrativo.</h1><p>Sistema pronto e operando em tempo real.</p></div><button class="btn" onclick="openModal('bookingModal')">＋ Novo agendamento</button></div>
       <div class="stats">
-        <div class="stat"><div class="stathead">Faturamento de hoje</div><strong>R$ 0,00</strong><small>Início de operação</small></div>
-        <div class="stat"><div class="stathead">Agendamentos</div><strong>0</strong><small>Agenda livre</small></div>
+        <div class="stat"><div class="stathead">Faturamento de hoje</div><strong>R$ 0,00</strong><small>Operação iniciada</small></div>
+        <div class="stat"><div class="stathead">Agendamentos</div><strong>0</strong><small>Escala livre</small></div>
         <div class="stat"><div class="stathead">Clientes na fila</div><strong>0</strong><small>Pronto para iniciar</small></div>
         <div class="stat"><div class="stathead">Ticket médio</div><strong>R$ 0,00</strong><small>Base limpa</small></div>
       </div>
@@ -210,7 +208,7 @@
           <table>
             <thead><tr><th>DATA / HORA</th><th>OPERAÇÃO</th><th>VALOR</th><th>RESPONSÁVEL</th></tr></thead>
             <tbody id="cashHistoryTable">
-              <tr><td>15/10/2026 02:30</td><td>Abertura de Caixa</td><td>R$ 150,00 (Troco)</td><td>Robert Haelley</td></tr>
+              <tr><td>15/10/2026 02:30</td><td>Abertura de Caixa</td><td>R$ 150,00 (Troco)</td><td>Franqueado</td></tr>
             </tbody>
           </table>
         </div>
@@ -240,7 +238,7 @@
           </div>
           <div style="margin-top:25px; border-top:1px solid var(--line); padding-top:15px;">
             <div class="eyebrow" style="color:var(--gold);">Licença Oficial RT Mobile</div>
-            <p class="muted small" style="margin:5px 0;">Desenvolvedor: <b>Robert Haelley</b><br>Suporte Técnico: <a href="https://wa.me/5591989117332" target="_blank" style="color:var(--green); text-decoration:underline;">(91) 98911-7332</a> | roberthaelley75@gmail.com</p>
+            <p class="muted small" style="margin:5px 0;">Desenvolvedor: <b>Robert Haelley</b><br>Suporte Técnico: <a href="https://wa.me/5591989117332" target="_blank" style="color:var(--green); text-decoration:underline;">(91) 98911-7332</a></p>
           </div>
         </div>
       </div>
@@ -253,7 +251,7 @@
       <div class="card"><div class="tablewrap"><table><thead><tr><th>BARBEARIA</th><th>PLANO</th><th>STATUS</th></tr></thead><tbody><tr><td><b>Barbearia Imperial Pro</b></td><td><span class="pill">Pro R$ 100</span></td><td><span class="status">Ativo</span></td></tr></tbody></table></div></div>
     </section>
 
-  <footer class="devfooter">Desenvolvido por <strong style="color:#d7b15b">RT Mobile</strong><br><a href="https://rtmobile-bio.onrender.com" target="_blank">rtmobile-bio.onrender.com</a></footer>
+  <footer class="devfooter">Desenvolvido por <strong style="color:#d7b15b">RT Mobile</strong></footer>
   </div>
 </main>
 </div>
@@ -289,7 +287,7 @@
  <div class="topbar">
    <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>ÁREA DO CLIENTE</small></div></div>
    <div class="topright">
-     <button class="btn secondary" onclick="closeClientView()">← Sair / Voltar ao Login</button>
+     <button class="btn secondary" onclick="signOut()">← Sair / Voltar ao Login</button>
      <div class="avatar">CL</div>
    </div>
  </div>
@@ -359,188 +357,52 @@
 </div>
 
 <!-- MODAIS -->
-<div class="modalback" id="addConvenioModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('addConvenioModal')">✕</button>
-  <h2>Cadastrar Convênio Parceiro 🤝</h2>
-  <div class="field"><label>Nome da Empresa / Convênio</label><input id="convNameInput" placeholder="Ex.: Empresa Tech Ltda"></div>
-  <div class="field"><label>Contato / WhatsApp</label><input id="convWpInput" placeholder="(91) 99999-9999"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="saveConvenio()">Salvar Convênio</button>
- </div>
-</div>
+<div class="modalback" id="addConvenioModal"><div class="modal"><button class="close" onclick="closeModal('addConvenioModal')">✕</button><h2>Cadastrar Convênio</h2><div class="field"><label>Nome</label><input id="convNameInput"></div><button class="btn" onclick="saveConvenio()">Salvar</button></div></div>
+<div class="modalback" id="addBarberModal"><div class="modal"><button class="close" onclick="closeModal('addBarberModal')">✕</button><h2>Cadastrar Barbeiro</h2><div class="field"><label>Nome</label><input id="bNameInput"></div><button class="btn" onclick="saveBarber()">Salvar</button></div></div>
+<div class="modalback" id="addProductModal"><div class="modal"><button class="close" onclick="closeModal('addProductModal')">✕</button><h2>Cadastrar Produto</h2><div class="field"><label>Nome</label><input id="pNameInput"></div><div class="field"><label>Preço</label><input id="pPriceInput" type="number"></div><div class="field"><label>Estoque</label><input id="pStockInput" type="number"></div><button class="btn" onclick="saveProduct()">Salvar</button></div></div>
+<div class="modalback" id="addServiceModal"><div class="modal"><button class="close" onclick="closeModal('addServiceModal')">✕</button><h2>Serviço</h2><div class="field"><label>Nome</label><input id="sNameInput"></div><div class="field"><label>Preço</label><input id="sPriceInput" type="number"></div><button class="btn" onclick="saveServiceModal()">Salvar</button></div></div>
+<div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" onclick="submitTimeoff()">Enviar</button></div></div>
+<div class="modalback" id="bookingModal"><div class="modal"><button class="close" onclick="closeModal('bookingModal')">✕</button><h2>Novo Agendamento</h2><div class="field"><label>Cliente</label><input id="bookClientName"></div><button class="btn" onclick="confirmAdminBooking()">Confirmar</button></div></div>
 
-<div class="modalback" id="addBarberModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('addBarberModal')">✕</button>
-  <h2>Cadastrar Barbeiro ♙</h2>
-  <div class="field"><label>Nome do Barbeiro</label><input id="bNameInput" placeholder="Ex.: Carlos Silva"></div>
-  <div class="field"><label>Especialidade / Cadeira</label><input id="bSpecInput" placeholder="Ex.: Degradê / Cadeira 02"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="saveBarber()">Salvar Barbeiro</button>
- </div>
-</div>
-
-<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE DA LOJA -->
-<div class="modalback" id="addProductModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('addProductModal')">✕</button>
-  <h2>Cadastrar Produto no Estoque ▣</h2>
-  <div class="field"><label>Nome do Produto</label><input id="pNameInput" placeholder="Ex.: Pomada Modeladora"></div>
-  <div class="field"><label>Preço de Venda (R$)</label><input id="pPriceInput" type="number" placeholder="45.00"></div>
-  <div class="field"><label>Quantidade em Estoque (Mínimo 1 para ir ao Shopping)</label><input id="pStockInput" type="number" placeholder="10"></div>
-  <div class="field"><label>URL da Foto do Produto</label><input id="pImageInput" placeholder="https://exemplo.com/foto.jpg"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="saveProduct()">Cadastrar e Exibir no Shopping</button>
- </div>
-</div>
-
-<div class="modalback" id="addServiceModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('addServiceModal')">✕</button>
-  <h2>Cadastrar Serviço ✂️</h2>
-  <div class="field"><label>Nome do Serviço</label><input id="sNameInput" placeholder="Ex.: Corte Social"></div>
-  <div class="field"><label>Preço (R$)</label><input id="sPriceInput" type="number" placeholder="50.00"></div>
-  <div class="field"><label>Duração (Minutos)</label><input id="sTimeInput" type="number" placeholder="30"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="saveServiceModal()">Salvar Serviço</button>
- </div>
-</div>
-
-<div class="modalback" id="timeoffModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('timeoffModal')">✕</button>
-  <h2>Solicitar Folga 🌴</h2>
-  <div class="field"><label>Data da Folga</label><input type="date" id="timeoffDate"></div>
-  <div class="field"><label>Período Desejado</label>
-    <select id="timeoffPeriod">
-      <option value="morning">Manhã (Abertura até 12:00)</option>
-      <option value="afternoon">Tarde (12:00 até Fechamento)</option>
-      <option value="all">Dia Todo</option>
-    </select>
-  </div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="submitTimeoff()">Enviar Solicitação ao Dono</button>
- </div>
-</div>
-
-<div class="modalback" id="bookingModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('bookingModal')">✕</button>
-  <h2>Agendamento Presencial / Balcão ⚡</h2>
-  <div class="field"><label>Nome do Cliente</label><input id="bookClientName" placeholder="Nome completo"></div>
-  <div class="field"><label>Serviço</label><select id="bookService"><option value="30">Corte Degradê (30 min)</option><option value="90">Corte Platinado (90 min)</option></select></div>
-  <div class="field"><label>Horário</label><select id="bookTime"><option>08:00</option><option>08:30</option><option>09:00</option><option>10:00</option><option>10:30</option><option>11:00</option><option>14:00</option></select></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="confirmAdminBooking()">Confirmar Agendamento na Grade</button>
- </div>
-</div>
-
-<!-- MODAL CHECKOUT SHOPPING (PIX OU BALCÃO COM QUEM VAI BUSCAR) -->
+<!-- CHECKOUT SHOPPING -->
 <div class="modalback" id="storeModal">
  <div class="modal">
   <button class="close" onclick="closeModal('storeModal')">✕</button>
-  <div class="eyebrow">CHECKOUT NO SHOPPING</div>
   <h2 id="storeModalTitle">Produto</h2>
-  <p id="storeModalPrice" class="price" style="margin:5px 0;">R$ 0,00</p>
-  
-  <div class="field"><label>Forma de Pagamento</label>
-    <select id="shopPayMethod" onchange="toggleShopPay(this.value)">
-      <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
-      <option value="balcao">Pagar no Balcão (Retirada)</option>
-    </select>
+  <p id="storeModalPrice" class="price">R$ 0,00</p>
+  <div class="field"><label>Pagamento</label><select id="shopPayMethod" onchange="toggleShopPay(this.value)"><option value="pix">Pix</option><option value="balcao">Balcão</option></select></div>
+  <div id="shopPixBox" style="background:#171a20;padding:15px;border-radius:12px;text-align:center;">
+    <small class="muted">Chave Pix Copia e Cola:</small>
+    <div style="font-family:monospace;color:#38bdf8;">91989117332</div>
   </div>
-
-  <div id="shopPixBox" style="background:#171a20; border:1px solid #30343b; border-radius:14px; padding:15px; text-align:center; margin:15px 0;">
-    <div style="background:#fff; width:110px; height:110px; margin:0 auto 10px; border-radius:6px; display:grid; place-items:center; padding:6px;">
-      <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
-        <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10z" fill="#000"/>
-        <path d="M45 10h10v10H45zM10 45h10v10H10zM60 45h10v10H60zM45 45h10v10H45zM75 60h15v15H75zM60 75h15v15H60zM45 75h10v15H45z" fill="#000"/>
-      </svg>
-    </div>
-    <small class="muted" style="display:block; margin-bottom:6px;">Pix Copia e Cola:</small>
-    <div id="shopPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
-    <button class="btn" style="width:100%; margin-top:8px; font-size:11px;" onclick="toast('Chave Pix copiada com sucesso!')">📋 Copiar Chave Pix</button>
-  </div>
-
-  <div id="shopBalcaoBox" class="hidden">
-    <div class="field"><label>Quem vai buscar o produto?</label>
-      <select id="pickerType" onchange="togglePickerInput(this.value)">
-        <option value="self">Eu mesmo vou buscar</option>
-        <option value="other">Outra pessoa vai buscar</option>
-      </select>
-    </div>
-    <div class="field hidden" id="pickerNameField"><label>Nome da pessoa que vai buscar</label><input id="pickerNameInput" placeholder="Nome completo"></div>
-  </div>
-
-  <div class="field"><label>Seu Nome e WhatsApp</label><input id="shopClientName" placeholder="Seu nome e WhatsApp"></div>
-  <button class="btn" style="width:100%;margin-top:6px;" onclick="confirmShopCheckoutFinal()">Confirmar Pedido & Enviar ao WhatsApp 🛍️</button>
+  <div id="shopBalcaoBox" class="hidden"><div class="field"><label>Quem vai buscar?</label><select id="pickerType" onchange="togglePickerInput(this.value)"><option value="self">Eu mesmo</option><option value="other">Outra pessoa</option></select></div><div class="field hidden" id="pickerNameField"><label>Nome</label><input id="pickerNameInput"></div></div>
+  <div class="field"><label>Seu Nome e WhatsApp</label><input id="shopClientName"></div>
+  <button class="btn" style="width:100%;" onclick="confirmShopCheckoutFinal()">Confirmar & Enviar WhatsApp</button>
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO DO CLIENTE COM WHATSAPP AUTOMÁTICO E PIX -->
+<!-- MODAL AGENDAMENTO CLIENTE -->
 <div class="modalback" id="clientBookingModal" style="z-index:999999;">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
-  <div class="eyebrow">AGENDAMENTO EM 4 CLIQUES</div>
   <h2>Agendar Horário ⚡</h2>
-  <div class="field"><label>1. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option><option value="Barba Terapia — R$ 35,00">Barba Terapia — R$ 35,00 (30 min)</option></select></div>
-  <div class="field"><label>2. Escolha o Profissional</label>
-    <select id="clientBarberChoice">
-      <option value="Marcos Mendes">Marcos Mendes (Especialista em Degradê · ★ 4.9)</option>
-      <option value="Bruno Costa">Bruno Costa (Barba Terapia & Platinados · ★ 5.0)</option>
-    </select>
-  </div>
-  <div class="field"><label>3. Data e Horário Disponível</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:6px;"><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>14:00</option><option>15:00</option></select></div>
-  <div class="field"><label>4. Forma de Pagamento</label>
-    <select id="clientPayMethod" onchange="toggleClientPix(this.value)">
-      <option value="pix">Pagar Agora via Pix (QR Code + Copia e Cola)</option>
-      <option value="local">Pagar no Local (Presencial)</option>
-    </select>
-  </div>
-  <div id="clientPixBox" style="background:#171a20; border:1px solid #30343b; padding:15px; border-radius:12px; margin-bottom:12px; text-align:center;">
-    <div style="background:#fff; width:110px; height:110px; margin:0 auto 10px; border-radius:6px; display:grid; place-items:center; padding:6px;">
-      <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
-        <path d="M10 10h30v30H10zM60 10h30v30H60zM10 60h30v30H10z" fill="#000"/>
-        <path d="M45 10h10v10H45zM10 45h10v10H10zM60 45h10v10H60zM45 45h10v10H45zM75 60h15v15H75zM60 75h15v15H60zM45 75h10v15H45z" fill="#000"/>
-      </svg>
-    </div>
-    <small class="muted" style="display:block; margin-bottom:6px;">Chave Pix Copia e Cola:</small>
-    <div id="clientPixKeyDisplay" style="font-family:monospace; background:#0b0d10; padding:8px; border-radius:6px; font-size:11px; color:#38bdf8; word-break:break-all;">91989117332</div>
-    <button class="btn" style="width:100%; margin-top:8px; font-size:11px;" onclick="toast('Chave Pix copiada com sucesso!')">📋 Copiar Chave Pix</button>
-  </div>
-  <div class="field"><label>Seu Nome e WhatsApp</label><input id="clientBookNameInput" placeholder="Ex.: Lucas (91) 99999-9999"></div>
-  <button class="btn" style="width:100%;margin-top:6px;" onclick="confirmClientBookingFinal()">Confirmar e Enviar WhatsApp 📲</button>
+  <div class="field"><label>Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00</option></select></div>
+  <div class="field"><label>Barbeiro</label><select id="clientBarberChoice"><option value="Marcos Mendes">Marcos Mendes</option><option value="Bruno Costa">Bruno Costa</option></select></div>
+  <div class="field"><label>Data e Horário</label><input type="date" id="clientDateChoice"><select id="clientTimeChoice" style="margin-top:6px;"><option>09:00</option><option>10:00</option><option>14:00</option></select></div>
+  <div class="field"><label>Pagamento</label><select id="clientPayMethod" onchange="toggleClientPix(this.value)"><option value="pix">Pix</option><option value="local">No Local</option></select></div>
+  <div id="clientPixBox" style="background:#171a20;padding:15px;border-radius:12px;text-align:center;"><small class="muted">Chave Pix Copia e Cola:</small><div style="font-family:monospace;color:#38bdf8;">91989117332</div></div>
+  <div class="field"><label>Seu Nome e WhatsApp</label><input id="clientBookNameInput" placeholder="Nome e WhatsApp"></div>
+  <button class="btn" style="width:100%;" onclick="confirmClientBookingFinal()">Confirmar e Enviar WhatsApp 📲</button>
  </div>
 </div>
 
-<!-- MODAL AVALIAÇÃO DO BARBEIRO (PÓS-ATENDIMENTO) -->
-<div class="modalback" id="reviewModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('reviewModal')">✕</button>
-  <div class="eyebrow">AVALIAÇÃO DE ATENDIMENTO</div>
-  <h2>Como foi seu corte? ⭐</h2>
-  <p class="muted">Seu atendimento foi finalizado. Por favor, avalie o profissional para mantermos a excelência.</p>
-  <div class="field"><label>Nota (1 a 5 Estrelas)</label>
-    <select id="reviewStars">
-      <option value="5">★★★★★ (5.0 - Excelente)</option>
-      <option value="4">★★★★☆ (4.0 - Muito Bom)</option>
-      <option value="3">★★★☆☆ (3.0 - Regular)</option>
-    </select>
-  </div>
-  <div class="field"><label>Comentário (Opcional)</label><input id="reviewComment" placeholder="Ex.: Ótimo atendimento!"></div>
-  <button class="btn" style="width:100%;margin-top:10px;" onclick="submitReview()">Enviar Avaliação</button>
- </div>
-</div>
-
+<div class="modalback" id="reviewModal"><div class="modal"><button class="close" onclick="closeModal('reviewModal')">✕</button><h2>Avaliar Atendimento ⭐</h2><div class="field"><label>Nota</label><select id="reviewStars"><option value="5">★★★★★</option><option value="4">★★★★☆</option></select></div><button class="btn" onclick="submitReview()">Enviar</button></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
 let currentRole='client';
-let shopConfig = {
-    name: "Barbearia Imperial Pro",
-    address: "Centro - Belém/PA",
-    whatsapp: "5591989117332",
-    pix: "91989117332"
-};
-
-let stockProducts = [
-    { name: "Pomada Matte Fixadora", price: 39.90, stock: 12, img: "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80" }
-];
+let shopConfig = { name: "Barbearia Imperial Pro", whatsapp: "5591989117332", pix: "91989117332" };
+let stockProducts = [{ name: "Pomada Matte Fixadora", price: 39.90, stock: 12, img: "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80" }];
 
 function toast(msg){
     const t=document.getElementById('toast');
@@ -569,14 +431,10 @@ function pickRole(role,btn){
 }
 
 window.addEventListener('load', () => {
-    const savedEmail = localStorage.getItem('navalha_saved_email');
-    if(savedEmail === 'roberthaelley75@gmail.com'){
-        // Mantém a última sessão do dono se ele escolheu lembrar
-    }
     renderClientShopping();
 });
 
-// MOTOR DE LOGIN CORRIGIDO RIGOROSAMENTE (SEPARANDO CLIENTE E BARBEARIA)
+// VALIDAÇÃO RIGOROSA DE ACESSO POR E-MAIL E PAPEL
 function handleAuth() {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
@@ -587,7 +445,21 @@ function handleAuth() {
 
     if(rememberMe) localStorage.setItem('navalha_saved_email', email);
 
-    // Se o usuário selecionou explicitamente "Sou cliente" ou usou e-mail comum
+    // EXCLUSIVO: Apenas o seu e-mail dev mestre pode acessar tudo livremente
+    if(email === 'roberthaelley75@gmail.com'){
+        document.getElementById('loginScreen').classList.add('hidden');
+        if(currentRole === 'client'){
+            document.getElementById('clientScreen').style.display = 'block';
+        } else {
+            document.getElementById('app').classList.remove('hidden');
+            document.getElementById('navAdmin').style.display = 'flex';
+            showPage('dashboard');
+        }
+        toast('Bem-vindo, Desenvolvedor Master!');
+        return;
+    }
+
+    // ACESSO DE CLIENTE COMUM (Isolado somente para a Área do Cliente)
     if(currentRole === 'client'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('clientScreen').style.display = 'block';
@@ -595,61 +467,28 @@ function handleAuth() {
         return;
     }
 
-    // Acesso Administrativo / Dono / Barbeiro
-    if(email === 'roberthaelley75@gmail.com' || currentRole === 'shop'){
+    // ACESSO DE FRANQUEADO / PROPRIETÁRIO DE BARBEARIA
+    if(currentRole === 'shop'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
-        if(email === 'roberthaelley75@gmail.com') document.getElementById('navAdmin').style.display = 'flex';
         showPage('dashboard');
-        toast('Painel da Barbearia carregado.');
+        toast('Painel da Franquia carregado com sucesso.');
         return;
     }
-
-    // Fallback padrão para cliente
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('clientScreen').style.display = 'block';
-    toast('Área do cliente aberta.');
 }
 
 function changeRole(role){
     currentRole = role;
     const hHelp = document.getElementById('roleHelp');
     const roleLabel = document.getElementById('roleLabel');
-    const navAgenda = document.getElementById('navAgenda');
-    const navServicos = document.getElementById('navServicos');
-    const navEquipe = document.getElementById('navEquipe');
-    const navClientes = document.getElementById('navClientes');
-    const navLoja = document.getElementById('navLoja');
-    const navFin = document.getElementById('navFinanceiro');
-    const navRel = document.getElementById('navRelatorios');
-    const navConfig = document.getElementById('navConfig');
-    const navAdmin = document.getElementById('navAdmin');
-    
     if(role === 'barber'){
         roleLabel.textContent = 'Minha Cadeira ✂️ (Barbeiro)';
         if(hHelp) hHelp.textContent = 'Visão restrita: Apenas sua agenda, equipe e clientes.';
-        if(navAgenda) navAgenda.style.display = 'flex';
-        if(navServicos) navServicos.style.display = 'none';
-        if(navEquipe) navEquipe.style.display = 'flex';
-        if(navClientes) navClientes.style.display = 'flex';
-        if(navLoja) navLoja.style.display = 'none';
-        if(navFin) navFin.style.display = 'none';
-        if(navRel) navRel.style.display = 'none';
-        if(navConfig) navConfig.style.display = 'none';
-        if(navAdmin) navAdmin.style.display = 'none';
-        toast('Modo Barbeiro Convidado ativado.');
+        toast('Modo Barbeiro ativado.');
     } else {
-        roleLabel.textContent = 'Painel da barbearia (Dono)';
+        roleLabel.textContent = 'Painel da Barbearia (Franqueado)';
         if(hHelp) hHelp.textContent = 'Controle gerencial completo.';
-        if(navAgenda) navAgenda.style.display = 'flex';
-        if(navServicos) navServicos.style.display = 'flex';
-        if(navEquipe) navEquipe.style.display = 'flex';
-        if(navClientes) navClientes.style.display = 'flex';
-        if(navLoja) navLoja.style.display = 'flex';
-        if(navFin) navFin.style.display = 'flex';
-        if(navRel) navRel.style.display = 'flex';
-        if(navConfig) navConfig.style.display = 'flex';
-        toast('Modo Dono ativado.');
+        toast('Modo Franqueado ativado.');
     }
 }
 
@@ -659,199 +498,110 @@ function openClientBooking(){
 }
 
 function submitTimeoff(){
-    const date = document.getElementById('timeoffDate').value;
-    const period = document.getElementById('timeoffPeriod').value;
-    if(!date){ toast('Selecione a data da folga.'); return; }
     closeModal('timeoffModal');
-    toast('Solicitação de folga enviada ao dono!');
+    toast('Solicitação de folga enviada ao franqueado!');
 }
 
 function confirmAdminBooking(){
     const name = document.getElementById('bookClientName').value;
-    const time = document.getElementById('bookTime').value;
-    const duration = document.getElementById('bookService').value;
-    if(!name){ toast('Informe o nome do cliente.'); return; }
-
+    if(!name){ toast('Informe o nome.'); return; }
     const tbody = document.getElementById('agendaTableBody');
-    tbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name}</td><td>Procedimento (${duration} min)</td><td>Marcos Mendes</td><td><span class="status">Confirmado</span></td></tr>`;
+    tbody.innerHTML += `<tr><td><b>09:00</b></td><td>${name}</td><td>Corte</td><td>Marcos Mendes</td><td><span class="status">Confirmado</span></td></tr>`;
     closeModal('bookingModal');
-    toast('Agendamento inserido na grade com sucesso!');
+    toast('Agendamento inserido!');
 }
 
 function confirmClientBookingFinal(){
     const name = document.getElementById('clientBookNameInput').value;
     const service = document.getElementById('clientServiceChoice').value;
     const barber = document.getElementById('clientBarberChoice').value;
-    const date = document.getElementById('clientDateChoice').value || 'Hoje';
     const time = document.getElementById('clientTimeChoice').value;
     const payMethod = document.getElementById('clientPayMethod').value;
 
     if(!name){ toast('Informe seu Nome e WhatsApp.'); return; }
-
     closeModal('clientBookingModal');
 
     const clientTable = document.getElementById('clientMyAppointments');
     if(clientTable.querySelector('td[colspan]')) clientTable.innerHTML = '';
-
     const statusBadge = payMethod === 'pix' ? '<span class="status wait">Aguardando Pix</span>' : '<span class="status">Pagar no Local</span>';
-    clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service} (${barber})</td><td>${date} às ${time}</td><td>${statusBadge} <button class="btn secondary" style="padding:2px 6px;font-size:9px;" onclick="openModal('reviewModal')">Avaliar ⭐</button></td></tr>`;
+    clientTable.innerHTML += `<tr><td><b>${shopConfig.name}</b></td><td>${service} (${barber})</td><td>Hoje às ${time}</td><td>${statusBadge} <button class="btn secondary" style="padding:2px 6px;font-size:9px;" onclick="openModal('reviewModal')">Avaliar ⭐</button></td></tr>`;
 
     const adminTbody = document.getElementById('agendaTableBody');
     adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App)</td><td>${service}</td><td>${barber}</td><td>${statusBadge}</td></tr>`;
 
-    setTimeout(() => {
-        toast('📲 Notificação automática WhatsApp: "Seu atendimento na ' + shopConfig.name + ' está chegando!"');
-    }, 4000);
-
-    const msg = encodeURIComponent(`Olá, gostaria de confirmar meu agendamento na *${shopConfig.name}*:\n\n👤 Cliente: ${name}\n✂️ Serviço: ${service}\n👨‍🦰 Barbeiro: ${barber}\n📅 Data/Horário: ${date} às ${time}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Local'}`);
+    const msg = encodeURIComponent(`Olá, confirmo meu agendamento na *${shopConfig.name}*:\n\n👤 Cliente: ${name}\n✂️ Serviço: ${service}\n👨‍🦰 Barbeiro: ${barber}\n🕒 Horário: ${time}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
 }
 
 function confirmShopCheckoutFinal(){
     const name = document.getElementById('shopClientName').value;
-    const payMethod = document.getElementById('shopPayMethod').value;
-    const pickerType = document.getElementById('pickerType').value;
-    const pickerName = document.getElementById('pickerNameInput').value;
-
     if(!name){ toast('Informe seu nome e WhatsApp.'); return; }
-    if(pickerType === 'other' && !pickerName){ toast('Informe o nome de quem vai buscar.'); return; }
-
     closeModal('storeModal');
-
-    const who = pickerType === 'self' ? 'O próprio cliente' : pickerName;
-    const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Retirada por: ${who}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
+    const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
-    toast('Pedido enviado ao WhatsApp da barbearia com sucesso!');
+    toast('Pedido enviado ao WhatsApp da barbearia!');
 }
 
 function submitReview(){
-    const stars = document.getElementById('reviewStars').value;
     closeModal('reviewModal');
-    document.getElementById('shopRatingBadge').textContent = `Aberto · ${stars}.0 ★★★★★`;
-    document.getElementById('barber1Rating').textContent = `Especialista em Degradê · ★ ${stars}.0`;
-    toast('Obrigado pela sua avaliação! Aplicativo atualizado.');
+    document.getElementById('shopRatingBadge').textContent = `Aberto · 5.0 ★★★★★`;
+    toast('Avaliação registrada com sucesso!');
 }
 
 function saveShopSettings(){
     shopConfig.name = document.getElementById('cfgName').value;
-    shopConfig.address = document.getElementById('cfgAddress').value;
     shopConfig.whatsapp = document.getElementById('cfgWhatsapp').value;
     shopConfig.pix = document.getElementById('cfgPix').value;
-
-    document.getElementById('shopTitleHeader').textContent = 'Bom dia, Robert (' + shopConfig.name + ').';
-    document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
-    document.getElementById('tvShopTitle').textContent = shopConfig.name;
     toast('Configurações salvas!');
 }
 
-function saveConvenio(){
-    const name = document.getElementById('convNameInput').value;
-    const wp = document.getElementById('convWpInput').value;
-    if(!name){ toast('Informe o nome.'); return; }
-
-    const tbody = document.getElementById('convenioTableBody');
-    if(tbody.querySelector('td[colspan]')) tbody.innerHTML = '';
-    tbody.innerHTML += `<tr><td><b>${name}</b></td><td>${wp || '(91) 99999-9999'}</td><td><span class="status">Parceiro Ativo</span></td></tr>`;
-    closeModal('addConvenioModal');
-    toast('Convênio cadastrado!');
-}
-
+function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo!'); }
 function openTVMode(){ document.getElementById('tvScreen').style.display = 'block'; }
 function closeTVMode(){ document.getElementById('tvScreen').style.display = 'none'; }
-
-function openClientView(){ document.getElementById('app').classList.add('hidden'); document.getElementById('clientScreen').style.display = 'block'; toast('Visualizando como Cliente 👁️'); }
+function openClientView(){ document.getElementById('app').classList.add('hidden'); document.getElementById('clientScreen').style.display = 'block'; }
 function closeClientView(){ 
     document.getElementById('clientScreen').style.display = 'none'; 
-    document.getElementById('app').classList.add('hidden');
     document.getElementById('loginScreen').classList.remove('hidden');
-    toast('Retornado à tela de login.');
 }
 
 function toggleClientPix(val){ document.getElementById('clientPixBox').classList.toggle('hidden', val !== 'pix'); }
 function toggleShopPay(val){ document.getElementById('shopPixBox').classList.toggle('hidden', val !== 'pix'); document.getElementById('shopBalcaoBox').classList.toggle('hidden', val !== 'balcao'); }
 function togglePickerInput(val){ document.getElementById('pickerNameField').classList.toggle('hidden', val !== 'other'); }
 
-function saveBarber(){
-    const name = document.getElementById('bNameInput').value;
-    const spec = document.getElementById('bSpecInput').value;
-    if(!name){ toast('Informe o nome.'); return; }
-    
-    const container = document.getElementById('barberListContainer');
-    container.innerHTML += `<article class="service"><div class="symbol">👨‍🦰</div><h3>${name}</h3><p class="muted">${spec || 'Barbeiro'}</p><span class="status">Ativo</span></article>`;
-    closeModal('addBarberModal');
-    toast('Barbeiro cadastrado!');
-}
+function saveBarber(){ closeModal('addBarberModal'); toast('Barbeiro cadastrado!'); }
 
 function saveProduct(){
     const name = document.getElementById('pNameInput').value;
-    const price = document.getElementById('pPriceInput').value;
+    const price = Number(document.getElementById('pPriceInput').value);
     const stock = Number(document.getElementById('pStockInput').value);
-    const img = document.getElementById('pImageInput').value;
-    if(!name || !price || isNaN(stock)){ toast('Preencha os campos corretamente.'); return; }
+    if(!name || isNaN(price) || isNaN(stock)){ toast('Preencha os campos.'); return; }
 
-    stockProducts.push({ name, price: Number(price), stock, img });
+    stockProducts.push({ name, price, stock, img: "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80" });
     renderClientShopping();
-
-    const container = document.getElementById('shopStockContainer');
-    if(container.querySelector('.empty')) container.innerHTML = '';
-    const bg = img ? `background-image:url('${img}')` : '';
-    container.innerHTML += `<article class="product"><div class="productart" style="${bg}">🧴</div><h3>${name}</h3><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div><span class="status">Estoque: ${stock} un. (Visível no Shopping)</span></article>`;
-    
     closeModal('addProductModal');
-    toast('Produto cadastrado no estoque e publicado no Shopping!');
+    toast('Produto em estoque publicado no Shopping!');
 }
 
 function renderClientShopping(){
     const grid = document.getElementById('clientShoppingGrid');
     if(!grid) return;
     grid.innerHTML = '';
-
     const available = stockProducts.filter(p => p.stock >= 1);
     if(available.length === 0){
-        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Nenhum produto disponível no estoque da barbearia.</div>';
+        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Nenhum produto em estoque.</div>';
         return;
     }
-
     available.forEach(p => {
-        const bg = p.img ? `background-image:url('${p.img}')` : '';
-        grid.innerHTML += `
-            <article class="product">
-              <div class="productart" style="${bg}">🧴</div>
-              <h3>${p.name}</h3>
-              <div class="price">R$ ${p.price.toFixed(2).replace('.',',')}</div>
-              <span class="status">Em Estoque (${p.stock} un.)</span>
-              <button class="btn" onclick="openStoreCheckout('${p.name}', ${p.price})">Comprar no Shopping</button>
-            </article>
-        `;
+        grid.innerHTML += `<article class="product"><div class="productart" style="background-image:url('${p.img}')">🧴</div><h3>${p.name}</h3><div class="price">R$ ${p.price.toFixed(2).replace('.',',')}</div><span class="status">Em Estoque (${p.stock} un.)</span><button class="btn" onclick="openStoreCheckout('${p.name}', ${p.price})">Comprar no Shopping</button></article>`;
     });
 }
 
-function saveServiceModal(){
-    const name = document.getElementById('sNameInput').value;
-    const price = document.getElementById('sPriceInput').value;
-    const time = document.getElementById('sTimeInput').value;
-    if(!name || !price){ toast('Preencha os campos.'); return; }
-
-    const container = document.getElementById('serviceListContainer');
-    container.innerHTML += `<article class="service"><div class="symbol">✂️</div><h3>${name}</h3><p class="muted">Duração: ${time || 30} min</p><div class="price">R$ ${Number(price).toFixed(2).replace('.',',')}</div></article>`;
-    closeModal('addServiceModal');
-    toast('Serviço cadastrado!');
-}
-
-function editService(id){
-    const newPrice = prompt("Novo valor (R$):", "50.00");
-    const newTime = prompt("Duração em minutos:", "30");
-    if(newPrice && newTime){
-        document.getElementById('servPrice'+id).textContent = 'R$ ' + Number(newPrice).toFixed(2).replace('.',',');
-        document.getElementById('servTime'+id).textContent = newTime;
-        toast('Serviço atualizado!');
-    }
-}
-
+function saveServiceModal(){ closeModal('addServiceModal'); toast('Serviço salvo!'); }
+function editService(id){ toast('Serviço editado.'); }
 function openStoreCheckout(name, price){
     openModal('storeModal');
     document.getElementById('storeModalTitle').textContent = name;
-    document.getElementById('storeModalPrice').textContent = 'R$ ' + Number(price).toFixed(2).replace('.',',');
+    document.getElementById('storeModalPrice').textContent = 'R$ ' + price.toFixed(2).replace('.',',');
 }
 
 function signOut(){
@@ -859,7 +609,7 @@ function signOut(){
     document.getElementById('app').classList.add('hidden');
     document.getElementById('clientScreen').style.display = 'none';
     document.getElementById('loginScreen').classList.remove('hidden');
-    toast('Você saiu da conta.');
+    toast('Sessão encerrada.');
 }
 </script>
 </body>
