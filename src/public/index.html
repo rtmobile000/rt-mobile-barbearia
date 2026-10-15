@@ -125,7 +125,7 @@
       </div>
     </section>
 
-    <!-- AGENDA PROFISSIONAL E COMPLETA -->
+    <!-- AGENDA -->
     <section class="section" id="page-agenda">
       <div class="heading">
         <div><h1>Agenda Profissional da Unidade</h1><p>Grade completa de horários e atendimento em tempo real.</p></div>
@@ -175,7 +175,7 @@
       </div>
     </section>
 
-    <!-- EQUIPE (COM OPÇÃO DE EDITAR E APAGAR BARBEIRO) -->
+    <!-- EQUIPE -->
     <section class="section" id="page-equipe">
       <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre, edite ou remova profissionais da equipe.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
       <div class="servicegrid" id="barberListContainer">
@@ -184,14 +184,14 @@
           <h3>Marcos Mendes</h3>
           <p class="muted">WhatsApp: (91) 98888-1122 · ★ 4.9</p>
           <div style="display:flex; gap:6px; margin-top:8px;">
-            <button class="btn secondary" style="flex:1;" onclick="editBarber(0)">Editar</button>
-            <button class="btn danger" style="flex:1;" onclick="deleteBarber(0)">Apagar</button>
+            <button class="btn secondary" style="flex:1;" onclick="editBarber(this)">Editar</button>
+            <button class="btn danger" style="flex:1;" onclick="deleteBarber(this)">Apagar</button>
           </div>
         </article>
       </div>
     </section>
     
-    <!-- CLIENTES & CONVÊNIOS (COM OPÇÃO DE EDITAR E APAGAR CLIENTE) -->
+    <!-- CLIENTES & CONVÊNIOS -->
     <section class="section" id="page-clientes">
       <div class="heading">
         <div><h1>Clientes & Convênios 🤝</h1><p>Gerencie sua base de clientes com foto, WhatsApp, edição e exclusão.</p></div>
@@ -211,8 +211,8 @@
                 <td><b>Lucas Almeida</b></td>
                 <td>(91) 98888-2233</td>
                 <td>
-                  <button class="btn secondary" style="padding:3px 6px;font-size:10px;" onclick="editClient(0)">Editar</button>
-                  <button class="btn danger" style="padding:3px 6px;font-size:10px;" onclick="deleteClient(0)">Apagar</button>
+                  <button class="btn secondary" style="padding:3px 6px;font-size:10px;" onclick="editClientRow(this)">Editar</button>
+                  <button class="btn danger" style="padding:3px 6px;font-size:10px;" onclick="deleteClientRow(this)">Apagar</button>
                 </td>
               </tr>
             </tbody>
@@ -385,21 +385,21 @@
     </div>
    </div>
 
-   <!-- BANNER DE PROMOÇÕES -->
+   <!-- BANNER DE PROMOÇÕES (BOTÃO "APROVEITAR OFERTA" LEVA AO WHATSAPP DA BARBEARIA) -->
    <div class="card" style="margin-bottom:20px; background:linear-gradient(135deg, #18150f, #101216); border:1px solid var(--gold);">
      <div class="cardtitle"><h2>🔥 Ofertas & Promoções nas Barbearias</h2><span class="pill">DESTAQUES</span></div>
      <div id="clientPromotionsFeed" style="display:grid; gap:10px;">
        <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
          <div>
-           <b style="color:var(--gold2);">Barbearia Imperial Pro</b>
-           <p class="muted small" style="margin:2px 0;">Primeiro corte na barbearia com 20% off!</p>
+           <b style="color:var(--gold2);" id="promoShopNameDisplay">Barbearia Imperial Pro</b>
+           <p class="muted small" style="margin:2px 0;" id="promoTextDisplay">Primeiro corte na barbearia com 20% off!</p>
          </div>
-         <button class="btn" style="padding:6px 12px; font-size:10px;" onclick="openClientBooking()">Aproveitar Oferta ✂️</button>
+         <button class="btn" style="padding:6px 12px; font-size:10px;" onclick="claimPromotionWhatsapp('Barbearia Imperial Pro', '5591989117332', 'Primeiro corte na barbearia com 20% off!')">Aproveitar Oferta 📲</button>
        </div>
      </div>
    </div>
 
-   <!-- MEUS AGENDAMENTOS NA ÁREA DO CLIENTE (COM TABELA PROFISSIONAL) -->
+   <!-- MEUS AGENDAMENTOS NA ÁREA DO CLIENTE (TABELA PROFISSIONAL) -->
    <div class="card" style="margin-bottom:20px;">
      <div class="cardtitle"><h2>Meus Agendamentos Realizados 📅</h2></div>
      <div class="tablewrap">
@@ -482,7 +482,7 @@
 <!-- MODAIS -->
 <div class="modalback" id="addConvenioModal"><div class="modal"><button class="close" onclick="closeModal('addConvenioModal')">✕</button><h2>Cadastrar Convênio</h2><div class="field"><label>Nome</label><input id="convNameInput"></div><button class="btn" onclick="saveConvenio()">Salvar</button></div></div>
 
-<!-- MODAL CADASTRAR BARBEIRO (FOTO E WHATSAPP) -->
+<!-- MODAL CADASTRAR BARBEIRO -->
 <div class="modalback" id="addBarberModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addBarberModal')">✕</button>
@@ -494,7 +494,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR CLIENTE (FOTO E WHATSAPP) -->
+<!-- MODAL CADASTRAR CLIENTE -->
 <div class="modalback" id="addClientModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addClientModal')">✕</button>
@@ -506,7 +506,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE -->
+<!-- MODAL CADASTRAR PRODUTO -->
 <div class="modalback" id="addProductModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addProductModal')">✕</button>
@@ -519,7 +519,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR / EDITAR SERVIÇOS -->
+<!-- MODAL CADASTRAR SERVIÇO -->
 <div class="modalback" id="addServiceModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addServiceModal')">✕</button>
@@ -533,7 +533,7 @@
 
 <div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" onclick="submitTimeoff()">Enviar</button></div></div>
 
-<!-- MODAL NOVA MOVIMENTAÇÃO CAIXA -->
+<!-- MODAL CAIXA -->
 <div class="modalback" id="cashTransactionModal">
  <div class="modal">
   <button class="close" onclick="closeModal('cashTransactionModal')">✕</button>
@@ -744,6 +744,13 @@ function subscribeSpecificVip(shopName, wpNumber){
     toast(`Redirecionando para ${shopName}...`);
 }
 
+// APROVEITAR OFERTA LEVA DIRETAMENTE AO WHATSAPP DA BARBEARIA
+function claimPromotionWhatsapp(shopName, wpNumber, promoText){
+    const text = encodeURIComponent(`🔥 Olá! Vi a promoção "${promoText}" da *${shopName}* no app NAVALHA e gostaria de aproveitar para agendar meu atendimento!`);
+    window.open(`https://wa.me/${wpNumber}?text=${text}`, '_blank');
+    toast(`Abrindo WhatsApp da ${shopName}...`);
+}
+
 function toggleVipSettings(isChecked){
     const priceField = document.getElementById('vipPriceField');
     const banner = document.getElementById('clientVipBannerTitle');
@@ -888,7 +895,6 @@ function confirmClientBookingFinal(){
     if(adminTbody.querySelector('td[colspan]')) adminTbody.innerHTML = '';
     adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App)</td><td>${service}</td><td>${barber}</td><td>${statusBadge}</td></tr>`;
 
-    // Atualiza também a tabela profissional da agenda
     const profTbody = document.getElementById('adminAgendaTableBody');
     if(profTbody.querySelector('td[colspan]')) profTbody.innerHTML = '';
     profTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name}</td><td>${service}</td><td>${barber}</td><td><span class="status">Confirmado</span></td><td><button class="btn secondary" style="padding:4px 8px;font-size:10px;" onclick="toast('Concluído')">Concluir</button></td></tr>`;
@@ -989,6 +995,12 @@ function saveShopSettings(){
     document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
     const promoEl = document.getElementById('clientShopPromoDisplay');
     if(promoEl) promoEl.textContent = `🔥 Promoção: ${promoText}`;
+
+    const promoTextDisplay = document.getElementById('promoTextDisplay');
+    if(promoTextDisplay) promoTextDisplay.textContent = promoText;
+
+    const promoShopNameDisplay = document.getElementById('promoShopNameDisplay');
+    if(promoShopNameDisplay) promoShopNameDisplay.textContent = shopConfig.name;
 
     toggleVipSettings(document.getElementById('toggleVipPlan').checked);
     toast('Configurações e promoções salvas!');
