@@ -308,7 +308,7 @@
       <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">O relatório está otimizado para exibir dados exatos do intervalo de dias selecionado acima.</p></div>
     </section>
 
-    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA (COM SALVAMENTO CORRETO) -->
+    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA -->
     <section class="section" id="page-config">
       <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix, Clube VIP e Promoções.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
       <div class="grid2">
@@ -491,7 +491,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE (COM SCANNER DE CÓDIGO DE BARRAS) -->
+<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE -->
 <div class="modalback" id="addProductModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addProductModal')">✕</button>
@@ -510,7 +510,7 @@
  </div>
 </div>
 
-<!-- CHECKOUT CARRINHO DO SHOPPING (COM QUEM VAI BUSCAR, CHAVE PIX DA BARBEARIA E PAGAR NO LOCAL) -->
+<!-- CHECKOUT CARRINHO DO SHOPPING (COM BOTÃO DE REMOVER ITEM / ZERAR CARRINHO) -->
 <div class="modalback" id="storeModal">
  <div class="modal">
   <button class="close" onclick="closeModal('storeModal')">✕</button>
@@ -539,7 +539,8 @@
   </div>
 
   <div class="field"><label>Seu Nome e WhatsApp</label><input id="shopClientName" placeholder="Ex: Lucas (91) 99999-9999"></div>
-  <button class="btn" style="width:100%;" onclick="confirmShopCheckoutFinal()">Enviar Pedido ao WhatsApp 🛒</button>
+  <button class="btn" style="width:100%; margin-bottom:6px;" onclick="confirmShopCheckoutFinal()">Enviar Pedido ao WhatsApp 🛒</button>
+  <button class="btn danger" style="width:100%; background:#361b1e; color:#ffb5b5;" onclick="clearEntireCart()">🗑️ Esvaziar / Zerar Carrinho</button>
  </div>
 </div>
 
@@ -745,7 +746,7 @@ function handleAuth(isAuto = false) {
         localStorage.setItem('rt_saved_role', currentRole);
     }
 
-    if((email === 'roberthaelley75@gmail.com') || (isAuto && localStorage.getItem('rt_saved_email') === 'roberthaelley75@gmail.com')){
+    if((email === 'roberthaelley75@gmail.com') || (isAuto && localStorage.getItem('rt_saved_email'] === 'roberthaelley75@gmail.com')){
         document.getElementById('loginScreen').classList.add('hidden');
         if(currentRole === 'client' && !isAuto){
             document.getElementById('clientScreen').style.display = 'block';
@@ -855,18 +856,61 @@ function addProductToCart(name, price){
     } else {
         activeCart.push({ name, price, qty: 1 });
     }
-    const totalCount = activeCart.reduce((sum, i) => sum + i.qty, 0);
-    document.getElementById('cartSummaryText').textContent = `${totalCount} item(ns) na sacola (R$ ${activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0).toFixed(2)})`;
+    updateCartDisplayCount();
     toast(`${name} adicionado à sacola!`);
+}
+
+function updateCartDisplayCount(){
+    const totalCount = activeCart.reduce((sum, i) => sum + i.qty, 0);
+    const totalVal = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+    document.getElementById('cartSummaryText').textContent = `${totalCount} item(ns) na sacola (R$ ${totalVal.toFixed(2)})`;
 }
 
 function openCartCheckout(){
     if(activeCart.length === 0){ toast('Sua sacola está vazia.'); return; }
     openModal('storeModal');
-    let summary = activeCart.map(i => `• ${i.qty}x ${i.name} — R$ ${(i.price * i.qty).toFixed(2)}`).join('<br>');
-    const total = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
-    document.getElementById('cartModalItems').innerHTML = `${summary}<br><br><b>Total: R$ ${total.toFixed(2)}</b>`;
+    renderCartModalItems();
     document.getElementById('modalPixKeyText').textContent = shopConfig.pix;
+}
+
+function renderCartModalItems(){
+    const container = document.getElementById('cartModalItems');
+    if(activeCart.length === 0){
+        container.innerHTML = 'Nenhum item na sacola.';
+        return;
+    }
+    let html = '';
+    activeCart.forEach((i, idx) => {
+        html += `
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#171a20; padding:8px; border-radius:8px; margin-bottom:6px; border:1px solid #30343b;">
+              <div>
+                <b>${i.qty}x ${i.name}</b>
+                <div style="font-size:10px; color:var(--gold2);">R$ ${(i.price * i.qty).toFixed(2)}</div>
+              </div>
+              <button class="btn danger" style="padding:4px 8px; font-size:10px;" onclick="removeCartItem(${idx})">Remover ✕</button>
+            </div>
+        `;
+    });
+    const total = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+    html += `<div style="margin-top:10px; text-align:right;"><b>Total: R$ ${total.toFixed(2)}</b></div>`;
+    container.innerHTML = html;
+}
+
+function removeCartItem(index){
+    activeCart.splice(index, 1);
+    updateCartDisplayCount();
+    renderCartModalItems();
+    toast('Item removido da sacola.');
+    if(activeCart.length === 0){
+        closeModal('storeModal');
+    }
+}
+
+function clearEntireCart(){
+    activeCart = [];
+    updateCartDisplayCount();
+    closeModal('storeModal');
+    toast('Carrinho esvaziado.');
 }
 
 function confirmShopCheckoutFinal(){
@@ -887,6 +931,7 @@ function confirmShopCheckoutFinal(){
     const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n👤 Retirada: ${retiraText}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
     activeCart = [];
+    updateCartDisplayCount();
     toast('Pedido enviado ao WhatsApp da barbearia com sucesso!');
 }
 
@@ -929,7 +974,6 @@ function updateReportData(){
     toast(`Relatório atualizado para ${days} dia(s).`);
 }
 
-// SALVAR CONFIGURAÇÕES DA BARBEARIA (COM ATUALIZAÇÃO IMEDIATA DO PIX E WHATSAPP)
 function saveShopSettings(){
     shopConfig.name = document.getElementById('cfgName').value;
     shopConfig.whatsapp = document.getElementById('cfgWhatsapp').value;
