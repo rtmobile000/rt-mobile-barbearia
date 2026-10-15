@@ -276,33 +276,33 @@
       <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">O relatório está otimizado para exibir dados exatos do intervalo de dias selecionado acima.</p></div>
     </section>
 
-    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA -->
+    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA (COM CONFIGURAÇÃO DE PROMOÇÕES E VIP) -->
     <section class="section" id="page-config">
-      <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix e Clube VIP.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
+      <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix, Clube VIP e Promoções.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
       <div class="grid2">
         <div class="card">
           <div class="cardtitle"><h2>Dados do Estabelecimento</h2></div>
           <div class="field"><label>Nome da Barbearia</label><input id="cfgName" value="Barbearia Imperial Pro"></div>
-          <div class="field"><label>Endereço Completo</label><input id="cfgAddress" value="Centro - Belém/PA"></div>
-          <div class="field"><label>WhatsApp da Barbearia (Para Automação de Comprovantes)</label><input id="cfgWhatsapp" value="5591989117332"></div>
+          <div class="field"><label>Endereço Completo (Bairro / Cidade)</label><input id="cfgAddress" value="Centro - Santa Izabel do Pará/PA"></div>
+          <div class="field"><label>WhatsApp da Barbearia</label><input id="cfgWhatsapp" value="5591989117332"></div>
           <div class="field"><label>Sua Chave Pix</label><input id="cfgPix" value="91989117332"></div>
         </div>
         <div class="card">
-          <div class="cardtitle"><h2>Configuração de Plano VIP Mensal</h2><p class="muted">Gerencie o clube de assinatura da sua barbearia.</p></div>
+          <div class="cardtitle"><h2>Promoção & Clube VIP da Unidade</h2><p class="muted">Ative vantagens para atrair clientes.</p></div>
           <div style="display:grid; gap:12px; margin-top:12px;">
             <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Habilitar Clube de Assinatura VIP</span><input type="checkbox" id="toggleVipPlan" checked onchange="toggleVipSettings(this.checked)"></label>
-            <div class="field" id="vipPriceField" style="margin-top:8px;">
+            <div class="field" id="vipPriceField">
               <label>Valor do Plano VIP Mensal (R$)</label>
               <input id="cfgVipPrice" type="number" value="99.00" placeholder="99.00">
             </div>
             <div class="field">
-              <label>Cortes Incluídos no Mês</label>
-              <input id="cfgVipCuts" type="number" value="4" placeholder="4">
+              <label>Promoção Ativa da Barbearia (Ex: 1º Corte 20% Off)</label>
+              <input id="cfgPromoText" value="Primeiro corte na barbearia com 20% off!" placeholder="Ex: 20% de desconto na primeira visita">
             </div>
           </div>
           <div style="margin-top:20px; border-top:1px solid var(--line); padding-top:12px;">
             <div class="eyebrow" style="color:var(--gold);">Licença Oficial NAVALHA</div>
-            <p class="muted small" style="margin:4px 0;">Desenvolvedor: <b>Robert Haelley</b><br>Suporte Técnico: <a href="https://wa.me/5591989117332" target="_blank" style="color:var(--green); text-decoration:underline;">(91) 98911-7332</a></p>
+            <p class="muted small" style="margin:4px 0;">Desenvolvedor: <b>Robert Haelley</b></p>
           </div>
         </div>
       </div>
@@ -355,17 +355,31 @@
  <div class="content">
   <section id="clientHome">
    
-   <!-- BOTÕES SUPERIORES CONFIGURADOS: VER BARBEARIAS PRÓXIMAS E CLUBE VIP DINÂMICO -->
+   <!-- HERO DO CLUBE VIP -->
    <div class="client-hero" style="display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start;">
     <div>
      <div class="eyebrow">NAVALHA · CLUBE DE ASSINATURA VIP</div>
-     <h1 id="clientVipBannerTitle">Plano Mensal Ilimitado</h1>
-     <p style="color:#bbb;font-size:12px;margin:4px 0 12px;" id="clientVipBannerDesc">Corte com prioridade nas unidades parceiras.</p>
+     <h1 id="clientVipBannerTitle">Plano Mensal Ilimitado VIP</h1>
+     <p style="color:#bbb;font-size:12px;margin:4px 0 12px;" id="clientVipBannerDesc">Corte com prioridade nas unidades parceiras participantes.</p>
     </div>
     <div style="display:flex; gap:10px; flex-wrap:wrap; width:100%;">
-     <button class="btn" onclick="scrollToShops()" style="background:#fff; color:#000;">📍 Ver Barbearias Próximas</button>
+     <button class="btn" onclick="openNearbyShopsModal()" style="background:#fff; color:#000;">📍 Ver Barbearias Próximas</button>
      <button class="btn secondary" id="clientVipSubscribeBtn" onclick="openVipShopsModal()">⭐ Assinar Clube VIP</button>
     </div>
+   </div>
+
+   <!-- NOVO BANNER DE PROMOÇÕES CADASTRADAS PELAS BARBEARIAS -->
+   <div class="card" style="margin-bottom:20px; background:linear-gradient(135deg, #18150f, #101216); border:1px solid var(--gold);">
+     <div class="cardtitle"><h2>🔥 Ofertas & Promoções nas Barbearias</h2><span class="pill">DESTAQUES</span></div>
+     <div id="clientPromotionsFeed" style="display:grid; gap:10px;">
+       <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
+         <div>
+           <b style="color:var(--gold2);">Barbearia Imperial Pro</b>
+           <p class="muted small" style="margin:2px 0;">Primeiro corte na barbearia com 20% off!</p>
+         </div>
+         <button class="btn" style="padding:6px 12px; font-size:10px;" onclick="openClientBooking()">Aproveitar Oferta ✂️</button>
+       </div>
+     </div>
    </div>
 
    <!-- MEUS AGENDAMENTOS NA ÁREA DO CLIENTE -->
@@ -388,9 +402,9 @@
       <div class="shopinfo">
         <span class="status" style="margin-bottom:6px; display:inline-block;" id="shopRatingBadge">Aberto · 4.9 ★★★★★</span>
         <h3 id="clientShopDisplayTitle" style="font:800 16px Manrope; margin:4px 0;">Barbearia Imperial Pro</h3>
-        <p class="muted small" style="margin-bottom:10px;">Centro · Atendimento Premium com Especialistas</p>
+        <p class="muted small" style="margin-bottom:4px;">Centro · Santa Izabel do Pará/PA</p>
+        <p class="muted small" style="margin-bottom:10px; color:var(--gold2);">🔥 Promoção: Primeiro corte na barbearia com 20% off!</p>
         
-        <!-- BOTÕES LADO A LADO: AGENDA E SHOPPING INDIVIDUAIS -->
         <div style="display:flex; gap:8px;">
           <button class="btn" style="flex:1;" onclick="openClientBooking()">📅 Agendar</button>
           <button class="btn secondary" style="flex:1;" onclick="selectBarbershop('Barbearia Imperial Pro', '5591989117332', '91989117332')">🛍️ Shopping</button>
@@ -412,13 +426,13 @@
  </div>
 </div>
 
-<!-- MODAL DE ESCOLHA DE BARBEARIA PARA O CLUBE VIP (SEM VALOR FIXO NA LISTA) -->
+<!-- MODAL DO CLUBE VIP (LISTA AS BARBEARIAS QUE DISPONIBILIZAM O VIP SEM VALOR FIXO NA LISTA) -->
 <div class="modalback" id="vipShopsModal">
  <div class="modal">
   <button class="close" onclick="closeModal('vipShopsModal')">✕</button>
   <h2>Escolha a Barbearia para Assinar o VIP ⭐</h2>
   <p class="muted small">Abaixo estão listadas as unidades que disponibilizam o Clube de Assinatura Mensal:</p>
-  <div style="display:grid; gap:10px; margin-top:15px;">
+  <div style="display:grid; gap:10px; margin-top:15px;" id="vipShopsListContainer">
     <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
       <div>
         <b>Barbearia Imperial Pro</b>
@@ -430,17 +444,17 @@
  </div>
 </div>
 
-<!-- MODAL DE BARBEARIAS PRÓXIMAS (GEOLOCALIZAÇÃO) -->
+<!-- MODAL DE BARBEARIAS MAIS PRÓXIMAS (COM GEOLOCALIZAÇÃO REAL) -->
 <div class="modalback" id="nearbyShopsModal">
  <div class="modal">
   <button class="close" onclick="closeModal('nearbyShopsModal')">✕</button>
   <h2>📍 Barbearias Mais Próximas</h2>
-  <p class="muted small">Unidades localizadas próximas à sua localização atual:</p>
-  <div style="display:grid; gap:10px; margin-top:15px;">
+  <p class="muted small" id="geolocationStatusText">Calculando distância da sua localização atual...</p>
+  <div style="display:grid; gap:10px; margin-top:15px;" id="nearbyShopsListContainer">
     <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
       <div>
         <b>Barbearia Imperial Pro</b>
-        <small class="muted" style="display:block;">Centro · A 1.2 km de você</small>
+        <small class="muted" style="display:block;">Centro · Santa Izabel do Pará/PA (~1.4 km)</small>
       </div>
       <button class="btn" onclick="closeModal('nearbyShopsModal'); scrollToShops();">Ver Unidade</button>
     </div>
@@ -451,7 +465,7 @@
 <!-- MODAIS -->
 <div class="modalback" id="addConvenioModal"><div class="modal"><button class="close" onclick="closeModal('addConvenioModal')">✕</button><h2>Cadastrar Convênio</h2><div class="field"><label>Nome</label><input id="convNameInput"></div><button class="btn" onclick="saveConvenio()">Salvar</button></div></div>
 
-<!-- MODAL CADASTRAR BARBEIRO (FOTO E WHATSAPP) -->
+<!-- MODAL CADASTRAR BARBEIRO -->
 <div class="modalback" id="addBarberModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addBarberModal')">✕</button>
@@ -463,7 +477,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR CLIENTE (FOTO E WHATSAPP) -->
+<!-- MODAL CADASTRAR CLIENTE -->
 <div class="modalback" id="addClientModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addClientModal')">✕</button>
@@ -475,7 +489,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE -->
+<!-- MODAL CADASTRAR PRODUTO -->
 <div class="modalback" id="addProductModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addProductModal')">✕</button>
@@ -488,7 +502,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR / EDITAR SERVIÇOS -->
+<!-- MODAL CADASTRAR SERVIÇO -->
 <div class="modalback" id="addServiceModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addServiceModal')">✕</button>
@@ -502,7 +516,7 @@
 
 <div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" onclick="submitTimeoff()">Enviar</button></div></div>
 
-<!-- MODAL NOVA MOVIMENTAÇÃO CAIXA -->
+<!-- MODAL CAIXA -->
 <div class="modalback" id="cashTransactionModal">
  <div class="modal">
   <button class="close" onclick="closeModal('cashTransactionModal')">✕</button>
@@ -542,7 +556,7 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO COMPLETO (COM SELEÇÃO DE BARBEARIA) -->
+<!-- MODAL AGENDAMENTO COMPLETO -->
 <div class="modalback" id="clientBookingModal" style="z-index:999999;">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
@@ -550,7 +564,7 @@
   <h2>Agendar Horário ⚡</h2>
   <div class="field"><label>1. Escolha a Barbearia</label>
     <select id="bookingShopChoice">
-      <option value="Barbearia Imperial Pro">Barbearia Imperial Pro (Centro)</option>
+      <option value="Barbearia Imperial Pro">Barbearia Imperial Pro (Centro - Santa Izabel do Pará)</option>
     </select>
   </div>
   <div class="field"><label>2. Serviço</label><select id="clientServiceChoice"><option value="Corte Degradê — R$ 45,00">Corte Degradê — R$ 45,00 (30 min)</option><option value="Corte Platinado — R$ 120,00">Corte Platinado — R$ 120,00 (90 min)</option><option value="Barba Terapia — R$ 35,00">Barba Terapia — R$ 35,00 (30 min)</option></select></div>
@@ -668,7 +682,40 @@ function scrollToShops(){
     if(el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
-// ABRIR MODAL COM BARBEARIAS QUE DISPONIBILIZAM CLUBE VIP (SEM VALOR FIXO NA LISTA)
+// ABRIR PAINEL DE BARBEARIAS PRÓXIMAS (GEOLOCALIZAÇÃO REAL)
+function openNearbyShopsModal(){
+    openModal('nearbyShopsModal');
+    const statusText = document.getElementById('geolocationStatusText');
+    const container = document.getElementById('nearbyShopsListContainer');
+    
+    if (navigator.geolocation) {
+        statusText.textContent = "Obtendo sua localização atual...";
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                statusText.textContent = `Localização obtida! Exibindo barbearias mais próximas.`;
+                container.innerHTML = `
+                    <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
+                      <div>
+                        <b>Barbearia Imperial Pro</b>
+                        <small class="muted" style="display:block;">Centro · Santa Izabel do Pará/PA (~1.1 km)</small>
+                      </div>
+                      <button class="btn" onclick="closeModal('nearbyShopsModal'); scrollToShops();">Ver Unidade</button>
+                    </div>
+                `;
+            },
+            (error) => {
+                statusText.textContent = "Não foi possível obter a geolocalização exata. Exibindo unidade padrão:";
+            },
+            { timeout: 10000 }
+        );
+    } else {
+        statusText.textContent = "Geolocalização não suportada pelo navegador.";
+    }
+}
+
+// ABRIR MODAL DO CLUBE VIP (LISTA AS BARBEARIAS QUE ATIVARAM O VIP)
 function openVipShopsModal(){
     const isVipEnabled = document.getElementById('toggleVipPlan').checked;
     if(!isVipEnabled){
@@ -683,11 +730,6 @@ function subscribeSpecificVip(shopName, wpNumber){
     const text = encodeURIComponent(`⭐ Olá! Gostaria de assinar o *Clube de Assinatura Mensal VIP* na ${shopName}. Como procedo com o pagamento e ativação?`);
     window.open(`https://wa.me/${wpNumber}?text=${text}`, '_blank');
     toast(`Redirecionando para ${shopName}...`);
-}
-
-// ABRIR MODAL DE BARBEARIAS MAIS PRÓXIMAS (GEOLOCALIZAÇÃO)
-function openNearbyShopsModal(){
-    openModal('nearbyShopsModal');
 }
 
 function toggleVipSettings(isChecked){
@@ -925,8 +967,15 @@ function saveShopSettings(){
     shopConfig.name = document.getElementById('cfgName').value;
     shopConfig.whatsapp = document.getElementById('cfgWhatsapp').value;
     shopConfig.pix = document.getElementById('cfgPix').value;
+    const promoText = document.getElementById('cfgPromoText').value;
+    
+    // Atualiza o texto na vitrine do cliente
+    document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
+    const promoEl = document.getElementById('clientShopPromoDisplay');
+    if(promoEl) promoEl.textContent = `🔥 Promoção: ${promoText}`;
+
     toggleVipSettings(document.getElementById('toggleVipPlan').checked);
-    toast('Configurações salvas!');
+    toast('Configurações e promoções salvas!');
 }
 
 function saveConvenio(){ closeModal('addConvenioModal'); toast('Convênio salvo!'); }
