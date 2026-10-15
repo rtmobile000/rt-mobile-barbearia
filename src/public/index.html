@@ -119,7 +119,7 @@
     <!-- AGENDA -->
     <section class="section" id="page-agenda">
       <div class="heading">
-        <div><h1>Agenda da Unidade</h1><p>Grade de horários (intervalos de 30 minutos com cálculo dinâmico de duração).</p></div>
+        <div><h1>Agenda da Unidade</h1><p>Grade de horários (intervalos de 30 minutos).</p></div>
         <button class="btn" onclick="openModal('bookingModal')">＋ Agendar Horário</button>
       </div>
       <div class="card">
@@ -152,13 +152,6 @@
           <div class="price" id="servPrice1">R$ 45,00</div>
           <button class="btn secondary" onclick="editService(1)">Editar Valor & Tempo</button>
         </article>
-        <article class="service">
-          <div class="symbol">✨</div>
-          <h3>Corte Platinado</h3>
-          <p class="muted">Duração: <span id="servTime2">90</span> min</p>
-          <div class="price" id="servPrice2">R$ 120,00</div>
-          <button class="btn secondary" onclick="editService(2)">Editar Valor & Tempo</button>
-        </article>
       </div>
     </section>
 
@@ -170,12 +163,6 @@
           <div class="symbol">👨‍🦰</div>
           <h3>Marcos Mendes</h3>
           <p class="muted">Cadeira 01 · Ativo</p>
-          <button class="btn secondary" onclick="openModal('timeoffModal')">Solicitar Folga 🌴</button>
-        </article>
-        <article class="service">
-          <div class="symbol">👨‍🦰</div>
-          <h3>Bruno Costa</h3>
-          <p class="muted">Cadeira 02 · Ativo</p>
           <button class="btn secondary" onclick="openModal('timeoffModal')">Solicitar Folga 🌴</button>
         </article>
       </div>
@@ -293,9 +280,6 @@
         <div style="display:flex; justify-content:space-between; padding:12px; background:#171a20; border-radius:10px;">
           <b>Cadeira 01 (Marcos Mendes)</b><span class="status">Atendendo Luan Garcia</span>
         </div>
-        <div style="display:flex; justify-content:space-between; padding:12px; background:#171a20; border-radius:10px;">
-          <b>Cadeira 02 (Bruno Costa)</b><span class="status wait">Livre / Próximo da Fila</span>
-        </div>
       </div>
     </div>
   </div>
@@ -372,7 +356,7 @@
  </div>
 </div>
 
-<!-- MODAL SOLICITAÇÃO DE FOLGA (BARBEIRO) -->
+<!-- MODAL SOLICITAÇÃO DE FOLGA (BARBEIRO) COM AS 3 OPÇÕES -->
 <div class="modalback" id="timeoffModal">
  <div class="modal">
   <button class="close" onclick="closeModal('timeoffModal')">✕</button>
@@ -389,7 +373,7 @@
  </div>
 </div>
 
-<!-- MODAL AGENDAMENTO NO PAINEL DA BARBEARIA / BARBEIRO -->
+<!-- MODAL AGENDAMENTO NO PAINEL DA BARBEARIA -->
 <div class="modalback" id="bookingModal">
  <div class="modal">
   <button class="close" onclick="closeModal('bookingModal')">✕</button>
@@ -397,7 +381,6 @@
   <div class="field"><label>Nome do Cliente</label><input id="bookClientName" placeholder="Nome completo"></div>
   <div class="field"><label>Serviço</label><select id="bookService"><option value="30">Corte Degradê (30 min)</option><option value="90">Corte Platinado (90 min)</option></select></div>
   <div class="field"><label>Horário</label><select id="bookTime"><option>08:00</option><option>08:30</option><option>09:00</option><option>10:00</option><option>10:30</option><option>11:00</option><option>14:00</option></select></div>
-  <div class="field"><label>Barbeiro Responsável</label><select><option>Marcos Mendes</option><option>Bruno Costa</option></select></div>
   <button class="btn" style="width:100%;margin-top:10px;" onclick="confirmAdminBooking()">Confirmar Agendamento na Grade</button>
  </div>
 </div>
@@ -421,7 +404,7 @@
     <div id="dynamicPixKey" style="font-family:monospace; background:#0b0d10; padding:10px; border-radius:8px; font-size:12px; color:#38bdf8; margin:8px 0; word-break:break-all; border:1px dashed #373b43;">91989117332</div>
     <button class="btn" style="width:100%; margin-top:8px; background:var(--gold); color:#191407;" onclick="toast('Chave Pix Copia e Cola copiada!')">📋 Copiar Chave Pix</button>
   </div>
-  <button class="btn secondary" style="width:100%;" onclick="closeModal('storeModal');toast('Pedido registrado! Aguardando Pix.')">Já Realizei o Pagamento</button>
+  <button class="btn secondary" style="width:100%;" onclick="closeModal('storeModal');toast('Pedido registrado! Aguardando pagamento Pix.')">Já Realizei o Pagamento</button>
  </div>
 </div>
 
@@ -540,6 +523,11 @@ function changeRole(role){
     currentRole = role;
     const hHelp = document.getElementById('roleHelp');
     const roleLabel = document.getElementById('roleLabel');
+    const navAgenda = document.getElementById('navAgenda');
+    const navServicos = document.getElementById('navServicos');
+    const navEquipe = document.getElementById('navEquipe');
+    const navClientes = document.getElementById('navClientes');
+    const navLoja = document.getElementById('navLoja');
     const navFin = document.getElementById('navFinanceiro');
     const navRel = document.getElementById('navRelatorios');
     const navConfig = document.getElementById('navConfig');
@@ -548,18 +536,28 @@ function changeRole(role){
     if(role === 'barber'){
         roleLabel.textContent = 'Minha Cadeira ✂️ (Barbeiro)';
         if(hHelp) hHelp.textContent = 'Visão restrita: Apenas sua agenda, equipe e clientes.';
+        if(navAgenda) navAgenda.style.display = 'flex';
+        if(navServicos) navServicos.style.display = 'none';
+        if(navEquipe) navEquipe.style.display = 'flex';
+        if(navClientes) navClientes.style.display = 'flex';
+        if(navLoja) navLoja.style.display = 'none';
         if(navFin) navFin.style.display = 'none';
         if(navRel) navRel.style.display = 'none';
         if(navConfig) navConfig.style.display = 'none';
         if(navAdmin) navAdmin.style.display = 'none';
-        toast('Modo Barbeiro Convidado ativado.');
+        toast('Modo Barbeiro Convidado ativado (Acesso restrito).');
     } else {
         roleLabel.textContent = 'Painel da barbearia (Dono)';
         if(hHelp) hHelp.textContent = 'Controle gerencial completo.';
+        if(navAgenda) navAgenda.style.display = 'flex';
+        if(navServicos) navServicos.style.display = 'flex';
+        if(navEquipe) navEquipe.style.display = 'flex';
+        if(navClientes) navClientes.style.display = 'flex';
+        if(navLoja) navLoja.style.display = 'flex';
         if(navFin) navFin.style.display = 'flex';
         if(navRel) navRel.style.display = 'flex';
         if(navConfig) navConfig.style.display = 'flex';
-        toast('Modo Dono ativado.');
+        toast('Modo Dono ativado (Acesso total).');
     }
 }
 
