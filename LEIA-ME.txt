@@ -1,0 +1,90 @@
+NAVALHA — PACOTE INICIAL E TUTORIAL
+RT Mobile
+
+IMPORTANTE
+Este pacote publica o protótipo visual HTML do NAVALHA. Ele NÃO é ainda o sistema completo de produção.
+Ainda não inclui backend, autenticação real, banco de dados conectado, permissões seguras, pagamentos reais,
+WhatsApp automático, fila em tempo real nem processamento de assinaturas. Não use dados reais de clientes
+nem aceite pagamentos com base apenas neste protótipo.
+
+PARTE 1 — COLOCAR O PROTÓTIPO NO GITHUB
+
+1. No navegador, entre em https://github.com e faça login.
+2. Clique no botão + (canto superior direito) > New repository.
+3. Em Repository name, escreva: navalha
+4. Escolha Private (recomendado enquanto desenvolve).
+5. Clique em Create repository.
+6. Na página do repositório, clique em Add file > Upload files.
+7. Extraia este ZIP no computador ou telefone. Envie o arquivo index.html dentro do caminho
+   src/public/index.html. Para manter a estrutura, o ideal é criar as pastas src e public no GitHub
+   e colocar index.html dentro de src/public. Como o GitHub pelo navegador não cria pastas vazias,
+   use Add file > Create new file, escreva src/public/index.html no nome e depois envie/substitua
+   o conteúdo pelo HTML deste pacote, ou faça o upload das pastas a partir do computador.
+8. Clique em Commit changes para salvar.
+Documentação oficial: https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository
+
+PARTE 2 — PUBLICAR O PROTÓTIPO NO RENDER
+
+Para este pacote simples, use Static Site, não Web Service.
+
+1. Entre em https://render.com e faça login.
+2. Clique em New + > Static Site.
+3. Conecte sua conta GitHub e autorize o Render.
+4. Selecione o repositório navalha.
+5. Em Branch, escolha main (ou a branch padrão exibida).
+6. Em Root Directory, deixe vazio.
+7. Em Build Command, deixe vazio.
+8. Em Publish Directory, informe: src/public
+9. Clique em Create Static Site.
+10. Aguarde o deploy terminar. Abra a URL *.onrender.com que o Render mostrar.
+11. Teste em celular e computador.
+12. Depois de editar o arquivo no GitHub e clicar em Commit changes, o Render normalmente publica a atualização automaticamente.
+Documentação oficial: https://render.com/docs/static-sites
+
+PARTE 3 — CRIAR O PROJETO SUPABASE (PREPARAÇÃO, AINDA NÃO CONECTADO)
+
+1. Entre em https://supabase.com e crie uma conta.
+2. Clique em New project.
+3. Dê o nome NAVALHA e crie uma senha forte para o banco. Guarde-a em local seguro.
+4. Escolha a região mais próxima disponível e clique para criar o projeto.
+5. Quando abrir o painel, vá para Project Settings > API (o nome pode aparecer como API Keys).
+6. Você verá informações do projeto, incluindo Project URL e uma chave pública/publishable/anon.
+7. NÃO coloque service_role, secret key, senha do banco ou tokens privados dentro de HTML, JavaScript público ou no GitHub.
+8. Não cole chaves secretas em conversas nem envie capturas de tela contendo segredos.
+9. Por enquanto, não crie tabelas aleatórias nem desative segurança. O protótipo atual ainda não usa o Supabase.
+Documentação oficial:
+https://supabase.com/docs/guides/database/overview
+https://supabase.com/docs/guides/auth
+https://supabase.com/docs/guides/database/postgres/row-level-security
+
+PARTE 4 — O QUE FALTA PARA SER UM SISTEMA REAL
+
+O projeto de produção precisa ser desenvolvido e testado em etapas:
+1. Aplicação frontend organizada (preferencialmente React/Next.js ou estrutura equivalente).
+2. Supabase Auth para login e cadastro.
+3. Tabelas PostgreSQL para perfis, barbearias, membros, serviços, disponibilidade, folgas, agendamentos,
+   estoque, pedidos, pagamentos, comissões, avaliações, planos e auditoria.
+4. Row Level Security (RLS) em todas as tabelas expostas, para que clientes vejam só o permitido,
+   barbeiros vejam os próprios dados operacionais, donos vejam apenas a sua barbearia e o superadmin
+   tenha permissões controladas.
+5. Operação transacional para reservar horários sem conflitos e evitar que duas pessoas ganhem a mesma vaga.
+6. Backend/Edge Functions para validar pagamentos, aprovar comprovantes, gerar QR Pix conforme o provedor,
+   executar lembretes e integrar WhatsApp.
+7. Serviço de tarefas agendadas para lembretes 24h/2h e campanhas; não pode depender de alguém manter a página aberta.
+8. Canal de tempo real para fila e Modo TV.
+9. Testes de permissões, agendamento, estoque, pagamentos, falhas e recuperação.
+10. Configurar segredos somente nas variáveis de ambiente do serviço backend no Render ou nos Secrets do Supabase.
+11. Antes de produção, testar com contas fictícias de cliente, barbeiro, dono e administrador.
+12. Só depois conectar domínio e aceitar clientes/pagamentos reais.
+
+REGRAS DE SEGURANÇA
+- Nunca confie apenas em esconder botões no frontend.
+- Não use uma chave service_role no navegador.
+- Ative e teste RLS em todas as tabelas expostas.
+- O email do administrador não deve ganhar poderes apenas por um campo editável pelo usuário; a função admin deve ser atribuída por um procedimento seguro no backend.
+- Não armazene dados de cartão. Use um provedor de pagamento apropriado.
+- QR Pix estático e comprovante enviado pelo usuário não confirmam automaticamente um pagamento. A aprovação precisa de conferência ou integração com provedor.
+
+COMO PEDIR AJUDA NO PRÓXIMO PASSO
+Envie uma captura da tela em que você está e diga se está no GitHub, Supabase ou Render.
+Nunca envie senhas, chaves privadas, service_role, tokens ou dados pessoais de clientes.

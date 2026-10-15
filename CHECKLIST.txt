@@ -1,0 +1,10 @@
+NAVALHA — CHECKLIST DE PUBLICAÇÃO DO PROTÓTIPO
+
+[ ] Repositório GitHub criado
+[ ] src/public/index.html enviado e commitado
+[ ] Render Static Site conectado ao repositório
+[ ] Publish Directory definido como src/public
+[ ] Deploy concluído sem erro
+[ ] URL do Render abre no celular
+[ ] URL do Render abre no computador
+[ ] Entendido que login/banco/pagamentos ainda não estão conectados
