@@ -125,25 +125,36 @@
       </div>
     </section>
 
-    <!-- AGENDA -->
+    <!-- AGENDA PROFISSIONAL E COMPLETA -->
     <section class="section" id="page-agenda">
       <div class="heading">
-        <div><h1>Agenda da Unidade</h1><p>Grade de horários (intervalos de 30 minutos).</p></div>
+        <div><h1>Agenda Profissional da Unidade</h1><p>Grade completa de horários e atendimento em tempo real.</p></div>
         <button class="btn" onclick="openAdminBookingModal()">＋ Agendar Horário</button>
       </div>
       <div class="card">
         <div class="tablewrap">
           <table>
-            <thead><tr><th>HORÁRIO</th><th>CLIENTE</th><th>SERVIÇO & TEMPO</th><th>PROFISSIONAL</th><th>STATUS</th></tr></thead>
-            <tbody id="agendaTableBody">
-              <tr><td>08:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
-              <tr><td>08:30</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
-              <tr><td>09:00</td><td>Lucas Almeida</td><td>Corte Degradê (30 min)</td><td>Marcos Mendes</td><td><span class="status">Confirmado</span></td></tr>
-              <tr><td>09:30</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário bloqueado (Duração de Corte)</td></tr>
-              <tr><td>10:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
-              <tr><td>10:30</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
-              <tr><td>11:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
-              <tr><td>14:00</td><td colspan="4" style="color:var(--muted); text-align:center;">Horário livre</td></tr>
+            <thead>
+              <tr>
+                <th>HORÁRIO</th>
+                <th>CLIENTE</th>
+                <th>SERVIÇO & DURAÇÃO</th>
+                <th>PROFISSIONAL</th>
+                <th>STATUS</th>
+                <th>AÇÕES</th>
+              </tr>
+            </thead>
+            <tbody id="adminAgendaTableBody">
+              <tr>
+                <td><b>09:00</b></td>
+                <td>Lucas Almeida</td>
+                <td>Corte Degradê (30 min)</td>
+                <td>Marcos Mendes</td>
+                <td><span class="status">Confirmado</span></td>
+                <td><button class="btn secondary" style="padding:4px 8px;font-size:10px;" onclick="toast('Agendamento concluído')">Concluir</button></td>
+              </tr>
+              <tr><td>09:30</td><td colspan="5" style="color:var(--muted); text-align:center;">Horário disponível</td></tr>
+              <tr><td>10:00</td><td colspan="5" style="color:var(--muted); text-align:center;">Horário disponível</td></tr>
             </tbody>
           </table>
         </div>
@@ -164,23 +175,26 @@
       </div>
     </section>
 
-    <!-- EQUIPE -->
+    <!-- EQUIPE (COM OPÇÃO DE EDITAR E APAGAR BARBEIRO) -->
     <section class="section" id="page-equipe">
-      <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre os profissionais com foto e WhatsApp.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
+      <div class="heading"><div><h1>Equipe de Barbeiros</h1><p>Cadastre, edite ou remova profissionais da equipe.</p></div><button class="btn" onclick="openModal('addBarberModal')">＋ Cadastrar Barbeiro</button></div>
       <div class="servicegrid" id="barberListContainer">
         <article class="service">
           <div class="barberart" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80')"></div>
           <h3>Marcos Mendes</h3>
           <p class="muted">WhatsApp: (91) 98888-1122 · ★ 4.9</p>
-          <button class="btn secondary" onclick="openModal('timeoffModal')">Solicitar Folga 🌴</button>
+          <div style="display:flex; gap:6px; margin-top:8px;">
+            <button class="btn secondary" style="flex:1;" onclick="editBarber(0)">Editar</button>
+            <button class="btn danger" style="flex:1;" onclick="deleteBarber(0)">Apagar</button>
+          </div>
         </article>
       </div>
     </section>
     
-    <!-- CLIENTES & CONVÊNIOS -->
+    <!-- CLIENTES & CONVÊNIOS (COM OPÇÃO DE EDITAR E APAGAR CLIENTE) -->
     <section class="section" id="page-clientes">
       <div class="heading">
-        <div><h1>Clientes & Convênios 🤝</h1><p>Gerencie sua base de clientes com foto e WhatsApp.</p></div>
+        <div><h1>Clientes & Convênios 🤝</h1><p>Gerencie sua base de clientes com foto, WhatsApp, edição e exclusão.</p></div>
         <div style="display:flex; gap:8px;">
           <button class="btn" onclick="openModal('addClientModal')">＋ Cadastrar Cliente</button>
           <button class="btn secondary" onclick="openModal('addConvenioModal')">＋ Cadastrar Convênio</button>
@@ -196,7 +210,10 @@
                 <td><div style="width:32px;height:32px;border-radius:50%;background:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80') center/cover;"></div></td>
                 <td><b>Lucas Almeida</b></td>
                 <td>(91) 98888-2233</td>
-                <td><button class="btn secondary" style="padding:4px 8px;font-size:10px;" onclick="toast('Histórico do cliente')">Ver Histórico</button></td>
+                <td>
+                  <button class="btn secondary" style="padding:3px 6px;font-size:10px;" onclick="editClient(0)">Editar</button>
+                  <button class="btn danger" style="padding:3px 6px;font-size:10px;" onclick="deleteClient(0)">Apagar</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -276,14 +293,14 @@
       <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">O relatório está otimizado para exibir dados exatos do intervalo de dias selecionado acima.</p></div>
     </section>
 
-    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA (COM CONFIGURAÇÃO DE PROMOÇÕES E VIP) -->
+    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA -->
     <section class="section" id="page-config">
       <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix, Clube VIP e Promoções.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
       <div class="grid2">
         <div class="card">
           <div class="cardtitle"><h2>Dados do Estabelecimento</h2></div>
           <div class="field"><label>Nome da Barbearia</label><input id="cfgName" value="Barbearia Imperial Pro"></div>
-          <div class="field"><label>Endereço Completo (Bairro / Cidade)</label><input id="cfgAddress" value="Centro - Santa Izabel do Pará/PA"></div>
+          <div class="field"><label>Endereço Completo</label><input id="cfgAddress" value="Centro - Santa Izabel do Pará/PA"></div>
           <div class="field"><label>WhatsApp da Barbearia</label><input id="cfgWhatsapp" value="5591989117332"></div>
           <div class="field"><label>Sua Chave Pix</label><input id="cfgPix" value="91989117332"></div>
         </div>
@@ -368,7 +385,7 @@
     </div>
    </div>
 
-   <!-- NOVO BANNER DE PROMOÇÕES CADASTRADAS PELAS BARBEARIAS -->
+   <!-- BANNER DE PROMOÇÕES -->
    <div class="card" style="margin-bottom:20px; background:linear-gradient(135deg, #18150f, #101216); border:1px solid var(--gold);">
      <div class="cardtitle"><h2>🔥 Ofertas & Promoções nas Barbearias</h2><span class="pill">DESTAQUES</span></div>
      <div id="clientPromotionsFeed" style="display:grid; gap:10px;">
@@ -382,7 +399,7 @@
      </div>
    </div>
 
-   <!-- MEUS AGENDAMENTOS NA ÁREA DO CLIENTE -->
+   <!-- MEUS AGENDAMENTOS NA ÁREA DO CLIENTE (COM TABELA PROFISSIONAL) -->
    <div class="card" style="margin-bottom:20px;">
      <div class="cardtitle"><h2>Meus Agendamentos Realizados 📅</h2></div>
      <div class="tablewrap">
@@ -403,7 +420,7 @@
         <span class="status" style="margin-bottom:6px; display:inline-block;" id="shopRatingBadge">Aberto · 4.9 ★★★★★</span>
         <h3 id="clientShopDisplayTitle" style="font:800 16px Manrope; margin:4px 0;">Barbearia Imperial Pro</h3>
         <p class="muted small" style="margin-bottom:4px;">Centro · Santa Izabel do Pará/PA</p>
-        <p class="muted small" style="margin-bottom:10px; color:var(--gold2);">🔥 Promoção: Primeiro corte na barbearia com 20% off!</p>
+        <p class="muted small" style="margin-bottom:10px; color:var(--gold2);" id="clientShopPromoDisplay">🔥 Promoção: Primeiro corte na barbearia com 20% off!</p>
         
         <div style="display:flex; gap:8px;">
           <button class="btn" style="flex:1;" onclick="openClientBooking()">📅 Agendar</button>
@@ -426,7 +443,7 @@
  </div>
 </div>
 
-<!-- MODAL DO CLUBE VIP (LISTA AS BARBEARIAS QUE DISPONIBILIZAM O VIP SEM VALOR FIXO NA LISTA) -->
+<!-- MODAL DO CLUBE VIP -->
 <div class="modalback" id="vipShopsModal">
  <div class="modal">
   <button class="close" onclick="closeModal('vipShopsModal')">✕</button>
@@ -444,7 +461,7 @@
  </div>
 </div>
 
-<!-- MODAL DE BARBEARIAS MAIS PRÓXIMAS (COM GEOLOCALIZAÇÃO REAL) -->
+<!-- MODAL DE BARBEARIAS MAIS PRÓXIMAS -->
 <div class="modalback" id="nearbyShopsModal">
  <div class="modal">
   <button class="close" onclick="closeModal('nearbyShopsModal')">✕</button>
@@ -454,7 +471,7 @@
     <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
       <div>
         <b>Barbearia Imperial Pro</b>
-        <small class="muted" style="display:block;">Centro · Santa Izabel do Pará/PA (~1.4 km)</small>
+        <small class="muted" style="display:block;">Centro · Santa Izabel do Pará/PA (~1.1 km)</small>
       </div>
       <button class="btn" onclick="closeModal('nearbyShopsModal'); scrollToShops();">Ver Unidade</button>
     </div>
@@ -465,7 +482,7 @@
 <!-- MODAIS -->
 <div class="modalback" id="addConvenioModal"><div class="modal"><button class="close" onclick="closeModal('addConvenioModal')">✕</button><h2>Cadastrar Convênio</h2><div class="field"><label>Nome</label><input id="convNameInput"></div><button class="btn" onclick="saveConvenio()">Salvar</button></div></div>
 
-<!-- MODAL CADASTRAR BARBEIRO -->
+<!-- MODAL CADASTRAR BARBEIRO (FOTO E WHATSAPP) -->
 <div class="modalback" id="addBarberModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addBarberModal')">✕</button>
@@ -477,7 +494,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR CLIENTE -->
+<!-- MODAL CADASTRAR CLIENTE (FOTO E WHATSAPP) -->
 <div class="modalback" id="addClientModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addClientModal')">✕</button>
@@ -489,7 +506,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR PRODUTO -->
+<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE -->
 <div class="modalback" id="addProductModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addProductModal')">✕</button>
@@ -502,7 +519,7 @@
  </div>
 </div>
 
-<!-- MODAL CADASTRAR SERVIÇO -->
+<!-- MODAL CADASTRAR / EDITAR SERVIÇOS -->
 <div class="modalback" id="addServiceModal">
  <div class="modal">
   <button class="close" onclick="closeModal('addServiceModal')">✕</button>
@@ -516,7 +533,7 @@
 
 <div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" onclick="submitTimeoff()">Enviar</button></div></div>
 
-<!-- MODAL CAIXA -->
+<!-- MODAL NOVA MOVIMENTAÇÃO CAIXA -->
 <div class="modalback" id="cashTransactionModal">
  <div class="modal">
   <button class="close" onclick="closeModal('cashTransactionModal')">✕</button>
@@ -676,13 +693,11 @@ function requestUpgrade(){
     window.open(`https://wa.me/5591989117332?text=${text}`, '_blank');
 }
 
-// SCROLL AUTOMÁTICO PARA AS BARBEARIAS PRÓXIMAS
 function scrollToShops(){
     const el = document.getElementById('shopsAnchorSection');
     if(el) el.scrollIntoView({ behavior: 'smooth' });
 }
 
-// ABRIR PAINEL DE BARBEARIAS PRÓXIMAS (GEOLOCALIZAÇÃO REAL)
 function openNearbyShopsModal(){
     openModal('nearbyShopsModal');
     const statusText = document.getElementById('geolocationStatusText');
@@ -692,9 +707,7 @@ function openNearbyShopsModal(){
         statusText.textContent = "Obtendo sua localização atual...";
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                statusText.textContent = `Localização obtida! Exibindo barbearias mais próximas.`;
+                statusText.textContent = `Localização obtida! Barbearias mais próximas:`;
                 container.innerHTML = `
                     <div style="background:#171a20; padding:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #30343b;">
                       <div>
@@ -706,16 +719,15 @@ function openNearbyShopsModal(){
                 `;
             },
             (error) => {
-                statusText.textContent = "Não foi possível obter a geolocalização exata. Exibindo unidade padrão:";
+                statusText.textContent = "Exibindo unidade padrão mais próxima:";
             },
             { timeout: 10000 }
         );
     } else {
-        statusText.textContent = "Geolocalização não suportada pelo navegador.";
+        statusText.textContent = "Geolocalização não suportada.";
     }
 }
 
-// ABRIR MODAL DO CLUBE VIP (LISTA AS BARBEARIAS QUE ATIVARAM O VIP)
 function openVipShopsModal(){
     const isVipEnabled = document.getElementById('toggleVipPlan').checked;
     if(!isVipEnabled){
@@ -876,6 +888,11 @@ function confirmClientBookingFinal(){
     if(adminTbody.querySelector('td[colspan]')) adminTbody.innerHTML = '';
     adminTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name} (App)</td><td>${service}</td><td>${barber}</td><td>${statusBadge}</td></tr>`;
 
+    // Atualiza também a tabela profissional da agenda
+    const profTbody = document.getElementById('adminAgendaTableBody');
+    if(profTbody.querySelector('td[colspan]')) profTbody.innerHTML = '';
+    profTbody.innerHTML += `<tr><td><b>${time}</b></td><td>${name}</td><td>${service}</td><td>${barber}</td><td><span class="status">Confirmado</span></td><td><button class="btn secondary" style="padding:4px 8px;font-size:10px;" onclick="toast('Concluído')">Concluir</button></td></tr>`;
+
     const msg = encodeURIComponent(`Olá, confirmo meu agendamento na *${chosenShop}*:\n\n👤 Cliente: ${name}\n✂️ Serviço: ${service}\n👨‍🦰 Barbeiro: ${barber}\n🕒 Horário: ${time}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
     toast('Agendamento realizado com sucesso!');
@@ -969,7 +986,6 @@ function saveShopSettings(){
     shopConfig.pix = document.getElementById('cfgPix').value;
     const promoText = document.getElementById('cfgPromoText').value;
     
-    // Atualiza o texto na vitrine do cliente
     document.getElementById('clientShopDisplayTitle').textContent = shopConfig.name;
     const promoEl = document.getElementById('clientShopPromoDisplay');
     if(promoEl) promoEl.textContent = `🔥 Promoção: ${promoText}`;
@@ -997,6 +1013,7 @@ function toggleClientPix(val){ document.getElementById('clientPixBox').classList
 function toggleShopPay(val){ document.getElementById('shopPixBox').classList.toggle('hidden', val !== 'pix'); document.getElementById('shopBalcaoBox').classList.toggle('hidden', val !== 'balcao'); }
 function togglePickerInput(val){ document.getElementById('pickerNameField').classList.toggle('hidden', val !== 'other'); }
 
+// EDITAR E APAGAR BARBEIRO
 function saveBarber(){
     const name = document.getElementById('bNameInput').value;
     const wp = document.getElementById('bWpInput').value;
@@ -1009,13 +1026,35 @@ function saveBarber(){
           <div class="barberart" style="background-image:url('${img}')"></div>
           <h3>${name}</h3>
           <p class="muted">WhatsApp: ${wp || '(91) 99999-9999'} · ★ 5.0</p>
-          <button class="btn secondary" onclick="openModal('timeoffModal')">Solicitar Folga 🌴</button>
+          <div style="display:flex; gap:6px; margin-top:8px;">
+            <button class="btn secondary" style="flex:1;" onclick="editBarber(this)">Editar</button>
+            <button class="btn danger" style="flex:1;" onclick="deleteBarber(this)">Apagar</button>
+          </div>
         </article>
     `;
     closeModal('addBarberModal');
-    toast('Barbeiro cadastrado com foto e WhatsApp!');
+    toast('Barbeiro cadastrado com sucesso!');
 }
 
+function editBarber(btn){
+    const article = btn.closest('article');
+    const h3 = article.querySelector('h3');
+    const newName = prompt("Nome do Barbeiro:", h3.textContent);
+    if(newName){
+        h3.textContent = newName;
+        toast('Barbeiro atualizado!');
+    }
+}
+
+function deleteBarber(btn){
+    if(confirm("Tem certeza que deseja apagar/demitir este barbeiro?")){
+        const article = btn.closest('article');
+        article.remove();
+        toast('Barbeiro removido da equipe.');
+    }
+}
+
+// EDITAR E APAGAR CLIENTE
 function saveClient(){
     const name = document.getElementById('cNameInput').value;
     const wp = document.getElementById('cWpInput').value;
@@ -1028,11 +1067,32 @@ function saveClient(){
           <td><div style="width:32px;height:32px;border-radius:50%;background:url('${img}') center/cover;"></div></td>
           <td><b>${name}</b></td>
           <td>${wp || '(91) 99999-9999'}</td>
-          <td><button class="btn secondary" style="padding:4px 8px;font-size:10px;" onclick="toast('Histórico do cliente')">Ver Histórico</button></td>
+          <td>
+            <button class="btn secondary" style="padding:3px 6px;font-size:10px;" onclick="editClientRow(this)">Editar</button>
+            <button class="btn danger" style="padding:3px 6px;font-size:10px;" onclick="deleteClientRow(this)">Apagar</button>
+          </td>
         </tr>
     `;
     closeModal('addClientModal');
     toast('Cliente cadastrado com sucesso!');
+}
+
+function editClientRow(btn){
+    const tr = btn.closest('tr');
+    const b = tr.querySelector('b');
+    const newName = prompt("Nome do Cliente:", b.textContent);
+    if(newName){
+        b.textContent = newName;
+        toast('Cliente atualizado!');
+    }
+}
+
+function deleteClientRow(btn){
+    if(confirm("Tem certeza que deseja apagar este cliente da base?")){
+        const tr = btn.closest('tr');
+        tr.remove();
+        toast('Cliente removido.');
+    }
 }
 
 function saveProduct(){
