@@ -276,9 +276,9 @@
       <div class="card"><div class="cardtitle"><h2>Resumo Analítico da Gestão</h2></div><p class="muted small">O relatório está otimizado para exibir dados exatos do intervalo de dias selecionado acima.</p></div>
     </section>
 
-    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA -->
+    <!-- CONFIGURAÇÕES GLOBAIS DA BARBEARIA (COM CLUBE VIP LIGA/DESLIGA E PREÇO) -->
     <section class="section" id="page-config">
-      <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp e chave Pix.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
+      <div class="heading"><div><h1>Configurações da Barbearia ⚙️</h1><p>Edite dados do estabelecimento, WhatsApp, chave Pix e Clube VIP.</p></div><button class="btn" onclick="saveShopSettings()">Salvar Alterações</button></div>
       <div class="grid2">
         <div class="card">
           <div class="cardtitle"><h2>Dados do Estabelecimento</h2></div>
@@ -288,11 +288,17 @@
           <div class="field"><label>Sua Chave Pix</label><input id="cfgPix" value="91989117332"></div>
         </div>
         <div class="card">
-          <div class="cardtitle"><h2>Chaves de Ativação de Funções</h2><p class="muted">Ligue ou desligue módulos.</p></div>
+          <div class="cardtitle"><h2>Configuração de Plano VIP Mensal</h2><p class="muted">Gerencie o clube de assinatura da sua barbearia.</p></div>
           <div style="display:grid; gap:12px; margin-top:12px;">
-            <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Módulo Loja / Shopping</span><input type="checkbox" id="toggleShopModule" checked></label>
-            <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Módulo Convênios Parceiros</span><input type="checkbox" id="toggleConvModule" checked></label>
-            <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Modo TV na Recepção</span><input type="checkbox" id="toggleTvModule" checked></label>
+            <label class="switch" style="width:100%; justify-content:space-between;"><span style="color:#fff;">Habilitar Clube de Assinatura VIP</span><input type="checkbox" id="toggleVipPlan" checked onchange="toggleVipSettings(this.checked)"></label>
+            <div class="field" id="vipPriceField" style="margin-top:8px;">
+              <label>Valor do Plano VIP Mensal (R$)</label>
+              <input id="cfgVipPrice" type="number" value="99.00" placeholder="99.00">
+            </div>
+            <div class="field">
+              <label>Cortes Incluídos no Mês</label>
+              <input id="cfgVipCuts" type="number" value="4" placeholder="4">
+            </div>
           </div>
           <div style="margin-top:20px; border-top:1px solid var(--line); padding-top:12px;">
             <div class="eyebrow" style="color:var(--gold);">Licença Oficial NAVALHA</div>
@@ -348,12 +354,18 @@
  </div>
  <div class="content">
   <section id="clientHome">
-   <div class="client-hero">
+   
+   <!-- BOTÃO 1: ATALHO RÁPIDO PARA O CATÁLOGO DE BARBEARIAS (SCROLL AUTOMÁTICO) -->
+   <!-- BOTÃO 2: BANNER DE CLUBE DE ASSINATURA VIP (LIGADO/DESLIGADO POR BARBEARIA) -->
+   <div class="client-hero" style="display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start;">
     <div>
-     <div class="eyebrow">NAVALHA · AGENDAMENTO RÁPIDO EM 4 CLIQUES</div>
-     <h1>Seu próximo corte começa aqui.</h1>
-     <p style="color:#bbb;font-size:12px;margin:6px 0 14px;">Escolha o serviço, profissional e horário ideal sem complicação.</p>
-     <button class="btn" onclick="openClientBooking()">⚡ Agendar Horário Agora</button>
+     <div class="eyebrow">NAVALHA · CLUBE DE ASSINATURA VIP</div>
+     <h1 id="clientVipBannerTitle">Plano Mensal Ilimitado - R$ 99/mês</h1>
+     <p style="color:#bbb;font-size:12px;margin:4px 0 12px;" id="clientVipBannerDesc">Corte até 4 vezes ao mês com prioridade na cadeira.</p>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; width:100%;">
+     <button class="btn" onclick="scrollToShops()" style="background:#fff; color:#000;">📍 Ver Barbearias Próximas</button>
+     <button class="btn secondary" id="clientVipSubscribeBtn" onclick="subscribeVipPlan()">⭐ Assinar Clube VIP</button>
     </div>
    </div>
 
@@ -370,7 +382,7 @@
      </div>
    </div>
 
-   <div class="clientsectiontitle" style="margin-bottom:12px;"><div><h2>Barbearias Parceiras (Botões Separados para Agenda e Shopping)</h2></div></div>
+   <div class="clientsectiontitle" id="shopsAnchorSection" style="margin-bottom:12px;"><div><h2>Barbearias Parceiras (Agenda e Shopping Separados)</h2></div></div>
    
    <div class="barbershopgrid" id="publicShopsFeed">
     <article class="shop" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px;">
@@ -379,10 +391,10 @@
         <h3 id="clientShopDisplayTitle" style="font:800 16px Manrope; margin:4px 0;">Barbearia Imperial Pro</h3>
         <p class="muted small" style="margin-bottom:10px;">Centro · Atendimento Premium com Especialistas</p>
         
-        <!-- BOTÕES SEPARADOS EXATAMENTE COMO SOLICITADO -->
+        <!-- BOTÕES LADO A LADO: AGENDA E SHOPPING INDIVIDUAIS -->
         <div style="display:flex; gap:8px;">
-          <button class="btn" style="flex:1;" onclick="openClientBooking()">📅 Agendar Horário</button>
-          <button class="btn secondary" style="flex:1;" onclick="selectBarbershop('Barbearia Imperial Pro', '5591989117332', '91989117332')">🛍️ Acessar Shopping</button>
+          <button class="btn" style="flex:1;" onclick="openClientBooking()">📅 Agendar</button>
+          <button class="btn secondary" style="flex:1;" onclick="selectBarbershop('Barbearia Imperial Pro', '5591989117332', '91989117332')">🛍️ Shopping</button>
         </div>
       </div>
     </article>
@@ -550,23 +562,6 @@
  </div>
 </div>
 
-<div class="modalback" id="reviewModal">
- <div class="modal">
-  <button class="close" onclick="closeModal('reviewModal')">✕</button>
-  <h2>Avaliar Atendimento ⭐</h2>
-  <p class="muted small">Como foi sua experiência com o barbeiro? Sua avaliação atualiza o ranking em tempo real.</p>
-  <div class="field"><label>Nota (Estrelas)</label>
-    <select id="reviewStars">
-      <option value="5">★★★★★ (5.0 - Excelente)</option>
-      <option value="4">★★★★☆ (4.0 - Muito Bom)</option>
-      <option value="3">★★★☆☆ (3.0 - Regular)</option>
-    </select>
-  </div>
-  <div class="field"><label>Comentário</label><input id="reviewComment" placeholder="Ex: Atendimento impecável!"></div>
-  <button class="btn" style="width:100%;" onclick="submitReview()">Enviar Avaliação</button>
- </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <script>
@@ -596,7 +591,7 @@ window.addEventListener('DOMContentLoaded', () => {
         } else {
             document.getElementById('loginScreen').classList.remove('hidden');
         }
-        renderAdminStock();
+        toggleVipSettings(document.getElementById('toggleVipPlan').checked);
     }, 1000);
 });
 
@@ -629,6 +624,43 @@ function pickRole(role,btn){
 function requestUpgrade(){
     const text = encodeURIComponent("Olá Robert! Gostaria de fazer o Upgrade da minha barbearia no NAVALHA para o plano completo de R$ 100/mês.");
     window.open(`https://wa.me/5591989117332?text=${text}`, '_blank');
+}
+
+// SCROLL AUTOMÁTICO PARA AS BARBEARIAS PRÓXIMAS
+function scrollToShops(){
+    const el = document.getElementById('shopsAnchorSection');
+    if(el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// LIGA / DESLIGA CONFIGURAÇÃO DO PLANO VIP NO PAINEL
+function toggleVipSettings(isChecked){
+    const priceField = document.getElementById('vipPriceField');
+    const banner = document.getElementById('clientVipBannerTitle');
+    const bannerDesc = document.getElementById('clientVipBannerDesc');
+    const subBtn = document.getElementById('clientVipSubscribeBtn');
+    
+    if(priceField) priceField.style.display = isChecked ? 'grid' : 'none';
+    if(banner){
+        if(isChecked){
+            const price = document.getElementById('cfgVipPrice')?.value || '99.00';
+            const cuts = document.getElementById('cfgVipCuts')?.value || '4';
+            banner.textContent = `Plano Mensal Ilimitado - R$ ${Number(price).toFixed(2).replace('.',',')}/mês`;
+            bannerDesc.textContent = `Corte até ${cuts} vezes ao mês com prioridade na cadeira.`;
+            if(subBtn) subBtn.style.display = 'inline-block';
+        } else {
+            banner.textContent = `Clube VIP Indisponível no Momento`;
+            bannerDesc.textContent = `Esta unidade opera atualmente com cortes avulsos.`;
+            if(subBtn) subBtn.style.display = 'none';
+        }
+    }
+}
+
+function subscribeVipPlan(){
+    const price = document.getElementById('cfgVipPrice')?.value || '99.00';
+    const cuts = document.getElementById('cfgVipCuts')?.value || '4';
+    const text = encodeURIComponent(`⭐ Olá! Gostaria de assinar o *Clube VIP Mensal* na ${shopConfig.name} (R$ ${price}/mês - até ${cuts} cortes). Como procedo com o pagamento?`);
+    window.open(`https://wa.me/${shopConfig.whatsapp}?text=${text}`, '_blank');
+    toast('Redirecionando para assinar o Clube VIP...');
 }
 
 function selectBarbershop(name, wp, pix){
@@ -760,12 +792,6 @@ function confirmClientBookingFinal(){
     toast('Agendamento realizado com sucesso!');
 }
 
-function submitReview(){
-    const stars = document.getElementById('reviewStars').value;
-    closeModal('reviewModal');
-    toast(`Avaliação enviada com sucesso! Nota ${stars}.0 registrada.`);
-}
-
 function addProductToCart(name, price){
     const item = activeCart.find(p => p.name === name);
     if(item){
@@ -852,6 +878,7 @@ function saveShopSettings(){
     shopConfig.name = document.getElementById('cfgName').value;
     shopConfig.whatsapp = document.getElementById('cfgWhatsapp').value;
     shopConfig.pix = document.getElementById('cfgPix').value;
+    toggleVipSettings(document.getElementById('toggleVipPlan').checked);
     toast('Configurações salvas!');
 }
 
