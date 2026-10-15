@@ -575,10 +575,14 @@ function changeRole(role){
     }
 }
 
-// Abre o agendamento exclusivo do cliente sem conflito
+// Função robusta para abrir o agendamento do cliente
 function openClientBooking(){
     const modal = document.getElementById('clientBookingModal');
-    if(modal) modal.style.display = 'grid';
+    if(modal) {
+        modal.style.display = 'grid';
+    } else {
+        alert('Modal não encontrado');
+    }
 }
 
 // Solicitação de Folga com 3 Opções
@@ -732,4 +736,4 @@ function signOut(){
 }
 </script>
 </body>
-</html>s
+</html>
