@@ -9,9 +9,9 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{--bg:#08090b;--panel:#101216;--panel2:#15181e;--line:#262a31;--text:#f4f4f2;--muted:#9298a2;--gold:#d7b15b;--gold2:#f0d38a;--green:#55c69a;--red:#f07878}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;max-width:100vw;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{padding:20px 14px;border-right:1px solid var(--line);background:#0b0c0f;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brandmark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--gold2),#9b762c);display:grid;place-items:center;color:#17130a;font-weight:900;font-family:Manrope}.brand strong{font:800 15px Manrope;letter-spacing:.7px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.5px;margin-top:2px}.navlabel{color:#606671;font-size:10px;font-weight:700;letter-spacing:1.8px;padding:0 12px;margin-bottom:-10px}.nav{display:grid;gap:4px}.nav button{display:flex;align-items:center;gap:10px;background:transparent;color:#a6abb4;padding:10px 12px;border-radius:10px;text-align:left;font-size:12px}.nav button span{width:16px;text-align:center;font-size:15px}.nav button.active,.nav button:hover{background:#242016;color:var(--gold2)}.sidebottom{margin-top:auto;border:1px solid var(--line);border-radius:12px;padding:12px;background:linear-gradient(135deg,#17150f,#101216)}.sidebottom p{font-size:11px;color:var(--muted);line-height:1.4}.sidebottom button{width:100%;margin-top:6px}.main{min-width:0;width:100%}.topbar{height:65px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px}.crumb{font-size:11px;color:var(--muted)}.crumb b{color:#fff;font-weight:600}.topright{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{border:1px solid #34302a;color:var(--gold2);background:#1a1710;border-radius:99px;padding:5px 10px;font-size:10px}.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#d4b05a;color:#1b1608;font-weight:800;font-size:12px}.content{max-width:1400px;margin:auto;padding:20px 20px 40px}.eyebrow{color:var(--gold);font-size:9px;letter-spacing:1.8px;font-weight:800;text-transform:uppercase}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:20px;flex-wrap:wrap}.heading h1{font:800 clamp(22px,2.5vw,30px) Manrope;margin:5px 0}.heading p{margin:0;color:var(--muted);font-size:12px}.btn{border-radius:9px;padding:10px 14px;font-size:11px;font-weight:700;background:var(--gold);color:#191407;transition:.2s;white-space:nowrap}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#1b1e24;color:#e9e9e7;border:1px solid #30343c}.btn.ghost{background:transparent;color:var(--gold2);border:1px solid #51452a}.btn.danger{background:#361b1e;color:#ffb5b5;border:1px solid #623237}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:14px}.stat{padding:16px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.stat strong{display:block;font:800 22px Manrope;margin:12px 0 4px}.stat small{color:var(--green);font-size:10px}.grid2{display:grid;grid-template-columns:1fr;gap:14px}@media(min-width:900px){.grid2{grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr)}}.card{padding:18px;min-width:0}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.cardtitle h2{font:700 14px Manrope;margin:0}.muted{color:var(--muted)}.small{font-size:10px}.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;min-width:500px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid #272a30;font-size:11px}th{color:var(--muted);font-weight:600}td{color:#e4e5e7}.status{font-size:10px;border-radius:99px;padding:5px 7px;background:#173126;color:#7ee0b4;white-space:nowrap}.status.wait{background:#332918;color:#e7c477}.status.off{background:#351e22;color:#f2a0a0}.section{display:none}.section.active{display:block}.servicegrid,.shopgrid,.barbershopgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.service,.product,.shop{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}.service h3,.product h3,.shop h3{font:700 13px Manrope;margin:0 0 4px}.service p,.product p,.shop p{font-size:11px;color:var(--muted);line-height:1.4}.price{font:800 18px Manrope;color:var(--gold2);margin:10px 0}.service button,.product button,.shop button{width:100%;margin-top:6px}.productart{height:90px;border-radius:10px;background:radial-gradient(circle at 50% 35%,#3b3322,#181a1e 65%);display:grid;place-items:center;font-size:32px;margin-bottom:10px;background-size:cover;background-position:center}.field{display:grid;gap:6px;margin-bottom:12px}.field label{font-size:11px;color:#b6bbc3}.field input,.field select{width:100%;padding:10px 12px;border-radius:9px;border:1px solid #30343b;background:#0b0d10;color:white;outline:none;font-size:13px}.field input:focus,.field select:focus{border-color:var(--gold)}.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed #30343b;border-radius:10px;font-size:11px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#f1d181;color:#171207;border-radius:10px;padding:10px 16px;font-size:11px;font-weight:700;box-shadow:0 6px 20px #0008;display:none;z-index:999999;max-width:90vw}.modalback{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:14px;z-index:999999}.modal{background:#111419;border:1px solid #373b43;border-radius:16px;padding:20px;width:min(440px,100%);max-height:90vh;overflow:auto}.modal h2{font:800 19px Manrope;margin:0 0 6px}.modal p{font-size:11px;color:var(--muted);line-height:1.5}.close{float:right;background:#272a30;color:white;border-radius:7px;padding:5px 8px;font-size:12px}.loginpage{min-height:100vh;display:grid;grid-template-columns:1fr;position:fixed;inset:0;z-index:1000;background:var(--bg);overflow-y:auto}@media(min-width:768px){.loginpage{grid-template-columns:1fr 1fr;overflow:hidden}}.loginvisual{padding:6%;background:radial-gradient(circle at 25% 20%,#392b13,#101114 55%,#08090b);display:flex;flex-direction:column;justify-content:space-between}.loginvisual h1{font:800 clamp(28px,4vw,50px) Manrope;line-height:1.05;max-width:550px}.loginvisual h1 span{color:var(--gold2)}.loginvisual p{color:#b2b0a9;max-width:380px;line-height:1.6;font-size:13px}.loginform{padding:6%;display:flex;flex-direction:column;justify-content:center;max-width:580px;width:100%;margin:auto}.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.rolepick button{padding:11px;border-radius:9px;background:#1a1d22;border:1px solid #30343b;color:#c7c9ce;font-size:11px}.rolepick button.selected{border-color:var(--gold);color:var(--gold2);background:#282216}.tiny{font-size:10px;color:var(--muted);line-height:1.5}.hidden{display:none!important}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;max-width:100vw;overflow-x:hidden}button,input,select{font:inherit}button{cursor:pointer;border:0;touch-action:manipulation}a{color:inherit;text-decoration:none}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.sidebar{padding:20px 14px;border-right:1px solid var(--line);background:#0b0c0f;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.brandmark{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--gold2),#9b762c);display:grid;place-items:center;color:#17130a;font-weight:900;font-family:Manrope}.brand strong{font:800 15px Manrope;letter-spacing:.7px}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:1.5px;margin-top:2px}.navlabel{color:#606671;font-size:10px;font-weight:700;letter-spacing:1.8px;padding:0 12px;margin-bottom:-10px}.nav{display:grid;gap:4px}.nav button{display:flex;align-items:center;gap:10px;background:transparent;color:#a6abb4;padding:10px 12px;border-radius:10px;text-align:left;font-size:12px}.nav button span{width:16px;text-align:center;font-size:15px}.nav button.active,.nav button:hover{background:#242016;color:var(--gold2)}.sidebottom{margin-top:auto;border:1px solid var(--line);border-radius:12px;padding:12px;background:linear-gradient(135deg,#17150f,#101216)}.sidebottom p{font-size:11px;color:var(--muted);line-height:1.4}.sidebottom button{width:100%;margin-top:6px}.main{min-width:0;width:100%}.topbar{height:65px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px;position:relative;z-index:90}.crumb{font-size:11px;color:var(--muted)}.crumb b{color:#fff;font-weight:600}.topright{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{border:1px solid #34302a;color:var(--gold2);background:#1a1710;border-radius:99px;padding:5px 10px;font-size:10px}.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#d4b05a;color:#1b1608;font-weight:800;font-size:12px}.content{max-width:1400px;margin:auto;padding:20px 20px 40px}.eyebrow{color:var(--gold);font-size:9px;letter-spacing:1.8px;font-weight:800;text-transform:uppercase}.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:20px;flex-wrap:wrap}.heading h1{font:800 clamp(22px,2.5vw,30px) Manrope;margin:5px 0}.heading p{margin:0;color:var(--muted);font-size:12px}.btn{border-radius:9px;padding:10px 14px;font-size:11px;font-weight:700;background:var(--gold);color:#191407;transition:.2s;white-space:nowrap;touch-action:manipulation}.btn:hover{background:var(--gold2);transform:translateY(-1px)}.btn.secondary{background:#1b1e24;color:#e9e9e7;border:1px solid #30343c}.btn.ghost{background:transparent;color:var(--gold2);border:1px solid #51452a}.btn.danger{background:#361b1e;color:#ffb5b5;border:1px solid #623237}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:18px}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:14px}.stat{padding:16px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}.stat strong{display:block;font:800 22px Manrope;margin:12px 0 4px}.stat small{color:var(--green);font-size:10px}.grid2{display:grid;grid-template-columns:1fr;gap:14px}@media(min-width:900px){.grid2{grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr)}}.card{padding:18px;min-width:0}.cardtitle{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.cardtitle h2{font:700 14px Manrope;margin:0}.muted{color:var(--muted)}.small{font-size:10px}.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}table{width:100%;border-collapse:collapse;min-width:500px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid #272a30;font-size:11px}th{color:var(--muted);font-weight:600}td{color:#e4e5e7}.status{font-size:10px;border-radius:99px;padding:5px 7px;background:#173126;color:#7ee0b4;white-space:nowrap}.status.wait{background:#332918;color:#e7c477}.status.off{background:#351e22;color:#f2a0a0}.section{display:none}.section.active{display:block}.servicegrid,.shopgrid,.barbershopgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}.service,.product,.shop{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}.service h3,.product h3,.shop h3{font:700 13px Manrope;margin:0 0 4px}.service p,.product p,.shop p{font-size:11px;color:var(--muted);line-height:1.4}.price{font:800 18px Manrope;color:var(--gold2);margin:10px 0}.service button,.product button,.shop button{width:100%;margin-top:6px}.productart{height:110px;border-radius:10px;background-size:cover;background-position:center;margin-bottom:10px}.field{display:grid;gap:6px;margin-bottom:12px}.field label{font-size:11px;color:#b6bbc3}.field input,.field select{width:100%;padding:10px 12px;border-radius:9px;border:1px solid #30343b;background:#0b0d10;color:white;outline:none;font-size:13px}.field input:focus,.field select:focus{border-color:var(--gold)}.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed #30343b;border-radius:10px;font-size:11px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#f1d181;color:#171207;border-radius:10px;padding:10px 16px;font-size:11px;font-weight:700;box-shadow:0 6px 20px #0008;display:none;z-index:999999;max-width:90vw}.modalback{position:fixed;inset:0;background:#000b;display:none;place-items:center;padding:14px;z-index:999999}.modal{background:#111419;border:1px solid #373b43;border-radius:16px;padding:20px;width:min(440px,100%);max-height:90vh;overflow:auto}.modal h2{font:800 19px Manrope;margin:0 0 6px}.modal p{font-size:11px;color:var(--muted);line-height:1.5}.close{float:right;background:#272a30;color:white;border-radius:7px;padding:5px 8px;font-size:12px}.loginpage{min-height:100vh;display:grid;grid-template-columns:1fr;position:fixed;inset:0;z-index:1000;background:var(--bg);overflow-y:auto}@media(min-width:768px){.loginpage{grid-template-columns:1fr 1fr;overflow:hidden}}.loginvisual{padding:6%;background:radial-gradient(circle at 25% 20%,#392b13,#101114 55%,#08090b);display:flex;flex-direction:column;justify-content:space-between}.loginvisual h1{font:800 clamp(28px,4vw,50px) Manrope;line-height:1.05;max-width:550px}.loginvisual h1 span{color:var(--gold2)}.loginvisual p{color:#b2b0a9;max-width:380px;line-height:1.6;font-size:13px}.loginform{padding:6%;display:flex;flex-direction:column;justify-content:center;max-width:580px;width:100%;margin:auto}.rolepick{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.rolepick button{padding:11px;border-radius:9px;background:#1a1d22;border:1px solid #30343b;color:#c7c9ce;font-size:11px}.rolepick button.selected{border-color:var(--gold);color:var(--gold2);background:#282216}.tiny{font-size:10px;color:var(--muted);line-height:1.5}.hidden{display:none!important}
 
-@media(max-width:768px){body,.app,.main{max-width:100vw;overflow-x:hidden}.app{display:block;padding-bottom:60px}.sidebar{display:none}.topbar{height:55px;padding:0 12px}.content{padding:12px 10px 50px}}
+@media(max-width:768px){body,.app,.main{max-width:100vw;overflow-x:hidden}.app{display:block;padding-bottom:60px}.sidebar{display:none}.topbar{height:55px;padding:0 12px;z-index:90}.content{padding:12px 10px 50px}}
 .devfooter{padding:20px 0 10px;text-align:center;color:#7e838c;font-size:10px;line-height:1.6}.devfooter a{color:var(--gold2);text-decoration:underline;text-underline-offset:3px}
 .owner-tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.switch{display:inline-flex;align-items:center;gap:8px;border:1px solid #373b43;background:#171a20;border-radius:10px;padding:8px 10px;color:#e5e6e8;font-size:11px}.switch input{accent-color:#d7b15b;width:15px;height:15px}
 .role-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#13161b;border:1px solid #2c3037;border-radius:12px;padding:12px 14px;margin-bottom:14px;flex-wrap:wrap}.role-banner strong{font-size:11px}.role-banner p{font-size:10px;color:var(--muted);margin:3px 0 0}
@@ -84,7 +84,7 @@
   <div class="sidebottom">
     <div class="eyebrow">PLANO TRIAL BARBEARIA</div>
     <p id="trialCounterText">7 dias restantes no teste grátis.</p>
-    <button class="btn secondary" onclick="openModal('plansModal')" style="margin-bottom:6px;">Fazer Upgrade (R$ 100)</button>
+    <button class="btn secondary" onclick="requestUpgrade()" style="margin-bottom:6px;">Fazer Upgrade (R$ 100)</button>
     <button class="btn danger" onclick="signOut()" style="width:100%;">Sair / Trocar conta</button>
   </div>
 </aside>
@@ -92,9 +92,9 @@
   <header class="topbar">
     <div class="crumb">NAVALHA <span class="muted">/</span> <b id="crumb">Visão geral</b></div>
     <div class="topright">
-      <button class="btn ghost" id="btnDevClientView" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);display:none;">👁️ Ver como Cliente (DEV)</button>
-      <button class="btn secondary" onclick="openTVMode()">▣ Modo TV</button>
-      <span class="pill" id="userBadge">● TESTE GRÁTIS</span>
+      <button class="btn ghost" id="btnDevClientView" onclick="openClientView()" style="border-color:var(--gold);color:var(--gold2);display:none;">👁️ Cliente (DEV)</button>
+      <button class="btn secondary" onclick="openTVMode()">▣ TV</button>
+      <span class="pill" id="userBadge">● TRIAL</span>
       <div class="avatar" id="userAvatar">RT</div>
     </div>
   </header>
@@ -112,7 +112,7 @@
           <label class="switch"><input type="checkbox" id="killSwitch" checked onchange="toggleShop(this.checked)"><span id="killLabel">Agenda aberta</span></label>
         </div>
       </div>
-      <div class="heading"><div><div class="eyebrow">ESTABELECIMENTO ATIVO</div><h1 id="shopTitleHeader">Painel Administrativo.</h1><p>Sistema pronto para operação comercial e vendas.</p></div><button class="btn" onclick="openAdminBookingModal()">＋ Novo agendamento</button></div>
+      <div class="heading"><div><div class="eyebrow">ESTABELECIMENTO ATIVO</div><h1 id="shopTitleHeader">Painel Administrativo.</h1><p>Sistema pronto para operação comercial e vendas.</p></div><button class="btn" onclick="openAdminBookingModal()">＋ Agendar</button></div>
       <div class="stats">
         <div class="stat"><div class="stathead">Faturamento de hoje</div><strong>R$ 0,00</strong><small>Operação iniciada</small></div>
         <div class="stat"><div class="stathead">Agendamentos</div><strong>0</strong><small>Escala livre</small></div>
@@ -197,15 +197,16 @@
       <div class="card"><div class="cardtitle"><h2>Base de Clientes</h2></div><div class="empty">Nenhum cliente cadastrado na base ainda.</div></div>
     </section>
 
-    <!-- LOJA / ESTOQUE -->
+    <!-- LOJA / ESTOQUE COM EDIÇÃO DE PREÇOS E FOTOS REAIS -->
     <section class="section" id="page-loja">
-      <div class="heading"><div><h1>Loja / Estoque da Barbearia ▣</h1><p>Itens com estoque superior a 0 aparecerão automaticamente no Shopping do Cliente.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto no Estoque</button></div>
+      <div class="heading"><div><h1>Loja / Estoque da Barbearia ▣</h1><p>Itens com estoque superior a 0 aparecerão no Shopping da Barbearia.</p></div><button class="btn" onclick="openModal('addProductModal')">＋ Cadastrar Produto</button></div>
       <div class="shopgrid" id="shopStockContainer">
         <article class="product">
-          <div class="productart" style="background-image:url('https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80')">🧴</div>
+          <div class="productart" style="background-image:url('https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=400&q=80')"></div>
           <h3>Pomada Matte Fixadora</h3>
           <div class="price">R$ 39,90</div>
-          <span class="status">Estoque: 12 un. (Visível no Shopping)</span>
+          <span class="status">Estoque: 12 un.</span>
+          <button class="btn secondary" onclick="editProductStock(0)">Editar Preço & Estoque</button>
         </article>
       </div>
     </section>
@@ -290,7 +291,7 @@
  <div class="topbar">
    <div class="brand"><div class="brandmark">N</div><div><strong>NAVALHA</strong><small>ÁREA DO CLIENTE</small></div></div>
    <div class="topright">
-     <button class="btn secondary" onclick="signOut()">← Sair / Voltar ao Login</button>
+     <button class="btn secondary" onclick="signOut()">← Sair</button>
      <div class="avatar">CL</div>
    </div>
  </div>
@@ -318,21 +319,7 @@
      </div>
    </div>
 
-   <!-- SHOPPING / VITRINE DE PRODUTOS DO ESTOQUE DA BARBEARIA -->
-   <div class="card" style="margin-bottom:20px;">
-     <div class="cardtitle"><h2>🛍️ Shopping da Barbearia (Produtos em Estoque)</h2></div>
-     <div class="shopgrid" id="clientShoppingGrid">
-       <article class="product">
-         <div class="productart" style="background-image:url('https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80')">🧴</div>
-         <h3>Pomada Matte Fixadora</h3>
-         <div class="price">R$ 39,90</div>
-         <span class="status">Em Estoque</span>
-         <button class="btn" onclick="openStoreCheckout('Pomada Matte', 39.90)">Comprar no Shopping</button>
-       </article>
-     </div>
-   </div>
-
-   <div class="clientsectiontitle" style="margin-bottom:12px;"><div><h2>Barbearias Parceiras & Avaliações ★</h2></div></div>
+   <div class="clientsectiontitle" style="margin-bottom:12px;"><div><h2>Escolha a Barbearia Parceira para Acessar a Loja & Agendar</h2></div></div>
    
    <div class="barbershopgrid" id="publicShopsFeed">
     <article class="shop" style="background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px;">
@@ -340,9 +327,21 @@
         <span class="status" style="margin-bottom:6px; display:inline-block;" id="shopRatingBadge">Aberto · 4.9 ★★★★★</span>
         <h3 id="clientShopDisplayTitle" style="font:800 16px Manrope; margin:4px 0;">Barbearia Imperial Pro</h3>
         <p class="muted small" style="margin-bottom:10px;">Centro · Atendimento Premium com Especialistas</p>
-        <button class="btn" style="width:100%;" onclick="openClientBooking()">Agendar Procedimento ✂️</button>
+        <button class="btn" style="width:100%; margin-bottom:8px;" onclick="selectBarbershop('Barbearia Imperial Pro', '5591989117332', '91989117332')">Entrar na Barbearia (Shopping & Agenda) 🛍️</button>
       </div>
     </article>
+   </div>
+
+   <!-- SHOPPING DA BARBEARIA SELECIONADA (APARECE SÓ APÓS SELECIONAR A BARBEARIA) -->
+   <div class="card hidden" id="selectedShopShoppingCard" style="margin-top:24px; border:1px solid var(--gold);">
+     <div class="cardtitle"><h2 id="shoppingShopTitle">🛍️ Shopping da Barbearia</h2><span class="pill">CARRINHO ATIVO</span></div>
+     <div class="shopgrid" id="clientShoppingGrid">
+       <!-- Produtos em estoque da barbearia selecionada -->
+     </div>
+     <div style="margin-top:16px; border-top:1px solid var(--line); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
+       <div><strong id="cartSummaryText">0 itens na sacola</strong></div>
+       <button class="btn" onclick="openCartCheckout()">Finalizar Compra / Pagar Tudo 🛒</button>
+     </div>
    </div>
   </section>
  </div>
@@ -351,11 +350,24 @@
 <!-- MODAIS -->
 <div class="modalback" id="addConvenioModal"><div class="modal"><button class="close" onclick="closeModal('addConvenioModal')">✕</button><h2>Cadastrar Convênio</h2><div class="field"><label>Nome</label><input id="convNameInput"></div><button class="btn" onclick="saveConvenio()">Salvar</button></div></div>
 <div class="modalback" id="addBarberModal"><div class="modal"><button class="close" onclick="closeModal('addBarberModal')">✕</button><h2>Cadastrar Barbeiro</h2><div class="field"><label>Nome</label><input id="bNameInput"></div><button class="btn" onclick="saveBarber()">Salvar</button></div></div>
-<div class="modalback" id="addProductModal"><div class="modal"><button class="close" onclick="closeModal('addProductModal')">✕</button><h2>Cadastrar Produto</h2><div class="field"><label>Nome</label><input id="pNameInput"></div><div class="field"><label>Preço</label><input id="pPriceInput" type="number"></div><div class="field"><label>Estoque</label><input id="pStockInput" type="number"></div><button class="btn" onclick="saveProduct()">Salvar</button></div></div>
+
+<!-- MODAL CADASTRAR PRODUTO NO ESTOQUE -->
+<div class="modalback" id="addProductModal">
+ <div class="modal">
+  <button class="close" onclick="closeModal('addProductModal')">✕</button>
+  <h2>Cadastrar Produto no Estoque</h2>
+  <div class="field"><label>Nome do Produto</label><input id="pNameInput" placeholder="Ex: Óleo para Barba Premium"></div>
+  <div class="field"><label>Preço (R$)</label><input id="pPriceInput" type="number" step="0.01" placeholder="45.00"></div>
+  <div class="field"><label>Quantidade em Estoque</label><input id="pStockInput" type="number" placeholder="10"></div>
+  <div class="field"><label>URL da Foto Real</label><input id="pImageInput" placeholder="https://images.unsplash.com/...foto.jpg"></div>
+  <button class="btn" style="width:100%;margin-top:8px;" onclick="saveProduct()">Salvar Produto</button>
+ </div>
+</div>
+
 <div class="modalback" id="addServiceModal"><div class="modal"><button class="close" onclick="closeModal('addServiceModal')">✕</button><h2>Serviço</h2><div class="field"><label>Nome</label><input id="sNameInput"></div><div class="field"><label>Preço</label><input id="sPriceInput" type="number"></div><button class="btn" onclick="saveServiceModal()">Salvar</button></div></div>
 <div class="modalback" id="timeoffModal"><div class="modal"><button class="close" onclick="closeModal('timeoffModal')">✕</button><h2>Folga</h2><button class="btn" onclick="submitTimeoff()">Enviar</button></div></div>
 
-<!-- MODAL AGENDAMENTO UNIFICADO (COMPARTILHADO ADM E CLIENTE) -->
+<!-- MODAL AGENDAMENTO COMPLETO -->
 <div class="modalback" id="clientBookingModal" style="z-index:999999;">
  <div class="modal">
   <button class="close" onclick="closeModal('clientBookingModal')">✕</button>
@@ -385,20 +397,23 @@
  </div>
 </div>
 
-<!-- CHECKOUT SHOPPING -->
+<!-- CHECKOUT CARRINHO DO SHOPPING -->
 <div class="modalback" id="storeModal">
  <div class="modal">
   <button class="close" onclick="closeModal('storeModal')">✕</button>
-  <h2 id="storeModalTitle">Produto</h2>
-  <p id="storeModalPrice" class="price">R$ 0,00</p>
-  <div class="field"><label>Pagamento</label><select id="shopPayMethod" onchange="toggleShopPay(this.value)"><option value="pix">Pix</option><option value="balcao">Balcão</option></select></div>
-  <div id="shopPixBox" style="background:#171a20;padding:12px;border-radius:10px;text-align:center;">
+  <h2>Finalizar Compra / Sacola 🛍️</h2>
+  <div id="cartModalItems" style="margin:10px 0; font-size:12px; color:var(--muted);">Nenhum item na sacola.</div>
+  <div class="field"><label>Forma de Pagamento</label><select id="shopPayMethod" onchange="toggleShopPay(this.value)"><option value="pix">Pix (Comprovante)</option><option value="balcao">Pagar no Balcão</option></select></div>
+  <div id="shopPixBox" style="background:#171a20;padding:12px;border-radius:10px;text-align:center; margin-bottom:10px;">
     <small class="muted">Chave Pix Copia e Cola:</small>
-    <div style="font-family:monospace;color:#38bdf8;">91989117332</div>
+    <div style="font-family:monospace;color:#38bdf8;" id="modalPixKeyText">91989117332</div>
   </div>
-  <div id="shopBalcaoBox" class="hidden"><div class="field"><label>Quem vai buscar?</label><select id="pickerType" onchange="togglePickerInput(this.value)"><option value="self">Eu mesmo</option><option value="other">Outra pessoa</option></select></div><div class="field hidden" id="pickerNameField"><label>Nome</label><input id="pickerNameInput"></div></div>
-  <div class="field"><label>Seu Nome e WhatsApp</label><input id="shopClientName"></div>
-  <button class="btn" style="width:100%;" onclick="confirmShopCheckoutFinal()">Confirmar & Enviar WhatsApp</button>
+  <div id="shopBalcaoBox" class="hidden">
+    <div class="field"><label>Quem vai buscar?</label><select id="pickerType" onchange="togglePickerInput(this.value)"><option value="self">Eu mesmo</option><option value="other">Outra pessoa</option></select></div>
+    <div class="field hidden" id="pickerNameField"><label>Nome de quem vai buscar</label><input id="pickerNameInput"></div>
+  </div>
+  <div class="field"><label>Seu Nome e WhatsApp</label><input id="shopClientName" placeholder="Seu nome e WhatsApp"></div>
+  <button class="btn" style="width:100%;" onclick="confirmShopCheckoutFinal()">Enviar Pedido ao WhatsApp 🛒</button>
  </div>
 </div>
 
@@ -408,9 +423,14 @@
 <script>
 let currentRole='client';
 let shopConfig = { name: "Barbearia Imperial Pro", whatsapp: "5591989117332", pix: "91989117332" };
-let stockProducts = [{ name: "Pomada Matte Fixadora", price: 39.90, stock: 12, img: "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80" }];
+let stockProducts = [
+    { name: "Pomada Matte Fixadora", price: 39.90, stock: 12, img: "https://images.unsplash.com/photo-1626497764746-6dc36546b388?auto=format&fit=crop&w=400&q=80" },
+    { name: "Óleo para Barba Premium", price: 49.90, stock: 8, img: "https://images.unsplash.com/photo-1608248597359-994c657519a7?auto=format&fit=crop&w=400&q=80" }
+];
+let activeCart = [];
+let selectedShopName = "";
 
-// SPLASH SCREEN DE MARCA: RT MOBILE & SESSÃO PERSISTENTE
+// SPLASH SCREEN DE MARCA & AUTO-LOGIN PERSISTENTE
 window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         const splash = document.getElementById('brandSplash');
@@ -419,16 +439,12 @@ window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => splash.remove(), 350);
         }
         
-        // Verifica se já existe login salvo no localStorage para auto-login
         const savedEmail = localStorage.getItem('rt_saved_email');
         const savedRole = localStorage.getItem('rt_saved_role');
         if(savedEmail){
             document.getElementById('loginEmail').value = savedEmail;
-            if(savedRole){
-                currentRole = savedRole;
-            }
-            // Auto login direto na sessão anterior
-            handleAuth(true);
+            if(savedRole) currentRole = savedRole;
+            handleAuth(true); // Auto-login direto na sessão
         } else {
             document.getElementById('loginScreen').classList.remove('hidden');
         }
@@ -461,11 +477,27 @@ function pickRole(role,btn){
     if(sf) sf.classList.toggle('hidden',role!=='shop');
 }
 
-window.addEventListener('load', () => {
-    renderClientShopping();
-});
+// BOTÃO DE UPGRADE REDIRECIONA AO WHATSAPP DO DEV
+function requestUpgrade(){
+    const text = encodeURIComponent("Olá Robert! Gostaria de fazer o Upgrade da minha barbearia no NAVALHA para o plano completo de R$ 100/mês.");
+    window.open(`https://wa.me/5591989117332?text=${text}`, '_blank');
+}
 
-// MOTOR DE AUTENTICAÇÃO COM MEMÓRIA PERSISTENTE E CONTADOR TRIAL 7 DIAS
+// SELECIONAR BARBEARIA PARA ABRIR O SHOPPING DESTA LOJA ESPECÍFICA
+function selectBarbershop(name, wp, pix){
+    selectedShopName = name;
+    shopConfig.name = name;
+    shopConfig.whatsapp = wp;
+    shopConfig.pix = pix;
+    
+    document.getElementById('shoppingShopTitle').textContent = `🛍️ Shopping da ${name}`;
+    document.getElementById('selectedShopShoppingCard').classList.remove('hidden');
+    renderClientShopping();
+    toast(`Entrou na ${name}! Escolha os produtos.`);
+    window.scrollTo({ top: document.getElementById('selectedShopShoppingCard').offsetTop - 20, behavior: 'smooth' });
+}
+
+// MOTOR DE AUTENTICAÇÃO COM SESSÃO PERSISTENTE E CONTADOR TRIAL 7 DIAS
 function handleAuth(isAuto = false) {
     const email = document.getElementById('loginEmail').value.trim().toLowerCase();
     const password = document.getElementById('loginPassword').value.trim();
@@ -479,7 +511,7 @@ function handleAuth(isAuto = false) {
         localStorage.setItem('rt_saved_role', currentRole);
     }
 
-    // 1. MESTRE DESENVOLVEDOR
+    // 1. MESTRE DESENVOLVEDOR VITALÍCIO
     if((email === 'roberthaelley75@gmail.com') || (isAuto && localStorage.getItem('rt_saved_email') === 'roberthaelley75@gmail.com')){
         document.getElementById('loginScreen').classList.add('hidden');
         if(currentRole === 'client' && !isAuto){
@@ -504,33 +536,49 @@ function handleAuth(isAuto = false) {
         return;
     }
 
-    // 3. BARBEARIA / FRANQUEADO (TESTE GRÁTIS DE 7 DIAS ATIVO)
+    // 3. BARBEARIA / FRANQUEADO (7 DIAS DE TESTE GRÁTIS)
     if(currentRole === 'shop'){
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('app').classList.remove('hidden');
         document.getElementById('btnDevClientView').style.display = 'none';
         showPage('dashboard');
-        if(!isAuto) toast('Painel de Franquia carregado (Teste Grátis: 7 dias).');
+        if(!isAuto) toast('Painel carregado (Teste Grátis: 7 dias ativos).');
         return;
     }
 }
 
+// MODO BARBEIRO CONVIDADO (ACESSO LIMITADO)
 function changeRole(role){
     currentRole = role;
     const hHelp = document.getElementById('roleHelp');
     const roleLabel = document.getElementById('roleLabel');
+    const navServicos = document.getElementById('navServicos');
+    const navLoja = document.getElementById('navLoja');
+    const navFin = document.getElementById('navFinanceiro');
+    const navRel = document.getElementById('navRelatorios');
+    const navConfig = document.getElementById('navConfig');
+    
     if(role === 'barber'){
         roleLabel.textContent = 'Minha Cadeira ✂️ (Barbeiro)';
-        if(hHelp) hHelp.textContent = 'Visão restrita: Apenas sua agenda, equipe e clientes.';
-        toast('Modo Barbeiro ativado.');
+        if(hHelp) hHelp.textContent = 'Acesso restrito: Apenas agenda, equipe e solicitações de folga.';
+        if(navServicos) navServicos.style.display = 'none';
+        if(navLoja) navLoja.style.display = 'none';
+        if(navFin) navFin.style.display = 'none';
+        if(navRel) navRel.style.display = 'none';
+        if(navConfig) navConfig.style.display = 'none';
+        toast('Modo Barbeiro (Acesso Limitado) ativado.');
     } else {
         roleLabel.textContent = 'Painel da Barbearia (Proprietário)';
         if(hHelp) hHelp.textContent = 'Controle gerencial completo.';
-        toast('Modo Proprietário ativado.');
+        if(navServicos) navServicos.style.display = 'flex';
+        if(navLoja) navLoja.style.display = 'flex';
+        if(navFin) navFin.style.display = 'flex';
+        if(navRel) navRel.style.display = 'flex';
+        if(navConfig) navConfig.style.display = 'flex';
+        toast('Modo Proprietário (Acesso Total) ativado.');
     }
 }
 
-// Abre o modal completo de agendamento (tanto no ADM quanto no Cliente)
 function openClientBooking(){
     const modal = document.getElementById('clientBookingModal');
     if(modal) modal.style.display = 'grid';
@@ -543,10 +591,6 @@ function openAdminBookingModal(){
 function submitTimeoff(){
     closeModal('timeoffModal');
     toast('Solicitação de folga enviada ao proprietário!');
-}
-
-function confirmAdminBooking(){
-    confirmClientBookingFinal();
 }
 
 function confirmClientBookingFinal(){
@@ -573,13 +617,40 @@ function confirmClientBookingFinal(){
     toast('Agendamento realizado com sucesso!');
 }
 
+// CARRINHO DO SHOPPING DA BARBEARIA
+function addProductToCart(name, price){
+    const item = activeCart.find(p => p.name === name);
+    if(item){
+        item.qty += 1;
+    } else {
+        activeCart.push({ name, price, qty: 1 });
+    }
+    const totalCount = activeCart.reduce((sum, i) => sum + i.qty, 0);
+    document.getElementById('cartSummaryText').textContent = `${totalCount} item(ns) na sacola (R$ ${activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0).toFixed(2)})`;
+    toast(`${name} adicionado à sacola!`);
+}
+
+function openCartCheckout(){
+    if(activeCart.length === 0){ toast('Sua sacola está vazia.'); return; }
+    openModal('storeModal');
+    let summary = activeCart.map(i => `• ${i.qty}x ${i.name} — R$ ${(i.price * i.qty).toFixed(2)}`).join('<br>');
+    const total = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+    document.getElementById('cartModalItems').innerHTML = `${summary}<br><br><b>Total: R$ ${total.toFixed(2)}</b>`;
+    document.getElementById('modalPixKeyText').textContent = shopConfig.pix;
+}
+
 function confirmShopCheckoutFinal(){
     const name = document.getElementById('shopClientName').value;
+    const payMethod = document.getElementById('shopPayMethod').value;
     if(!name){ toast('Informe seu nome e WhatsApp.'); return; }
     closeModal('storeModal');
-    const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}`);
+
+    const total = activeCart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+    const itemsText = activeCart.map(i => `${i.qty}x ${i.name}`).join(', ');
+    const msg = encodeURIComponent(`🛍️ *Novo Pedido no Shopping - ${shopConfig.name}*:\n\n👤 Comprador: ${name}\n📦 Produtos: ${itemsText}\n💰 Total: R$ ${total.toFixed(2)}\n💳 Pagamento: ${payMethod === 'pix' ? 'Pix Realizado' : 'Pagar no Balcão'}`);
     window.open(`https://wa.me/${shopConfig.whatsapp}?text=${msg}`, '_blank');
-    toast('Pedido enviado ao WhatsApp da barbearia!');
+    activeCart = [];
+    toast('Pedido enviado ao WhatsApp da barbearia com sucesso!');
 }
 
 function submitReview(){
@@ -616,16 +687,50 @@ function togglePickerInput(val){ document.getElementById('pickerNameField').clas
 
 function saveBarber(){ closeModal('addBarberModal'); toast('Barbeiro cadastrado!'); }
 
+// CADASTRAR PRODUTO NO ESTOQUE COM FOTOS REAIS
 function saveProduct(){
     const name = document.getElementById('pNameInput').value;
     const price = Number(document.getElementById('pPriceInput').value);
     const stock = Number(document.getElementById('pStockInput').value);
-    if(!name || isNaN(price) || isNaN(stock)){ toast('Preencha os campos.'); return; }
+    const img = document.getElementById('pImageInput').value || "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80";
+    if(!name || isNaN(price) || isNaN(stock)){ toast('Preencha os campos corretamente.'); return; }
 
-    stockProducts.push({ name, price, stock, img: "https://images.unsplash.com/photo-1585751119414-ef2636f9aede?auto=format&fit=crop&w=400&q=80" });
+    stockProducts.push({ name, price, stock, img });
     renderClientShopping();
+    renderAdminStock();
     closeModal('addProductModal');
-    toast('Produto em estoque publicado no Shopping!');
+    toast('Produto cadastrado no estoque!');
+}
+
+// EDITAR PREÇO E ESTOQUE DIRETAMENTE NA LOJA
+function editProductStock(index){
+    const p = stockProducts[index];
+    const newPrice = prompt("Novo preço de venda (R$):", p.price);
+    const newStock = prompt("Nova quantidade em estoque:", p.stock);
+    if(newPrice !== null && newStock !== null){
+        p.price = Number(newPrice);
+        p.stock = Number(newStock);
+        renderAdminStock();
+        renderClientShopping();
+        toast('Estoque e preço atualizados!');
+    }
+}
+
+function renderAdminStock(){
+    const container = document.getElementById('shopStockContainer');
+    if(!container) return;
+    container.innerHTML = '';
+    stockProducts.forEach((p, idx) => {
+        container.innerHTML += `
+            <article class="product">
+              <div class="productart" style="background-image:url('${p.img}')"></div>
+              <h3>${p.name}</h3>
+              <div class="price">R$ ${p.price.toFixed(2).replace('.',',')}</div>
+              <span class="status">Estoque: ${p.stock} un.</span>
+              <button class="btn secondary" onclick="editProductStock(${idx})">Editar Preço & Estoque</button>
+            </article>
+        `;
+    });
 }
 
 function renderClientShopping(){
@@ -634,21 +739,24 @@ function renderClientShopping(){
     grid.innerHTML = '';
     const available = stockProducts.filter(p => p.stock >= 1);
     if(available.length === 0){
-        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Nenhum produto em estoque.</div>';
+        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Nenhum produto em estoque nesta barbearia.</div>';
         return;
     }
     available.forEach(p => {
-        grid.innerHTML += `<article class="product"><div class="productart" style="background-image:url('${p.img}')">🧴</div><h3>${p.name}</h3><div class="price">R$ ${p.price.toFixed(2).replace('.',',')}</div><span class="status">Em Estoque (${p.stock} un.)</span><button class="btn" onclick="openStoreCheckout('${p.name}', ${p.price})">Comprar no Shopping</button></article>`;
+        grid.innerHTML += `
+            <article class="product">
+              <div class="productart" style="background-image:url('${p.img}')"></div>
+              <h3>${p.name}</h3>
+              <div class="price">R$ ${p.price.toFixed(2).replace('.',',')}</div>
+              <span class="status">Em Estoque (${p.stock} un.)</span>
+              <button class="btn" onclick="addProductToCart('${p.name}', ${p.price})">Adicionar à Sacola 🛍️</button>
+            </article>
+        `;
     });
 }
 
 function saveServiceModal(){ closeModal('addServiceModal'); toast('Serviço salvo!'); }
 function editService(id){ toast('Serviço editado.'); }
-function openStoreCheckout(name, price){
-    openModal('storeModal');
-    document.getElementById('storeModalTitle').textContent = name;
-    document.getElementById('storeModalPrice').textContent = 'R$ ' + price.toFixed(2).replace('.',',');
-}
 
 function signOut(){
     localStorage.removeItem('rt_saved_email');
