@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#08090b">
 <title>NAVALHA — Gestão inteligente</title>
+<!-- Integração Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 :root{--bg:#08090b;--panel:#101216;--panel2:#15181e;--line:#262a31;--text:#f4f4f2;--muted:#9298a2;--gold:#d7b15b;--gold2:#f0d38a;--green:#55c69a;--red:#f07878}
@@ -55,10 +58,10 @@
 #clientScreen .client-hero h1{letter-spacing:-.045em}
 #clientScreen .clientsectiontitle h2{letter-spacing:-.025em}
 @media(max-width:700px){
- #clientScreen .content{padding:18px 15px 100px}
- #clientScreen .client-hero{min-height:390px;border-radius:22px;padding:22px}
- #clientScreen .client-hero h1{font-size:34px}
- #clientScreen .client-hero p{font-size:13px}
+  #clientScreen .content{padding:18px 15px 100px}
+  #clientScreen .client-hero{min-height:390px;border-radius:22px;padding:22px}
+  #clientScreen .client-hero h1{font-size:34px}
+  #clientScreen .client-hero p{font-size:13px}
 }
 
 </style>
@@ -216,10 +219,10 @@
 <div class="toast" id="toast"></div>
 <script>
 let currentRole='client', appointments=[
- {time:'09:00',name:'Lucas Almeida',service:'Corte degradê',barber:'Marcos',status:'Confirmado'},
- {time:'09:30',name:'Luan Garcia',service:'Cabelo + barba',barber:'Bruno',status:'Em atendimento'},
- {time:'10:00',name:'Murilo Teixeira',service:'Corte tradicional',barber:'Thiago',status:'Aguardando'},
- {time:'10:30',name:'Nicolas Esteves',service:'Barba terapia',barber:'Marcos',status:'Confirmado'}
+  {time:'09:00',name:'Lucas Almeida',service:'Corte degradê',barber:'Marcos',status:'Confirmado'},
+  {time:'09:30',name:'Luan Garcia',service:'Cabelo + barba',barber:'Bruno',status:'Em atendimento'},
+  {time:'10:00',name:'Murilo Teixeira',service:'Corte tradicional',barber:'Thiago',status:'Aguardando'},
+  {time:'10:30',name:'Nicolas Esteves',service:'Barba terapia',barber:'Marcos',status:'Confirmado'}
 ];
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2900)}
 function showPage(page){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));const target=document.getElementById('page-'+page);if(target)target.classList.add('active');document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));const label={dashboard:'Visão geral',agenda:'Agenda',servicos:'Serviços',equipe:'Equipe',clientes:'Clientes',loja:'Loja / Produtos',financeiro:'Financeiro',relatorios:'Relatórios',admin:'Super Admin'};document.getElementById('crumb').textContent=label[page]||page;if(page==='agenda')renderAgenda();window.scrollTo({top:0,behavior:'smooth'})}
@@ -260,38 +263,38 @@ function sendProof(){const f=document.getElementById('proofFile').files[0];if(!f
 
 let currentPermission='owner', shopIsOpen=true, timeoffRequests=[];
 function changeRole(role){
- currentPermission=role;
- const label=document.getElementById('roleLabel'),help=document.getElementById('roleHelp');
- if(role==='barber'){
-  label.textContent='Visão do barbeiro convidado';help.textContent='Acesso à própria agenda, histórico e painel do dia. Financeiro e caixa ficam bloqueados.';
-  document.querySelectorAll('[data-page="financeiro"],[data-page="relatorios"],[data-page="admin"]').forEach(b=>b.classList.add('hidden'));
-  ['financeiro','relatorios','admin'].forEach(p=>document.getElementById('page-'+p).classList.remove('active'));
-  document.getElementById('killSwitch').disabled=true;document.getElementById('killSwitch').parentElement.style.opacity='.45';
-  showPage('dashboard');toast('Modo barbeiro: financeiro e controles do dono ocultados.');
- }else{
-  label.textContent='Visão do dono da barbearia';help.textContent='Acesso total ao estabelecimento, incluindo financeiro, equipe e configurações.';
-  document.querySelectorAll('[data-page="financeiro"],[data-page="relatorios"],[data-page="admin"]').forEach(b=>b.classList.remove('hidden'));
-  document.getElementById('killSwitch').disabled=false;document.getElementById('killSwitch').parentElement.style.opacity='1';
-  toast('Modo proprietário ativado na demonstração.');
- }
+  currentPermission=role;
+  const label=document.getElementById('roleLabel'),help=document.getElementById('roleHelp');
+  if(role==='barber'){
+   label.textContent='Visão do barbeiro convidado';help.textContent='Acesso à própria agenda, histórico e painel do dia. Financeiro e caixa ficam bloqueados.';
+   document.querySelectorAll('[data-page="financeiro"],[data-page="relatorios"],[data-page="admin"]').forEach(b=>b.classList.add('hidden'));
+   ['financeiro','relatorios','admin'].forEach(p=>document.getElementById('page-'+p).classList.remove('active'));
+   document.getElementById('killSwitch').disabled=true;document.getElementById('killSwitch').parentElement.style.opacity='.45';
+   showPage('dashboard');toast('Modo barbeiro: financeiro e controles do dono ocultados.');
+  }else{
+   label.textContent='Visão do dono da barbearia';help.textContent='Acesso total ao estabelecimento, incluindo financeiro, equipe e configurações.';
+   document.querySelectorAll('[data-page="financeiro"],[data-page="relatorios"],[data-page="admin"]').forEach(b=>b.classList.remove('hidden'));
+   document.getElementById('killSwitch').disabled=false;document.getElementById('killSwitch').parentElement.style.opacity='1';
+   toast('Modo proprietário ativado na demonstração.');
+  }
 }
 function toggleShop(on){
- if(currentPermission!=='owner'){document.getElementById('killSwitch').checked=shopIsOpen;toast('Somente o dono pode alterar a chave geral.');return}
- shopIsOpen=on;document.getElementById('killLabel').textContent=on?'Barbearia visível / agenda aberta':'Barbearia oculta / novos agendamentos bloqueados';
- document.getElementById('killLabel').style.color=on?'#e5e6e8':'#f07878';
- document.querySelectorAll('#clientShops .shop').forEach(s=>s.style.opacity=on?'1':'.45');
- toast(on?'Barbearia aberta na demonstração.':'Chave geral desligada na demonstração.');
+  if(currentPermission!=='owner'){document.getElementById('killSwitch').checked=shopIsOpen;toast('Somente o dono pode alterar a chave geral.');return}
+  shopIsOpen=on;document.getElementById('killLabel').textContent=on?'Barbearia visível / agenda aberta':'Barbearia oculta / novos agendamentos bloqueados';
+  document.getElementById('killLabel').style.color=on?'#e5e6e8':'#f07878';
+  document.querySelectorAll('#clientShops .shop').forEach(s=>s.style.opacity=on?'1':'.45');
+  toast(on?'Barbearia aberta na demonstração.':'Chave geral desligada na demonstração.');
 }
 function saveTimeoff(){
- const barber=document.getElementById('timeoffBarber').value,date=document.getElementById('timeoffDate').value,period=document.getElementById('timeoffPeriod').value;
- if(!date){toast('Selecione a data da folga.');return}
- timeoffRequests.push({barber,date,period,reason:document.getElementById('timeoffReason').value});
- closeModal('timeoffModal');toast('Solicitação registrada nesta sessão. Bloqueio real exige backend.');
+  const barber=document.getElementById('timeoffBarber').value,date=document.getElementById('timeoffDate').value,period=document.getElementById('timeoffPeriod').value;
+  if(!date){toast('Selecione a data da folga.');return}
+  timeoffRequests.push({barber,date,period,reason:document.getElementById('timeoffReason').value});
+  closeModal('timeoffModal');toast('Solicitação registrada nesta sessão. Bloqueio real exige backend.');
 }
 function createInvite(){
- const email=document.getElementById('inviteEmail').value.trim();if(!email){toast('Informe o e-mail do barbeiro.');return}
- document.getElementById('inviteResult').textContent='Convite demonstrativo para '+email+'. Para link real, conectar autenticação e backend.';
- toast('Convite demonstrativo preparado.');
+  const email=document.getElementById('inviteEmail').value.trim();if(!email){toast('Informe o e-mail do barbeiro.');return}
+  document.getElementById('inviteResult').textContent='Convite demonstrativo para '+email+'. Para link real, conectar autenticação e backend.';
+  toast('Convite demonstrativo preparado.');
 }
 
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
