@@ -35,8 +35,8 @@
 </head>
 <body>
 
-<!-- SPLASH SCREEN DE MARCA -->
-<div id="brandSplash" style="position:fixed;inset:0;z-index:9999999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<!-- LOGO DE INICIALIZAÇÃO (SPLASH SCREEN RT MOBILE) -->
+<div id="brandSplash" style="position:fixed;inset:0;z-index:9999999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s ease-out;">
  <div style="width:70px;height:70px;border-radius:14px;background:#000;border:1.5px solid #333;display:flex;align-items:center;justify-content:center;box-shadow:0 0 25px rgba(37,211,102,0.25);margin-bottom:12px;">
   <span style="font-size:24px;font-weight:900;color:#fff;font-family:Manrope;letter-spacing:-1px;">RT</span>
  </div>
@@ -478,7 +478,7 @@
  </div>
 </div>
 
-<!-- MODAL CALCULADORA REAL E COMPLETA (PAINEL PADRÃO CIENTÍFICO/FINANCEIRO) -->
+<!-- MODAL CALCULADORA REAL E COMPLETA -->
 <div class="modalback" id="calcModal">
  <div class="modal" style="width:min(320px, 100%);">
   <button class="close" onclick="closeModal('calcModal')">✕</button>
@@ -507,7 +507,7 @@
  </div>
 </div>
 
-<!-- MODAL SCANNER DE CÂMERA REAL (COM INPUT MANUAL DE SUPORTE) -->
+<!-- MODAL SCANNER DE CÂMERA REAL -->
 <div class="modalback" id="cameraScannerModal">
  <div class="modal" style="text-align:center;">
   <button class="close" onclick="closeCameraScan(); closeModal('cameraScannerModal');">✕</button>
@@ -589,11 +589,14 @@ let scannerTargetInput = null;
 let mediaStream = null;
 
 window.addEventListener('DOMContentLoaded', async () => {
-    const splash = document.getElementById('brandSplash');
-    if(splash) {
-        splash.style.opacity = '0';
-        setTimeout(() => splash.remove(), 200);
-    }
+    // Splash screen com logo RT MOBILE
+    setTimeout(() => {
+        const splash = document.getElementById('brandSplash');
+        if(splash) {
+            splash.style.opacity = '0';
+            setTimeout(() => splash.remove(), 400);
+        }
+    }, 1200);
     
     const savedEmail = localStorage.getItem('rt_saved_email');
     const savedRole = localStorage.getItem('rt_saved_role');
@@ -888,7 +891,7 @@ async function saveProduct(){
 }
 
 // ==========================================
-// CALCULADORA COMERCIAL COMPLETA E FUNCIONAL
+// CALCULADORA REAL E COMPLETA
 // ==========================================
 function calcAppend(val){
     const disp = document.getElementById('calcDisplay');
@@ -916,7 +919,7 @@ function calcCompute(){
 }
 
 // ==========================================
-// SCANNER DE CÂMERA REAL (COMUM EM SMARTPHONES)
+// SCANNER DE CÂMERA REAL (MOBILE COMPATÍVEL)
 // ==========================================
 function scanBarcodeForProduct(){
     scannerTargetInput = document.getElementById('pBarcodeInput');
@@ -934,14 +937,17 @@ async function startRealCamera(){
     const video = document.getElementById('scannerVideo');
     try {
         if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
-            mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } });
+            mediaStream = await navigator.mediaDevices.getUserMedia({ 
+                video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 } } 
+            });
             video.srcObject = mediaStream;
             await video.play();
         } else {
-            throw new Error('API de mídia indisponível');
+            toast('Câmera não suportada neste navegador.');
         }
     } catch (err) {
-        toast('Câmera bloqueada ou indisponível.');
+        console.error("Erro ao acessar câmera:", err);
+        toast('Permissão de câmera negada ou indisponível.');
     }
 }
 
