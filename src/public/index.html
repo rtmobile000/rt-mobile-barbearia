@@ -142,10 +142,10 @@
       </div>
     </section>
 
-    <!-- AGENDA (COM BOTÕES DE EDITAR E CANCELAR) -->
+    <!-- AGENDA (COM LINK DE AVALIAÇÃO PARA O WHATSAPP DO CLIENTE) -->
     <section class="section" id="page-agenda">
       <div class="heading">
-        <div><h1>Agenda Profissional da Unidade</h1><p>Gerencie horários, edite dados, envie lembretes e cancele vagas.</p></div>
+        <div><h1>Agenda Profissional da Unidade</h1><p>Gerencie horários, edite dados, envie lembretes e envie link de avaliação via WhatsApp.</p></div>
         <button class="btn" onclick="openAdminBookingModal()">＋ Agendar Horário</button>
       </div>
       <div class="card">
@@ -171,7 +171,7 @@
                 <td>
                   <div style="display:flex; gap:4px; flex-wrap:wrap;">
                     <button class="btn" style="padding:3px 6px;font-size:9px;background:#25d366;color:#000;" onclick="sendWhatsAppReminder('Lucas Almeida', '09:00', '5591988882233')">📲 Avisar</button>
-                    <button class="btn secondary" style="padding:3px 6px;font-size:9px;color:var(--gold2);" onclick="openRatingModal('Lucas Almeida')">⭐ Avaliar</button>
+                    <button class="btn secondary" style="padding:3px 6px;font-size:9px;color:var(--gold2);" onclick="sendWhatsAppRatingLink('Lucas Almeida', '5591988882233')">⭐ Avaliar (Link)</button>
                     <button class="btn secondary" style="padding:3px 6px;font-size:9px;" onclick="editAppointment(1)">Editar ✏️</button>
                     <button class="btn danger" style="padding:3px 6px;font-size:9px;" onclick="cancelAppointment(this)">Cancelar ✕</button>
                   </div>
@@ -618,20 +618,6 @@
  </div>
 </div>
 
-<!-- MODAL AVALIAÇÃO COM ESTRELAS ⭐ -->
-<div class="modalback" id="ratingModal">
- <div class="modal" style="text-align:center;">
-  <button class="close" onclick="closeModal('ratingModal')">✕</button>
-  <h2>Avaliar Atendimento ⭐</h2>
-  <p class="muted small" id="ratingClientTitle">Atendimento de Lucas Almeida</p>
-  <div style="font-size:28px; margin:15px 0; color:var(--gold2); cursor:pointer;" id="starRatingContainer">
-    <span onclick="setRating(1)">★</span><span onclick="setRating(2)">★</span><span onclick="setRating(3)">★</span><span onclick="setRating(4)">★</span><span onclick="setRating(5)">★</span>
-  </div>
-  <p class="small muted">Nota selecionada: <b id="selectedRatingNum" style="color:#fff;">5</b> de 5 estrelas</p>
-  <button class="btn" style="width:100%; margin-top:10px;" onclick="submitRatingFinal()">Salvar Avaliação ⭐</button>
- </div>
-</div>
-
 <!-- MODAIS AUXILIARES -->
 <div class="modalback" id="addConvenioModal"><div class="modal"><button class="close" onclick="closeModal('addConvenioModal')">✕</button><h2>Cadastrar Convênio</h2><div class="field"><label>Nome</label><input id="convNameInput"></div><button class="btn" onclick="saveConvenio()">Salvar</button></div></div>
 <div class="modalback" id="addBarberModal"><div class="modal"><button class="close" onclick="closeModal('addBarberModal')">✕</button><h2>Cadastrar Barbeiro</h2><div class="field"><label>Nome</label><input id="bNameInput" placeholder="Carlos"></div><div class="field"><label>WhatsApp</label><input id="bWpInput" placeholder="(91)..."></div><div class="field"><label>Foto URL</label><input id="bImgInput" placeholder="https://..."></div><button class="btn" onclick="saveBarber()">Salvar</button></div></div>
@@ -653,7 +639,6 @@ let stockProducts = [];
 let activeCart = [];
 let scannerTargetInput = null;
 let mediaStream = null;
-let currentRatingVal = 5;
 
 window.addEventListener('DOMContentLoaded', async () => {
     setTimeout(() => {
@@ -993,7 +978,7 @@ function cancelAppointment(btn){
 }
 
 // ==========================================
-// FERRAMENTAS EXTRAS: LEMBRETE WHATSAPP & AVALIAÇÃO
+// FERRAMENTAS EXTRAS: LEMBRETE E LINK DE AVALIAÇÃO WHATSAPP
 // ==========================================
 function sendWhatsAppReminder(clientName, time, phone){
     const shopName = currentOrg?.name || 'Barbearia';
@@ -1002,25 +987,12 @@ function sendWhatsAppReminder(clientName, time, phone){
     toast('Abrindo lembrete no WhatsApp...');
 }
 
-function openRatingModal(clientName){
-    document.getElementById('ratingClientTitle').textContent = `Atendimento de ${clientName}`;
-    currentRatingVal = 5;
-    updateStarDisplay();
-    openModal('ratingModal');
-}
-
-function setRating(val){
-    currentRatingVal = val;
-    updateStarDisplay();
-}
-
-function updateStarDisplay(){
-    document.getElementById('selectedRatingNum').textContent = currentRatingVal;
-}
-
-function submitRatingFinal(){
-    closeModal('ratingModal');
-    toast(`Avaliação de ${currentRatingVal} estrelas salva com sucesso! ⭐`);
+function sendWhatsAppRatingLink(clientName, phone){
+    const shopName = currentOrg?.name || 'Barbearia';
+    const linkAvaliacao = window.location.href; // Link da aplicação para o cliente avaliar
+    const msg = encodeURIComponent(`⭐ Olá ${clientName}! Obrigado por cortar na ${shopName} hoje. Poderia avaliar o nosso atendimento clicando aqui? ${linkAvaliacao}`);
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    toast('Link de avaliação enviado ao WhatsApp do cliente!');
 }
 
 // ==========================================
