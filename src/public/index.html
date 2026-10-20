@@ -142,10 +142,10 @@
       </div>
     </section>
 
-    <!-- AGENDA (COM LEMBRETE WHATSAPP E AVALIAÇÃO COM ESTRELAS) -->
+    <!-- AGENDA (COM BOTÕES DE EDITAR E CANCELAR) -->
     <section class="section" id="page-agenda">
       <div class="heading">
-        <div><h1>Agenda Profissional da Unidade</h1><p>Gerencie horários, envie lembretes via WhatsApp e avalie atendimentos.</p></div>
+        <div><h1>Agenda Profissional da Unidade</h1><p>Gerencie horários, edite dados, envie lembretes e cancele vagas.</p></div>
         <button class="btn" onclick="openAdminBookingModal()">＋ Agendar Horário</button>
       </div>
       <div class="card">
@@ -163,7 +163,7 @@
             </thead>
             <tbody id="adminAgendaTableBody">
               <tr>
-                <td><b>09:00</b></td>
+                <td><b id="agTime1">09:00</b></td>
                 <td id="agClient1">Lucas Almeida</td>
                 <td id="agServ1">Corte Degradê (30 min)</td>
                 <td id="agBarber1">Marcos Mendes</td>
@@ -172,8 +172,8 @@
                   <div style="display:flex; gap:4px; flex-wrap:wrap;">
                     <button class="btn" style="padding:3px 6px;font-size:9px;background:#25d366;color:#000;" onclick="sendWhatsAppReminder('Lucas Almeida', '09:00', '5591988882233')">📲 Avisar</button>
                     <button class="btn secondary" style="padding:3px 6px;font-size:9px;color:var(--gold2);" onclick="openRatingModal('Lucas Almeida')">⭐ Avaliar</button>
-                    <button class="btn secondary" style="padding:3px 6px;font-size:9px;" onclick="editAppointment(1)">Editar</button>
-                    <button class="btn danger" style="padding:3px 6px;font-size:9px;" onclick="cancelAppointment(this)">Cancelar</button>
+                    <button class="btn secondary" style="padding:3px 6px;font-size:9px;" onclick="editAppointment(1)">Editar ✏️</button>
+                    <button class="btn danger" style="padding:3px 6px;font-size:9px;" onclick="cancelAppointment(this)">Cancelar ✕</button>
                   </div>
                 </td>
               </tr>
@@ -605,13 +605,15 @@
  </div>
 </div>
 
-<!-- MODAL EDITAR AGENDAMENTO -->
+<!-- MODAL EDITAR AGENDAMENTO ✏️ -->
 <div class="modalback" id="editAppointmentModal">
  <div class="modal">
   <button class="close" onclick="closeModal('editAppointmentModal')">✕</button>
   <h2>Editar Agendamento ✏️</h2>
+  <div class="field"><label>Horário</label><input id="editAppTime" placeholder="Ex: 09:00"></div>
   <div class="field"><label>Nome do Cliente</label><input id="editAppClientName" placeholder="Nome"></div>
   <div class="field"><label>Serviço</label><input id="editAppService" placeholder="Serviço"></div>
+  <div class="field"><label>Profissional / Barbeiro</label><input id="editAppBarber" placeholder="Barbeiro"></div>
   <button class="btn" style="width:100%; margin-top:8px;" onclick="saveEditedAppointment()">Salvar Alterações</button>
  </div>
 </div>
@@ -955,6 +957,42 @@ async function saveProduct(){
 }
 
 // ==========================================
+// GESTÃO DE AGENDAMENTOS (EDITAR E CANCELAR)
+// ==========================================
+function editAppointment(id){
+    openModal('editAppointmentModal');
+    document.getElementById('editAppTime').value = document.getElementById('agTime' + id).textContent;
+    document.getElementById('editAppClientName').value = document.getElementById('agClient' + id).textContent;
+    document.getElementById('editAppService').value = document.getElementById('agServ' + id).textContent;
+    document.getElementById('editAppBarber').value = document.getElementById('agBarber' + id).textContent;
+}
+
+function saveEditedAppointment(){
+    const time = document.getElementById('editAppTime').value.trim();
+    const name = document.getElementById('editAppClientName').value.trim();
+    const serv = document.getElementById('editAppService').value.trim();
+    const barber = document.getElementById('editAppBarber').value.trim();
+
+    if(!name || !time){ toast('Preencha os campos obrigatórios.'); return; }
+
+    document.getElementById('agTime1').textContent = time;
+    document.getElementById('agClient1').textContent = name;
+    document.getElementById('agServ1').textContent = serv;
+    document.getElementById('agBarber1').textContent = barber;
+
+    closeModal('editAppointmentModal');
+    toast('Agendamento atualizado com sucesso!');
+}
+
+function cancelAppointment(btn){
+    if(confirm("Deseja cancelar este agendamento e liberar o horário?")){
+        const row = btn.closest('tr');
+        row.innerHTML = '<td><b>Vago</b></td><td colspan="5" style="color:var(--muted); text-align:center;">Horário disponível para novo agendamento</td>';
+        toast('Horário cancelado e liberado com sucesso!');
+    }
+}
+
+// ==========================================
 // FERRAMENTAS EXTRAS: LEMBRETE WHATSAPP & AVALIAÇÃO
 // ==========================================
 function sendWhatsAppReminder(clientName, time, phone){
@@ -983,34 +1021,6 @@ function updateStarDisplay(){
 function submitRatingFinal(){
     closeModal('ratingModal');
     toast(`Avaliação de ${currentRatingVal} estrelas salva com sucesso! ⭐`);
-}
-
-// ==========================================
-// GESTÃO DE AGENDAMENTOS (EDITAR E CANCELAR)
-// ==========================================
-function editAppointment(id){
-    openModal('editAppointmentModal');
-    document.getElementById('editAppClientName').value = document.getElementById('agClient' + id).textContent;
-    document.getElementById('editAppService').value = document.getElementById('agServ' + id).textContent;
-}
-
-function saveEditedAppointment(){
-    const newName = document.getElementById('editAppClientName').value.trim();
-    const newServ = document.getElementById('editAppService').value.trim();
-    if(!newName){ toast('Informe o nome do cliente.'); return; }
-
-    document.getElementById('agClient1').textContent = newName;
-    document.getElementById('agServ1').textContent = newServ;
-    closeModal('editAppointmentModal');
-    toast('Agendamento atualizado com sucesso!');
-}
-
-function cancelAppointment(btn){
-    if(confirm("Deseja cancelar este agendamento e liberar o horário?")){
-        const row = btn.closest('tr');
-        row.innerHTML = '<td><b>09:00</b></td><td colspan="5" style="color:var(--muted); text-align:center;">Horário disponível (Vago)</td>';
-        toast('Horário cancelado e liberado com sucesso!');
-    }
 }
 
 // ==========================================
